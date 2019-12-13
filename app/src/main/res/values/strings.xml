@@ -5,4 +5,6 @@
     <string name="textoLabelClave">Clave:</string>
     <string name="textoLabelNoTienesCuenta">¿No tienes cuenta?.</string>
     <string name="textoCrearCuenta"> Crea una.</string>
+    <string name="textoBienvenido">¡Bienvenido!</string>
+    <string name="textoBotonRegistrarse">Registrarse</string>
 </resources>
