@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">M07Proyecto</string>
+    <string name="textoBotonLogin">Iniciar Sesión</string>
+    <string name="textoLabelUsuario">Usuario:</string>
+    <string name="textoLabelClave">Clave:</string>
+    <string name="textoLabelNoTienesCuenta">¿No tienes cuenta?.</string>
+    <string name="textoCrearCuenta"> Crea una.</string>
 </resources>
