@@ -4,61 +4,67 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/bg"
     tools:context=".RegistrarUsuarioActivity">
 
     <Button
-        android:id="@+id/botonRegistrarse"
+        android:id="@+id/botonIniciarSesion"
         android:layout_width="217dp"
         android:layout_height="54dp"
-        android:layout_marginStart="64dp"
-        android:layout_marginTop="48dp"
-        android:onClick="addArticulo"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="30dp"
+        android:onClick="registrarse"
         android:text="@string/textoBotonRegistrarse"
         android:textSize="20sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textoClaveUsuario" />
+        app:layout_constraintTop_toBottomOf="@+id/textoClave" />
 
     <EditText
-        android:id="@+id/textonombreUsuario"
+        android:id="@+id/textoUsuario"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="60dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="25dp"
         android:ems="10"
         android:inputType="textPersonName"
+        android:textColor="#ffffff"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView5" />
+        app:layout_constraintTop_toBottomOf="@+id/tvUsuario" />
 
     <TextView
-        android:id="@+id/textView5"
+        android:id="@+id/tvUsuario"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="60dp"
-        android:layout_marginTop="92dp"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="50dp"
         android:text="@string/textoLabelUsuario"
-        android:textSize="30sp"
+        android:textColor="#ffffff"
+        android:textSize="25sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/textView6"
+        android:id="@+id/tvClave"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="64dp"
-        android:layout_marginTop="76dp"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="50dp"
         android:text="@string/textoLabelClave"
-        android:textSize="30sp"
+        android:textColor="#ffffff"
+        android:textSize="25sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textonombreUsuario" />
+        app:layout_constraintTop_toBottomOf="@+id/textoUsuario" />
 
     <EditText
-        android:id="@+id/textoClaveUsuario"
+        android:id="@+id/textoClave"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="64dp"
-        android:layout_marginTop="36dp"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="25dp"
         android:ems="10"
         android:inputType="textPersonName"
+        android:textColor="#ffffff"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView6" />
+        app:layout_constraintTop_toBottomOf="@+id/tvClave" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -3,8 +3,10 @@
     <string name="textoBotonLogin">Iniciar Sesión</string>
     <string name="textoLabelUsuario">Usuario:</string>
     <string name="textoLabelClave">Clave:</string>
-    <string name="textoLabelNoTienesCuenta">¿No tienes cuenta?.</string>
-    <string name="textoCrearCuenta"> Crea una.</string>
+    <string name="textoLabelNoTienesCuenta">¿No tienes cuenta?</string>
+    <string name="textoCrearCuenta">¡Crea una!</string>
+    <string name="textoLabelYaTienesCuenta">¿Ya tienes cuenta?</string>
+    <string name="textoIniciarSesion">¡Inicia sesión!</string>
     <string name="textoBienvenido">¡Bienvenido!</string>
     <string name="textoBotonRegistrarse">Registrarse</string>
 </resources>

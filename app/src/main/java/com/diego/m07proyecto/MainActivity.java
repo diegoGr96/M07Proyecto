@@ -9,9 +9,6 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.util.HashSet;
-import java.util.Set;
-
 public class MainActivity extends AppCompatActivity {
 
     public static final String KEY_INTENT_SEGUNDA_ACTIVITY = "keyEnviarSegundaActivity";
@@ -40,8 +37,8 @@ public class MainActivity extends AppCompatActivity {
 
         preferencias = getSharedPreferences(sharedPreFile, MODE_PRIVATE);
 
-        usuario = preferencias.getString(USUARIO_KEY, new String());
-        clave = preferencias.getString(CLAVE_KEY, new String());
+        usuario = preferencias.getString(USUARIO_KEY, "");
+        clave = preferencias.getString(CLAVE_KEY, "");
 
         textoRegistro.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -72,7 +69,6 @@ public class MainActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
 
         if (requestCode == NUEVO_USUARIO_ACTIVITY_REQUEST_CODE && resultCode == RESULT_OK) {
-            String datosRecibidos [] = data.getStringArrayExtra(RegistrarUsuarioActivity.EXTRA_REPLY_USUARIO) ;
             usuario = data.getStringExtra(RegistrarUsuarioActivity.EXTRA_REPLY_USUARIO);
             clave = data.getStringExtra(RegistrarUsuarioActivity.EXTRA_REPLY_CLAVE);
 

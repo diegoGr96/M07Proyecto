@@ -21,11 +21,11 @@ public class RegistrarUsuarioActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registrar_usuario);
 
-        textoNombreUsuario = findViewById(R.id.textonombreUsuario);
-        textoClaveUsuario = findViewById(R.id.textoClaveUsuario);
+        textoNombreUsuario = findViewById(R.id.textoUsuario);
+        textoClaveUsuario = findViewById(R.id.textoClave);
     }
 
-    public void addArticulo(View view) {
+    public void registrarse(View view) {
         Intent respuestaIntent = new Intent();
         if (TextUtils.isEmpty(textoNombreUsuario.getText()) || TextUtils.isEmpty(textoClaveUsuario.getText())) {
             setResult(RESULT_CANCELED, respuestaIntent);
