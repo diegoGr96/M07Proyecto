@@ -14,12 +14,14 @@ import java.util.Set;
 
 public class MainActivity extends AppCompatActivity {
 
-    private SharedPreferences preferencias;
-    private String sharedPreFile = "com.diego.m07proyecto";
+    public static final String KEY_INTENT_SEGUNDA_ACTIVITY = "keyEnviarSegundaActivity";
+    public static final int NUEVO_USUARIO_ACTIVITY_REQUEST_CODE = 1;
     private final String USUARIO_KEY = "usuario";
     private final String CLAVE_KEY = "clave";
 
-    public static final String KEY_INTENT_SEGUNDA_ACTIVITY = "keyEnviarSegundaActivity";
+    private SharedPreferences preferencias;
+    private String sharedPreFile = "com.diego.m07proyecto";
+
     private TextView textoUsuario;
     private TextView textoClave;
     private TextView textoRegistro;
@@ -40,35 +42,49 @@ public class MainActivity extends AppCompatActivity {
 
         usuario = preferencias.getString(USUARIO_KEY, new String());
         clave = preferencias.getString(CLAVE_KEY, new String());
-        textoUsuario.setText(usuario);
-        textoClave.setText(clave);
 
         textoRegistro.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(getApplicationContext(), "REGISTROOOO", Toast.LENGTH_LONG).show();
+
+                Intent intentSegundaActivity = new Intent(getApplicationContext(), RegistrarUsuarioActivity.class);
+                startActivityForResult(intentSegundaActivity, NUEVO_USUARIO_ACTIVITY_REQUEST_CODE);
+
             }
         });
     }
 
     public void iniciarSesion(View view) {
-        Toast.makeText(getApplicationContext(), "INICIAR SESIOOON", Toast.LENGTH_LONG).show();
-    }
-
-/*
-    public void enviarEdadSegundaActivity(View view) {
-        if (!textoEdad.getText().toString().equals("") && Integer.parseInt(textoEdad.getText().toString()) > 1
-                && Integer.parseInt(textoEdad.getText().toString()) < 100) {
-            Intent intentSegundaActivity = new Intent(this, segundaActivity.class);
-            intentSegundaActivity.putExtra(KEY_INTENT_SEGUNDA_ACTIVITY, textoEdad.getText().toString());
-            textoEdad.setText("");
-            startActivity(intentSegundaActivity);
+        if (!textoUsuario.getText().toString().equals("") && !textoClave.getText().toString().equals("")) {
+            if (textoUsuario.getText().toString().equals(usuario) &&
+                    textoClave.getText().toString().equals(clave)) {
+                Intent intentSegundaActivity = new Intent(getApplicationContext(), PaginaPrincipalActivity.class);
+                startActivity(intentSegundaActivity);
+            } else {
+               Toast.makeText(getApplicationContext(),"Credenciales incorrectas", Toast.LENGTH_LONG).show();
+            }
         } else {
-            Toast.makeText(this, "Edat invalida...", Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(), "Los campos no pueden estár en blanco.", Toast.LENGTH_LONG).show();
         }
     }
 
- */
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == NUEVO_USUARIO_ACTIVITY_REQUEST_CODE && resultCode == RESULT_OK) {
+            String datosRecibidos [] = data.getStringArrayExtra(RegistrarUsuarioActivity.EXTRA_REPLY_USUARIO) ;
+            usuario = data.getStringExtra(RegistrarUsuarioActivity.EXTRA_REPLY_USUARIO);
+            clave = data.getStringExtra(RegistrarUsuarioActivity.EXTRA_REPLY_CLAVE);
+
+            Toast.makeText(
+                    this, "Se ha registrado al usuario.", Toast.LENGTH_LONG).show();
+
+
+        } else if (requestCode == NUEVO_USUARIO_ACTIVITY_REQUEST_CODE && resultCode == RESULT_CANCELED) {
+            Toast.makeText(
+                    this, "El usuario no ha sido registrado porque estaba vacio.", Toast.LENGTH_LONG).show();
+        }
+    }
 
     @Override
     protected void onPause() {

@@ -12,6 +12,7 @@
         android:layout_height="54dp"
         android:layout_marginStart="64dp"
         android:layout_marginTop="48dp"
+        android:onClick="addArticulo"
         android:text="@string/textoBotonRegistrarse"
         android:textSize="20sp"
         app:layout_constraintStart_toStartOf="parent"
