@@ -8,8 +8,12 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
-        <activity android:name=".PaginaPrincipalActivity"></activity>
+        android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        <activity
+            android:name=".MenuPrincipal"
+            android:label="@string/title_activity_menu_principal"
+            android:theme="@style/NoActionBar"></activity>
+        <activity android:name=".PaginaPrincipalActivity" />
         <activity android:name=".RegistrarUsuarioActivity" />
         <activity android:name=".MainActivity">
             <intent-filter>

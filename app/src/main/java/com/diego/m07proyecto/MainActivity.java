@@ -55,7 +55,7 @@ public class MainActivity extends AppCompatActivity {
         if (!textoUsuario.getText().toString().equals("") && !textoClave.getText().toString().equals("")) {
             if (textoUsuario.getText().toString().equals(usuario) &&
                     textoClave.getText().toString().equals(clave)) {
-                Intent intentSegundaActivity = new Intent(getApplicationContext(), PaginaPrincipalActivity.class);
+                Intent intentSegundaActivity = new Intent(getApplicationContext(), MenuPrincipal.class);
                 startActivity(intentSegundaActivity);
             } else {
                Toast.makeText(getApplicationContext(),"Credenciales incorrectas", Toast.LENGTH_LONG).show();
