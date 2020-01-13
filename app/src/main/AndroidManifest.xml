@@ -15,6 +15,7 @@
             android:theme="@style/NoActionBar"></activity>
         <activity android:name=".PaginaPrincipalActivity" />
         <activity android:name=".RegistrarUsuarioActivity" />
+        <activity android:name=".DetailActivity"/>
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

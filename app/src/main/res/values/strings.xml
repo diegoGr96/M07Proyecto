@@ -23,4 +23,42 @@
     <string name="menu_tools">Tools</string>
     <string name="menu_share">Share</string>
     <string name="menu_send">Send</string>
+
+    <string name="title_placeholder">Title</string>
+    <string name="news_placeholder">News</string>
+    <string name="sports_info_placeholder">Here is some news</string>
+    <string name="fromSoftwareDetails">FromSoftware, Inc. es una compañía japonesa de videojuegos
+        fundada en noviembre de 1986 conocida principalmente por ser los creadores de las series Armored Core,
+        Demons Souls, Kings Field, Otogi, Tenchu, Dark Souls, Bloodborne y Sekiro: Shadows Die Twice.</string>
+
+    <string-array name="games_titles">
+        <item>Demons Souls</item>
+        <item>Dark Souls</item>
+        <item>Dark Souls 2</item>
+        <item>Dark Souls 3</item>
+        <item>Bloodborne</item>
+        <item>Sekiro: Shadows Die Twice</item>
+        <item>Elden Ring</item>
+    </string-array>
+
+    <string-array name="games_info">
+        <item>Demons Souls</item>
+        <item>DarkSouls</item>
+        <item>DarkSouls 2</item>
+        <item>DarkSouls 3</item>
+        <item>Bloodborne</item>
+        <item>Sekiro: Shadow Die Twice</item>
+        <item>Elden Ring</item>
+    </string-array>
+
+    <array name="games_images">
+        <item>@drawable/img_demonsouls</item>
+        <item>@drawable/img_darksouls</item>
+        <item>@drawable/img_darksoulstwo</item>
+        <item>@drawable/img_darksoulsthree</item>
+        <item>@drawable/img_bloodborne</item>
+        <item>@drawable/img_sekiro</item>
+        <item>@drawable/img_eldenring</item>
+
+    </array>
 </resources>
