@@ -4,13 +4,12 @@ import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.Handler;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -32,11 +31,13 @@ public class RegistrarUsuarioActivity extends AppCompatActivity {
     private TextView textoClaveUsuario;
     private RadioButton rbPublico;
     private RadioButton rbPrivado;
+    private RadioGroup grupoBotones;
     private Spinner spGenero;
     private CheckBox checkCondiciones;
     private Switch swRecibirUpdate;
     private SeekBar sbEdad;
     private TextView valueEdad;
+    private Button botonRegistrarse;
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
@@ -46,6 +47,7 @@ public class RegistrarUsuarioActivity extends AppCompatActivity {
 
         textoNombreUsuario = findViewById(R.id.textoUsuario);
         textoClaveUsuario = findViewById(R.id.textoClave);
+        grupoBotones = findViewById(R.id.grupoBotones);
         rbPublico = findViewById(R.id.rbPublico);
         rbPrivado = findViewById(R.id.rbPrivado);
         spGenero = findViewById(R.id.spGenero);
@@ -53,6 +55,10 @@ public class RegistrarUsuarioActivity extends AppCompatActivity {
         swRecibirUpdate = findViewById(R.id.swRecibirUpdate);
         sbEdad = findViewById(R.id.sbEdad);
         valueEdad = findViewById(R.id.valueEdad);
+        botonRegistrarse = findViewById(R.id.botonRegistrarse);
+
+
+        botonRegistrarse.setEnabled(false);
 
         List<String> spinnerArray =  new ArrayList<>();
         spinnerArray.add("Hombre");
@@ -86,10 +92,19 @@ public class RegistrarUsuarioActivity extends AppCompatActivity {
             }
         });
         valueEdad.setText(String.valueOf(sbEdad.getProgress()));
+
+
+    }
+
+    public void botonCondiciones(View view){
+        botonRegistrarse.setEnabled(checkCondiciones.isChecked());
     }
 
     public void registrarse(View view) {
         if(checkCondiciones.isChecked()) {
+
+            Toast.makeText(this, textoNombreUsuario.getText() + "\n" + textoClaveUsuario.getText() + "\nPerfil: " + spGenero.getSelectedItem() + "\nRecibir notificaciones: " +
+                    (swRecibirUpdate.isSelected()?"Si":"No") + "\nEdad: " + valueEdad.getText(),Toast.LENGTH_LONG).show();
             Intent respuestaIntent = new Intent();
             if (TextUtils.isEmpty(textoNombreUsuario.getText()) || TextUtils.isEmpty(textoClaveUsuario.getText())) {
                 setResult(RESULT_CANCELED, respuestaIntent);

@@ -8,7 +8,7 @@
     tools:context=".MainActivity">
 
     <Button
-        android:id="@+id/botonIniciarSesion"
+        android:id="@+id/botonRegistrarse"
         android:layout_width="217dp"
         android:layout_height="54dp"
         android:layout_marginStart="50dp"
@@ -76,7 +76,7 @@
         android:text="@string/textoLabelNoTienesCuenta"
         android:textSize="15sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/botonIniciarSesion" />
+        app:layout_constraintTop_toBottomOf="@+id/botonRegistrarse" />
 
     <TextView
         android:id="@+id/textoRegistrar"
@@ -89,5 +89,5 @@
         android:textSize="15sp"
         android:textStyle="bold"
         app:layout_constraintStart_toEndOf="@+id/textoDecoIniciar"
-        app:layout_constraintTop_toBottomOf="@+id/botonIniciarSesion" />
+        app:layout_constraintTop_toBottomOf="@+id/botonRegistrarse" />
 </androidx.constraintlayout.widget.ConstraintLayout>
