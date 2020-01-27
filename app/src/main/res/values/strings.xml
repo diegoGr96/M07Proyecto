@@ -1,43 +1,43 @@
 <resources>
     <string name="app_name">M07Proyecto</string>
-    <string name="textoBotonLogin">Iniciar Sesión</string>
-    <string name="textoLabelUsuario">Usuario:</string>
-    <string name="textoLabelClave">Clave:</string>
-    <string name="textoLabelNoTienesCuenta">¿No tienes cuenta?</string>
-    <string name="textoCrearCuenta">¡Crea una!</string>
-    <string name="textoLabelYaTienesCuenta">¿Ya tienes cuenta?</string>
-    <string name="textoIniciarSesion">¡Inicia sesión!</string>
-    <string name="textoBienvenido">¡Bienvenido!</string>
-    <string name="textoBotonRegistrarse">Registrarse</string>
+    <string name="textoBotonLogin">Inicia sessió</string>
+    <string name="textoLabelUsuario">Usuari:</string>
+    <string name="textoLabelClave">Clau:</string>
+    <string name="textoLabelNoTienesCuenta">¿No tens compte?</string>
+    <string name="textoCrearCuenta">¡Crea un!</string>
+    <string name="textoLabelYaTienesCuenta">¿Ja tens compte?</string>
+    <string name="textoIniciarSesion">¡Inicia sessió!</string>
+    <string name="textoBienvenido">¡Benvingut!</string>
+    <string name="textoBotonRegistrarse">Registrar-se</string>
     <string name="title_activity_menu_principal">MenuPrincipal</string>
-    <string name="navigation_drawer_open">Open navigation drawer</string>
-    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="navigation_drawer_open">Obrir finestra de navegació</string>
+    <string name="navigation_drawer_close">Tancar finestra de navegació</string>
     <string name="nav_header_title">Android Studio</string>
     <string name="nav_header_subtitle">android.studio@android.com</string>
-    <string name="nav_header_desc">Navigation header</string>
-    <string name="action_settings">Settings</string>
+    <string name="nav_header_desc">Capçalera de navegació</string>
+    <string name="action_settings">Configuracions</string>
 
-    <string name="menu_home">Home</string>
-    <string name="menu_gallery">Gallery</string>
-    <string name="menu_slideshow">Slideshow</string>
-    <string name="menu_tools">Tools</string>
-    <string name="menu_share">Share</string>
-    <string name="menu_send">Send</string>
+    <string name="menu_home">Menú</string>
+    <string name="menu_gallery">Galeria</string>
+    <string name="menu_slideshow">Diapositives</string>
+    <string name="menu_tools">Eines</string>
+    <string name="menu_share">Compartir</string>
+    <string name="menu_send">Enviar</string>
 
-    <string name="title_placeholder">Title</string>
-    <string name="news_placeholder">News</string>
-    <string name="sports_info_placeholder">Here is some news</string>
+    <string name="title_placeholder">Títol</string>
+    <string name="news_placeholder">Notícies</string>
+    <string name="sports_info_placeholder">Aquí hi ha algunes notícies</string>
 
     <string name="fromSoftwareDetails">FromSoftware, Inc. es una compañía japonesa de videojuegos
         fundada en noviembre de 1986 conocida principalmente por ser los creadores de las series Armored Core,
         Demons Souls, Kings Field, Otogi, Tenchu, Dark Souls, Bloodborne y Sekiro: Shadows Die Twice.</string>
-    <string name="hombre">Hombre</string>
-    <string name="perfil_publico">Público</string>
-    <string name="perfil_privado">Privado</string>
+    <string name="hombre">Home</string>
+    <string name="perfil_publico">Públic</string>
+    <string name="perfil_privado">Privat</string>
     <string name="perfil">Perfil:</string>
-    <string name="acepto_las_condiciones_y_t_rminos_de_servicio">Acepto las Condiciones y Términos.</string>
-    <string name="recibir_notificaciones">Recibir notificaciones</string>
-    <string name="edad">Edad:</string>
+    <string name="acepto_las_condiciones_y_t_rminos_de_servicio">Accepto les Condicions y Termes.</string>
+    <string name="recibir_notificaciones">Rebre notificacions</string>
+    <string name="edad">Edat:</string>
 
     <string-array name="games_titles">
         <item>Demons Souls</item>
@@ -69,4 +69,5 @@
         <item>@drawable/img_eldenring</item>
 
     </array>
+    <string name="fromSoftwareDetails">F</string>
 </resources>
