@@ -73,8 +73,8 @@ public class RegistrarUsuarioActivity extends AppCompatActivity {
 
         swRecibirUpdate.setChecked(true);
 
-        sbEdad.setMin(12);
-        sbEdad.setMax(100);
+        /*sbEdad.setMin(12);
+        sbEdad.setMax(100);*/
         sbEdad.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {

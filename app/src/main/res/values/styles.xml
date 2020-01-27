@@ -1,5 +1,4 @@
 <resources>
-
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
         <!-- Customize your theme here. -->
@@ -17,4 +16,22 @@
 
     <style name="PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
+    <style name="botones">
+        <item name="android:background">@color/backgroundBotones</item>
+        <item name="android:textColor">@color/letraBlanca</item>
+        <item name="android:fontFamily">@font/allerta</item>
+    </style>
+
+    <style name="textoTitulos">
+        <item name="android:textColor">@color/letraBlanca</item>
+        <item name="android:textSize">25sp</item>
+        <item name="android:fontFamily">@font/allerta</item>
+    </style>
+
+    <style name="cardViews">
+        <item name="android:textColor">@color/letraBlanca</item>
+        <item name="android:fontFamily">@font/allerta</item>
+        <item name="android:background">@color/backgroundCardView</item>
+        <item name="android:textSize">25sp</item>
+    </style>
 </resources>

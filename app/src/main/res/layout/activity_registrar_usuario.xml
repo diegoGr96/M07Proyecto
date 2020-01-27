@@ -9,6 +9,7 @@
 
     <Button
         android:id="@+id/botonRegistrarse"
+        style="@style/botones"
         android:layout_width="217dp"
         android:layout_height="54dp"
         android:layout_marginStart="44dp"
@@ -28,33 +29,38 @@
         android:layout_marginStart="50dp"
         android:layout_marginTop="25dp"
         android:ems="10"
+        android:fontFamily="@font/allerta"
         android:hint="@string/textoLabelUsuario"
+        android:importantForAutofill="no"
         android:inputType="textPersonName"
-        android:textColor="#ffffff"
+        android:textColorHint="@color/letraBlanca"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvUsuario"
-        android:importantForAutofill="no" />
+        app:layout_constraintTop_toBottomOf="@+id/tvUsuario" />
 
     <TextView
         android:id="@+id/tvUsuario"
+        style="@style/textoTitulos"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="50dp"
         android:layout_marginTop="50dp"
+        android:fontFamily="@font/allerta"
         android:text="@string/textoLabelUsuario"
-        android:textColor="#ffffff"
+        android:textColor="@color/letraBlanca"
         android:textSize="25sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/tvClave"
+        style="@style/textoTitulos"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="50dp"
         android:layout_marginTop="50dp"
+        android:fontFamily="@font/allerta"
         android:text="@string/textoLabelClave"
-        android:textColor="#ffffff"
+        android:textColor="@color/letraBlanca"
         android:textSize="25sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textoUsuario" />
@@ -66,12 +72,14 @@
         android:layout_marginStart="50dp"
         android:layout_marginTop="25dp"
         android:ems="10"
+        android:fontFamily="@font/allerta"
         android:hint="@string/textoLabelClave"
+        android:importantForAutofill="no"
         android:inputType="textPassword"
-        android:textColor="#ffffff"
+        android:textColor="@color/letraBlanca"
+        android:textColorHint="@color/letraBlanca"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvClave"
-        android:importantForAutofill="no" />
+        app:layout_constraintTop_toBottomOf="@+id/tvClave" />
 
     <LinearLayout
         android:id="@+id/linearLayout"
@@ -88,7 +96,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="@string/perfil" />
+            android:fontFamily="@font/allerta"
+            android:text="@string/perfil"
+            android:textSize="16sp" />
 
         <RadioGroup
             android:id="@+id/grupoBotones"
@@ -102,6 +112,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:checked="true"
+                android:fontFamily="@font/allerta"
                 android:text="@string/perfil_publico" />
 
             <RadioButton
@@ -110,6 +121,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="16dp"
                 android:layout_weight="1"
+                android:fontFamily="@font/allerta"
                 android:text="@string/perfil_privado" />
         </RadioGroup>
 
@@ -131,6 +143,7 @@
         android:layout_marginStart="50dp"
         android:layout_marginTop="25dp"
         android:checked="false"
+        android:fontFamily="@font/allerta"
         android:onClick="botonCondiciones"
         android:text="@string/acepto_las_condiciones_y_t_rminos_de_servicio"
         app:layout_constraintStart_toStartOf="parent"
@@ -142,6 +155,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="50dp"
         android:layout_marginTop="25dp"
+        android:fontFamily="@font/allerta"
         android:text="@string/recibir_notificaciones"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/checkCondiciones" />
@@ -163,6 +177,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:fontFamily="@font/allerta"
             android:text="@string/edad" />
 
         <SeekBar
