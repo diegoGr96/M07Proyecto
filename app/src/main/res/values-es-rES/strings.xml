@@ -20,7 +20,7 @@
     <string name="recibir_notificaciones">Recibir notificaciones</string>
     <string name="sports_info_placeholder">Nuevas noticias</string>
     <string name="textoBienvenido">¡Bienvenido!</string>
-    <string name="textoBotonLogin">Iniciar Sesión</string>
+    <string name="textoBotonLogin">Iniciar sesión</string>
     <string name="textoBotonRegistrarse">Registrarse</string>
     <string name="textoCrearCuenta">¡Crea una!</string>
     <string name="textoIniciarSesion">¡Inicia sesión!</string>
@@ -28,7 +28,7 @@
     <string name="textoLabelNoTienesCuenta">¿No tienes cuenta?</string>
     <string name="textoLabelUsuario">Usuario:</string>
     <string name="textoLabelYaTienesCuenta">¿Ya tienes cuenta?</string>
-    <string name="title_activity_menu_principal">MenuPrincipal</string>
+    <string name="title_activity_menu_principal">Menu principal</string>
     <string name="title_placeholder">Titulo</string>
     <string name="menu_slideshow">Diapositivas</string>
     <string name="nav_header_desc">Navegación</string>
