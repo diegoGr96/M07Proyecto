@@ -3,7 +3,6 @@
     <string name="app_name">M07Proyecto</string>
     <string name="acepto_las_condiciones_y_t_rminos_de_servicio">Acepto las Condiciones y Términos.</string>
     <string name="action_settings">Ajustes</string>
-    <string name="edad">Edad:</string>
     <string name="hombre">Hombre</string>
     <string name="menu_gallery">Galeria</string>
     <string name="menu_home">Principal</string>
@@ -13,10 +12,6 @@
     <string name="nav_header_subtitle">android.studio@android.com</string>
     <string name="nav_header_title">Android Studio</string>
     <string name="news_placeholder">Noticias</string>
-    <string name="perfil">Perfil:</string>
-    <string name="perfil_privado">Privado</string>
-    <string name="perfil_publico">Público</string>
-    <string name="recibir_notificaciones">Recibir notificaciones</string>
     <string name="sports_info_placeholder">Nuevas noticias</string>
     <string name="textoBienvenido">¡Bienvenido!</string>
     <string name="textoBotonLogin">Iniciar sesión</string>
@@ -33,4 +28,6 @@
     <string name="nav_header_desc">Navegación</string>
     <string name="navigation_drawer_close">Cerrar ventana de navegación</string>
     <string name="navigation_drawer_open">Abrir ventana de navegación</string>
+    <string name="escriu_el_teu_nom_d_usuari">Escribe tu nombre de usuario</string>
+    <string name="escriu_la_teva_clau">Escribe tu contraseña</string>
 </resources>

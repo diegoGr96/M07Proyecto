@@ -13,24 +13,22 @@
         android:layout_width="217dp"
         android:layout_height="54dp"
         android:layout_marginStart="44dp"
-        android:layout_marginTop="24dp"
-        android:layout_marginBottom="24dp"
+        android:layout_marginTop="50dp"
         android:onClick="registrarse"
         android:text="@string/textoBotonRegistrarse"
         android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/valueEdad" />
+        app:layout_constraintTop_toBottomOf="@+id/checkCondiciones" />
 
     <EditText
         android:id="@+id/textoUsuario"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="48dp"
         android:layout_marginStart="50dp"
         android:layout_marginTop="25dp"
+        android:contentDescription="@string/escriu_el_teu_nom_d_usuari"
         android:ems="10"
         android:fontFamily="@font/allerta"
-        android:hint="@string/textoLabelUsuario"
         android:importantForAutofill="no"
         android:inputType="textPersonName"
         android:textColorHint="@color/letraBlanca"
@@ -68,12 +66,12 @@
     <EditText
         android:id="@+id/textoClave"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="48dp"
         android:layout_marginStart="50dp"
         android:layout_marginTop="25dp"
+        android:contentDescription="@string/escriu_la_teva_clau"
         android:ems="10"
         android:fontFamily="@font/allerta"
-        android:hint="@string/textoLabelClave"
         android:importantForAutofill="no"
         android:inputType="textPassword"
         android:textColor="@color/letraBlanca"
@@ -81,118 +79,42 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvClave" />
 
-    <LinearLayout
-        android:id="@+id/linearLayout"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="50dp"
-        android:layout_marginTop="25dp"
-        android:orientation="horizontal"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textoClave">
-
-        <TextView
-            android:id="@+id/tvPerfil"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:fontFamily="@font/allerta"
-            android:text="@string/perfil"
-            android:textSize="16sp" />
-
-        <RadioGroup
-            android:id="@+id/grupoBotones"
-            android:layout_width="197dp"
-            android:layout_height="match_parent"
-            android:orientation="horizontal"
-            android:layout_weight="1">
-
-            <RadioButton
-                android:id="@+id/rbPublico"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:checked="true"
-                android:fontFamily="@font/allerta"
-                android:text="@string/perfil_publico" />
-
-            <RadioButton
-                android:id="@+id/rbPrivado"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="16dp"
-                android:layout_weight="1"
-                android:fontFamily="@font/allerta"
-                android:text="@string/perfil_privado" />
-        </RadioGroup>
-
-    </LinearLayout>
-
     <Spinner
         android:id="@+id/spGenero"
         android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="50dp"
-        android:layout_marginTop="25dp"
+        android:layout_marginTop="50dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
+        app:layout_constraintTop_toBottomOf="@+id/textoClave" />
 
     <CheckBox
         android:id="@+id/checkCondiciones"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="50dp"
-        android:layout_marginTop="25dp"
+        android:layout_marginTop="50dp"
         android:checked="false"
         android:fontFamily="@font/allerta"
         android:onClick="botonCondiciones"
-        android:text="@string/acepto_las_condiciones_y_t_rminos_de_servicio"
+        android:scaleX="2"
+        android:scaleY="2"
+        android:scrollbarSize="4dp"
+        android:textSize="16sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/spGenero" />
 
-    <Switch
-        android:id="@+id/swRecibirUpdate"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="50dp"
-        android:layout_marginTop="25dp"
-        android:fontFamily="@font/allerta"
-        android:text="@string/recibir_notificaciones"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/checkCondiciones" />
-
-    <LinearLayout
-        android:id="@+id/linearLayout3"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="50dp"
-        android:layout_marginTop="25dp"
-        android:layout_marginEnd="50dp"
-        android:orientation="horizontal"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/swRecibirUpdate">
-
-        <TextView
-            android:id="@+id/tvEdad"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:fontFamily="@font/allerta"
-            android:text="@string/edad" />
-
-        <SeekBar
-            android:id="@+id/sbEdad"
-            android:layout_width="250dp"
-            android:layout_height="wrap_content" />
-    </LinearLayout>
-
     <TextView
-        android:id="@+id/valueEdad"
+        android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="25dp"
-        android:layout_marginEnd="50dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout3" />
+        android:layout_marginStart="14dp"
+        android:layout_marginTop="54dp"
+        android:fontFamily="@font/allerta"
+        android:text="@string/acepto_las_condiciones_y_t_rminos_de_servicio"
+        android:textColor="#000000"
+        android:textSize="16sp"
+        app:layout_constraintStart_toEndOf="@+id/checkCondiciones"
+        app:layout_constraintTop_toBottomOf="@+id/spGenero" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

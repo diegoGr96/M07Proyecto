@@ -29,14 +29,8 @@ public class RegistrarUsuarioActivity extends AppCompatActivity {
 
     private TextView textoNombreUsuario;
     private TextView textoClaveUsuario;
-    private RadioButton rbPublico;
-    private RadioButton rbPrivado;
-    private RadioGroup grupoBotones;
     private Spinner spGenero;
     private CheckBox checkCondiciones;
-    private Switch swRecibirUpdate;
-    private SeekBar sbEdad;
-    private TextView valueEdad;
     private Button botonRegistrarse;
 
     @RequiresApi(api = Build.VERSION_CODES.O)
@@ -47,14 +41,8 @@ public class RegistrarUsuarioActivity extends AppCompatActivity {
 
         textoNombreUsuario = findViewById(R.id.textoUsuario);
         textoClaveUsuario = findViewById(R.id.textoClave);
-        grupoBotones = findViewById(R.id.grupoBotones);
-        rbPublico = findViewById(R.id.rbPublico);
-        rbPrivado = findViewById(R.id.rbPrivado);
         spGenero = findViewById(R.id.spGenero);
         checkCondiciones = findViewById(R.id.checkCondiciones);
-        swRecibirUpdate = findViewById(R.id.swRecibirUpdate);
-        sbEdad = findViewById(R.id.sbEdad);
-        valueEdad = findViewById(R.id.valueEdad);
         botonRegistrarse = findViewById(R.id.botonRegistrarse);
 
 
@@ -71,28 +59,6 @@ public class RegistrarUsuarioActivity extends AppCompatActivity {
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spGenero.setAdapter(adapter);
 
-        swRecibirUpdate.setChecked(true);
-
-        /*sbEdad.setMin(12);
-        sbEdad.setMax(100);*/
-        sbEdad.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
-            @Override
-            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                valueEdad.setText(String.valueOf(progress));
-            }
-
-            @Override
-            public void onStartTrackingTouch(SeekBar seekBar) {
-
-            }
-
-            @Override
-            public void onStopTrackingTouch(SeekBar seekBar) {
-
-            }
-        });
-        valueEdad.setText(String.valueOf(sbEdad.getProgress()));
-
 
     }
 
@@ -103,8 +69,6 @@ public class RegistrarUsuarioActivity extends AppCompatActivity {
     public void registrarse(View view) {
         if(checkCondiciones.isChecked()) {
 
-            Toast.makeText(this, textoNombreUsuario.getText() + "\n" + textoClaveUsuario.getText() + "\nPerfil: " + spGenero.getSelectedItem() + "\nRecibir notificaciones: " +
-                    (swRecibirUpdate.isSelected()?"Si":"No") + "\nEdad: " + valueEdad.getText(),Toast.LENGTH_LONG).show();
             Intent respuestaIntent = new Intent();
             if (TextUtils.isEmpty(textoNombreUsuario.getText()) || TextUtils.isEmpty(textoClaveUsuario.getText())) {
                 setResult(RESULT_CANCELED, respuestaIntent);
