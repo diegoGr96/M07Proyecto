@@ -4,7 +4,7 @@
     <string name="textoLabelUsuario">Usuari:</string>
     <string name="textoLabelClave">Clau:</string>
     <string name="textoLabelNoTienesCuenta">¿No tens compte?</string>
-    <string name="textoCrearCuenta">¡Crea un!</string>
+    <string name="textoCrearCuenta">¡Crea\'n un!</string>
     <string name="textoLabelYaTienesCuenta">¿Ja tens compte?</string>
     <string name="textoIniciarSesion">¡Inicia sessió!</string>
     <string name="textoBienvenido">¡Benvingut!</string>
@@ -32,9 +32,14 @@
         fundada en noviembre de 1986 conocida principalmente por ser los creadores de las series Armored Core,
         Demons Souls, Kings Field, Otogi, Tenchu, Dark Souls, Bloodborne y Sekiro: Shadows Die Twice.</string>
     <string name="hombre">Home</string>
-    <string name="acepto_las_condiciones_y_t_rminos_de_servicio">Accepto les Condicions y Termes.</string>
+    <string name="acepto_las_condiciones_y_t_rminos_de_servicio">Accepto les Condicions i Termes</string>
     <string name="escriu_el_teu_nom_d_usuari">Escriu el teu nom d\'usuari</string>
     <string name="escriu_la_teva_clau">Escriu la teva clau</string>
+    <string name="selecciona_el_teu_g_nere">Selecciona el teu gènere</string>
+    <string name="accepta_les_condicions_i_termes">Accepta les Condicions i Termes</string>
+    <string name="bot_per_a_registrar_se">Botó per a registrar-se</string>
+    <string name="bot_per_a_iniciar_sessi">Botó per a iniciar sessió</string>
+    <string name="clica_per_a_crear_un_compte">Clica per a crear un compte</string>
 
     <string-array name="games_titles">
         <item>Demons Souls</item>

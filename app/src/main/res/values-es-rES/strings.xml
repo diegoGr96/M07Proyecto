@@ -30,4 +30,9 @@
     <string name="navigation_drawer_open">Abrir ventana de navegación</string>
     <string name="escriu_el_teu_nom_d_usuari">Escribe tu nombre de usuario</string>
     <string name="escriu_la_teva_clau">Escribe tu contraseña</string>
+    <string name="accepta_les_condicions_i_termes">Acepta las Condiciones y Términos</string>
+    <string name="bot_per_a_iniciar_sessi">Botón para iniciar sesión</string>
+    <string name="bot_per_a_registrar_se">Botón para registrarse</string>
+    <string name="clica_per_a_crear_un_compte">Clica para crear una cuenta</string>
+    <string name="selecciona_el_teu_g_nere">Selecciona tu género</string>
 </resources>
