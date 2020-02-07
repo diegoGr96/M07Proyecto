@@ -79,6 +79,8 @@ public class RegistrarUsuarioActivity extends AppCompatActivity {
                 respuestaIntent.putExtra(EXTRA_REPLY_USUARIO, usuario);
                 respuestaIntent.putExtra(EXTRA_REPLY_CLAVE, clave);
                 setResult(RESULT_OK, respuestaIntent);
+
+                spGenero.announceForAccessibility(getString(R.string.registroCorrecto));
             }
             finish();
         } else{

@@ -17,6 +17,7 @@
         android:width="315dp"
         android:background="#FA394892"
         android:contentDescription="@string/bot_per_a_registrar_se"
+        android:labelFor="@id/checkCondiciones"
         android:onClick="registrarse"
         android:text="@string/textoBotonRegistrarse"
         android:textSize="20sp"
@@ -37,6 +38,7 @@
         android:hint="@string/hintUsuario"
         android:importantForAutofill="no"
         android:inputType="textPersonName"
+        android:labelFor="@id/tvUsuario"
         android:textColorHint="@color/colorHint"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvUsuario" />
@@ -63,6 +65,7 @@
         android:layout_marginStart="50dp"
         android:layout_marginTop="50dp"
         android:fontFamily="@font/allerta"
+        android:labelFor="@id/textoUsuario"
         android:text="@string/textoLabelClave"
         android:textColor="@color/letraBlanca"
         android:textSize="25sp"
@@ -83,6 +86,7 @@
         android:hint="@string/hintPassword"
         android:importantForAutofill="no"
         android:inputType="textPassword"
+        android:labelFor="@id/tvClave"
         android:textColor="@color/letraBlanca"
         android:textColorHint="@color/colorHint"
         app:layout_constraintStart_toStartOf="parent"
@@ -96,6 +100,7 @@
         android:layout_marginTop="50dp"
         android:background="#B3B3B3"
         android:contentDescription="@string/selecciona_el_teu_g_nere"
+        android:labelFor="@id/textoClave"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textoClave" />
 
@@ -108,6 +113,7 @@
         android:checked="false"
         android:contentDescription="@string/accepta_les_condicions_i_termes"
         android:fontFamily="@font/allerta"
+        android:labelFor="@id/labelCondiciones"
         android:onClick="botonCondiciones"
         android:scaleX="2"
         android:scaleY="2"
@@ -117,13 +123,14 @@
         app:layout_constraintTop_toBottomOf="@+id/spGenero" />
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/labelCondiciones"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="14dp"
         android:layout_marginTop="54dp"
         android:background="#806D6D6D"
         android:fontFamily="@font/allerta"
+        android:labelFor="@id/spGenero"
         android:text="@string/acepto_las_condiciones_y_t_rminos_de_servicio"
         android:textColor="#000000"
         android:textSize="16sp"

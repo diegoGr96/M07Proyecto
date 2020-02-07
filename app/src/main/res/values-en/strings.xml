@@ -37,4 +37,5 @@
     <string name="selecciona_el_teu_g_nere">Select your gender</string>
     <string name="hintPassword">Write your password</string>
     <string name="hintUsuario">Write your nick name</string>
+    <string name="registroCorrecto">User registered</string>
 </resources>

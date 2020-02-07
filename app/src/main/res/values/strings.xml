@@ -17,6 +17,8 @@
     <string name="nav_header_desc">Capçalera de navegació</string>
     <string name="action_settings">Configuracions</string>
 
+    <string name="registroCorrecto">Usuari registrat correctament.</string>
+
     <string name="menu_home">Menú</string>
     <string name="menu_gallery">Galeria</string>
     <string name="menu_slideshow">Diapositives</string>
