@@ -62,8 +62,7 @@ public class MenuPrincipal extends AppCompatActivity {
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
 
-
-
+        toolbar.announceForAccessibility(getString(R.string.loginCorrecto));
     }
 
 

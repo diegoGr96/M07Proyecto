@@ -18,6 +18,7 @@
     <string name="action_settings">Configuracions</string>
 
     <string name="registroCorrecto">Usuari registrat correctament.</string>
+    <string name="loginCorrecto">Has iniciat sessió correctament.</string>
 
     <string name="menu_home">Menú</string>
     <string name="menu_gallery">Galeria</string>
