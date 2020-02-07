@@ -35,4 +35,6 @@
     <string name="bot_per_a_registrar_se">Botón para registrarse</string>
     <string name="clica_per_a_crear_un_compte">Clica para crear una cuenta</string>
     <string name="selecciona_el_teu_g_nere">Selecciona tu género</string>
+    <string name="hintPassword">Escribe tu contraseña</string>
+    <string name="hintUsuario">Escribe tu nombre de usuario</string>
 </resources>

@@ -28,6 +28,9 @@
     <string name="news_placeholder">Notícies</string>
     <string name="sports_info_placeholder">Aquí hi ha algunes notícies</string>
 
+    <string name="hintUsuario">Escriu la el teu nom d\'usuari</string>
+    <string name="hintPassword">Escriu la teva contrasenya</string>
+
     <string name="fromSoftwareDetails" translatable="false">FromSoftware, Inc. es una compañía japonesa de videojuegos
         fundada en noviembre de 1986 conocida principalmente por ser los creadores de las series Armored Core,
         Demons Souls, Kings Field, Otogi, Tenchu, Dark Souls, Bloodborne y Sekiro: Shadows Die Twice.</string>

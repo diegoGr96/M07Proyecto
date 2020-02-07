@@ -3,6 +3,7 @@
     <color name="colorPrimary">#008577</color>
     <color name="colorPrimaryDark">#00574B</color>
     <color name="colorAccent">#D81B60</color>
+    <color name="colorHint">#52363535</color>
     <color name="letraBlanca">#FFFFFF</color>
     <color name="backgroundBotones">#CD394892</color>
     <color name="backgroundCardView">#1D2341D5</color>
