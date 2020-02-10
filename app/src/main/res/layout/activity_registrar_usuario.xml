@@ -87,7 +87,6 @@
         android:importantForAutofill="no"
         android:inputType="textPassword"
         android:labelFor="@id/tvClave"
-        android:textColor="@color/letraBlanca"
         android:textColorHint="@color/colorHint"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvClave" />
