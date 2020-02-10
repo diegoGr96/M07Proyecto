@@ -72,8 +72,6 @@ public class HomeFragment extends Fragment {
                 .getStringArray(R.array.games_titles);
         String[] sportsInfo = getResources()
                 .getStringArray(R.array.games_info);
-        TypedArray sportsImageResources =
-                getResources().obtainTypedArray(R.array.games_images);
 
         // Clear the existing data (to avoid duplication).
         mHistoriasData.clear();
@@ -81,11 +79,8 @@ public class HomeFragment extends Fragment {
         // Create the ArrayList of Sports objects with titles and
         // information about each sport.
         for (int i = 0; i < sportsList.length; i++) {
-            mHistoriasData.add(new Historia(sportsList[i], sportsInfo[i],
-                    sportsImageResources.getResourceId(i, 0)));
+            mHistoriasData.add(new Historia(sportsList[i], sportsInfo[i]));
         }
-
-        sportsImageResources.recycle();
 
         // Notify the adapter of the change.
         mAdapter.notifyDataSetChanged();

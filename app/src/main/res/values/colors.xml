@@ -7,4 +7,5 @@
     <color name="letraBlanca">#FFFFFF</color>
     <color name="backgroundBotones">#CD394892</color>
     <color name="backgroundCardView">#1D2341D5</color>
+    <color name="textColor">#000000</color>
 </resources>

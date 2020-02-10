@@ -66,15 +66,4 @@
         <item>Sekiro: Shadow Die Twice</item>
         <item>Elden Ring</item>
     </string-array>
-
-    <array name="games_images">
-        <item>@drawable/img_demonsouls</item>
-        <item>@drawable/img_darksouls</item>
-        <item>@drawable/img_darksoulstwo</item>
-        <item>@drawable/img_darksoulsthree</item>
-        <item>@drawable/img_bloodborne</item>
-        <item>@drawable/img_sekiro</item>
-        <item>@drawable/img_eldenring</item>
-
-    </array>
 </resources>

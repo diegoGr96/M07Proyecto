@@ -22,7 +22,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -114,7 +113,6 @@ public class HistoriasAdapter extends RecyclerView.Adapter<HistoriasAdapter.View
         // Member Variables for the TextViews
         private TextView mTitleText;
         private TextView mInfoText;
-        private ImageView mGamesImage;
 
         /**
          * Constructor for the ViewHolder, used in onCreateViewHolder().
@@ -127,7 +125,6 @@ public class HistoriasAdapter extends RecyclerView.Adapter<HistoriasAdapter.View
             // Initialize the views.
             mTitleText = itemView.findViewById(R.id.titleDetail);
             mInfoText = itemView.findViewById(R.id.subTitleDetail);
-            mGamesImage = itemView.findViewById(R.id.gamesImageDetail);
 
             itemView.setOnClickListener(this);
         }
@@ -140,8 +137,6 @@ public class HistoriasAdapter extends RecyclerView.Adapter<HistoriasAdapter.View
             // Populate the textviews with data.
             mTitleText.setText(currentHistory.getTitle());
             mInfoText.setText(currentHistory.getInfo());
-            Glide.with(mContext).load(currentHistory.getImageResource()).into(mGamesImage);
-
         }
 
         @Override
@@ -150,8 +145,6 @@ public class HistoriasAdapter extends RecyclerView.Adapter<HistoriasAdapter.View
             Log.d("A","AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAsddfnuirn");
             Intent detailIntent = new Intent(mContext, DetailActivity.class);
             detailIntent.putExtra("title", currentHistory.getTitle());
-            detailIntent.putExtra("image_resource",
-                    currentHistory.getImageResource());
             mContext.startActivity(detailIntent);
         }
     }

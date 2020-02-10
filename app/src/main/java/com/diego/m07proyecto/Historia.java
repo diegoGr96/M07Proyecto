@@ -24,7 +24,6 @@ public class Historia {
     // Member variables representing the title and information about the sport.
     private String title;
     private String info;
-    private final int imageResource;
 
     /**
      * Constructor for the Game data model.
@@ -32,10 +31,9 @@ public class Historia {
      * @param title The name if the sport.
      * @param info Information about the sport.
      */
-    public Historia(String title, String info, int imageResource) {
+    public Historia(String title, String info) {
         this.title = title;
         this.info = info;
-        this.imageResource = imageResource;
     }
 
     /**
@@ -56,8 +54,4 @@ public class Historia {
         return info;
     }
 
-
-    public int getImageResource() {
-        return imageResource;
-    }
 }
