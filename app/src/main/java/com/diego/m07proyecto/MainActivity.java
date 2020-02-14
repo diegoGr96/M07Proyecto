@@ -36,17 +36,18 @@ public class MainActivity extends AppCompatActivity {
         textoClave = findViewById(R.id.textoClave);
         textoRegistro = findViewById(R.id.textoRegistrar);
 
-        preferencias = getSharedPreferences(sharedPreFile, MODE_PRIVATE);
+       /* preferencias = getSharedPreferences(sharedPreFile, MODE_PRIVATE);
 
         usuario = preferencias.getString(USUARIO_KEY, "");
-        clave = preferencias.getString(CLAVE_KEY, "");
+        clave = preferencias.getString(CLAVE_KEY, "");*/
 
         textoRegistro.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
                 Intent intentSegundaActivity = new Intent(getApplicationContext(), RegistrarUsuarioActivity.class);
-                startActivityForResult(intentSegundaActivity, NUEVO_USUARIO_ACTIVITY_REQUEST_CODE);
+                startActivity(intentSegundaActivity);
+//                startActivityForResult(intentSegundaActivity, NUEVO_USUARIO_ACTIVITY_REQUEST_CODE);
 
             }
         });
@@ -66,7 +67,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+/*    public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
         if (requestCode == NUEVO_USUARIO_ACTIVITY_REQUEST_CODE && resultCode == RESULT_OK) {
@@ -81,9 +82,9 @@ public class MainActivity extends AppCompatActivity {
             Toast.makeText(
                     this, "El usuario no ha sido registrado porque estaba vacio.", Toast.LENGTH_LONG).show();
         }
-    }
+    }*/
 
-    @Override
+/*    @Override
     protected void onPause() {
         super.onPause();
 
@@ -91,5 +92,5 @@ public class MainActivity extends AppCompatActivity {
         preferencesEditor.putString(USUARIO_KEY, usuario);
         preferencesEditor.putString(CLAVE_KEY, clave);
         preferencesEditor.apply();
-    }
+    }*/
 }
