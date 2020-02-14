@@ -28,15 +28,15 @@
     <string name="textoLabelYaTienesCuenta">¿Already have an account?</string>
     <string name="title_activity_menu_principal">PrincipalMenu</string>
     <string name="title_placeholder">Title</string>
-    <string name="escriu_el_teu_nom_d_usuari">Write your username</string>
+    <string name="escriu_el_teu_nom_d_usuari">Write your email</string>
     <string name="escriu_la_teva_clau">Write your password</string>
     <string name="accepta_les_condicions_i_termes">Accept the Conditions and Terms</string>
     <string name="bot_per_a_iniciar_sessi">Button to sign in</string>
     <string name="bot_per_a_registrar_se">Button to sign up</string>
     <string name="clica_per_a_crear_un_compte">Click to create an account</string>
     <string name="selecciona_el_teu_g_nere">Select your gender</string>
-    <string name="hintPassword">Write your password</string>
-    <string name="hintUsuario">Write your nick name</string>
+    <string name="hintPassword">Password</string>
+    <string name="hintUsuario">Email</string>
     <string name="registroCorrecto">User registered</string>
     <string name="loginCorrecto">Has iniciado sesión correctamente.</string>
 </resources>
