@@ -30,6 +30,7 @@
         android:layout_height="48dp"
         android:layout_marginStart="50dp"
         android:layout_marginTop="25dp"
+        android:layout_marginEnd="50dp"
         android:width="315dp"
         android:background="#EBEBEB"
         android:contentDescription="@string/escriu_el_teu_nom_d_usuari"
@@ -40,6 +41,7 @@
         android:inputType="textPersonName"
         android:labelFor="@id/tvUsuario"
         android:textColorHint="@color/colorHint"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvUsuario" />
 
@@ -78,6 +80,7 @@
         android:layout_height="48dp"
         android:layout_marginStart="50dp"
         android:layout_marginTop="25dp"
+        android:layout_marginEnd="50dp"
         android:width="315dp"
         android:background="#FFEBEBEB"
         android:contentDescription="@string/escriu_la_teva_clau"
@@ -88,6 +91,7 @@
         android:inputType="textPassword"
         android:labelFor="@id/tvClave"
         android:textColorHint="@color/colorHint"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvClave" />
 
@@ -132,7 +136,7 @@
         android:labelFor="@id/spGenero"
         android:text="@string/acepto_las_condiciones_y_t_rminos_de_servicio"
         android:textColor="#000000"
-        android:textSize="16sp"
+        android:textSize="13sp"
         app:layout_constraintStart_toEndOf="@+id/checkCondiciones"
         app:layout_constraintTop_toBottomOf="@+id/spGenero" />
 
