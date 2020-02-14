@@ -10,10 +10,11 @@
     <Button
         android:id="@+id/botonRegistrarse"
         style="@style/botones"
-        android:layout_width="217dp"
+        android:layout_width="0dp"
         android:layout_height="54dp"
         android:layout_marginStart="50dp"
         android:layout_marginTop="50dp"
+        android:layout_marginEnd="140dp"
         android:width="315dp"
         android:background="#FA394892"
         android:contentDescription="@string/bot_per_a_registrar_se"
@@ -28,7 +29,7 @@
 
     <EditText
         android:id="@+id/textoUsuario"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="48dp"
         android:layout_marginStart="50dp"
         android:layout_marginTop="25dp"
@@ -78,7 +79,7 @@
 
     <EditText
         android:id="@+id/textoClave"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="48dp"
         android:layout_marginStart="50dp"
         android:layout_marginTop="25dp"
@@ -99,10 +100,11 @@
 
     <Spinner
         android:id="@+id/spGenero"
-        android:layout_width="200dp"
+        android:layout_width="0dp"
         android:layout_height="50dp"
         android:layout_marginStart="50dp"
         android:layout_marginTop="50dp"
+        android:layout_marginEnd="150dp"
         android:background="#B3B3B3"
         android:contentDescription="@string/selecciona_el_teu_g_nere"
         android:labelFor="@id/textoClave"
@@ -126,8 +128,6 @@
         android:scaleY="2"
         android:scrollbarSize="4dp"
         android:textSize="16sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/spGenero" />
 
@@ -135,16 +135,17 @@
         android:id="@+id/labelCondiciones"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="15dp"
+        android:layout_marginStart="20dp"
         android:layout_marginTop="54dp"
+        android:layout_marginEnd="90dp"
         android:background="#806D6D6D"
         android:fontFamily="@font/allerta"
         android:labelFor="@id/spGenero"
         android:text="@string/acepto_las_condiciones_y_t_rminos_de_servicio"
         android:textColor="#000000"
-        android:textSize="13sp"
+        android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.029"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toEndOf="@+id/checkCondiciones"
         app:layout_constraintTop_toBottomOf="@+id/spGenero" />
 
