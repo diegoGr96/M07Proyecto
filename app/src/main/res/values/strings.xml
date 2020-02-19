@@ -66,4 +66,5 @@
         <item>Sekiro: Shadow Die Twice</item>
         <item>Elden Ring</item>
     </string-array>
+    <string name="registroErroneo">Aquest usuari ja existeix.</string>
 </resources>
