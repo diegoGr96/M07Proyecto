@@ -17,9 +17,17 @@
     <style name="PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
     <style name="botones">
-        <item name="android:background">@color/backgroundBotones</item>
+        <item name="android:background">@drawable/back</item>
         <item name="android:textColor">@color/letraBlanca</item>
         <item name="android:fontFamily">@font/allerta</item>
+    </style>
+    <style name="editText">
+        <item name="android:textColorHint">@color/colorHint</item>
+        <item name="android:background">@drawable/back_edit_text</item>
+        <item name="android:textColor">@color/textColor</item>
+        <item name="android:fontFamily">@font/allerta</item>
+        <item name="android:paddingLeft">10dp</item>
+        <item name="android:paddingRight">10dp</item>
     </style>
 
     <style name="textoTitulos">
