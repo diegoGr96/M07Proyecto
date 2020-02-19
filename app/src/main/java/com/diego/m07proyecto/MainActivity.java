@@ -47,7 +47,7 @@ public class MainActivity extends AppCompatActivity {
 
                 Intent intentSegundaActivity = new Intent(getApplicationContext(), RegistrarUsuarioActivity.class);
                 startActivity(intentSegundaActivity);
-//                startActivityForResult(intentSegundaActivity, NUEVO_USUARIO_ACTIVITY_REQUEST_CODE);
+                startActivityForResult(intentSegundaActivity, NUEVO_USUARIO_ACTIVITY_REQUEST_CODE);
 
             }
         });
@@ -60,29 +60,30 @@ public class MainActivity extends AppCompatActivity {
                 Intent intentSegundaActivity = new Intent(getApplicationContext(), MenuPrincipal.class);
                 startActivity(intentSegundaActivity);
             } else {
-               Toast.makeText(getApplicationContext(),"Credenciales incorrectas", Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), "Credenciales incorrectas", Toast.LENGTH_LONG).show();
             }
         } else {
             Toast.makeText(getApplicationContext(), "Los campos no pueden estár en blanco.", Toast.LENGTH_LONG).show();
         }
     }
 
-/*    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
         if (requestCode == NUEVO_USUARIO_ACTIVITY_REQUEST_CODE && resultCode == RESULT_OK) {
             usuario = data.getStringExtra(RegistrarUsuarioActivity.EXTRA_REPLY_USUARIO);
             clave = data.getStringExtra(RegistrarUsuarioActivity.EXTRA_REPLY_CLAVE);
 
+            /*
             Toast.makeText(
                     this, "Se ha registrado al usuario.", Toast.LENGTH_LONG).show();
-
+*/
 
         } else if (requestCode == NUEVO_USUARIO_ACTIVITY_REQUEST_CODE && resultCode == RESULT_CANCELED) {
             Toast.makeText(
                     this, "El usuario no ha sido registrado porque estaba vacio.", Toast.LENGTH_LONG).show();
         }
-    }*/
+    }
 
 /*    @Override
     protected void onPause() {
