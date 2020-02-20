@@ -60,14 +60,15 @@ public class RegistrarUsuarioActivity extends AppCompatActivity {
         botonRegistrarse.setEnabled(false);
 
     }
-
+/*
     @Override
     public void onStart() {
         super.onStart();
         // Check if user is signed in (non-null) and update UI accordingly.
         FirebaseUser currentUser = mAuth.getCurrentUser();
-    }
 
+    }
+*/
     public void botonCondiciones(View view){
         botonRegistrarse.setEnabled(checkCondiciones.isChecked());
     }
@@ -75,8 +76,10 @@ public class RegistrarUsuarioActivity extends AppCompatActivity {
     public void registrarse(View view) {
        final View viewButton = view;
         if(checkCondiciones.isChecked()) {
-            String email = textoUsuario.getText().toString();
-            String password = textoClave.getText().toString();
+            String email = textoUsuario.getText().toString().trim();
+            String password = textoClave.getText().toString().trim();
+            Toast.makeText(RegistrarUsuarioActivity.this, "-"+email+"-",
+                    Toast.LENGTH_LONG).show();
             mAuth.createUserWithEmailAndPassword(email, password)
                     .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                         @Override
@@ -87,22 +90,12 @@ public class RegistrarUsuarioActivity extends AppCompatActivity {
                                 setResult(Activity.RESULT_OK,returnIntent);
                                 finish();
                             } else {
+
+                                Log.w("a", "createUserWithEmail:failure", task.getException());
+                                /*Toast.makeText(RegistrarUsuarioActivity.this, "Authentication failed.",
+                                        Toast.LENGTH_SHORT).show();*/
                                 Snackbar.make(viewButton, getResources().getText(R.string.registroErroneo), Snackbar.LENGTH_LONG)
                                         .setAction("Action", null).show();
-
-                                // If sign in fails, display a message to the user.
-                                /*
-                                botonRegistrarse.setOnClickListener(new View.OnClickListener() {
-                                    @Override
-                                    public void onClick(View view) {
-                                        Snackbar.make(view, getResources().getText(R.string.registroErroneo), Snackbar.LENGTH_LONG)
-                                                .setAction("Action", null).show();
-                                    }
-                                });
-                                 *//*
-                                Toast.makeText(getApplicationContext(), "Authentication failed.",
-                                        Toast.LENGTH_SHORT).show();
-                                        */
                             }
                         }
                     });
