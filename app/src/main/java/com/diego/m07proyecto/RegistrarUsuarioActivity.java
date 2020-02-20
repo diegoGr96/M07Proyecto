@@ -29,6 +29,8 @@ import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -36,6 +38,8 @@ import java.util.List;
 public class RegistrarUsuarioActivity extends AppCompatActivity {
 
     private FirebaseAuth mAuth;
+
+    FirebaseDatabase database = FirebaseDatabase.getInstance();
 
     public static final String EXTRA_REPLY_USUARIO = "usuario_devuelto";
     public static final String EXTRA_REPLY_CLAVE = "clave_devuelto";
@@ -86,9 +90,12 @@ public class RegistrarUsuarioActivity extends AppCompatActivity {
                                 // Sign in success, update UI with the signed-in user's information
                                 Intent returnIntent = new Intent(getApplicationContext(), RegistrarUsuarioActivity.class);
                                 setResult(Activity.RESULT_OK,returnIntent);
+                                FirebaseUser aux = task.getResult().getUser();
+                                DatabaseReference myRef = database.getReference("Usuarios/"+aux.getUid());
+                                myRef.child("Email").setValue(aux.getEmail());
+                                myRef.child("Nick").setValue("");
                                 finish();
                             } else {
-
                                 Log.w("a", "createUserWithEmail:failure", task.getException());
                                 /*Toast.makeText(RegistrarUsuarioActivity.this, "Authentication failed.",
                                         Toast.LENGTH_SHORT).show();*/
