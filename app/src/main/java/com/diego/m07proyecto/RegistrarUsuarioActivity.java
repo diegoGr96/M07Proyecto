@@ -78,8 +78,6 @@ public class RegistrarUsuarioActivity extends AppCompatActivity {
         if(checkCondiciones.isChecked()) {
             String email = textoUsuario.getText().toString().trim();
             String password = textoClave.getText().toString().trim();
-            Toast.makeText(RegistrarUsuarioActivity.this, "-"+email+"-",
-                    Toast.LENGTH_LONG).show();
             mAuth.createUserWithEmailAndPassword(email, password)
                     .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                         @Override
