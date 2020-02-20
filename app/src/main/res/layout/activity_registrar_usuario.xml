@@ -48,7 +48,7 @@
         android:fontFamily="@font/allerta"
         android:hint="@string/hintUsuario"
         android:importantForAutofill="no"
-        android:inputType="textPersonName"
+        android:inputType="textEmailAddress"
         android:labelFor="@id/logo"
         android:textColorHint="@color/colorHint"
         app:layout_constraintEnd_toEndOf="parent"
