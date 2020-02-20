@@ -2,6 +2,7 @@ package com.diego.m07proyecto;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -9,6 +10,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.google.android.material.snackbar.Snackbar;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -46,7 +49,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
 
                 Intent intentSegundaActivity = new Intent(getApplicationContext(), RegistrarUsuarioActivity.class);
-                startActivity(intentSegundaActivity);
+                //startActivity(intentSegundaActivity);
                 startActivityForResult(intentSegundaActivity, NUEVO_USUARIO_ACTIVITY_REQUEST_CODE);
 
             }
@@ -71,14 +74,12 @@ public class MainActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
 
         if (requestCode == NUEVO_USUARIO_ACTIVITY_REQUEST_CODE && resultCode == RESULT_OK) {
-            usuario = data.getStringExtra(RegistrarUsuarioActivity.EXTRA_REPLY_USUARIO);
-            clave = data.getStringExtra(RegistrarUsuarioActivity.EXTRA_REPLY_CLAVE);
-
+            Snackbar.make(this.textoRegistro, getResources().getText(R.string.registroCorrecto), Snackbar.LENGTH_LONG)
+                    .setAction("Action", null).show();
             /*
             Toast.makeText(
                     this, "Se ha registrado al usuario.", Toast.LENGTH_LONG).show();
 */
-
         } else if (requestCode == NUEVO_USUARIO_ACTIVITY_REQUEST_CODE && resultCode == RESULT_CANCELED) {
             Toast.makeText(
                     this, "El usuario no ha sido registrado porque estaba vacio.", Toast.LENGTH_LONG).show();
