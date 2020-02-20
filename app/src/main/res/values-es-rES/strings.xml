@@ -40,4 +40,5 @@
     <string name="registroCorrecto">Usuario registrado correctamente.</string>
     <string name="loginCorrecto">You successfully logged in.</string>
     <string name="registroErroneo">Este usuari ya existe.</string>
+    <string name="login_error">Credenciales incorrectas</string>
 </resources>

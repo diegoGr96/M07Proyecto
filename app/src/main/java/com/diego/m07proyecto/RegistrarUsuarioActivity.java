@@ -41,9 +41,6 @@ public class RegistrarUsuarioActivity extends AppCompatActivity {
 
     FirebaseDatabase database = FirebaseDatabase.getInstance();
 
-    public static final String EXTRA_REPLY_USUARIO = "usuario_devuelto";
-    public static final String EXTRA_REPLY_CLAVE = "clave_devuelto";
-
     private CheckBox checkCondiciones;
     private Button botonRegistrarse;
     private EditText textoUsuario;
@@ -64,15 +61,7 @@ public class RegistrarUsuarioActivity extends AppCompatActivity {
         botonRegistrarse.setEnabled(false);
 
     }
-/*
-    @Override
-    public void onStart() {
-        super.onStart();
-        // Check if user is signed in (non-null) and update UI accordingly.
-        FirebaseUser currentUser = mAuth.getCurrentUser();
 
-    }
-*/
     public void botonCondiciones(View view){
         botonRegistrarse.setEnabled(checkCondiciones.isChecked());
     }
@@ -97,8 +86,6 @@ public class RegistrarUsuarioActivity extends AppCompatActivity {
                                 finish();
                             } else {
                                 Log.w("a", "createUserWithEmail:failure", task.getException());
-                                /*Toast.makeText(RegistrarUsuarioActivity.this, "Authentication failed.",
-                                        Toast.LENGTH_SHORT).show();*/
                                 Snackbar.make(viewButton, getResources().getText(R.string.registroErroneo), Snackbar.LENGTH_LONG)
                                         .setAction("Action", null).show();
                             }

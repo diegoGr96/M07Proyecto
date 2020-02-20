@@ -32,22 +32,11 @@ public class MainActivity extends AppCompatActivity {
 
     FirebaseDatabase database = FirebaseDatabase.getInstance();
 
-    public static final String KEY_INTENT_SEGUNDA_ACTIVITY = "keyEnviarSegundaActivity";
     public static final int NUEVO_USUARIO_ACTIVITY_REQUEST_CODE = 1;
-    private final String USUARIO_KEY = "usuario";
-    private final String CLAVE_KEY = "clave";
-
-    private SharedPreferences preferencias;
-    private String sharedPreFile = "com.diego.m07proyecto";
 
     private TextView textoUsuario;
     private TextView textoClave;
     private TextView textoRegistro;
-
-    /*
-    private String usuario;
-    private String clave;
-     */
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,17 +49,11 @@ public class MainActivity extends AppCompatActivity {
 
         mAuth = FirebaseAuth.getInstance();
 
-               /* preferencias = getSharedPreferences(sharedPreFile, MODE_PRIVATE);
-
-        usuario = preferencias.getString(USUARIO_KEY, "");
-        clave = preferencias.getString(CLAVE_KEY, "");*/
-
         textoRegistro.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
                 Intent intentSegundaActivity = new Intent(getApplicationContext(), RegistrarUsuarioActivity.class);
-                //startActivity(intentSegundaActivity);
                 startActivityForResult(intentSegundaActivity, NUEVO_USUARIO_ACTIVITY_REQUEST_CODE);
 
             }
@@ -85,9 +68,11 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void iniciarSesion(View view) {
+        final View viewButton = view;
         String usuario = textoUsuario.getText().toString().trim();
         String password = textoClave.getText().toString().trim();
-        if (!usuario.equals("") || !password.equals("")) {
+
+        if (!usuario.equals("") &&  !password.equals("")) {
                 mAuth.signInWithEmailAndPassword(usuario, password)
                         .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                             @Override
@@ -101,7 +86,13 @@ public class MainActivity extends AppCompatActivity {
                                     myRef.addListenerForSingleValueEvent(new ValueEventListener() {
                                         @Override
                                         public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                                            dataSnapshot.getValue();
+
+                                            if(dataSnapshot.getValue().toString().equals(""))
+                                                Toast.makeText(getApplicationContext(),"Es la primera vez que inicia sesión.",Toast.LENGTH_LONG).show();
+                                            else{
+                                                Intent intentSegundaActivity = new Intent(getApplicationContext(), MenuPrincipal.class);
+                                                startActivity(intentSegundaActivity);
+                                            }
                                         }
 
                                         @Override
@@ -109,22 +100,19 @@ public class MainActivity extends AppCompatActivity {
                                             // Sin hacer nada
                                         }
                                     });
-                                    Intent intentSegundaActivity = new Intent(getApplicationContext(), MenuPrincipal.class);
-                                    startActivity(intentSegundaActivity);
                                 } else {
                                     // If sign in fails, display a message to the user.
-                                    Log.w("", "signInWithEmail:failure", task.getException());
-                                    Toast.makeText(MainActivity.this, "Authentication failed.",
-                                            Toast.LENGTH_SHORT).show();
+                                    Snackbar.make(viewButton, getResources().getText(R.string.login_error), Snackbar.LENGTH_LONG)
+                                            .setAction("Action", null).show();
                                 }
 
                                 // ...
                             }
                         });
         } else {
-            Toast.makeText(getApplicationContext(), "-"+usuario+"-"+password+"-", Toast.LENGTH_LONG).show();
-
-            //Toast.makeText(getApplicationContext(), "Los campos no pueden estár en blanco.", Toast.LENGTH_LONG).show();
+            //Toast.makeText(getApplicationContext(), "-"+usuario+"-"+password+"-", Toast.LENGTH_LONG).show();
+            Snackbar.make(viewButton, getResources().getText(R.string.login_error), Snackbar.LENGTH_LONG)
+                    .setAction("Action", null).show();
         }
     }
 
@@ -134,23 +122,9 @@ public class MainActivity extends AppCompatActivity {
         if (requestCode == NUEVO_USUARIO_ACTIVITY_REQUEST_CODE && resultCode == RESULT_OK) {
             Snackbar.make(this.textoRegistro, getResources().getText(R.string.registroCorrecto), Snackbar.LENGTH_LONG)
                     .setAction("Action", null).show();
-            /*
-            Toast.makeText(
-                    this, "Se ha registrado al usuario.", Toast.LENGTH_LONG).show();
-*/
         } else if (requestCode == NUEVO_USUARIO_ACTIVITY_REQUEST_CODE && resultCode == RESULT_CANCELED) {
             Toast.makeText(
                     this, "El usuario no ha sido registrado porque estaba vacio.", Toast.LENGTH_LONG).show();
         }
     }
-
-/*    @Override
-    protected void onPause() {
-        super.onPause();
-
-        SharedPreferences.Editor preferencesEditor = preferencias.edit();
-        preferencesEditor.putString(USUARIO_KEY, usuario);
-        preferencesEditor.putString(CLAVE_KEY, clave);
-        preferencesEditor.apply();
-    }*/
 }

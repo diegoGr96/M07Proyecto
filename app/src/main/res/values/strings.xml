@@ -67,4 +67,5 @@
         <item>Elden Ring</item>
     </string-array>
     <string name="registroErroneo">Aquest usuari ja existeix.</string>
+    <string name="login_error">Credencials incorrectes</string>
 </resources>
