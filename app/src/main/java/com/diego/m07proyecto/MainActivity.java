@@ -52,7 +52,7 @@ public class MainActivity extends AppCompatActivity {
 
         mAuth = FirebaseAuth.getInstance();
 
-       /* preferencias = getSharedPreferences(sharedPreFile, MODE_PRIVATE);
+               /* preferencias = getSharedPreferences(sharedPreFile, MODE_PRIVATE);
 
         usuario = preferencias.getString(USUARIO_KEY, "");
         clave = preferencias.getString(CLAVE_KEY, "");*/
@@ -67,6 +67,13 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        textoUsuario.setText("");
+        textoClave.setText("");
     }
 
     public void iniciarSesion(View view) {
