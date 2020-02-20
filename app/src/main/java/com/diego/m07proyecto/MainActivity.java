@@ -72,7 +72,7 @@ public class MainActivity extends AppCompatActivity {
     public void iniciarSesion(View view) {
         String usuario = textoUsuario.getText().toString().trim();
         String password = textoClave.getText().toString().trim();
-        if (usuario.equals("") || password.equals("")) {
+        if (!usuario.equals("") || !password.equals("")) {
                 mAuth.signInWithEmailAndPassword(usuario, password)
                         .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                             @Override
@@ -94,7 +94,9 @@ public class MainActivity extends AppCompatActivity {
                             }
                         });
         } else {
-            Toast.makeText(getApplicationContext(), "Los campos no pueden estár en blanco.", Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(), "-"+usuario+"-"+password+"-", Toast.LENGTH_LONG).show();
+
+            //Toast.makeText(getApplicationContext(), "Los campos no pueden estár en blanco.", Toast.LENGTH_LONG).show();
         }
     }
 
