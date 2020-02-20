@@ -67,7 +67,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="50dp"
-        android:layout_marginTop="120dp"
+        android:layout_marginTop="15dp"
         android:fontFamily="@font/allerta"
         android:labelFor="@id/textoRegistrar"
         android:text="@string/textoLabelNoTienesCuenta"
@@ -81,8 +81,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="50dp"
-        android:layout_marginTop="15dp"
-        android:layout_marginBottom="42dp"
         android:contentDescription="@string/clica_per_a_crear_un_compte"
         android:fontFamily="@font/allerta"
         android:labelFor="@id/textoDecoIniciar"
@@ -92,7 +90,8 @@
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textoDecoIniciar" />
+        app:layout_constraintTop_toBottomOf="@+id/textoDecoIniciar"
+        app:layout_constraintVertical_bias="0.0" />
 
     <ImageView
         android:id="@+id/logo"
