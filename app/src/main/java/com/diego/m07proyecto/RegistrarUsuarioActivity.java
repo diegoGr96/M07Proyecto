@@ -1,5 +1,6 @@
 package com.diego.m07proyecto;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -7,10 +8,12 @@ import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.SeekBar;
@@ -19,47 +22,49 @@ import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.android.material.snackbar.Snackbar;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class RegistrarUsuarioActivity extends AppCompatActivity {
 
+    private FirebaseAuth mAuth;
+
     public static final String EXTRA_REPLY_USUARIO = "usuario_devuelto";
     public static final String EXTRA_REPLY_CLAVE = "clave_devuelto";
 
-    private TextView textoNombreUsuario;
-    private TextView textoClaveUsuario;
-    private Spinner spGenero;
     private CheckBox checkCondiciones;
     private Button botonRegistrarse;
+    private EditText textoUsuario;
+    private EditText textoClave;
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registrar_usuario);
+        mAuth = FirebaseAuth.getInstance();
 
-        textoNombreUsuario = findViewById(R.id.textoUsuario);
-        textoClaveUsuario = findViewById(R.id.textoClave);
-        spGenero = findViewById(R.id.spGenero);
         checkCondiciones = findViewById(R.id.checkCondiciones);
         botonRegistrarse = findViewById(R.id.botonRegistrarse);
-
+        textoUsuario = findViewById(R.id.textoUsuario);
+        textoClave = findViewById(R.id.textoClave);
 
         botonRegistrarse.setEnabled(false);
 
-        List<String> spinnerArray =  new ArrayList<>();
-        spinnerArray.add("Hombre");
-        spinnerArray.add("Mujer");
-        spinnerArray.add("Sin especificar");
+    }
 
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(
-                this, android.R.layout.simple_spinner_item, spinnerArray);
-
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spGenero.setAdapter(adapter);
-
-
+    @Override
+    public void onStart() {
+        super.onStart();
+        // Check if user is signed in (non-null) and update UI accordingly.
+        FirebaseUser currentUser = mAuth.getCurrentUser();
     }
 
     public void botonCondiciones(View view){
@@ -68,21 +73,29 @@ public class RegistrarUsuarioActivity extends AppCompatActivity {
 
     public void registrarse(View view) {
         if(checkCondiciones.isChecked()) {
-
-            Intent respuestaIntent = new Intent();
-            if (TextUtils.isEmpty(textoNombreUsuario.getText()) || TextUtils.isEmpty(textoClaveUsuario.getText())) {
-                setResult(RESULT_CANCELED, respuestaIntent);
-            } else {
-                String usuario = textoNombreUsuario.getText().toString();
-                String clave = textoClaveUsuario.getText().toString();
-
-                respuestaIntent.putExtra(EXTRA_REPLY_USUARIO, usuario);
-                respuestaIntent.putExtra(EXTRA_REPLY_CLAVE, clave);
-                setResult(RESULT_OK, respuestaIntent);
-
-                spGenero.announceForAccessibility(getString(R.string.registroCorrecto));
-            }
-            finish();
+            String email = textoUsuario.getText().toString();
+            String password = textoClave.getText().toString();
+            mAuth.createUserWithEmailAndPassword(email, password)
+                    .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                        @Override
+                        public void onComplete(@NonNull Task<AuthResult> task) {
+                            if (task.isSuccessful()) {
+                                // Sign in success, update UI with the signed-in user's information
+                                finish();
+                            } else {
+                                // If sign in fails, display a message to the user.
+                                botonRegistrarse.setOnClickListener(new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View view) {
+                                        Snackbar.make(view, getResources().getText(R.string.registroErroneo), Snackbar.LENGTH_LONG)
+                                                .setAction("Action", null).show();
+                                    }
+                                });
+                                Toast.makeText(getApplicationContext(), "Authentication failed.",
+                                        Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                    });
         } else{
             Toast.makeText(this, "Tienes que aceptar las Condiciones y los Términos de servicio.", Toast.LENGTH_LONG).show();
         }
