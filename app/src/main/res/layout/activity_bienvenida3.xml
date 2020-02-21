@@ -75,13 +75,16 @@
         android:layout_marginStart="30dp"
         android:layout_marginTop="30dp"
         android:layout_marginEnd="150dp"
+        android:layout_marginBottom="30dp"
         android:ems="10"
         android:hint="Data de naixement"
         android:inputType="date"
+        app:layout_constraintBottom_toTopOf="@+id/btnBack"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textoApellidos" />
+        app:layout_constraintTop_toBottomOf="@+id/textoApellidos"
+        app:layout_constraintVertical_bias="0.0" />
 
     <ImageButton
         android:id="@+id/btnBack"
