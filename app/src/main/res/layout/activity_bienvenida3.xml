@@ -101,6 +101,7 @@
         android:onClick="envia"
         android:text="ENVIA"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/btnBack" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

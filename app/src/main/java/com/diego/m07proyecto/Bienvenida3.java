@@ -2,10 +2,13 @@ package com.diego.m07proyecto;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.text.Layout;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -14,7 +17,7 @@ import java.util.Date;
 
 public class Bienvenida3 extends AppCompatActivity {
 
-    //private TextView descripcion;
+    private TextView text;
     private Button btnEnvia;
     private EditText textoUsuario;
     private EditText textoNombre;
@@ -30,15 +33,15 @@ public class Bienvenida3 extends AppCompatActivity {
         textoNombre = findViewById(R.id.textoNombre);
         textoApellidos = findViewById(R.id.textoApellidos);
         fechaNacimiento = findViewById(R.id.fechaNacimiento);
-        /*
-        descripcion = findViewById(R.id.test);
-        descripcion.setJustificationMode(Layout.JUSTIFICATION_MODE_INTER_WORD);
-        NO VA POR LA API
-        */
+        text = findViewById(R.id.text);
+        if(android.os.Build.VERSION.SDK_INT >= 26) {
+            text.setJustificationMode(Layout.JUSTIFICATION_MODE_INTER_WORD);
+        }
     }
 
     public void goToPage2(View view) {
-        finish();
+        Intent intent = new Intent(this, Bienvenida2.class);
+        startActivity(intent);
     }
 
     public void envia(View view) throws ParseException {
@@ -47,17 +50,10 @@ public class Bienvenida3 extends AppCompatActivity {
         String nombre = textoNombre.getText().toString();
         String apellidos = textoApellidos.getText().toString();
         String nacimiento = fechaNacimiento.getText().toString();
-        System.out.println("La fecha " + nacimiento);
-        System.out.println("La fecha " + nacimiento.length());
-        if(nacimiento.length() == 8) {
+        if(nacimiento.length() == 10) {
             Date fecha = formatter.parse(nacimiento);
-            System.out.println(usuario);
-            System.out.println(nombre);
-            System.out.println(apellidos);
-            System.out.println(fecha);
-            System.out.println(nacimiento);
         } else{
-            System.out.println("La fecha no es correcta.");
+
         }
     }
 }
