@@ -71,4 +71,5 @@
     <string name="hintNick" translatable="false">Nick</string>
     <string name="explicacio_expressat">ExpressaT és una app amb la que pots compartir les teves experiències i emocions amb altra gent de manera online, amb total llibertat i sense preocupacions.\n\nComparteix les teves experiències i les d\'altres usuaris i fes nous amics!</string>
     <string name="no_hay_conexion">No hi ha connexió.</string>
+    <string name="sign_out">Tanca la sessió</string>
 </resources>
