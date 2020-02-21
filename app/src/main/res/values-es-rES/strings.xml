@@ -38,9 +38,9 @@
     <string name="hintPassword">Contraseña</string>
     <string name="hintCorreo">Correo</string>
     <string name="registroCorrecto">Usuario registrado correctamente.</string>
-    <string name="loginCorrecto">You successfully logged in.</string>
+    <string name="loginCorrecto">Has iniciado sesión correctamente.</string>
     <string name="registroErroneo">Este usuari ya existe.</string>
     <string name="login_error">Credenciales incorrectas</string>
     <string name="explicacio_expressat">ExpressaT es una aplicación con la que puedes compartir tus experiencias y emociones con otra gente de forma online, con total libertad y sin preocupaciones.\n\nComparte tus experiencias y las de otros usuarios y haz nuevos amigos!</string>
-    <string name="no_hay_conexion">Connection timed out.</string>
+    <string name="no_hay_conexion">No hay conexión</string>
 </resources>

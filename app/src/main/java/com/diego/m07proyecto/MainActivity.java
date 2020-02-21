@@ -39,8 +39,6 @@ public class MainActivity extends AppCompatActivity {
 
     public static final int NUEVO_USUARIO_ACTIVITY_REQUEST_CODE = 1;
 
-    private ConstraintLayout layoutLogin;
-
     private TextView textoUsuario;
     private TextView textoClave;
     private TextView textoRegistro;
@@ -49,8 +47,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        layoutLogin = findViewById(R.id.layoutLogin);
 /*
         int tiempoEspera = 3000;
         while(!isNetworkAvailable()){
@@ -74,13 +70,6 @@ public class MainActivity extends AppCompatActivity {
         if (currentUser != null) {
             checkLogin(currentUser);
             System.out.println("NO SOY NULL");
-        } else {
-            layoutLogin.setVisibility(View.VISIBLE);
-        }
-
-        if (!isNetworkAvailable()) {
-
-            layoutLogin.setVisibility(View.VISIBLE);
         }
 
         textoUsuario = findViewById(R.id.textoUsuario);
@@ -156,7 +145,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void checkLogin(FirebaseUser aux) {
-        DatabaseReference myRef = database.getReference("Usuarios/" + aux.getUid() + "/Nick");
+        final String userUid = aux.getUid();
+        DatabaseReference myRef = database.getReference("Usuarios/" + userUid + "/Nick");
         myRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {

@@ -38,9 +38,9 @@
     <string name="hintPassword">Password</string>
     <string name="hintCorreo">Email</string>
     <string name="registroCorrecto">User registered</string>
-    <string name="loginCorrecto">Has iniciado sesión correctamente.</string>
+    <string name="loginCorrecto">You successfully logged in.</string>
     <string name="registroErroneo">This user already exists.</string>
     <string name="login_error">Wrong credentials</string>
     <string name="explicacio_expressat">ExpressaT is an app which you can share your experiences and feelings with other users online, totally freedom and without worries.\n\nShare your experiences and other ones and make some new friends!</string>
-    <string name="no_hay_conexion">No hay conexión.</string>
+    <string name="no_hay_conexion">Connection timed out.</string>
 </resources>

@@ -10,6 +10,11 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -17,8 +22,13 @@ import java.util.Date;
 
 public class Bienvenida3 extends AppCompatActivity {
 
+    FirebaseDatabase database = FirebaseDatabase.getInstance();
+
+    FirebaseAuth mAuth;
+
+    FirebaseUser currentUser;
+
     private TextView text;
-    private Button btnEnvia;
     private EditText textoUsuario;
     private EditText textoNombre;
     private EditText textoApellidos;
@@ -28,7 +38,6 @@ public class Bienvenida3 extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_bienvenida3);
-        btnEnvia = findViewById(R.id.btnEnvia);
         textoUsuario = findViewById(R.id.textoUsuario);
         textoNombre = findViewById(R.id.textoNombre);
         textoApellidos = findViewById(R.id.textoApellidos);
@@ -37,6 +46,9 @@ public class Bienvenida3 extends AppCompatActivity {
         if(android.os.Build.VERSION.SDK_INT >= 26) {
             text.setJustificationMode(Layout.JUSTIFICATION_MODE_INTER_WORD);
         }
+        mAuth = FirebaseAuth.getInstance();
+        currentUser = mAuth.getCurrentUser();
+        System.out.println("El UID es: " + currentUser.getUid());
     }
 
     public void goToPage2(View view) {
@@ -54,12 +66,22 @@ public class Bienvenida3 extends AppCompatActivity {
         if(!textoNombre.getText().toString().equals("")) nombre = textoNombre.getText().toString();
         if(!textoApellidos.getText().toString().equals("")) apellidos = textoApellidos.getText().toString();
         if(!fechaNacimiento.getText().toString().equals("")) nacimiento = fechaNacimiento.getText().toString();
-
+        DatabaseReference myRef = database.getReference("Usuarios/"+currentUser.getUid());
+        myRef.child("Nick").setValue(0);
+        myRef.child("Edad").setValue(calcularEdad(formatter.parse(nacimiento)));
+        myRef.child("Nombre").setValue(nombre + " " + apellidos);
+        myRef.child("NumRespuestas").setValue("0");
+        myRef.child("NumTemas").setValue("0");
         /*if(nacimiento.length() == 10) {  // Si se cambia para que vaya poniendo las barras durante la escritura del campo no hace falta hacer esta comprobación. Poner también que no deje escribir más de 10 carácteres.
             Date fecha = formatter.parse(nacimiento);
         } else{
 
         }
         */
+    }
+
+    public int calcularEdad(Date fecha){
+        int edad = 0;
+        return edad;
     }
 }
