@@ -4,8 +4,12 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.ConnectivityManager;
+import android.net.Network;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.renderscript.Sampler;
 import android.util.Log;
@@ -47,6 +51,10 @@ public class MainActivity extends AppCompatActivity {
         FirebaseUser currentUser = mAuth.getCurrentUser();
         if (currentUser != null) {
             checkLogin(currentUser);
+        }
+
+        if(!isNetworkAvailable()){
+            Toast.makeText(this, "No tienes conexión", Toast.LENGTH_LONG).show();
         }
 
         textoUsuario = findViewById(R.id.textoUsuario);
@@ -135,5 +143,15 @@ public class MainActivity extends AppCompatActivity {
                 // Sin hacer nada
             }
         });
+    }
+
+    private boolean isNetworkAvailable() {
+        ConnectivityManager cm =
+                (ConnectivityManager)getApplicationContext().getSystemService(Context.CONNECTIVITY_SERVICE);
+
+        NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
+        boolean isConnected = activeNetwork != null &&
+                activeNetwork.isConnectedOrConnecting();
+        return isConnected;
     }
 }
