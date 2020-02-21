@@ -47,7 +47,7 @@
         android:contentDescription="@string/escriu_el_teu_nom_d_usuari"
         android:ems="10"
         android:fontFamily="@font/allerta"
-        android:hint="@string/hintUsuario"
+        android:hint="@string/hintCorreo"
         android:importantForAutofill="no"
         android:inputType="textEmailAddress"
         android:labelFor="@id/logo"

@@ -31,7 +31,7 @@
     <string name="news_placeholder">Notícies</string>
     <string name="sports_info_placeholder">Aquí hi ha algunes notícies</string>
 
-    <string name="hintUsuario">Correu</string>
+    <string name="hintCorreo">Correu</string>
     <string name="hintPassword">Clau</string>
 
     <string name="fromSoftwareDetails" translatable="false">FromSoftware, Inc. es una compañía japonesa de videojuegos
@@ -67,4 +67,6 @@
         <item>Elden Ring</item>
     </string-array>
     <string name="registroErroneo">Aquest usuari ja existeix.</string>
+    <string name="login_error">Credencials incorrectes</string>
+    <string name="hintNick" translatable="false">Nick</string>
 </resources>

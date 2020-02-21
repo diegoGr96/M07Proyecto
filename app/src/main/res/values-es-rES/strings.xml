@@ -36,8 +36,9 @@
     <string name="clica_per_a_crear_un_compte">Clica para crear una cuenta</string>
     <string name="selecciona_el_teu_g_nere">Selecciona tu género</string>
     <string name="hintPassword">Contraseña</string>
-    <string name="hintUsuario">Correo</string>
+    <string name="hintCorreo">Correo</string>
     <string name="registroCorrecto">Usuario registrado correctamente.</string>
     <string name="loginCorrecto">You successfully logged in.</string>
     <string name="registroErroneo">Este usuari ya existe.</string>
+    <string name="login_error">Credenciales incorrectas</string>
 </resources>
