@@ -36,7 +36,7 @@
     <string name="clica_per_a_crear_un_compte">Click to create an account</string>
     <string name="selecciona_el_teu_g_nere">Select your gender</string>
     <string name="hintPassword">Password</string>
-    <string name="hintUsuario">Email</string>
+    <string name="hintCorreo">Email</string>
     <string name="registroCorrecto">User registered</string>
     <string name="loginCorrecto">Has iniciado sesión correctamente.</string>
     <string name="registroErroneo">This user already exists.</string>

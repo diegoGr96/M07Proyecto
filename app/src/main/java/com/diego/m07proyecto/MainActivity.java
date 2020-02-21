@@ -87,9 +87,10 @@ public class MainActivity extends AppCompatActivity {
                                         @Override
                                         public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
-                                            if(dataSnapshot.getValue().toString().equals(""))
-                                                Toast.makeText(getApplicationContext(),"Es la primera vez que inicia sesión.",Toast.LENGTH_LONG).show();
-                                            else{
+                                            if(dataSnapshot.getValue().toString().equals("")) {
+                                                Intent intentSegundaActivity = new Intent(getApplicationContext(), Bienvenida.class);
+                                                startActivity(intentSegundaActivity);
+                                            }else{
                                                 Intent intentSegundaActivity = new Intent(getApplicationContext(), MenuPrincipal.class);
                                                 startActivity(intentSegundaActivity);
                                             }
