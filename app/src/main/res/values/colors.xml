@@ -6,6 +6,7 @@
     <color name="colorHint">#52363535</color>
     <color name="letraBlanca">#FFFFFF</color>
     <color name="backgroundBotones">#F3394892</color>
+    <color name="backgroundLogoBienvenida">#4A6CCC</color>
     <color name="backgroundCardView">#1D2341D5</color>
     <color name="textColor">#000000</color>
 </resources>
