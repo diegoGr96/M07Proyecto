@@ -43,4 +43,5 @@
     <string name="login_error">Wrong credentials</string>
     <string name="explicacio_expressat">ExpressaT is an app which you can share your experiences and feelings with other users online, totally freedom and without worries.\n\nShare your experiences and other ones and make some new friends!</string>
     <string name="no_hay_conexion">Connection timed out.</string>
+    <string name="sign_out">Sign out</string>
 </resources>
