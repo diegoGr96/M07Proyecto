@@ -3,11 +3,11 @@
     <string name="textoBotonLogin">Inicia sessió</string>
     <string name="textoLabelUsuario">Usuari:</string>
     <string name="textoLabelClave">Clau:</string>
-    <string name="textoLabelNoTienesCuenta">¿No tens compte?</string>
-    <string name="textoCrearCuenta">¡Crea\'n un!</string>
-    <string name="textoLabelYaTienesCuenta">¿Ja tens compte?</string>
-    <string name="textoIniciarSesion">¡Inicia sessió!</string>
-    <string name="textoBienvenido">¡Benvingut!</string>
+    <string name="textoLabelNoTienesCuenta">No tens compte?</string>
+    <string name="textoCrearCuenta">Crea\'n un!</string>
+    <string name="textoLabelYaTienesCuenta">Ja tens compte?</string>
+    <string name="textoIniciarSesion">Inicia sessió!</string>
+    <string name="textoBienvenido">Benvingut!</string>
     <string name="textoBotonRegistrarse">Registrar-se</string>
     <string name="title_activity_menu_principal">MenuPrincipal</string>
     <string name="navigation_drawer_open">Obrir finestra de navegació</string>
@@ -70,4 +70,5 @@
     <string name="login_error">Credencials incorrectes</string>
     <string name="hintNick" translatable="false">Nick</string>
     <string name="explicacio_expressat">ExpressaT és una app amb la que pots compartir les teves experiències i emocions amb altra gent de manera online, amb total llibertat i sense preocupacions.\n\nComparteix les teves experiències i les d\'altres usuaris i fes nous amics!</string>
+    <string name="no_hay_conexion">No hi ha connexió.</string>
 </resources>

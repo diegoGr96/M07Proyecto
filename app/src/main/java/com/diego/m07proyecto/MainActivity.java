@@ -133,7 +133,7 @@ public class MainActivity extends AppCompatActivity {
         } else {
 
             if (!isNetworkAvailable()) {
-                Snackbar.make(viewButton, "No hay conexión a internet.", Snackbar.LENGTH_LONG)
+                Snackbar.make(viewButton, getResources().getString(R.string.no_hay_conexion), Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
             } else {
                 //Toast.makeText(getApplicationContext(), "-"+usuario+"-"+password+"-", Toast.LENGTH_LONG).show();

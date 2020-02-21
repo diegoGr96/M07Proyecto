@@ -17,15 +17,15 @@
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="news_placeholder">News</string>
     <string name="sports_info_placeholder">Here is some news</string>
-    <string name="textoBienvenido">¡Welcome!</string>
+    <string name="textoBienvenido">Welcome!</string>
     <string name="textoBotonLogin">Sign in</string>
     <string name="textoBotonRegistrarse">Sign up</string>
-    <string name="textoCrearCuenta">¡Create one!</string>
-    <string name="textoIniciarSesion">¡Sign in!</string>
+    <string name="textoCrearCuenta">Create one!</string>
+    <string name="textoIniciarSesion">Sign in!</string>
     <string name="textoLabelClave">Key:</string>
-    <string name="textoLabelNoTienesCuenta">¿Don\'t have an account?</string>
+    <string name="textoLabelNoTienesCuenta">Don\'t have an account?</string>
     <string name="textoLabelUsuario">User:</string>
-    <string name="textoLabelYaTienesCuenta">¿Already have an account?</string>
+    <string name="textoLabelYaTienesCuenta">Already have an account?</string>
     <string name="title_activity_menu_principal">PrincipalMenu</string>
     <string name="title_placeholder">Title</string>
     <string name="escriu_el_teu_nom_d_usuari">Write your email</string>
@@ -42,4 +42,5 @@
     <string name="registroErroneo">This user already exists.</string>
     <string name="login_error">Wrong credentials</string>
     <string name="explicacio_expressat">ExpressaT is an app which you can share your experiences and feelings with other users online, totally freedom and without worries.\n\nShare your experiences and other ones and make some new friends!</string>
+    <string name="no_hay_conexion">No hay conexión.</string>
 </resources>

@@ -46,14 +46,20 @@ public class Bienvenida3 extends AppCompatActivity {
 
     public void envia(View view) throws ParseException {
         DateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
-        String usuario = textoUsuario.getText().toString();
-        String nombre = textoNombre.getText().toString();
-        String apellidos = textoApellidos.getText().toString();
-        String nacimiento = fechaNacimiento.getText().toString();
-        if(nacimiento.length() == 10) {
+        String usuario = "";
+        String nombre = "";
+        String apellidos = "";
+        String nacimiento = "";
+        if(!textoUsuario.getText().toString().equals("")) usuario = textoUsuario.getText().toString();
+        if(!textoNombre.getText().toString().equals("")) nombre = textoNombre.getText().toString();
+        if(!textoApellidos.getText().toString().equals("")) apellidos = textoApellidos.getText().toString();
+        if(!fechaNacimiento.getText().toString().equals("")) nacimiento = fechaNacimiento.getText().toString();
+
+        /*if(nacimiento.length() == 10) {  // Si se cambia para que vaya poniendo las barras durante la escritura del campo no hace falta hacer esta comprobación. Poner también que no deje escribir más de 10 carácteres.
             Date fecha = formatter.parse(nacimiento);
         } else{
 
         }
+        */
     }
 }
