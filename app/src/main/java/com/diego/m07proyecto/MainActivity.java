@@ -2,6 +2,7 @@ package com.diego.m07proyecto;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 
 import android.app.Activity;
 import android.content.Context;
@@ -38,6 +39,8 @@ public class MainActivity extends AppCompatActivity {
 
     public static final int NUEVO_USUARIO_ACTIVITY_REQUEST_CODE = 1;
 
+    private ConstraintLayout layoutLogin;
+
     private TextView textoUsuario;
     private TextView textoClave;
     private TextView textoRegistro;
@@ -47,14 +50,37 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        layoutLogin = findViewById(R.id.layoutLogin);
+/*
+        int tiempoEspera = 3000;
+        while(!isNetworkAvailable()){
+            if (tiempoEspera<60000){
+                tiempoEspera+=3000;
+            }
+            try {
+                Thread.sleep(tiempoEspera);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+
+*/
+/*
+        Reconectar hiloReconectar = new Reconectar();
+        hiloReconectar.start();
+*/
         mAuth = FirebaseAuth.getInstance();
         FirebaseUser currentUser = mAuth.getCurrentUser();
         if (currentUser != null) {
             checkLogin(currentUser);
+            System.out.println("NO SOY NULL");
+        } else {
+            layoutLogin.setVisibility(View.VISIBLE);
         }
 
-        if(!isNetworkAvailable()){
-            Toast.makeText(this, "No tienes conexión", Toast.LENGTH_LONG).show();
+        if (!isNetworkAvailable()) {
+
+            layoutLogin.setVisibility(View.VISIBLE);
         }
 
         textoUsuario = findViewById(R.id.textoUsuario);
@@ -84,7 +110,7 @@ public class MainActivity extends AppCompatActivity {
         String usuario = textoUsuario.getText().toString().trim();
         String password = textoClave.getText().toString().trim();
 
-        if (!usuario.equals("") && !password.equals("")) {
+        if ((!usuario.equals("") && !password.equals("")) && isNetworkAvailable()) {
             mAuth.signInWithEmailAndPassword(usuario, password)
                     .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                         @Override
@@ -105,9 +131,15 @@ public class MainActivity extends AppCompatActivity {
                         }
                     });
         } else {
-            //Toast.makeText(getApplicationContext(), "-"+usuario+"-"+password+"-", Toast.LENGTH_LONG).show();
-            Snackbar.make(viewButton, getResources().getText(R.string.login_error), Snackbar.LENGTH_LONG)
-                    .setAction("Action", null).show();
+
+            if (!isNetworkAvailable()) {
+                Snackbar.make(viewButton, "No hay conexión a internet.", Snackbar.LENGTH_LONG)
+                        .setAction("Action", null).show();
+            } else {
+                //Toast.makeText(getApplicationContext(), "-"+usuario+"-"+password+"-", Toast.LENGTH_LONG).show();
+                Snackbar.make(viewButton, getResources().getText(R.string.login_error), Snackbar.LENGTH_LONG)
+                        .setAction("Action", null).show();
+            }
         }
     }
 
@@ -147,7 +179,7 @@ public class MainActivity extends AppCompatActivity {
 
     private boolean isNetworkAvailable() {
         ConnectivityManager cm =
-                (ConnectivityManager)getApplicationContext().getSystemService(Context.CONNECTIVITY_SERVICE);
+                (ConnectivityManager) getApplicationContext().getSystemService(Context.CONNECTIVITY_SERVICE);
 
         NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
         boolean isConnected = activeNetwork != null &&

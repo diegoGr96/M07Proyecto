@@ -4,102 +4,124 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/bg"
+    android:background="@color/backgroundLogoBienvenida"
+    android:visibility="visible"
     tools:context=".MainActivity">
 
-    <Button
-        android:id="@+id/botonRegistrarse"
-        style="@style/botones"
-        android:layout_width="0dp"
-        android:layout_height="54dp"
-        android:layout_marginStart="50dp"
-        android:layout_marginTop="30dp"
-        android:layout_marginEnd="50dp"
-
-        android:contentDescription="@string/bot_per_a_iniciar_sessi"
-        android:labelFor="@id/textoClave"
-        android:onClick="iniciarSesion"
-        android:shadowColor="#00C50101"
-        android:text="@string/textoBotonLogin"
-        android:textSize="20sp"
-        app:layout_constraintCircleRadius="20dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textoClave" />
-
-    <EditText
-        android:id="@+id/textoUsuario"
-        style="@style/editText"
-        android:layout_width="0dp"
-        android:layout_height="48dp"
-        android:layout_marginStart="50dp"
-        android:layout_marginEnd="50dp"
-        android:contentDescription="@string/escriu_el_teu_nom_d_usuari"
-        android:ems="10"
-        android:fontFamily="@font/allerta"
-        android:hint="@string/hintCorreo"
-        android:inputType="textEmailAddress"
-        android:labelFor="@id/logo"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/logo" />
-
-    <EditText
-        android:id="@+id/textoClave"
-        style="@style/editText"
-        android:layout_width="0dp"
-        android:layout_height="48dp"
-        android:layout_marginStart="50dp"
-        android:layout_marginTop="30dp"
-        android:layout_marginEnd="50dp"
-        android:contentDescription="@string/escriu_la_teva_clau"
-        android:ems="10"
-        android:fontFamily="@font/allerta"
-        android:hint="@string/hintPassword"
-        android:inputType="textPassword"
-        android:labelFor="@id/textoUsuario"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textoUsuario" />
-
-    <TextView
-        android:id="@+id/textoDecoIniciar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="50dp"
-        android:layout_marginTop="30dp"
-        android:fontFamily="@font/allerta"
-        android:labelFor="@id/textoRegistrar"
-        android:text="@string/textoLabelNoTienesCuenta"
-        android:textColor="#000000"
-        android:textSize="18.5sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/botonRegistrarse" />
-
-    <TextView
-        android:id="@+id/textoRegistrar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="50dp"
-        android:layout_marginTop="15dp"
-        android:contentDescription="@string/clica_per_a_crear_un_compte"
-        android:fontFamily="@font/allerta"
-        android:labelFor="@id/textoDecoIniciar"
-        android:text="@string/textoCrearCuenta"
-        android:textColor="#D36008"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textoDecoIniciar"
-        app:layout_constraintVertical_bias="0.0" />
-
     <ImageView
-        android:id="@+id/logo"
-        android:layout_width="195dp"
-        android:layout_height="172dp"
+        android:id="@+id/logoExpressat2"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/layoutLogin"
         app:srcCompat="@drawable/logoexpressat" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/layoutLogin"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/bg"
+        android:visibility="invisible"
+        tools:layout_editor_absoluteX="-90dp"
+        tools:layout_editor_absoluteY="-16dp">
+
+        <ImageView
+            android:id="@+id/logo"
+            android:layout_width="0dp"
+            android:layout_height="172dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/logoexpressat" />
+
+        <TextView
+            android:id="@+id/textoDecoIniciar"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="50dp"
+            android:layout_marginTop="30dp"
+            android:fontFamily="@font/allerta"
+            android:labelFor="@id/textoRegistrar"
+            android:text="@string/textoLabelNoTienesCuenta"
+            android:textColor="#000000"
+            android:textSize="18.5sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/botonRegistrarse" />
+
+        <EditText
+            android:id="@+id/textoUsuario"
+            style="@style/editText"
+            android:layout_width="0dp"
+            android:layout_height="48dp"
+            android:layout_marginStart="50dp"
+            android:layout_marginEnd="50dp"
+            android:contentDescription="@string/escriu_el_teu_nom_d_usuari"
+            android:ems="10"
+            android:fontFamily="@font/allerta"
+            android:hint="@string/hintCorreo"
+            android:inputType="textEmailAddress"
+            android:labelFor="@id/logo"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/logo" />
+
+        <Button
+            android:id="@+id/botonRegistrarse"
+            style="@style/botones"
+            android:layout_width="0dp"
+            android:layout_height="54dp"
+
+            android:layout_marginStart="50dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginEnd="50dp"
+            android:contentDescription="@string/bot_per_a_iniciar_sessi"
+            android:labelFor="@id/textoClave"
+            android:onClick="iniciarSesion"
+            android:shadowColor="#00C50101"
+            android:text="@string/textoBotonLogin"
+            android:textSize="20sp"
+            app:layout_constraintCircleRadius="20dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textoClave" />
+
+        <TextView
+            android:id="@+id/textoRegistrar"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="50dp"
+            android:layout_marginTop="15dp"
+            android:contentDescription="@string/clica_per_a_crear_un_compte"
+            android:fontFamily="@font/allerta"
+            android:labelFor="@id/textoDecoIniciar"
+            android:text="@string/textoCrearCuenta"
+            android:textColor="#D36008"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textoDecoIniciar" />
+
+        <EditText
+            android:id="@+id/textoClave"
+            style="@style/editText"
+            android:layout_width="0dp"
+            android:layout_height="48dp"
+            android:layout_marginStart="50dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginEnd="50dp"
+            android:contentDescription="@string/escriu_la_teva_clau"
+            android:ems="10"
+            android:fontFamily="@font/allerta"
+            android:hint="@string/hintPassword"
+            android:inputType="textPassword"
+            android:labelFor="@id/textoUsuario"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textoUsuario" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>
