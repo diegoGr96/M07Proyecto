@@ -11,6 +11,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
@@ -72,7 +73,6 @@ public class Bienvenida3 extends AppCompatActivity {
     }
 
     public void envia(View view) throws ParseException {
-        DateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
         String usuario = "";
         String nombre = "";
         String apellidos = "";
@@ -81,17 +81,26 @@ public class Bienvenida3 extends AppCompatActivity {
         if(!textoNombre.getText().toString().equals("")) nombre = textoNombre.getText().toString();
         if(!textoApellidos.getText().toString().equals("")) apellidos = textoApellidos.getText().toString();
         if(!fechaNacimiento.getText().toString().equals("")) nacimiento = fechaNacimiento.getText().toString();
-        DatabaseReference myRef = database.getReference("Usuarios/"+currentUser.getUid());
-        myRef.child("Nick").setValue(usuario);
-        myRef.child("Edad").setValue(nacimiento);
-        myRef.child("Nombre").setValue(nombre + " " + apellidos);
-        myRef.child("NumRespuestas").setValue(0);
-        myRef.child("NumTemas").setValue(0);
-        /*if(nacimiento.length() == 10) {  // Si se cambia para que vaya poniendo las barras durante la escritura del campo no hace falta hacer esta comprobación. Poner también que no deje escribir más de 10 carácteres.
-            Date fecha = formatter.parse(nacimiento);
-        } else{
 
+        if(usuario.length()>0){
+            DatabaseReference myRef = database.getReference("Usuarios/"+currentUser.getUid());
+
+            usuario += ("#"+mAuth.getCurrentUser().getUid().substring(0,5));
+            myRef.child("Nick").setValue(usuario);
+            myRef.child("Edad").setValue(nacimiento);
+            myRef.child("Nombre").setValue(nombre + " " + apellidos);
+            myRef.child("NumRespuestas").setValue(0);
+            myRef.child("NumTemas").setValue(0);
+
+            Intent intent = new Intent(this,MenuPrincipal.class);
+            startActivity(intent);
+            finish();
+        }else{
+            Snackbar.make(textoUsuario, getResources().getText(R.string.AdvertenciaNickVacio), Snackbar.LENGTH_LONG)
+                    .setAction("Action", null).show();
         }
-        */
+
+
+
     }
 }
