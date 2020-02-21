@@ -65,7 +65,7 @@ public class Launcher extends AppCompatActivity {
                     finish();
                 }
             }
-        }, 5000);
+        }, 500);
     }
 
     public boolean isUserLogged() {
