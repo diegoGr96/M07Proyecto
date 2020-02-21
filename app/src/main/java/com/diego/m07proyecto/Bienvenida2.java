@@ -19,6 +19,7 @@ public class Bienvenida2 extends AppCompatActivity {
     public void goToPage3(View view) {
         Intent intent = new Intent(this, Bienvenida3.class);
         startActivity(intent);
+        finish();
     }
 
     public void goToPage1(View view) {
