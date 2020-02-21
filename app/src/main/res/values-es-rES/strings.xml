@@ -41,4 +41,5 @@
     <string name="loginCorrecto">You successfully logged in.</string>
     <string name="registroErroneo">Este usuari ya existe.</string>
     <string name="login_error">Credenciales incorrectas</string>
+    <string name="explicacio_expressat">ExpressaT es una aplicación con la que puedes compartir tus experiencias y emociones con otra gente de forma online, con total libertad y sin preocupaciones.\n\nComparte tus experiencias y las de otros usuarios y haz nuevos amigos!</string>
 </resources>

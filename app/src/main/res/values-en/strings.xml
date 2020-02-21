@@ -41,4 +41,5 @@
     <string name="loginCorrecto">Has iniciado sesión correctamente.</string>
     <string name="registroErroneo">This user already exists.</string>
     <string name="login_error">Wrong credentials</string>
+    <string name="explicacio_expressat">ExpressaT is an app which you can share your experiences and feelings with other users online, totally freedom and without worries.\n\nShare your experiences and other ones and make some new friends!</string>
 </resources>

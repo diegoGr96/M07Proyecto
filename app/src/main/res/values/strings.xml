@@ -69,5 +69,5 @@
     <string name="registroErroneo">Aquest usuari ja existeix.</string>
     <string name="login_error">Credencials incorrectes</string>
     <string name="hintNick" translatable="false">Nick</string>
-    <string name="explicacio_expressat" translatable="false">ExpressaT és una app amb la que pots compartir les teves experiències amb altra gent de maneara online, amb total llibertat i sense cap tipus de preocupació.\n\nComparteix les teves experiències i les d\'altres usuaris i fes nous amics!</string>
+    <string name="explicacio_expressat">ExpressaT és una app amb la que pots compartir les teves experiències i emocions amb altra gent de manera online, amb total llibertat i sense preocupacions.\n\nComparteix les teves experiències i les d\'altres usuaris i fes nous amics!</string>
 </resources>
