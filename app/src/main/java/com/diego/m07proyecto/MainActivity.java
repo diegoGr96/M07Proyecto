@@ -43,11 +43,15 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        mAuth = FirebaseAuth.getInstance();
+        FirebaseUser currentUser = mAuth.getCurrentUser();
+        if (currentUser != null) {
+            checkLogin(currentUser);
+        }
+
         textoUsuario = findViewById(R.id.textoUsuario);
         textoClave = findViewById(R.id.textoClave);
         textoRegistro = findViewById(R.id.textoRegistrar);
-
-        mAuth = FirebaseAuth.getInstance();
 
         textoRegistro.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -72,44 +76,26 @@ public class MainActivity extends AppCompatActivity {
         String usuario = textoUsuario.getText().toString().trim();
         String password = textoClave.getText().toString().trim();
 
-        if (!usuario.equals("") &&  !password.equals("")) {
-                mAuth.signInWithEmailAndPassword(usuario, password)
-                        .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-                            @Override
-                            public void onComplete(@NonNull Task<AuthResult> task) {
-                                if (task.isSuccessful()) {
-                                    // Sign in success, update UI with the signed-in user's information
-                                    Log.d("", "signInWithEmail:success");
-                                    FirebaseUser user = mAuth.getCurrentUser();
-                                    FirebaseUser aux = task.getResult().getUser();
-                                    DatabaseReference myRef = database.getReference("Usuarios/"+aux.getUid()+"/Nick");
-                                    myRef.addListenerForSingleValueEvent(new ValueEventListener() {
-                                        @Override
-                                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-
-                                            if(dataSnapshot.getValue().toString().equals("")) {
-                                                Intent intentSegundaActivity = new Intent(getApplicationContext(), Bienvenida.class);
-                                                startActivity(intentSegundaActivity);
-                                            }else{
-                                                Intent intentSegundaActivity = new Intent(getApplicationContext(), MenuPrincipal.class);
-                                                startActivity(intentSegundaActivity);
-                                            }
-                                        }
-
-                                        @Override
-                                        public void onCancelled(@NonNull DatabaseError databaseError) {
-                                            // Sin hacer nada
-                                        }
-                                    });
-                                } else {
-                                    // If sign in fails, display a message to the user.
-                                    Snackbar.make(viewButton, getResources().getText(R.string.login_error), Snackbar.LENGTH_LONG)
-                                            .setAction("Action", null).show();
-                                }
-
-                                // ...
+        if (!usuario.equals("") && !password.equals("")) {
+            mAuth.signInWithEmailAndPassword(usuario, password)
+                    .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                        @Override
+                        public void onComplete(@NonNull Task<AuthResult> task) {
+                            if (task.isSuccessful()) {
+                                // Sign in success, update UI with the signed-in user's information
+                                Log.d("", "signInWithEmail:success");
+                                //FirebaseUser user = mAuth.getCurrentUser();
+                                FirebaseUser currentUser = task.getResult().getUser();
+                                checkLogin(currentUser);
+                            } else {
+                                // If sign in fails, display a message to the user.
+                                Snackbar.make(viewButton, getResources().getText(R.string.login_error), Snackbar.LENGTH_LONG)
+                                        .setAction("Action", null).show();
                             }
-                        });
+
+                            // ...
+                        }
+                    });
         } else {
             //Toast.makeText(getApplicationContext(), "-"+usuario+"-"+password+"-", Toast.LENGTH_LONG).show();
             Snackbar.make(viewButton, getResources().getText(R.string.login_error), Snackbar.LENGTH_LONG)
@@ -127,5 +113,27 @@ public class MainActivity extends AppCompatActivity {
             Toast.makeText(
                     this, "El usuario no ha sido registrado porque estaba vacio.", Toast.LENGTH_LONG).show();
         }
+    }
+
+    public void checkLogin(FirebaseUser aux) {
+        DatabaseReference myRef = database.getReference("Usuarios/" + aux.getUid() + "/Nick");
+        myRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if (dataSnapshot.getValue().toString().equals("")) {
+                    Intent intentSegundaActivity = new Intent(getApplicationContext(), Bienvenida.class);
+                    startActivity(intentSegundaActivity);
+                } else {
+                    Intent intentSegundaActivity = new Intent(getApplicationContext(), MenuPrincipal.class);
+                    startActivity(intentSegundaActivity);
+                }
+                finish();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                // Sin hacer nada
+            }
+        });
     }
 }
