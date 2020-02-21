@@ -11,81 +11,74 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="30dp"
-        android:layout_marginTop="100dp"
+        android:layout_marginTop="25dp"
         android:layout_marginEnd="30dp"
         android:fontFamily="@font/allerta"
         android:text="Per últim, necessitem que ens donis algunes dades addicionals. Aquestes són necessàries per a que puguis utilitzar la nosta aplicació. No obstant, pots ocultar aquesta informació sempre que vulguis. A més, ExpressaT no fara cap ús perjudicial d'aquestes dades ni les compartirà públicament."
-        android:textSize="16sp"
+        android:textSize="12sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="270dp"
-        android:layout_marginBottom="135dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/text">
+    <EditText
+        android:id="@+id/textoNombre"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginEnd="150dp"
+        android:ems="10"
+        android:hint="Nom"
+        android:inputType="textPersonName"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textoUsuario" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
+    <EditText
+        android:id="@+id/textoUsuario"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginEnd="150dp"
+        android:ems="10"
+        android:hint="@string/hintNick"
+        android:inputType="textPersonName"
+        android:text="USUARIIIIIIIIIIIIIIIII"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/text" />
 
-            <EditText
-                android:id="@+id/textoUsuario"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="30dp"
-                android:layout_marginTop="30dp"
-                android:layout_marginEnd="150dp"
-                android:ems="10"
-                android:hint="@string/hintUsuario"
-                android:inputType="textPersonName"
-                android:text="USUARIIIIIIIIIIIIIIIII" />
+    <EditText
+        android:id="@+id/textoApellidos"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginEnd="150dp"
+        android:ems="10"
+        android:hint="Cognoms"
+        android:inputType="textPersonName"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textoNombre" />
 
-            <EditText
-                android:id="@+id/textoNombre"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="30dp"
-                android:layout_marginTop="28dp"
-                android:layout_marginEnd="150dp"
-                android:ems="10"
-                android:hint="Nom"
-                android:inputType="textPersonName" />
-
-            <EditText
-                android:id="@+id/textoApellidos"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="30dp"
-                android:layout_marginTop="30dp"
-                android:layout_marginEnd="150dp"
-                android:ems="10"
-                android:hint="Cognoms"
-                android:inputType="textPersonName" />
-
-            <TextView
-                android:id="@+id/textView4"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="30dp"
-                android:layout_marginTop="30dp"
-                android:layout_marginEnd="150dp"
-                android:text="Data de naixement"
-                android:textSize="18sp"
-                android:textStyle="bold" />
-
-            <CalendarView
-                android:id="@+id/fechaNacimiento"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="30dp" />
-
-        </LinearLayout>
-    </ScrollView>
+    <EditText
+        android:id="@+id/fechaNacimiento"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginEnd="150dp"
+        android:ems="10"
+        android:hint="Data de naixement"
+        android:inputType="date"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textoApellidos" />
 
     <ImageButton
         android:id="@+id/btnBack"

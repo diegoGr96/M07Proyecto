@@ -2,15 +2,14 @@ package com.diego.m07proyecto;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.text.Layout;
 import android.view.View;
 import android.widget.Button;
-import android.widget.CalendarView;
 import android.widget.EditText;
-import android.widget.TextView;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class Bienvenida3 extends AppCompatActivity {
@@ -20,7 +19,7 @@ public class Bienvenida3 extends AppCompatActivity {
     private EditText textoUsuario;
     private EditText textoNombre;
     private EditText textoApellidos;
-    private CalendarView fechaNacimiento;
+    private EditText fechaNacimiento;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,14 +38,26 @@ public class Bienvenida3 extends AppCompatActivity {
     }
 
     public void goToPage2(View view) {
-        Intent intent = new Intent(this, Bienvenida2.class);
-        startActivity(intent);
+        finish();
     }
 
-    public void envia(View view) {
+    public void envia(View view) throws ParseException {
+        DateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
         String usuario = textoUsuario.getText().toString();
         String nombre = textoNombre.getText().toString();
         String apellidos = textoApellidos.getText().toString();
-        String nacimiento = String.valueOf(fechaNacimiento.getDate());
+        String nacimiento = fechaNacimiento.getText().toString();
+        System.out.println("La fecha " + nacimiento);
+        System.out.println("La fecha " + nacimiento.length());
+        if(nacimiento.length() == 8) {
+            Date fecha = formatter.parse(nacimiento);
+            System.out.println(usuario);
+            System.out.println(nombre);
+            System.out.println(apellidos);
+            System.out.println(fecha);
+            System.out.println(nacimiento);
+        } else{
+            System.out.println("La fecha no es correcta.");
+        }
     }
 }
