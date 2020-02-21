@@ -42,18 +42,19 @@ public class Launcher extends AppCompatActivity {
                     final Handler checkConnection = new Handler(getMainLooper());
                     checkConnection.postDelayed(new Runnable() {
                         int timer = 5000;
+
                         @Override
                         public void run() {
                             if (connectionIsActive()) {
-                                if(isUserLogged()){
+                                if (isUserLogged()) {
                                     checkFirstLog();
-                                } else{
+                                } else {
                                     Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                                     startActivity(intent);
                                     finish();
                                 }
-                            } else{
-                                timer = timer + 5000;
+                            } else {
+                                timer = timer > 60000 ? timer + 5000 : timer;
                             }
                             checkConnection.postDelayed(this, timer);
                         }
@@ -61,6 +62,7 @@ public class Launcher extends AppCompatActivity {
                 } else {
                     Intent intentSegundaActivity = new Intent(getApplicationContext(), MainActivity.class);
                     startActivity(intentSegundaActivity);
+                    finish();
                 }
             }
         }, 5000);
