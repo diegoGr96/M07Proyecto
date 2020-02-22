@@ -26,6 +26,7 @@ public class Launcher extends AppCompatActivity {
     FirebaseDatabase database = FirebaseDatabase.getInstance();
     FirebaseAuth mAuth;
     FirebaseUser usuario;
+    private boolean postback = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,7 +34,7 @@ public class Launcher extends AppCompatActivity {
         setContentView(R.layout.activity_launcher);
         mAuth = FirebaseAuth.getInstance();
         usuario = mAuth.getCurrentUser();
-        Handler handler = new Handler();
+        final Handler handler = new Handler();
         handler.postDelayed(new Runnable() {
             public void run() {
                 if (isUserLogged() && connectionIsActive()) {
@@ -51,12 +52,13 @@ public class Launcher extends AppCompatActivity {
                                 } else {
                                     Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                                     startActivity(intent);
+                                    postback = false;
                                     finish();
                                 }
                             } else {
                                 timer = timer > 60000 ? timer + 5000 : timer;
                             }
-                            checkConnection.postDelayed(this, timer);
+                            if (postback)checkConnection.postDelayed(this, timer);
                         }
                     }, 10);
                 } else {
@@ -95,6 +97,7 @@ public class Launcher extends AppCompatActivity {
                     Intent intentSegundaActivity = new Intent(getApplicationContext(), MenuPrincipal.class);
                     startActivity(intentSegundaActivity);
                 }
+                postback = false;
                 finish();
             }
 
