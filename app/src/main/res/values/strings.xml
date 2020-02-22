@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">M07Proyecto</string>
+    <string name="app_name" translatable="false">ExpressaT</string>
     <string name="textoBotonLogin">Inicia sessió</string>
     <string name="textoLabelUsuario">Usuari:</string>
     <string name="textoLabelClave">Clau:</string>

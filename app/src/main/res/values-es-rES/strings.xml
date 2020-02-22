@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">M07Proyecto</string>
     <string name="acepto_las_condiciones_y_t_rminos_de_servicio">Acepto las Condiciones y Términos.</string>
     <string name="action_settings">Ajustes</string>
     <string name="hombre">Hombre</string>
