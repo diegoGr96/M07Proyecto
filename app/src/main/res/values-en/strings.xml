@@ -46,4 +46,5 @@
     <string name="description_tema">Express yourself here</string>
     <string name="tema_crear">CREATE THEME</string>
     <string name="tema_title">Write your theme title here</string>
+    <string name="white_camps">You must fill all the text fields.</string>
 </resources>
