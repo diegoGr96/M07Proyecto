@@ -31,6 +31,10 @@ public class SlideshowFragment extends Fragment {
     private CheckBox checkAnonim;
     private Button btnCrear;
 
+    private String nick;
+
+    private int numTema;
+
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_newtheme, container, false);
@@ -48,13 +52,13 @@ public class SlideshowFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 if(!tituloTema.getText().toString().equals("") && !descripcionTema.getText().toString().equals("")){
-                    String tema = tituloTema.getText().toString();
+                    String titulo = tituloTema.getText().toString();
                     String descripcion = descripcionTema.getText().toString();
-                    DatabaseReference datosUsuario = database.getReference("Usuarios/"+currentUser.getUid()+"/Nick");
-                    datosUsuario.addListenerForSingleValueEvent(new ValueEventListener() {
-                        String nick = "";
+                    DatabaseReference nickUsuario = database.getReference("Usuarios/"+currentUser.getUid()+"/Nick");
+                    nickUsuario.addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                            System.out.println(dataSnapshot.getValue().toString());
                             nick = dataSnapshot.getValue().toString();
                         }
 
@@ -63,7 +67,27 @@ public class SlideshowFragment extends Fragment {
 
                         }
                     });
-                    DatabaseReference newTema = database.getReference("Temas/"+currentUser.getUid());
+                    DatabaseReference TemaUsuario = database.getReference("Usuarios/"+currentUser.getUid()+"/NumTemas");
+                    TemaUsuario.addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                            System.out.println(dataSnapshot.getValue().toString());
+                            numTema = Integer.parseInt(dataSnapshot.getValue().toString());
+                            numTema++;
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                        }
+                    });
+                    DatabaseReference newTema = database.getReference("Temas/"+currentUser.getUid()+"_"+numTema);
+                    newTema.child("Autor").setValue(currentUser.getUid());
+                    newTema.child("Nick").setValue(nick);
+                    newTema.child("Titulo").setValue(titulo);
+                    newTema.child("Cuerpo").setValue(descripcion);
+                    DatabaseReference incNumTema = database.getReference("Usuarios/"+currentUser.getUid()+"/NumTemas");
+                    incNumTema.setValue(numTema);
                 } else{
                     Snackbar.make(view, getResources().getText(R.string.white_camps), Snackbar.LENGTH_LONG)
                             .setAction("Action", null).show();

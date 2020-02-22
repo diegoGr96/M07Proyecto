@@ -9,7 +9,6 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.os.Handler;
-import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -90,7 +89,7 @@ public class Launcher extends AppCompatActivity {
         myRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                if (dataSnapshot.getValue().toString().equals("")) {
+                 if (dataSnapshot.getValue().toString().equals("")) {
                     Intent intentSegundaActivity = new Intent(getApplicationContext(), Bienvenida.class);
                     startActivity(intentSegundaActivity);
                 } else {

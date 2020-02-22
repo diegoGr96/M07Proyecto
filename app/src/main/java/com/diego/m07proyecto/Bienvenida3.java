@@ -88,7 +88,7 @@ public class Bienvenida3 extends AppCompatActivity {
 
             usuario += ("#"+mAuth.getCurrentUser().getUid().substring(0,5));
             myRef.child("Nick").setValue(usuario);
-            myRef.child("Edad").setValue(nacimiento);
+            myRef.child("FechaNacimiento").setValue(nacimiento);
             myRef.child("Nombre").setValue(nombre + " " + apellidos);
             myRef.child("NumRespuestas").setValue(0);
             myRef.child("NumTemas").setValue(0);
