@@ -47,4 +47,7 @@
     <string name="tema_crear">CREATE THEME</string>
     <string name="tema_title">Write your theme title here</string>
     <string name="white_camps">You must fill all the text fields.</string>
+    <string name="hintNombre">Full name</string>
+    <string name="hintFechaNacimiento">Date born</string>
+    <string name="botonMisTemas">My themes</string>
 </resources>

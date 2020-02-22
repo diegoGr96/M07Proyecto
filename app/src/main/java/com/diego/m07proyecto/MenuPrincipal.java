@@ -5,6 +5,7 @@ import android.os.Bundle;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 
@@ -16,7 +17,11 @@ import androidx.navigation.ui.NavigationUI;
 import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import androidx.drawerlayout.widget.DrawerLayout;
 
@@ -35,8 +40,11 @@ public class MenuPrincipal extends AppCompatActivity {
     private TextView emailShow;
 
     private FirebaseAuth mAuth;
-
     private FirebaseDatabase database;
+
+    private DatabaseReference myRef;
+
+
 
 
     @Override
@@ -49,11 +57,6 @@ public class MenuPrincipal extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
 
         // LOS PILLA COMO NULL
-
-
-
-
-
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -87,17 +90,11 @@ public class MenuPrincipal extends AppCompatActivity {
         nickShow = hView.findViewById(R.id.miNick);
         emailShow = hView.findViewById(R.id.miEmail);
 
-        nickShow.setText(getUserNick());
+        getUserNick();
         emailShow.setText(getUserEmail());
 
         toolbar.announceForAccessibility(getString(R.string.loginCorrecto));
     }
-
-    public void onStart() {
-        super.onStart();
-
-    }
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -120,11 +117,33 @@ public class MenuPrincipal extends AppCompatActivity {
         finish();
     }
 
-    private String getUserNick() {
-        return "Test";
+    private void getUserNick() {
+        // Read from the database
+        myRef = database.getReference("Usuarios/"+mAuth.getCurrentUser().getUid()+"/Nick");
+        myRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                // This method is called once with the initial value and again
+                // whenever data at this location is updated.
+                nickShow.setText(dataSnapshot.getValue(String.class));
+            }
+
+            @Override
+            public void onCancelled(DatabaseError error) {
+                // Failed to read value
+                Log.w("", "Failed to read value.", error.toException());
+            }
+        });
     }
 
     public String getUserEmail() {
-        return mAuth.getCurrentUser().getEmail().toString();
+        return mAuth.getCurrentUser().getEmail();
+    }
+
+    public void cerrarSesion(View view){
+        Intent intent = new Intent(this,MainActivity.class);
+        startActivity(intent);
+        mAuth.signOut();
+        finish();
     }
 }

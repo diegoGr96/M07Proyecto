@@ -20,6 +20,8 @@
         <item name="android:background">@drawable/back</item>
         <item name="android:textColor">@color/letraBlanca</item>
         <item name="android:fontFamily">@font/allerta</item>
+        <item name="android:paddingLeft">10dp</item>
+        <item name="android:paddingRight">10dp</item>
     </style>
     <style name="editText">
         <item name="android:textColorHint">@color/colorHint</item>
@@ -28,6 +30,7 @@
         <item name="android:fontFamily">@font/allerta</item>
         <item name="android:paddingLeft">10dp</item>
         <item name="android:paddingRight">10dp</item>
+        <item name="android:layout_height">48dp</item>
     </style>
 
     <style name="textoTitulos">

@@ -76,4 +76,7 @@
     <string name="ask_anonimat">Manten-me anònim</string>
     <string name="tema_crear">CREA EL TEMA</string>
     <string name="white_camps">Has d\'omplir tots els camps de text.</string>
+    <string name="hintNombre">Nom</string>
+    <string name="hintFechaNacimiento">Data naixement</string>
+    <string name="botonMisTemas">Els meus temes</string>
 </resources>

@@ -1,5 +1,6 @@
 package com.diego.m07proyecto.ui.share;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,6 +13,7 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
+import com.diego.m07proyecto.MainActivity;
 import com.diego.m07proyecto.R;
 
 public class ShareFragment extends Fragment {

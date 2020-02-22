@@ -40,7 +40,6 @@ public class Bienvenida3 extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_bienvenida3);
-        setContentView(R.layout.nav_header_menu_principal);
         textoUsuario = findViewById(R.id.textoUsuario);
         textoNombre = findViewById(R.id.textoNombre);
         textoApellidos = findViewById(R.id.textoApellidos);
