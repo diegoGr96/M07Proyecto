@@ -58,8 +58,10 @@ public class SlideshowFragment extends Fragment {
                     nickUsuario.addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                            System.out.println(dataSnapshot.getValue().toString());
-                            nick = dataSnapshot.getValue().toString();
+                            //System.out.println(dataSnapshot.getValue().toString());
+                            //nick = dataSnapshot.getValue().toString();
+                            nick = dataSnapshot.getValue(String.class);
+
                         }
 
                         @Override
@@ -71,8 +73,9 @@ public class SlideshowFragment extends Fragment {
                     TemaUsuario.addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                            System.out.println(dataSnapshot.getValue().toString());
-                            numTema = Integer.parseInt(dataSnapshot.getValue().toString());
+                            //System.out.println(dataSnapshot.getValue().toString());
+                            //numTema = Integer.parseInt(dataSnapshot.getValue().toString());
+                            numTema = dataSnapshot.getValue(Integer.class);
                             numTema++;
                         }
 
@@ -83,11 +86,17 @@ public class SlideshowFragment extends Fragment {
                     });
                     DatabaseReference newTema = database.getReference("Temas/"+currentUser.getUid()+"_"+numTema);
                     newTema.child("Autor").setValue(currentUser.getUid());
+                    System.out.println("ZZZAutor"+currentUser.getUid());
                     newTema.child("Nick").setValue(nick);
+                    System.out.println("ZZZNick del creador "+nick);
                     newTema.child("Titulo").setValue(titulo);
+                    System.out.println("ZZZTitulo "+titulo);
                     newTema.child("Cuerpo").setValue(descripcion);
+                    System.out.println("ZZZCuerpo "+titulo);
                     DatabaseReference incNumTema = database.getReference("Usuarios/"+currentUser.getUid()+"/NumTemas");
                     incNumTema.setValue(numTema);
+                    System.out.println("ZZZNumero de temas "+numTema);
+                    System.out.println("ZZZ------------------------------------");
                 } else{
                     Snackbar.make(view, getResources().getText(R.string.white_camps), Snackbar.LENGTH_LONG)
                             .setAction("Action", null).show();
