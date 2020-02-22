@@ -20,11 +20,11 @@
     <string name="registroCorrecto">Usuari registrat correctament.</string>
     <string name="loginCorrecto">Has iniciat sessió correctament.</string>
 
-    <string name="menu_home">Menú</string>
-    <string name="menu_gallery">Galeria</string>
-    <string name="menu_slideshow">Diapositives</string>
-    <string name="menu_tools">Eines</string>
-    <string name="menu_share">Compartir</string>
+    <string name="menu_home">Menú principal</string>
+    <string name="menu_profile">El meu perfil</string>
+    <string name="menu_newtheme">Crea un nou tema</string>
+    <string name="menu_search">Busca</string>
+    <string name="menu_signout">Tanca la sessió</string>
     <string name="menu_send">Enviar</string>
 
     <string name="title_placeholder">Títol</string>

@@ -12,28 +12,28 @@
         tools:layout="@layout/fragment_home" />
 
     <fragment
-        android:id="@+id/nav_gallery"
-        android:name="com.diego.m07proyecto.ui.gallery.GalleryFragment"
-        android:label="@string/menu_gallery"
-        tools:layout="@layout/fragment_gallery" />
+        android:id="@+id/nav_profile"
+        android:name="com.diego.m07proyecto.ui.profile.GalleryFragment"
+        android:label="@string/menu_profile"
+        tools:layout="@layout/fragment_profile" />
 
     <fragment
-        android:id="@+id/nav_slideshow"
-        android:name="com.diego.m07proyecto.ui.slideshow.SlideshowFragment"
-        android:label="@string/menu_slideshow"
-        tools:layout="@layout/fragment_slideshow" />
+        android:id="@+id/nav_newtheme"
+        android:name="com.diego.m07proyecto.ui.newtheme.SlideshowFragment"
+        android:label="@string/menu_newtheme"
+        tools:layout="@layout/fragment_newtheme" />
 
     <fragment
-        android:id="@+id/nav_tools"
-        android:name="com.diego.m07proyecto.ui.tools.ToolsFragment"
-        android:label="@string/menu_tools"
-        tools:layout="@layout/fragment_tools" />
+        android:id="@+id/nav_search"
+        android:name="com.diego.m07proyecto.ui.search.ToolsFragment"
+        android:label="@string/menu_search"
+        tools:layout="@layout/fragment_search" />
 
     <fragment
-        android:id="@+id/nav_share"
-        android:name="com.diego.m07proyecto.ui.share.ShareFragment"
-        android:label="@string/menu_share"
-        tools:layout="@layout/fragment_share" />
+        android:id="@+id/nav_signout"
+        android:name="com.diego.m07proyecto.ui.signout.ShareFragment"
+        android:label="@string/menu_signout"
+        tools:layout="@layout/fragment_signout" />
 
     <fragment
         android:id="@+id/nav_send"

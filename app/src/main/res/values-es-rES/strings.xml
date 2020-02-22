@@ -3,11 +3,11 @@
     <string name="acepto_las_condiciones_y_t_rminos_de_servicio">Acepto las Condiciones y Términos.</string>
     <string name="action_settings">Ajustes</string>
     <string name="hombre">Hombre</string>
-    <string name="menu_gallery">Galeria</string>
-    <string name="menu_home">Principal</string>
+    <string name="menu_profile">Mi perfil</string>
+    <string name="menu_home">Menú principal</string>
     <string name="menu_send">Enviar</string>
-    <string name="menu_share">Compartir</string>
-    <string name="menu_tools">Herramientas</string>
+    <string name="menu_signout">Cerrar sesión</string>
+    <string name="menu_search">Buscar</string>
     <string name="nav_header_subtitle">android.studio@android.com</string>
     <string name="nav_header_title">Android Studio</string>
     <string name="news_placeholder">Noticias</string>
@@ -23,7 +23,7 @@
     <string name="textoLabelYaTienesCuenta">¿Ya tienes cuenta?</string>
     <string name="title_activity_menu_principal">Menu principal</string>
     <string name="title_placeholder">Titulo</string>
-    <string name="menu_slideshow">Diapositivas</string>
+    <string name="menu_newtheme">Crear un nuevo tema</string>
     <string name="nav_header_desc">Navegación</string>
     <string name="navigation_drawer_close">Cerrar ventana de navegación</string>
     <string name="navigation_drawer_open">Abrir ventana de navegación</string>
