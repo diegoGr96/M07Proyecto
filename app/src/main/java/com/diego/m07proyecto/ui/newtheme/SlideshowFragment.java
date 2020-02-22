@@ -48,6 +48,38 @@ public class SlideshowFragment extends Fragment {
         mAuth = FirebaseAuth.getInstance();
         currentUser = mAuth.getCurrentUser();
 
+        DatabaseReference aaaa = database.getReference("Usuarios/"+currentUser.getUid()+"/NumTemas");
+        aaaa.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                System.out.println("EEEEEEEEEEL NUM ES: " + dataSnapshot.getValue().toString());
+                //numTema = Integer.parseInt(dataSnapshot.getValue().toString());
+                numTema = dataSnapshot.getValue(Integer.class);
+                numTema++;
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
+        DatabaseReference aaaaa = database.getReference("Usuarios/"+currentUser.getUid()+"/Nick");
+        aaaaa.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                System.out.println("EEEEEEEEEEL NICK ES: " + dataSnapshot.getValue().toString());
+                //nick = dataSnapshot.getValue().toString();
+                nick = dataSnapshot.getValue(String.class);
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
         btnCrear.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
@@ -58,7 +90,7 @@ public class SlideshowFragment extends Fragment {
                     nickUsuario.addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                            //System.out.println(dataSnapshot.getValue().toString());
+                            System.out.println("EEEEEEEEEEL NICK ES: " + dataSnapshot.getValue().toString());
                             //nick = dataSnapshot.getValue().toString();
                             nick = dataSnapshot.getValue(String.class);
 
@@ -73,7 +105,7 @@ public class SlideshowFragment extends Fragment {
                     TemaUsuario.addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                            //System.out.println(dataSnapshot.getValue().toString());
+                            System.out.println("EEEEEEEEEEL NUM ES: " + dataSnapshot.getValue().toString());
                             //numTema = Integer.parseInt(dataSnapshot.getValue().toString());
                             numTema = dataSnapshot.getValue(Integer.class);
                             numTema++;
