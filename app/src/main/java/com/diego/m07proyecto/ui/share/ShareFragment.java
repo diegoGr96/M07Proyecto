@@ -1,4 +1,4 @@
-package com.diego.m07proyecto.ui.signout;
+package com.diego.m07proyecto.ui.share;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;

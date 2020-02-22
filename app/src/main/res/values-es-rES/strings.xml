@@ -8,8 +8,6 @@
     <string name="menu_send">Enviar</string>
     <string name="menu_signout">Cerrar sesión</string>
     <string name="menu_search">Buscar</string>
-    <string name="nav_header_subtitle">android.studio@android.com</string>
-    <string name="nav_header_title">Android Studio</string>
     <string name="news_placeholder">Noticias</string>
     <string name="sports_info_placeholder">Nuevas noticias</string>
     <string name="textoBienvenido">¡Bienvenido!</string>

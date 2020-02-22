@@ -31,7 +31,7 @@
 
     <fragment
         android:id="@+id/nav_signout"
-        android:name="com.diego.m07proyecto.ui.signout.ShareFragment"
+        android:name="com.diego.m07proyecto.ui.share.ShareFragment"
         android:label="@string/menu_signout"
         tools:layout="@layout/fragment_signout" />
 

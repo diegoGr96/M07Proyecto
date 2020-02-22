@@ -12,8 +12,6 @@
     <string name="title_activity_menu_principal">MenuPrincipal</string>
     <string name="navigation_drawer_open">Obrir finestra de navegació</string>
     <string name="navigation_drawer_close">Tancar finestra de navegació</string>
-    <string name="nav_header_title">Android Studio</string>
-    <string name="nav_header_subtitle">android.studio@android.com</string>
     <string name="nav_header_desc">Capçalera de navegació</string>
     <string name="action_settings">Configuracions</string>
 

@@ -15,6 +15,7 @@ import androidx.navigation.ui.NavigationUI;
 
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.FirebaseDatabase;
 
 import androidx.drawerlayout.widget.DrawerLayout;
 
@@ -23,12 +24,18 @@ import androidx.appcompat.widget.Toolbar;
 
 
 import android.view.Menu;
+import android.widget.TextView;
 
 public class MenuPrincipal extends AppCompatActivity {
 
     private AppBarConfiguration mAppBarConfiguration;
 
+    TextView nickShow;
+    TextView emailShow;
+
     FirebaseAuth mAuth;
+
+    FirebaseDatabase database;
 
 
     @Override
@@ -36,7 +43,17 @@ public class MenuPrincipal extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu_principal);
 
+        database = FirebaseDatabase.getInstance();
+
         mAuth = FirebaseAuth.getInstance();
+
+        // LOS PILLA COMO NULL
+
+        //nickShow = findViewById(R.id.miNick);
+        //emailShow = findViewById(R.id.miEmail);
+
+        //nickShow.setText(getUserNick());
+        //emailShow.setText(getUserEmail());
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -86,5 +103,13 @@ public class MenuPrincipal extends AppCompatActivity {
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
         finish();
+    }
+
+    private CharSequence getUserNick() {
+        return "Test";
+    }
+
+    public CharSequence getUserEmail() {
+        return mAuth.getCurrentUser().getEmail();
     }
 }
