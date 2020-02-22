@@ -71,4 +71,8 @@
     <string name="no_hay_conexion">No hi ha connexió.</string>
     <string name="sign_out">Tanca la sessió</string>
     <string name="AdvertenciaNickVacio">Error: Nick buit.</string>
+    <string name="tema_title">Escriu aqui el titol del tema</string>
+    <string name="description_tema">Expressa\'t aqui</string>
+    <string name="ask_anonimat">Manten-me anònim</string>
+    <string name="tema_crear">CREA EL TEMA</string>
 </resources>

@@ -42,4 +42,8 @@
     <string name="no_hay_conexion">Connection timed out.</string>
     <string name="sign_out">Sign out</string>
     <string name="AdvertenciaNickVacio">Error: Empty Nick.</string>
+    <string name="ask_anonimat">Keep me anonymous</string>
+    <string name="description_tema">Express yourself here</string>
+    <string name="tema_crear">CREATE THEME</string>
+    <string name="tema_title">Write your theme title here</string>
 </resources>

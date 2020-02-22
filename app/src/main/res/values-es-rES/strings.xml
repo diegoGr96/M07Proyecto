@@ -42,4 +42,8 @@
     <string name="no_hay_conexion">No hay conexión</string>
     <string name="sign_out">Cerrar sessión</string>
     <string name="AdvertenciaNickVacio">Error: Nick vacio.</string>
+    <string name="ask_anonimat">Mantenme anónimo</string>
+    <string name="description_tema">Exprésate aquí</string>
+    <string name="tema_crear">CREAR TEMA</string>
+    <string name="tema_title">Escribe aqui el título del tema</string>
 </resources>
