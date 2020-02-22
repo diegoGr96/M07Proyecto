@@ -10,6 +10,7 @@ import android.widget.EditText;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+
 import com.diego.m07proyecto.R;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.FirebaseAuth;
@@ -35,6 +36,9 @@ public class SlideshowFragment extends Fragment {
 
     private int numTema;
 
+    private String titulo;
+    private String descripcion;
+
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_newtheme, container, false);
@@ -48,27 +52,11 @@ public class SlideshowFragment extends Fragment {
         mAuth = FirebaseAuth.getInstance();
         currentUser = mAuth.getCurrentUser();
 
-        DatabaseReference aaaa = database.getReference("Usuarios/"+currentUser.getUid()+"/NumTemas");
-        aaaa.addListenerForSingleValueEvent(new ValueEventListener() {
+        DatabaseReference nickUsuario = database.getReference("Usuarios/" + currentUser.getUid() + "/Nick");
+        nickUsuario.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                System.out.println("EEEEEEEEEEL NUM ES: " + dataSnapshot.getValue().toString());
-                //numTema = Integer.parseInt(dataSnapshot.getValue().toString());
-                numTema = dataSnapshot.getValue(Integer.class);
-                numTema++;
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });
-
-        DatabaseReference aaaaa = database.getReference("Usuarios/"+currentUser.getUid()+"/Nick");
-        aaaaa.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                System.out.println("EEEEEEEEEEL NICK ES: " + dataSnapshot.getValue().toString());
+                //System.out.println("EEEEEEEEEEL NICK ES: " + dataSnapshot.getValue().toString());
                 //nick = dataSnapshot.getValue().toString();
                 nick = dataSnapshot.getValue(String.class);
 
@@ -80,58 +68,44 @@ public class SlideshowFragment extends Fragment {
             }
         });
 
-        btnCrear.setOnClickListener(new View.OnClickListener(){
+        DatabaseReference TemaUsuario = database.getReference("Usuarios/" + currentUser.getUid() + "/NumTemas");
+        TemaUsuario.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                //System.out.println("EEEEEEEEEEL NUM ES: " + dataSnapshot.getValue().toString());
+                //numTema = Integer.parseInt(dataSnapshot.getValue().toString());
+                numTema = dataSnapshot.getValue(Integer.class);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
+
+        btnCrear.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(!tituloTema.getText().toString().equals("") && !descripcionTema.getText().toString().equals("")){
-                    String titulo = tituloTema.getText().toString();
-                    String descripcion = descripcionTema.getText().toString();
-                    DatabaseReference nickUsuario = database.getReference("Usuarios/"+currentUser.getUid()+"/Nick");
-                    nickUsuario.addListenerForSingleValueEvent(new ValueEventListener() {
-                        @Override
-                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                            System.out.println("EEEEEEEEEEL NICK ES: " + dataSnapshot.getValue().toString());
-                            //nick = dataSnapshot.getValue().toString();
-                            nick = dataSnapshot.getValue(String.class);
-
-                        }
-
-                        @Override
-                        public void onCancelled(@NonNull DatabaseError databaseError) {
-
-                        }
-                    });
-                    DatabaseReference TemaUsuario = database.getReference("Usuarios/"+currentUser.getUid()+"/NumTemas");
-                    TemaUsuario.addListenerForSingleValueEvent(new ValueEventListener() {
-                        @Override
-                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                            System.out.println("EEEEEEEEEEL NUM ES: " + dataSnapshot.getValue().toString());
-                            //numTema = Integer.parseInt(dataSnapshot.getValue().toString());
-                            numTema = dataSnapshot.getValue(Integer.class);
-                            numTema++;
-                        }
-
-                        @Override
-                        public void onCancelled(@NonNull DatabaseError databaseError) {
-
-                        }
-                    });
-                    DatabaseReference newTema = database.getReference("Temas/"+currentUser.getUid()+"_"+numTema);
+                if (!tituloTema.getText().toString().equals("") && !descripcionTema.getText().toString().equals("")) {
+                    numTema++;
+                    titulo = tituloTema.getText().toString();
+                    descripcion = descripcionTema.getText().toString();
+                    DatabaseReference newTema = database.getReference("Temas/" + currentUser.getUid() + "_" + numTema);
                     newTema.child("Autor").setValue(currentUser.getUid());
-                    System.out.println("ZZZAutor"+currentUser.getUid());
+                    //System.out.println("ZZZAutor" + currentUser.getUid());
                     newTema.child("Nick").setValue(nick);
-                    System.out.println("ZZZNick del creador "+nick);
+                    //System.out.println("ZZZNick del creador " + nick);
                     newTema.child("Titulo").setValue(titulo);
-                    System.out.println("ZZZTitulo "+titulo);
+                    //System.out.println("ZZZTitulo " + titulo);
                     newTema.child("Cuerpo").setValue(descripcion);
-                    System.out.println("ZZZCuerpo "+titulo);
-                    DatabaseReference incNumTema = database.getReference("Usuarios/"+currentUser.getUid()+"/NumTemas");
+                    //System.out.println("ZZZCuerpo " + titulo);
+                    DatabaseReference incNumTema = database.getReference("Usuarios/" + currentUser.getUid() + "/NumTemas");
                     incNumTema.setValue(numTema);
-                    System.out.println("ZZZNumero de temas "+numTema);
-                    System.out.println("ZZZ------------------------------------");
-                } else{
-                    Snackbar.make(view, getResources().getText(R.string.white_camps), Snackbar.LENGTH_LONG)
-                            .setAction("Action", null).show();
+                    //System.out.println("ZZZNumero de temas " + numTema);
+                    //.out.println("ZZZ------------------------------------");
+                } else {
+                    Snackbar.make(view, getResources().getText(R.string.white_camps), Snackbar.LENGTH_LONG).setAction("Action", null).show();
                 }
             }
         });
