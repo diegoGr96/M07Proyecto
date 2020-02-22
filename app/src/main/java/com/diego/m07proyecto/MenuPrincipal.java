@@ -14,6 +14,7 @@ import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
 import com.google.android.material.navigation.NavigationView;
+import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -30,12 +31,12 @@ public class MenuPrincipal extends AppCompatActivity {
 
     private AppBarConfiguration mAppBarConfiguration;
 
-    TextView nickShow;
-    TextView emailShow;
+    private TextView nickShow;
+    private TextView emailShow;
 
-    FirebaseAuth mAuth;
+    private FirebaseAuth mAuth;
 
-    FirebaseDatabase database;
+    private FirebaseDatabase database;
 
 
     @Override
@@ -49,24 +50,25 @@ public class MenuPrincipal extends AppCompatActivity {
 
         // LOS PILLA COMO NULL
 
-        //nickShow = findViewById(R.id.miNick);
-        //emailShow = findViewById(R.id.miEmail);
 
-        //nickShow.setText(getUserNick());
-        //emailShow.setText(getUserEmail());
+
+
+
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         FloatingActionButton fab = findViewById(R.id.fab);
+
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-                /*Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
-                 */
+
             }
         });
+
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);
         // Passing each menu ID as a set of Ids because each
@@ -80,7 +82,20 @@ public class MenuPrincipal extends AppCompatActivity {
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
 
+        View hView = navigationView.getHeaderView(0);
+
+        nickShow = hView.findViewById(R.id.miNick);
+        emailShow = hView.findViewById(R.id.miEmail);
+
+        nickShow.setText(getUserNick());
+        emailShow.setText(getUserEmail());
+
         toolbar.announceForAccessibility(getString(R.string.loginCorrecto));
+    }
+
+    public void onStart() {
+        super.onStart();
+
     }
 
 
@@ -105,11 +120,11 @@ public class MenuPrincipal extends AppCompatActivity {
         finish();
     }
 
-    private CharSequence getUserNick() {
+    private String getUserNick() {
         return "Test";
     }
 
-    public CharSequence getUserEmail() {
-        return mAuth.getCurrentUser().getEmail();
+    public String getUserEmail() {
+        return mAuth.getCurrentUser().getEmail().toString();
     }
 }
