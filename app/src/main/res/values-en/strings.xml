@@ -53,4 +53,6 @@
     <string name="hintTemasCreados">Created themes</string>
     <string name="hintRespuestas">Replies</string>
     <string name="btnGuardasCambiosPerfil">Save</string>
+    <string name="cambiosMiPerfil">Changes saved successfully</string>
+    <string name="noCambiosMiPerfil">No changes detected</string>
 </resources>

@@ -33,6 +33,16 @@
         <item name="android:layout_height">48dp</item>
     </style>
 
+    <style name="editTextCambiosGuardados">
+        <item name="android:textColorHint">@color/colorHint</item>
+        <item name="android:background">@drawable/back_cambios_guardados</item>
+        <item name="android:textColor">@color/textColor</item>
+        <item name="android:fontFamily">@font/allerta</item>
+        <item name="android:paddingLeft">10dp</item>
+        <item name="android:paddingRight">10dp</item>
+        <item name="android:layout_height">48dp</item>
+    </style>
+
     <style name="textoTitulos">
         <item name="android:textColor">@color/letraBlanca</item>
         <item name="android:textSize">25sp</item>
