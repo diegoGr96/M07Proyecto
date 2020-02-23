@@ -79,4 +79,7 @@
     <string name="hintNombre">Nom</string>
     <string name="hintFechaNacimiento">Data naixement</string>
     <string name="botonMisTemas">Els meus temes</string>
+    <string name="hintTemasCreados">Temes creats</string>
+    <string name="hintRespuestas">Respostes</string>
+    <string name="btnGuardasCambiosPerfil">Guardar</string>
 </resources>

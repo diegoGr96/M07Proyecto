@@ -100,6 +100,7 @@ public class SlideshowFragment extends Fragment {
                     //System.out.println("ZZZTitulo " + titulo);
                     newTema.child("Cuerpo").setValue(descripcion);
                     //System.out.println("ZZZCuerpo " + titulo);
+                    newTema.child("Anonimo").setValue(checkAnonim.isChecked());
                     DatabaseReference incNumTema = database.getReference("Usuarios/" + currentUser.getUid() + "/NumTemas");
                     incNumTema.setValue(numTema);
                     //System.out.println("ZZZNumero de temas " + numTema);

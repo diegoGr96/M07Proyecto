@@ -50,4 +50,7 @@
     <string name="hintNombre">Full name</string>
     <string name="hintFechaNacimiento">Date born</string>
     <string name="botonMisTemas">My themes</string>
+    <string name="hintTemasCreados">Created themes</string>
+    <string name="hintRespuestas">Replies</string>
+    <string name="btnGuardasCambiosPerfil">Save</string>
 </resources>
