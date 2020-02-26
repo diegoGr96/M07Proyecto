@@ -84,4 +84,5 @@
     <string name="btnGuardasCambiosPerfil">Guardar</string>
     <string name="cambiosMiPerfil">Canvis guardats correctament</string>
     <string name="noCambiosMiPerfil">No s\'han detectat canvis</string>
+    <string name="temaUsuarioAnonimo">Anònim</string>
 </resources>
