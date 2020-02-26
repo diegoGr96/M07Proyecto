@@ -24,8 +24,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
-
 import java.util.ArrayList;
 
 import androidx.recyclerview.widget.RecyclerView;
@@ -36,17 +34,17 @@ import androidx.recyclerview.widget.RecyclerView;
 public class HistoriasAdapter extends RecyclerView.Adapter<HistoriasAdapter.ViewHolder>  {
 
     // Member variables.
-    private ArrayList<Historia> mHistoryData;
+    private ArrayList<Tema> mTemaData;
     private Context mContext;
 
     /**
      * Constructor that passes in the games data and the context.
      *
-     * @param gamesData ArrayList containing the gamess data.
+     * @param temasData ArrayList containing the gamess data.
      * @param context Context of the application.
      */
-    public HistoriasAdapter(Context context, ArrayList<Historia> gamesData) {
-        this.mHistoryData = gamesData;
+    public HistoriasAdapter(Context context, ArrayList<Tema> temasData) {
+        this.mTemaData = temasData;
         this.mContext = context;
     }
 
@@ -88,10 +86,10 @@ public class HistoriasAdapter extends RecyclerView.Adapter<HistoriasAdapter.View
     public void onBindViewHolder(HistoriasAdapter.ViewHolder holder,
                                  int position) {
         // Get current games.
-        Historia currentHistory = mHistoryData.get(position);
+        Tema currentTema = mTemaData.get(position);
 
         // Populate the textviews with data.
-        holder.bindTo(currentHistory);
+        holder.bindTo(currentTema);
     }
 
     /**
@@ -101,7 +99,7 @@ public class HistoriasAdapter extends RecyclerView.Adapter<HistoriasAdapter.View
      */
     @Override
     public int getItemCount() {
-        return mHistoryData.size();
+        return mTemaData.size();
     }
 
 
@@ -111,8 +109,8 @@ public class HistoriasAdapter extends RecyclerView.Adapter<HistoriasAdapter.View
     class ViewHolder extends RecyclerView.ViewHolder  implements View.OnClickListener{
 
         // Member Variables for the TextViews
-        private TextView mTitleText;
-        private TextView mInfoText;
+        private TextView mTituloText;
+        private TextView mNickText;
 
         /**
          * Constructor for the ViewHolder, used in onCreateViewHolder().
@@ -123,8 +121,8 @@ public class HistoriasAdapter extends RecyclerView.Adapter<HistoriasAdapter.View
             super(itemView);
 
             // Initialize the views.
-            mTitleText = itemView.findViewById(R.id.titleDetail);
-            mInfoText = itemView.findViewById(R.id.subTitleDetail);
+            mTituloText = itemView.findViewById(R.id.titleDetail);
+            mNickText = itemView.findViewById(R.id.userDetail);
 
             itemView.setOnClickListener(this);
         }
@@ -133,18 +131,22 @@ public class HistoriasAdapter extends RecyclerView.Adapter<HistoriasAdapter.View
         Mostramos los datos que hemos recibido a través del método 'onBindViewHolder' de la clase superior
         y nos encargamos de mostrarlos en pantalla.
          */
-        void bindTo(Historia currentHistory){
+        void bindTo(Tema currentTema){
             // Populate the textviews with data.
-            mTitleText.setText(currentHistory.getTitle());
-            mInfoText.setText(currentHistory.getInfo());
+            mTituloText.setText(currentTema.getTitulo());
+            if(currentTema.isAnonimato()){
+                mNickText.setText(R.string.temaUsuarioAnonimo);
+            } else{
+                mNickText.setText(currentTema.getNickAutor());
+            }
         }
 
         @Override
         public void onClick(View view) {
-            Historia currentHistory = mHistoryData.get(getAdapterPosition());
+            Tema currentTema = mTemaData.get(getAdapterPosition());
             Log.d("A","AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAsddfnuirn");
             Intent detailIntent = new Intent(mContext, DetailActivity.class);
-            detailIntent.putExtra("title", currentHistory.getTitle());
+            detailIntent.putExtra("title", currentTema.getTitulo());
             mContext.startActivity(detailIntent);
         }
     }

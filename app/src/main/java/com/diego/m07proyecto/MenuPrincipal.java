@@ -56,8 +56,6 @@ public class MenuPrincipal extends AppCompatActivity {
 
         mAuth = FirebaseAuth.getInstance();
 
-        // LOS PILLA COMO NULL
-
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         FloatingActionButton fab = findViewById(R.id.fab);

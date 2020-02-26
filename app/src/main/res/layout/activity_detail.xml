@@ -27,10 +27,10 @@
             android:padding="8dp"
             android:text="@string/news_placeholder"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/subTitleDetail" />
+            app:layout_constraintTop_toBottomOf="@+id/userDetail" />
 
         <TextView
-            android:id="@+id/subTitleDetail"
+            android:id="@+id/userDetail"
             style="@style/TextAppearance.AppCompat.Subhead"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

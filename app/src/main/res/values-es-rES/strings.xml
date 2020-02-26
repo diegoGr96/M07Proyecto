@@ -55,4 +55,5 @@
     <string name="btnGuardasCambiosPerfil">Guardar</string>
     <string name="cambiosMiPerfil">Cambios guardados correctamente</string>
     <string name="noCambiosMiPerfil">No se han detectado cambios</string>
+    <string name="temaUsuarioAnonimo">Annonymous</string>
 </resources>
