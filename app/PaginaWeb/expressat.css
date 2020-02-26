@@ -1,0 +1,51 @@
+*{
+    font-family: Lato, sans-serif; 
+}
+
+body{
+    background-image: url("Imagenes/road-nature-trees-branches-38537.jpg");
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    min-height:100%;
+    background-size:cover;
+}
+
+#logo{
+    margin: 65px;
+}
+
+.contenedor{
+    background-color: #1D1D1D;
+    color: white; 
+    padding: 50px;
+}
+
+#titulo{
+    font-size: 105px !important;
+    text-align: center;
+}
+
+#contenedor-logo{
+    display: flex;
+}
+#contenedor-logo img{
+    margin-left: 100px;
+}
+
+#contenedor-footer{
+    padding-bottom: 250px;
+    padding-right: 100px;
+}
+
+    #contenedor-footer img{
+        margin-top: 30px;
+        margin-right: 50px;
+        float: right;
+    }
+
+.contenedor p{
+    font-size: 50px;
+}
+.contenedor p strong{
+    font-size: 90px;
+}
