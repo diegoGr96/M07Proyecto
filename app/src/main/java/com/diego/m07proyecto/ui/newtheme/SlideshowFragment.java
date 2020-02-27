@@ -99,6 +99,26 @@ public class SlideshowFragment extends Fragment {
                             // This method is called once with the initial value and again
                             // whenever data at this location is updated.
                             contador = Integer.parseInt(String.valueOf(dataSnapshot.getValue()));
+                            numTema++;
+                            titulo = tituloTema.getText().toString();
+                            descripcion = descripcionTema.getText().toString();
+                            DatabaseReference newTema = database.getReference("Temas/" + contador);
+                            newTema.child("uidAutor").setValue(currentUser.getUid());
+                            //System.out.println("ZZZAutor" + currentUser.getUid());
+                            newTema.child("nickAutor").setValue(nick);
+                            //System.out.println("ZZZNick del creador " + nick);
+                            newTema.child("titulo").setValue(titulo);
+                            //System.out.println("ZZZTitulo " + titulo);
+                            newTema.child("cuerpo").setValue(descripcion);
+                            //System.out.println("ZZZCuerpo " + titulo);
+                            newTema.child("isAnonimo").setValue(checkAnonim.isChecked());
+                            //
+                            newTema.child("contRespuestas").setValue(0);
+                            newTema.child("idTema").setValue(contador);
+                            DatabaseReference incNumTema = database.getReference("Usuarios/" + currentUser.getUid() + "/NumTemas");
+                            incNumTema.setValue(numTema);
+                            contador++;
+                            myRef.setValue(contador);
                         }
 
                         @Override
@@ -106,28 +126,6 @@ public class SlideshowFragment extends Fragment {
                             // Failed to read value
                         }
                     });
-                    numTema++;
-                    titulo = tituloTema.getText().toString();
-                    descripcion = descripcionTema.getText().toString();
-                    DatabaseReference newTema = database.getReference("Temas/" + contador);
-                    newTema.child("uidAutor").setValue(currentUser.getUid());
-                    //System.out.println("ZZZAutor" + currentUser.getUid());
-                    newTema.child("nickAutor").setValue(nick);
-                    //System.out.println("ZZZNick del creador " + nick);
-                    newTema.child("titulo").setValue(titulo);
-                    //System.out.println("ZZZTitulo " + titulo);
-                    newTema.child("cuerpo").setValue(descripcion);
-                    //System.out.println("ZZZCuerpo " + titulo);
-                    newTema.child("isAnonimo").setValue(checkAnonim.isChecked());
-                    //
-                    newTema.child("contRespuestas").setValue(0);
-                    newTema.child("idTema").setValue(contador);
-                    DatabaseReference incNumTema = database.getReference("Usuarios/" + currentUser.getUid() + "/NumTemas");
-                    incNumTema.setValue(numTema);
-                    contador++;
-                    myRef.setValue(contador);
-                    //System.out.println("ZZZNumero de temas " + numTema);
-                    //.out.println("ZZZ------------------------------------");
                 } else {
                     Snackbar.make(view, getResources().getText(R.string.white_camps), Snackbar.LENGTH_LONG).setAction("Action", null).show();
                 }
