@@ -79,14 +79,20 @@ public class GalleryFragment extends Fragment {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 consulta = (HashMap<String, Object>) dataSnapshot.getValue();
-                consulta.remove("Email");
+                consulta.remove("email");
                 int i = 0;
+                /*
                 for (Map.Entry<String, Object> elemento : consulta.entrySet()) {
                     System.out.println("AAA   " + elemento.getKey() + " -- " + elemento.getValue());
                     listaTextos.get(i).setText(elemento.getValue().toString());
                     i++;
                 }
-
+                */
+                textNick.setText(consulta.get("nick").toString());
+                textNombre.setText(consulta.get("nombre").toString());
+                textNacimiento.setText(consulta.get("fechaNacimiento").toString());
+                textTemasCreados.setText(consulta.get("numTemas").toString());
+                textRespuestas.setText(consulta.get("numRespuestas").toString());
                 nacimientoOriginal = textNacimiento.getText().toString();
                 nombreOriginal = textNombre.getText().toString();
 
@@ -103,8 +109,8 @@ public class GalleryFragment extends Fragment {
             public void onClick(View view) {
                 if (!nombreOriginal.equals(textNombre.getText().toString()) || !nacimientoOriginal.equals(textNacimiento.getText().toString())) {
                     DatabaseReference newTema = database.getReference("Usuarios/" + currentUser.getUid());
-                    newTema.child("Nombre").setValue(textNombre.getText().toString());
-                    newTema.child("FechaNacimiento").setValue(textNacimiento.getText().toString());
+                    newTema.child("nombre").setValue(textNombre.getText().toString());
+                    newTema.child("fechaNacimiento").setValue(textNacimiento.getText().toString());
 
                     Snackbar.make(textNick, getResources().getText(R.string.cambiosMiPerfil), Snackbar.LENGTH_LONG)
                             .setAction("Action", null).show();
