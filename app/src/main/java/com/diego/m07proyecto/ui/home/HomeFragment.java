@@ -81,9 +81,15 @@ public class HomeFragment extends Fragment {
                 temasList = (List<Tema>) dataSnapshot.getValue();
                 System.out.println("Hola -- "+temasList);
 
-                // Initialize the adapter and set it to the RecyclerView.
-                mAdapter = new HistoriasAdapter(getContext(), temasList);
-                mRecyclerView.setAdapter(mAdapter);
+                if (temasList == null){
+
+                }else {
+                    // Initialize the adapter and set it to the RecyclerView.
+                    mAdapter = new HistoriasAdapter(getContext(), temasList);
+                    mRecyclerView.setAdapter(mAdapter);
+                }
+
+
             }
 
             @Override
