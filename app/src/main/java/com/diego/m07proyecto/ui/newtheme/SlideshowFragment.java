@@ -109,7 +109,7 @@ public class SlideshowFragment extends Fragment {
                     numTema++;
                     titulo = tituloTema.getText().toString();
                     descripcion = descripcionTema.getText().toString();
-                    DatabaseReference newTema = database.getReference("Temas/" + String.valueOf(contador));
+                    DatabaseReference newTema = database.getReference("Temas/" + contador);
                     newTema.child("uidAutor").setValue(currentUser.getUid());
                     //System.out.println("ZZZAutor" + currentUser.getUid());
                     newTema.child("nickAutor").setValue(nick);
