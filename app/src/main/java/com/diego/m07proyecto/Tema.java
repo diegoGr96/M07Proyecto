@@ -1,9 +1,10 @@
 package com.diego.m07proyecto;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
-public class Tema {
+public class Tema extends HashMap<String, Object> {
     private int contadorRespuestas;
     private int idTema;
     private String uidTema;
@@ -77,5 +78,15 @@ public class Tema {
                 ", titulo='" + titulo + '\'' +
                 ", respuestas=" + respuestas +
                 '}';
+    }
+    public static Tema convertTema(HashMap<String, Object> mapa){
+        String uidAutor = (String) mapa.get("uidAutor");
+        int idTema = ((Long) mapa.get("idTema")).intValue();
+        boolean isAnonimo = (boolean) mapa.get("isAnonimo");
+        String titulo = (String) mapa.get("titulo");
+        //int contRespuestas = ((Long) mapa.get("contRespuestas")).intValue();
+        String nickAutor = (String) mapa.get("nickAutor");
+        String cuerpo = (String) mapa.get("cuerpo");
+        return new Tema(isAnonimo,uidAutor,cuerpo,idTema,nickAutor,null,titulo);
     }
 }

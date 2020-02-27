@@ -25,6 +25,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import androidx.recyclerview.widget.RecyclerView;
@@ -87,7 +88,7 @@ public class HistoriasAdapter extends RecyclerView.Adapter<HistoriasAdapter.View
     public void onBindViewHolder(HistoriasAdapter.ViewHolder holder,
                                  int position) {
         // Get current games.
-        Tema currentTema = mTemaData.get(position);
+        Tema currentTema = Tema.convertTema(mTemaData.get(position));
 
         // Populate the textviews with data.
         holder.bindTo(currentTema);
@@ -144,7 +145,7 @@ public class HistoriasAdapter extends RecyclerView.Adapter<HistoriasAdapter.View
 
         @Override
         public void onClick(View view) {
-            Tema currentTema = mTemaData.get(getAdapterPosition());
+            Tema currentTema = Tema.convertTema(mTemaData.get(getAdapterPosition()));
             Log.d("A","AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAsddfnuirn");
             Intent detailIntent = new Intent(mContext, DetailActivity.class);
             detailIntent.putExtra("title", currentTema.getTitulo());
