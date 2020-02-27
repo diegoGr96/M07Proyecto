@@ -3,11 +3,13 @@
 }
 
 body{
-    background-image: url("Imagenes/road-nature-trees-branches-38537.jpg");
+    background-image: url("Imagenes/background.jpg");
     background-attachment: fixed;
     background-repeat: no-repeat;
     min-height:100%;
     background-size:cover;
+    margin: 0px;
+    display: block;
 }
 
 #logo{
@@ -17,24 +19,71 @@ body{
 .contenedor{
     background-color: #1D1D1D;
     color: white; 
-    padding: 50px;
+    padding: 30px;
+    font-size: 30px;
+    margin-bottom:450px;
 }
+    .contenedor > p {
+        font-size: 80px;
+        margin-top: 20px;
+        margin-bottom: 20px;
+    }
 
 #titulo{
-    font-size: 105px !important;
+    padding: 50px;
     text-align: center;
 }
+
+#explicacion-expressat{
+    padding-left: 30px;
+}
+
+#a{
+    line-height: 150px;
+        text-align: center;
+}
+
+.contenedor-participantes{
+    line-height: 1;
+    background-color: #F7F7F7;
+    color: black;
+    display: inline-block;
+    border: black solid 2px;
+    border-radius: 5px;
+    padding: 20px;
+    min-width: 315px;
+    margin: 40px 50px;
+}
+
+    .contenedor-participantes img{
+        margin-top: 30px;
+        margin-bottom: 30px;
+        border-radius: 5px;
+        box-shadow: 3px 3px 25px 5px  rgb(95, 95, 95);
+        filter: grayscale(100%);
+    }
+
+    .contenedor-participantes > img + p{
+      font-size: 45px ;
+      font-weight: bold;
+    }
+
+    .contenedor-participantes p + p{
+        font-size: 25px ;
+      }
 
 #contenedor-logo{
     display: flex;
 }
 #contenedor-logo img{
     margin-left: 100px;
+    margin-top: -30px;
 }
 
 #contenedor-footer{
     padding-bottom: 250px;
     padding-right: 100px;
+    margin-bottom: 0px !important;
 }
 
     #contenedor-footer img{
@@ -42,13 +91,6 @@ body{
         margin-right: 50px;
         float: right;
     }
-
-.contenedor p{
-    font-size: 50px;
-}
-.contenedor p strong{
-    font-size: 90px;
-}
 
 /* width */
 ::-webkit-scrollbar {
