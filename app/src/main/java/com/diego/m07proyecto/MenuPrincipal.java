@@ -117,7 +117,7 @@ public class MenuPrincipal extends AppCompatActivity {
 
     private void getUserNick() {
         // Read from the database
-        myRef = database.getReference("Usuarios/"+mAuth.getCurrentUser().getUid()+"/Nick");
+        myRef = database.getReference("Usuarios/"+mAuth.getCurrentUser().getUid()+"/nick");
         myRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {

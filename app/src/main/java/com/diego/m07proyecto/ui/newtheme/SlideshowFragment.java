@@ -57,7 +57,7 @@ public class SlideshowFragment extends Fragment {
 
         myRef = database.getReference("contador");
 
-        DatabaseReference nickUsuario = database.getReference("Usuarios/" + currentUser.getUid() + "/Nick");
+        DatabaseReference nickUsuario = database.getReference("Usuarios/" + currentUser.getUid() + "/nick");
         nickUsuario.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -73,7 +73,7 @@ public class SlideshowFragment extends Fragment {
             }
         });
 
-        DatabaseReference TemaUsuario = database.getReference("Usuarios/" + currentUser.getUid() + "/NumTemas");
+        DatabaseReference TemaUsuario = database.getReference("Usuarios/" + currentUser.getUid() + "/numTemas");
         TemaUsuario.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {

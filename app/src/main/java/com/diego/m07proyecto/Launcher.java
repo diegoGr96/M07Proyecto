@@ -85,7 +85,7 @@ public class Launcher extends AppCompatActivity {
 
     public void checkFirstLog() {
         final String userUid = usuario.getUid();
-        DatabaseReference myRef = database.getReference("Usuarios/" + userUid + "/Nick");
+        DatabaseReference myRef = database.getReference("Usuarios/" + userUid + "/nick");
         myRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
