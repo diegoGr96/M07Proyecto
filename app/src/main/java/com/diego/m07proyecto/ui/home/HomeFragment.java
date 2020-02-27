@@ -45,24 +45,17 @@ public class HomeFragment extends Fragment {
 
         initializeData();
 
+        System.out.println(temasList);
+
         homeViewModel =
                 ViewModelProviders.of(this).get(HomeViewModel.class);
         View root = inflater.inflate(R.layout.fragment_home, container, false);
-
-        /*
         // Initialize the RecyclerView.
         mRecyclerView = root.findViewById(R.id.recyclerView);
 
         // Set the Layout Manager.
         Log.d("A", mRecyclerView + "   AAAAAAAAAAAAAAAAAa");
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-
-        // Initialize the adapter and set it to the RecyclerView.
-        mAdapter = new HistoriasAdapter(getContext(), temasList);
-        mRecyclerView.setAdapter(mAdapter);
-
-        */
-
 
         /*
         final TextView textView = root.findViewById(R.id.text_home);
@@ -87,6 +80,10 @@ public class HomeFragment extends Fragment {
             public void onDataChange(DataSnapshot dataSnapshot) {
                 temasList = (List<Tema>) dataSnapshot.getValue();
                 System.out.println("Hola -- "+temasList);
+
+                // Initialize the adapter and set it to the RecyclerView.
+                mAdapter = new HistoriasAdapter(getContext(), temasList);
+                mRecyclerView.setAdapter(mAdapter);
             }
 
             @Override
