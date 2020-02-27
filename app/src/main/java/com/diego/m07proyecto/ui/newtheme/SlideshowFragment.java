@@ -115,7 +115,7 @@ public class SlideshowFragment extends Fragment {
                             //
                             newTema.child("contRespuestas").setValue(0);
                             newTema.child("idTema").setValue(contador);
-                            DatabaseReference incNumTema = database.getReference("Usuarios/" + currentUser.getUid() + "/NumTemas");
+                            DatabaseReference incNumTema = database.getReference("Usuarios/" + currentUser.getUid() + "/numTemas");
                             incNumTema.setValue(numTema);
                             contador++;
                             myRef.setValue(contador);
