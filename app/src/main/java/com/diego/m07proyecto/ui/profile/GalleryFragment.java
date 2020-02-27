@@ -64,11 +64,11 @@ public class GalleryFragment extends Fragment {
         textRespuestas = root.findViewById(R.id.textRespuestas);
 
         listaTextos = new ArrayList<>();
+        listaTextos.add(textRespuestas);
+        listaTextos.add(textNick);
+        listaTextos.add(textTemasCreados);
         listaTextos.add(textNacimiento);
         listaTextos.add(textNombre);
-        listaTextos.add(textNick);
-        listaTextos.add(textRespuestas);
-        listaTextos.add(textTemasCreados);
 
         btnMisTemas = root.findViewById(R.id.btnMisTemas);
         btnGuardar = root.findViewById(R.id.btnGuardar);

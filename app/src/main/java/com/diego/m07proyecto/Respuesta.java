@@ -1,28 +1,26 @@
 package com.diego.m07proyecto;
 
-import java.util.ArrayList;
-
 public class Respuesta {
-    private String idRespuesta;
-    private String respuesta;
+    private int idRespuesta;
+    private String textRespuesta;
     private String uidAutor;
     private String nickAutor;
-    private ArrayList<Respuesta> respuestas;
+    private boolean anonimo;
 
-    public Respuesta(String idRespuesta, String respuesta, String uidAutor, String nickAutor, ArrayList<Respuesta> respuestas) {
+    public Respuesta(boolean anonimo, int idRespuesta, String nickAutor, String textRespuesta, String uidAutor) {
         this.idRespuesta = idRespuesta;
-        this.respuesta = respuesta;
+        this.textRespuesta = textRespuesta;
         this.uidAutor = uidAutor;
         this.nickAutor = nickAutor;
-        this.respuestas = respuestas;
+        this.anonimo = anonimo;
     }
 
-    public String getIdRespuesta() {
+    public int getIdRespuesta() {
         return idRespuesta;
     }
 
-    public String getRespuesta() {
-        return respuesta;
+    public String getTextRespuesta() {
+        return textRespuesta;
     }
 
     public String getUidAutor() {
@@ -33,7 +31,18 @@ public class Respuesta {
         return nickAutor;
     }
 
-    public ArrayList<Respuesta> getRespuestas() {
-        return respuestas;
+    public boolean isAnonimo() {
+        return anonimo;
+    }
+
+    @Override
+    public String toString() {
+        return "Respuesta{" +
+                "idRespuesta=" + idRespuesta +
+                ", textRespuesta='" + textRespuesta + '\'' +
+                ", uidAutor='" + uidAutor + '\'' +
+                ", nickAutor='" + nickAutor + '\'' +
+                ", anonimo=" + anonimo +
+                '}';
     }
 }

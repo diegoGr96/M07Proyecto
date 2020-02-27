@@ -26,6 +26,7 @@ public class SlideshowFragment extends Fragment {
     FirebaseDatabase database;
     FirebaseAuth mAuth;
     FirebaseUser currentUser;
+    DatabaseReference myRef;
 
     private EditText tituloTema;
     private EditText descripcionTema;
@@ -39,6 +40,8 @@ public class SlideshowFragment extends Fragment {
     private String titulo;
     private String descripcion;
 
+    private int contador;
+
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_newtheme, container, false);
@@ -51,6 +54,8 @@ public class SlideshowFragment extends Fragment {
         database = FirebaseDatabase.getInstance();
         mAuth = FirebaseAuth.getInstance();
         currentUser = mAuth.getCurrentUser();
+
+        myRef = database.getReference("contador");
 
         DatabaseReference nickUsuario = database.getReference("Usuarios/" + currentUser.getUid() + "/Nick");
         nickUsuario.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -88,21 +93,39 @@ public class SlideshowFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 if (!tituloTema.getText().toString().equals("") && !descripcionTema.getText().toString().equals("")) {
+                    myRef.addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(DataSnapshot dataSnapshot) {
+                            // This method is called once with the initial value and again
+                            // whenever data at this location is updated.
+                            contador = Integer.parseInt(String.valueOf(dataSnapshot.getValue()));
+                        }
+
+                        @Override
+                        public void onCancelled(DatabaseError error) {
+                            // Failed to read value
+                        }
+                    });
                     numTema++;
                     titulo = tituloTema.getText().toString();
                     descripcion = descripcionTema.getText().toString();
-                    DatabaseReference newTema = database.getReference("Temas/" + currentUser.getUid() + "_" + numTema);
-                    newTema.child("Autor").setValue(currentUser.getUid());
+                    DatabaseReference newTema = database.getReference("Temas/" + contador);
+                    newTema.child("uidAutor").setValue(currentUser.getUid());
                     //System.out.println("ZZZAutor" + currentUser.getUid());
-                    newTema.child("Nick").setValue(nick);
+                    newTema.child("nickAutor").setValue(nick);
                     //System.out.println("ZZZNick del creador " + nick);
-                    newTema.child("Titulo").setValue(titulo);
+                    newTema.child("titulo").setValue(titulo);
                     //System.out.println("ZZZTitulo " + titulo);
-                    newTema.child("Cuerpo").setValue(descripcion);
+                    newTema.child("cuerpo").setValue(descripcion);
                     //System.out.println("ZZZCuerpo " + titulo);
-                    newTema.child("Anonimo").setValue(checkAnonim.isChecked());
+                    newTema.child("isAnonimo").setValue(checkAnonim.isChecked());
+                    //
+                    newTema.child("contRespuestas").setValue(0);
+                    newTema.child("idTema").setValue(contador);
                     DatabaseReference incNumTema = database.getReference("Usuarios/" + currentUser.getUid() + "/NumTemas");
                     incNumTema.setValue(numTema);
+                    contador++;
+                    myRef.setValue(contador);
                     //System.out.println("ZZZNumero de temas " + numTema);
                     //.out.println("ZZZ------------------------------------");
                 } else {

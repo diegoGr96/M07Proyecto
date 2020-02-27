@@ -25,6 +25,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -34,7 +35,7 @@ import androidx.recyclerview.widget.RecyclerView;
 public class HistoriasAdapter extends RecyclerView.Adapter<HistoriasAdapter.ViewHolder>  {
 
     // Member variables.
-    private ArrayList<Tema> mTemaData;
+    private List<Tema> mTemaData;
     private Context mContext;
 
     /**
@@ -43,7 +44,7 @@ public class HistoriasAdapter extends RecyclerView.Adapter<HistoriasAdapter.View
      * @param temasData ArrayList containing the gamess data.
      * @param context Context of the application.
      */
-    public HistoriasAdapter(Context context, ArrayList<Tema> temasData) {
+    public HistoriasAdapter(Context context, List<Tema> temasData) {
         this.mTemaData = temasData;
         this.mContext = context;
     }

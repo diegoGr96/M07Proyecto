@@ -14,14 +14,19 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.diego.m07proyecto.HistoriasAdapter;
 import com.diego.m07proyecto.R;
+import com.diego.m07proyecto.Respuesta;
 import com.diego.m07proyecto.Tema;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class HomeFragment extends Fragment {
 
@@ -29,18 +34,22 @@ public class HomeFragment extends Fragment {
 
     private HomeViewModel homeViewModel;
     private RecyclerView mRecyclerView;
-    private ArrayList<Tema> mTemasData;
     private HistoriasAdapter mAdapter;
+
+    private List<Tema> temasList;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
 
         database = FirebaseDatabase.getInstance();
 
+        initializeData();
+
         homeViewModel =
                 ViewModelProviders.of(this).get(HomeViewModel.class);
         View root = inflater.inflate(R.layout.fragment_home, container, false);
 
+        /*
         // Initialize the RecyclerView.
         mRecyclerView = root.findViewById(R.id.recyclerView);
 
@@ -48,15 +57,11 @@ public class HomeFragment extends Fragment {
         Log.d("A", mRecyclerView + "   AAAAAAAAAAAAAAAAAa");
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
-
-        // Initialize the ArrayList that will contain the data.
-        mTemasData = new ArrayList<>();
-
         // Initialize the adapter and set it to the RecyclerView.
-        mAdapter = new HistoriasAdapter(getContext(), mTemasData);
+        mAdapter = new HistoriasAdapter(getContext(), temasList);
         mRecyclerView.setAdapter(mAdapter);
 
-        initializeData();
+        */
 
 
         /*
@@ -74,18 +79,14 @@ public class HomeFragment extends Fragment {
 
     private void initializeData() {
         // Get the resources from the XML file.
+        DatabaseReference dbRef = database.getReference("Temas");
+        Query myQuery = dbRef.orderByChild("idTema").startAt(0).endAt(10);
 
-        final ArrayList<Tema> temasList = new ArrayList<>();
-        DatabaseReference myRef = database.getReference("TemasOrdenados");
-
-        myRef.addValueEventListener(new ValueEventListener() {
+        myQuery.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                // This method is called once with the initial value and again
-                // whenever data at this location is updated.
-                for(int i = 0; i < dataSnapshot.getChildrenCount() || i < 10; i++){
-
-                }
+                temasList = (List<Tema>) dataSnapshot.getValue();
+                System.out.println("Hola -- "+temasList);
             }
 
             @Override
@@ -95,18 +96,10 @@ public class HomeFragment extends Fragment {
             }
         });
 
-        // Clear the existing data (to avoid duplication).
-        mTemasData.clear();
-
         // Create the ArrayList of Sports objects with titles and
         // information about each sport.
-        for (int i = 0; i < 10; i++) {
-            if(temasList.get(i) != null) {
-                mTemasData.add(temasList.get(i));
-            }
-        }
 
         // Notify the adapter of the change.
-        mAdapter.notifyDataSetChanged();
+       // mAdapter.notifyDataSetChanged();
     }
 }
