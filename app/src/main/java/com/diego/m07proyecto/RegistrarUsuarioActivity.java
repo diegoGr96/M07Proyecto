@@ -81,8 +81,8 @@ public class RegistrarUsuarioActivity extends AppCompatActivity {
                                 setResult(Activity.RESULT_OK,returnIntent);
                                 FirebaseUser aux = task.getResult().getUser();
                                 DatabaseReference myRef = database.getReference("Usuarios/"+aux.getUid());
-                                myRef.child("Email").setValue(aux.getEmail());
-                                myRef.child("Nick").setValue("");
+                                myRef.child("email").setValue(aux.getEmail());
+                                myRef.child("nick").setValue("");
                                 finish();
                             } else {
                                 Log.w("a", "createUserWithEmail:failure", task.getException());
