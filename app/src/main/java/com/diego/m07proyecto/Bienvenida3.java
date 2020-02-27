@@ -86,11 +86,11 @@ import java.util.Date;
                     DatabaseReference myRef = database.getReference("Usuarios/"+currentUser.getUid());
 
                     usuario += ("#"+mAuth.getCurrentUser().getUid().substring(0,5));
-                    myRef.child("Nick").setValue(usuario);
-                    myRef.child("FechaNacimiento").setValue(nacimiento);
-                    myRef.child("Nombre").setValue(nombre + " " + apellidos);
-                    myRef.child("NumRespuestas").setValue(0);
-                    myRef.child("NumTemas").setValue(0);
+                    myRef.child("nick").setValue(usuario);
+                    myRef.child("fechaNacimiento").setValue(nacimiento);
+                    myRef.child("nombre").setValue(nombre + " " + apellidos);
+                    myRef.child("numRespuestas").setValue(0);
+                    myRef.child("numTemas").setValue(0);
 
                     Intent intent = new Intent(this,MenuPrincipal.class);
                     startActivity(intent);
