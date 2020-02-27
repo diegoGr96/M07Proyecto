@@ -26,7 +26,7 @@ public class SlideshowFragment extends Fragment {
     FirebaseDatabase database;
     FirebaseAuth mAuth;
     FirebaseUser currentUser;
-    DatabaseReference myRef;
+    DatabaseReference loadContador;
 
     private EditText tituloTema;
     private EditText descripcionTema;
@@ -40,7 +40,7 @@ public class SlideshowFragment extends Fragment {
     private String titulo;
     private String descripcion;
 
-    private int contador;
+    private int contador = -1;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -55,7 +55,7 @@ public class SlideshowFragment extends Fragment {
         mAuth = FirebaseAuth.getInstance();
         currentUser = mAuth.getCurrentUser();
 
-        myRef = database.getReference("contador");
+        loadContador = database.getReference("contador");
 
         DatabaseReference nickUsuario = database.getReference("Usuarios/" + currentUser.getUid() + "/nick");
         nickUsuario.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -88,44 +88,45 @@ public class SlideshowFragment extends Fragment {
             }
         });
 
+        loadContador.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                contador = Integer.parseInt(String.valueOf(dataSnapshot.getValue()));
+                System.out.println("Contador es: " + contador);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError error) {
+                // Failed to read value
+            }
+        });
+
 
         btnCrear.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                while(contador == -1);
                 if (!tituloTema.getText().toString().equals("") && !descripcionTema.getText().toString().equals("")) {
-                    myRef.addListenerForSingleValueEvent(new ValueEventListener() {
-                        @Override
-                        public void onDataChange(DataSnapshot dataSnapshot) {
-                            // This method is called once with the initial value and again
-                            // whenever data at this location is updated.
-                            contador = Integer.parseInt(String.valueOf(dataSnapshot.getValue()));
-                            numTema++;
-                            titulo = tituloTema.getText().toString();
-                            descripcion = descripcionTema.getText().toString();
-                            DatabaseReference newTema = database.getReference("Temas/" + contador);
-                            newTema.child("uidAutor").setValue(currentUser.getUid());
-                            //System.out.println("ZZZAutor" + currentUser.getUid());
-                            newTema.child("nickAutor").setValue(nick);
-                            //System.out.println("ZZZNick del creador " + nick);
-                            newTema.child("titulo").setValue(titulo);
-                            //System.out.println("ZZZTitulo " + titulo);
-                            newTema.child("cuerpo").setValue(descripcion);
-                            //System.out.println("ZZZCuerpo " + titulo);
-                            newTema.child("isAnonimo").setValue(checkAnonim.isChecked());
-                            //
-                            newTema.child("contRespuestas").setValue(0);
-                            newTema.child("idTema").setValue(contador);
-                            DatabaseReference incNumTema = database.getReference("Usuarios/" + currentUser.getUid() + "/numTemas");
-                            incNumTema.setValue(numTema);
-                            contador++;
-                            myRef.setValue(contador);
-                        }
-
-                        @Override
-                        public void onCancelled(DatabaseError error) {
-                            // Failed to read value
-                        }
-                    });
+                    System.out.println("Contador es(onClick): " + contador);
+                    titulo = tituloTema.getText().toString();
+                    descripcion = descripcionTema.getText().toString();
+                    DatabaseReference newTema = database.getReference("Temas/" + contador);
+                    newTema.child("uidAutor").setValue(currentUser.getUid());
+                    //System.out.println("ZZZAutor" + currentUser.getUid());
+                    newTema.child("nickAutor").setValue(nick);
+                    //System.out.println("ZZZNick del creador " + nick);
+                    newTema.child("titulo").setValue(titulo);
+                    //System.out.println("ZZZTitulo " + titulo);
+                    newTema.child("cuerpo").setValue(descripcion);
+                    newTema.child("isAnonimo").setValue(checkAnonim.isChecked());
+                    //
+                    newTema.child("contRespuestas").setValue(0);
+                    newTema.child("idTema").setValue(contador);
+                    DatabaseReference incNumTema = database.getReference("Usuarios/" + currentUser.getUid() + "/numTemas");
+                    incNumTema.setValue(numTema);
+                    contador++;
+                    numTema++;
+                    loadContador.setValue(contador);
                 } else {
                     Snackbar.make(view, getResources().getText(R.string.white_camps), Snackbar.LENGTH_LONG).setAction("Action", null).show();
                 }
