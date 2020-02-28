@@ -11,6 +11,8 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.diego.m07proyecto.ui.home.HomeViewModel;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -34,11 +36,21 @@ public class DetailActivity extends AppCompatActivity {
     private TextView temaCuerpo;
     private ImageView categoryImage;
     private int idTema = -1;
+    private FloatingActionButton fab;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail);
+
+        fab = findViewById(R.id.addRespuesta);
+
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
 
         temaTitle = findViewById(R.id.txtTitle);
         temaUser = findViewById(R.id.txtAutor);
