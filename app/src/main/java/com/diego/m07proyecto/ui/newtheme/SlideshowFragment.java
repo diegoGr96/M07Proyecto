@@ -1,6 +1,9 @@
 package com.diego.m07proyecto.ui.newtheme;
 
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -42,6 +45,8 @@ public class SlideshowFragment extends Fragment {
     private String descripcion;
 
     private int contador = -1;
+    private int contTitulo = 44;
+    private int contDescripcion = 300;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -65,12 +70,10 @@ public class SlideshowFragment extends Fragment {
                 //System.out.println("EEEEEEEEEEL NICK ES: " + dataSnapshot.getValue().toString());
                 //nick = dataSnapshot.getValue().toString();
                 nick = dataSnapshot.getValue(String.class);
-
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
-
             }
         });
 
@@ -85,7 +88,6 @@ public class SlideshowFragment extends Fragment {
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
-
             }
         });
 
@@ -102,31 +104,80 @@ public class SlideshowFragment extends Fragment {
             }
         });
 
+        tituloTema.setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View v, int keyCode, KeyEvent event) {
+                System.out.println(contTitulo+"  AAA");
+                if (tituloTema.getText().length() < contTitulo) {
+                    contTitulo++;
+                } else {
+                    if (contTitulo > 0) {
+                        contTitulo--;
+                    } else {
+                        tituloTema.setText(tituloTema.getText().subSequence(0, tituloTema.length() - 1));
+                        tituloTema.setSelection(tituloTema.length());
+                    }
+                }
+                return false;
+            }
+        });
+
+        tituloTema.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                System.out.println(contTitulo+"  AAA");
+                if (tituloTema.getText().length() < contTitulo) {
+                    contTitulo++;
+                } else {
+                    if (contTitulo > 0) {
+                        contTitulo--;
+                    } else {
+                        tituloTema.setText(tituloTema.getText().subSequence(0, tituloTema.length() - 1));
+                        tituloTema.setSelection(tituloTema.length());
+                    }
+                }
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });
+        descripcionTema.setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View v, int keyCode, KeyEvent event) {
+                if (descripcionTema.getText().length() < contDescripcion) {
+                    contDescripcion++;
+                } else {
+                    if (contDescripcion > 0) {
+                        contDescripcion--;
+                    } else {
+                        descripcionTema.setText(descripcionTema.getText().subSequence(0, descripcionTema.length() - 1));
+                        descripcionTema.setSelection(descripcionTema.length());
+                    }
+                }
+                return false;
+            }
+        });
+
 
         btnCrear.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                while(contador == -1);
+                while (contador == -1) ;
                 if (!tituloTema.getText().toString().equals("") && !descripcionTema.getText().toString().equals("")) {
                     System.out.println("Contador es(onClick): " + contador);
                     titulo = tituloTema.getText().toString();
                     descripcion = descripcionTema.getText().toString();
                     DatabaseReference newTema = database.getReference("Temas/" + contador);
-                    /*
-                    newTema.child("uidAutor").setValue(currentUser.getUid());
-                    //System.out.println("ZZZAutor" + currentUser.getUid());
-                    newTema.child("nickAutor").setValue(nick);
-                    //System.out.println("ZZZNick del creador " + nick);
-                    newTema.child("titulo").setValue(titulo);
-                    //System.out.println("ZZZTitulo " + titulo);
-                    newTema.child("cuerpo").setValue(descripcion);
-                    newTema.child("isAnonimo").setValue(checkAnonim.isChecked());
-                    //
-                    newTema.child("contRespuestas").setValue(0);
-                    newTema.child("idTema").setValue(contador);
-                    */
+
                     boolean isAnonimo = checkAnonim.isChecked();
-                    Tema nuevoTema = new Tema(isAnonimo, currentUser.getUid(),descripcion,contador,nick,titulo);
+                    Tema nuevoTema = new Tema(isAnonimo, currentUser.getUid(), descripcion, contador, nick, titulo);
                     newTema.setValue(nuevoTema);
 
                     DatabaseReference incNumTema = database.getReference("Usuarios/" + currentUser.getUid() + "/numTemas");
@@ -140,5 +191,10 @@ public class SlideshowFragment extends Fragment {
             }
         });
         return root;
+    }
+
+    private void formatearText() {
+        //titulo -->44
+        //cuerpo --> 300
     }
 }

@@ -10,4 +10,5 @@
     <color name="backgroundCardView">#1D2341D5</color>
     <color name="textColor">#000000</color>
     <color name="colorCambiosGuardados">#6FD653</color>
+    <color name="fondoCardView">#F8D237</color>
 </resources>

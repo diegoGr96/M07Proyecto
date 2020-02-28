@@ -28,12 +28,13 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
 /***
  * The adapter class for the RecyclerView, contains the games data.
  */
-public class HistoriasAdapter extends RecyclerView.Adapter<HistoriasAdapter.ViewHolder>  {
+public class HistoriasAdapter extends RecyclerView.Adapter<HistoriasAdapter.ViewHolder> {
 
     // Member variables.
     private List<Tema> mTemaData;
@@ -43,7 +44,7 @@ public class HistoriasAdapter extends RecyclerView.Adapter<HistoriasAdapter.View
      * Constructor that passes in the games data and the context.
      *
      * @param temasData ArrayList containing the gamess data.
-     * @param context Context of the application.
+     * @param context   Context of the application.
      */
     public HistoriasAdapter(Context context, List<Tema> temasData) {
         this.mTemaData = temasData;
@@ -54,8 +55,8 @@ public class HistoriasAdapter extends RecyclerView.Adapter<HistoriasAdapter.View
     /**
      * Required method for creating the viewholder objects.
      *
-     * @param parent The ViewGroup into which the new View will be added
-     *               after it is bound to an adapter position.
+     * @param parent   The ViewGroup into which the new View will be added
+     *                 after it is bound to an adapter position.
      * @param viewType The view type of the new View.
      * @return The newly created ViewHolder.
      */
@@ -74,7 +75,7 @@ public class HistoriasAdapter extends RecyclerView.Adapter<HistoriasAdapter.View
     /**
      * Required method that binds the data to the viewholder.
      *
-     * @param holder The viewholder into which the data should be put.
+     * @param holder   The viewholder into which the data should be put.
      * @param position The adapter position.
      */
 
@@ -108,11 +109,13 @@ public class HistoriasAdapter extends RecyclerView.Adapter<HistoriasAdapter.View
     /**
      * ViewHolder class that represents each row of data in the RecyclerView.
      */
-    class ViewHolder extends RecyclerView.ViewHolder  implements View.OnClickListener{
+    class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         // Member Variables for the TextViews
         private TextView mTituloText;
         private TextView mNickText;
+        private TextView cuerpoTema;
+        private ConstraintLayout fondoCardView;
 
         /**
          * Constructor for the ViewHolder, used in onCreateViewHolder().
@@ -125,7 +128,8 @@ public class HistoriasAdapter extends RecyclerView.Adapter<HistoriasAdapter.View
             // Initialize the views.
             mTituloText = itemView.findViewById(R.id.titleDetail);
             mNickText = itemView.findViewById(R.id.userDetail);
-
+            cuerpoTema = itemView.findViewById(R.id.cuerpoTema);
+            fondoCardView = itemView.findViewById(R.id.fondoCardView);
             itemView.setOnClickListener(this);
         }
 
@@ -133,20 +137,25 @@ public class HistoriasAdapter extends RecyclerView.Adapter<HistoriasAdapter.View
         Mostramos los datos que hemos recibido a través del método 'onBindViewHolder' de la clase superior
         y nos encargamos de mostrarlos en pantalla.
          */
-        void bindTo(Tema currentTema){
+        void bindTo(Tema currentTema) {
             // Populate the textviews with data.
+
             mTituloText.setText(currentTema.getTitulo());
-            if(currentTema.isAnonimo()){
+            String cuerpo = currentTema.getCuerpo();
+            if (cuerpo.length() > 70) cuerpo = cuerpo.substring(0, 71) + "...";
+            cuerpoTema.setText(cuerpo);
+            if (currentTema.isAnonimo()) {
                 mNickText.setText(R.string.temaUsuarioAnonimo);
-            } else{
+            } else {
                 mNickText.setText(currentTema.getNickAutor());
             }
+            fondoCardView.setBackgroundColor(mContext.getResources().getColor(R.color.fondoCardView));
         }
 
         @Override
         public void onClick(View view) {
             Tema currentTema = mTemaData.get(getAdapterPosition());
-            Log.d("A","AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAsddfnuirn");
+            Log.d("A", "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAsddfnuirn");
             Intent detailIntent = new Intent(mContext, DetailActivity.class);
             detailIntent.putExtra("title", currentTema.getTitulo());
             mContext.startActivity(detailIntent);
