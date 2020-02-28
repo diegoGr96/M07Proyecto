@@ -1,69 +1,113 @@
 package com.diego.m07proyecto;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-public class Tema extends HashMap<String, Object> {
-    private int contadorRespuestas;
-    private int idTema;
-    private String uidTema;
-    private boolean anonimato;
-    private String uidAutor;
-    private String cuerpo;
-    private String nickAutor;
-    private String titulo;
-    private List<Respuesta> respuestas;
+public class Tema{
+     int contRespuestas;
+     int idTema;
+     String uidTema;
+     boolean anonimo;
+     String uidAutor;
+     String cuerpo;
+     String nickAutor;
+     String titulo;
+     List<Respuesta> respuestas;
 
-    public Tema(boolean anonimato, String uidAutor, String cuerpo, int idTema, String nickAutor, List<Respuesta> respuestas, String titulo) {
+    public Tema(){
+    }
+
+    public Tema(boolean anomino, String uidAutor, String cuerpo, int idTema, String nickAutor, List<Respuesta> respuestas, String titulo) {
         this.idTema = idTema;
-        this.anonimato = anonimato;
+        this.anonimo = anomino;
         this.uidAutor = uidAutor;
         this.cuerpo = cuerpo;
         this.nickAutor = nickAutor;
         this.titulo = titulo;
         this.respuestas = respuestas;
-        this.contadorRespuestas = 0;
+        this.contRespuestas = 0;
     }
 
-    public int getContadorRespuestas() {
-        return contadorRespuestas;
+    public Tema(boolean anomino, String uidAutor, String cuerpo, int idTema, String nickAutor, String titulo) {
+        this.idTema = idTema;
+        this.anonimo = anomino;
+        this.uidAutor = uidAutor;
+        this.cuerpo = cuerpo;
+        this.nickAutor = nickAutor;
+        this.titulo = titulo;
+        this.contRespuestas = 0;
     }
 
-    public void setContadorRespuestas(int contadorRespuestas) {
-        this.contadorRespuestas = contadorRespuestas;
+    public int getContRespuestas() {
+        return contRespuestas;
+    }
+
+    public void setContRespuestas(int contRespuestas) {
+        this.contRespuestas = contRespuestas;
     }
 
     public int getIdTema() {
         return idTema;
     }
 
+    public void setIdTema(int idTema) {
+        this.idTema = idTema;
+    }
+
     public String getUidTema() {
         return uidTema;
     }
 
-    public boolean isAnonimato() {
-        return anonimato;
+    public void setUidTema(String uidTema) {
+        this.uidTema = uidTema;
+    }
+
+    public boolean isAnonimo() {
+        return anonimo;
+    }
+
+    public void setAnonimo(boolean anonimo) {
+        this.anonimo = anonimo;
     }
 
     public String getUidAutor() {
         return uidAutor;
     }
 
+    public void setUidAutor(String uidAutor) {
+        this.uidAutor = uidAutor;
+    }
+
     public String getCuerpo() {
         return cuerpo;
+    }
+
+    public void setCuerpo(String cuerpo) {
+        this.cuerpo = cuerpo;
     }
 
     public String getNickAutor() {
         return nickAutor;
     }
 
+    public void setNickAutor(String nickAutor) {
+        this.nickAutor = nickAutor;
+    }
+
     public String getTitulo() {
         return titulo;
     }
 
+    public void setTitulo(String titulo) {
+        this.titulo = titulo;
+    }
+
     public List<Respuesta> getRespuestas() {
         return respuestas;
+    }
+
+    public void setRespuestas(List<Respuesta> respuestas) {
+        this.respuestas = respuestas;
     }
 
     @Override
@@ -71,7 +115,7 @@ public class Tema extends HashMap<String, Object> {
         return "Tema{" +
                 "idTema=" + idTema +
                 ", uidTema='" + uidTema + '\'' +
-                ", anonimato=" + anonimato +
+                ", isAnonimo=" + anonimo +
                 ", uidAutor='" + uidAutor + '\'' +
                 ", cuerpo='" + cuerpo + '\'' +
                 ", nickAutor='" + nickAutor + '\'' +
@@ -79,10 +123,11 @@ public class Tema extends HashMap<String, Object> {
                 ", respuestas=" + respuestas +
                 '}';
     }
+
     public static Tema convertTema(HashMap<String, Object> mapa){
         String uidAutor = (String) mapa.get("uidAutor");
         int idTema = ((Long) mapa.get("idTema")).intValue();
-        boolean isAnonimo = (boolean) mapa.get("isAnonimo");
+        boolean isAnonimo = (boolean) mapa.get("anonimo");
         String titulo = (String) mapa.get("titulo");
         //int contRespuestas = ((Long) mapa.get("contRespuestas")).intValue();
         String nickAutor = (String) mapa.get("nickAutor");

@@ -88,7 +88,7 @@ public class HistoriasAdapter extends RecyclerView.Adapter<HistoriasAdapter.View
     public void onBindViewHolder(HistoriasAdapter.ViewHolder holder,
                                  int position) {
         // Get current games.
-        Tema currentTema = Tema.convertTema(mTemaData.get(position));
+        Tema currentTema = mTemaData.get(position);
 
         // Populate the textviews with data.
         holder.bindTo(currentTema);
@@ -136,7 +136,7 @@ public class HistoriasAdapter extends RecyclerView.Adapter<HistoriasAdapter.View
         void bindTo(Tema currentTema){
             // Populate the textviews with data.
             mTituloText.setText(currentTema.getTitulo());
-            if(currentTema.isAnonimato()){
+            if(currentTema.isAnonimo()){
                 mNickText.setText(R.string.temaUsuarioAnonimo);
             } else{
                 mNickText.setText(currentTema.getNickAutor());
@@ -145,7 +145,7 @@ public class HistoriasAdapter extends RecyclerView.Adapter<HistoriasAdapter.View
 
         @Override
         public void onClick(View view) {
-            Tema currentTema = Tema.convertTema(mTemaData.get(getAdapterPosition()));
+            Tema currentTema = mTemaData.get(getAdapterPosition());
             Log.d("A","AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAsddfnuirn");
             Intent detailIntent = new Intent(mContext, DetailActivity.class);
             detailIntent.putExtra("title", currentTema.getTitulo());

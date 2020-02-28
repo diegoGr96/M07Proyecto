@@ -19,20 +19,40 @@ public class Respuesta {
         return idRespuesta;
     }
 
+    public void setIdRespuesta(int idRespuesta) {
+        this.idRespuesta = idRespuesta;
+    }
+
     public String getTextRespuesta() {
         return textRespuesta;
+    }
+
+    public void setTextRespuesta(String textRespuesta) {
+        this.textRespuesta = textRespuesta;
     }
 
     public String getUidAutor() {
         return uidAutor;
     }
 
+    public void setUidAutor(String uidAutor) {
+        this.uidAutor = uidAutor;
+    }
+
     public String getNickAutor() {
         return nickAutor;
     }
 
+    public void setNickAutor(String nickAutor) {
+        this.nickAutor = nickAutor;
+    }
+
     public boolean isAnonimo() {
         return anonimo;
+    }
+
+    public void setAnonimo(boolean anonimo) {
+        this.anonimo = anonimo;
     }
 
     @Override
@@ -42,7 +62,7 @@ public class Respuesta {
                 ", textRespuesta='" + textRespuesta + '\'' +
                 ", uidAutor='" + uidAutor + '\'' +
                 ", nickAutor='" + nickAutor + '\'' +
-                ", anonimo=" + anonimo +
+                ", Anonimo=" + anonimo +
                 '}';
     }
 }
