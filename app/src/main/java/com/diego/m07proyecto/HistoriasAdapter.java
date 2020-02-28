@@ -157,7 +157,7 @@ public class HistoriasAdapter extends RecyclerView.Adapter<HistoriasAdapter.View
             Tema currentTema = mTemaData.get(getAdapterPosition());
             Log.d("A", "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAsddfnuirn");
             Intent detailIntent = new Intent(mContext, DetailActivity.class);
-            detailIntent.putExtra("title", currentTema.getTitulo());
+            detailIntent.putExtra("ID_TEMA", currentTema.getIdTema());
             mContext.startActivity(detailIntent);
         }
     }
