@@ -4,7 +4,7 @@
     <string name="action_settings">Settings</string>
     <string name="hombre">Man</string>
     <string name="menu_profile">My profile</string>
-    <string name="menu_home">Main menu</string>
+    <string name="menu_recent">Recent themes</string>
     <string name="menu_send">Send</string>
     <string name="menu_options_and_signout">Options and Sign out</string>
     <string name="menu_newtheme">Create a new theme</string>
@@ -58,4 +58,6 @@
     <string name="temaUsuarioAnonimo">Anónimo</string>
     <string name="search_filter">Search...</string>
     <string name="cv_tema_user">User</string>
+    <string name="resposta_tema">Type here your answer</string>
+    <string name="enviar_resposta">Send answer</string>
 </resources>

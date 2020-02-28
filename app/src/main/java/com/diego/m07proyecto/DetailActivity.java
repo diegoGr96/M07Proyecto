@@ -2,6 +2,7 @@ package com.diego.m07proyecto;
 
 //import android.support.v7.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -48,7 +49,8 @@ public class DetailActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                Intent iRespuesta = new Intent(getApplicationContext(), AddRespuesta.class);
+                startActivity(iRespuesta);
             }
         });
 

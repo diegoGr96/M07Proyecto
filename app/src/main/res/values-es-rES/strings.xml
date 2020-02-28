@@ -4,7 +4,7 @@
     <string name="action_settings">Ajustes</string>
     <string name="hombre">Hombre</string>
     <string name="menu_profile">Mi perfil</string>
-    <string name="menu_home">Menú principal</string>
+    <string name="menu_recent">Temas recientes</string>
     <string name="menu_send">Enviar</string>
     <string name="menu_options_and_signout">Opciones y Cerrar sesión</string>
     <string name="menu_search">Buscar</string>
@@ -58,4 +58,6 @@
     <string name="temaUsuarioAnonimo">Annonymous</string>
     <string name="search_filter">Buscar...</string>
     <string name="cv_tema_user">Usuario</string>
+    <string name="resposta_tema">Escribe aqui tu respuesta</string>
+    <string name="enviar_resposta">Enviar respuesta</string>
 </resources>
