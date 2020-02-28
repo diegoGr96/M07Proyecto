@@ -45,8 +45,6 @@ public class SlideshowFragment extends Fragment {
     private String descripcion;
 
     private int contador = -1;
-    private int contTitulo = 44;
-    private int contDescripcion = 300;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -103,98 +101,6 @@ public class SlideshowFragment extends Fragment {
                 // Failed to read value
             }
         });
-
-        tituloTema.setOnKeyListener(new View.OnKeyListener() {
-            @Override
-            public boolean onKey(View v, int keyCode, KeyEvent event) {
-                System.out.println(contTitulo+"  AAA");
-                if (tituloTema.getText().length() < contTitulo) {
-                    contTitulo++;
-                } else {
-                    if (contTitulo > 0) {
-                        contTitulo--;
-                    } else {
-                        tituloTema.setText(tituloTema.getText().subSequence(0, tituloTema.length() - 1));
-                        tituloTema.setSelection(tituloTema.length());
-                    }
-                }
-                return false;
-            }
-        });
-
-        tituloTema.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                System.out.println(contTitulo+"  AAA");
-                if (tituloTema.getText().length() < contTitulo) {
-                    contTitulo++;
-                } else {
-                    if (contTitulo > 0) {
-                        contTitulo--;
-                    } else {
-                        tituloTema.setText(tituloTema.getText().subSequence(0, tituloTema.length() - 1));
-                        tituloTema.setSelection(tituloTema.length());
-                    }
-                }
-            }
-
-            @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-            }
-
-            @Override
-            public void afterTextChanged(Editable editable) {
-
-            }
-        });
-        descripcionTema.setOnKeyListener(new View.OnKeyListener() {
-            @Override
-            public boolean onKey(View v, int keyCode, KeyEvent event) {
-                if (descripcionTema.getText().length() < contDescripcion) {
-                    contDescripcion++;
-                } else {
-                    if (contDescripcion > 0) {
-                        contDescripcion--;
-                    } else {
-                        descripcionTema.setText(descripcionTema.getText().subSequence(0, descripcionTema.length() - 1));
-                        descripcionTema.setSelection(descripcionTema.length());
-                    }
-                }
-                return false;
-            }
-        });
-
-
-        btnCrear.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                while (contador == -1) ;
-                if (!tituloTema.getText().toString().equals("") && !descripcionTema.getText().toString().equals("")) {
-                    System.out.println("Contador es(onClick): " + contador);
-                    titulo = tituloTema.getText().toString();
-                    descripcion = descripcionTema.getText().toString();
-                    DatabaseReference newTema = database.getReference("Temas/" + contador);
-
-                    boolean isAnonimo = checkAnonim.isChecked();
-                    Tema nuevoTema = new Tema(isAnonimo, currentUser.getUid(), descripcion, contador, nick, titulo);
-                    newTema.setValue(nuevoTema);
-
-                    DatabaseReference incNumTema = database.getReference("Usuarios/" + currentUser.getUid() + "/numTemas");
-                    incNumTema.setValue(numTema);
-                    contador++;
-                    numTema++;
-                    loadContador.setValue(contador);
-                } else {
-                    Snackbar.make(view, getResources().getText(R.string.white_camps), Snackbar.LENGTH_LONG).setAction("Action", null).show();
-                }
-            }
-        });
         return root;
-    }
-
-    private void formatearText() {
-        //titulo -->44
-        //cuerpo --> 300
     }
 }

@@ -6,6 +6,7 @@ public class Respuesta {
     private String uidAutor;
     private String nickAutor;
     private boolean anonimo;
+    private String tituloAutor;
 
     public Respuesta(boolean anonimo, int idRespuesta, String nickAutor, String textRespuesta, String uidAutor) {
         this.idRespuesta = idRespuesta;
