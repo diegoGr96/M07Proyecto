@@ -13,7 +13,7 @@
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="news_placeholder">News</string>
-    <string name="sports_info_placeholder">Here is some news</string>
+    <string name="cv_tema_info">Theme\'s content</string>
     <string name="textoBienvenido">Welcome!</string>
     <string name="textoBotonLogin">Sign in</string>
     <string name="textoBotonRegistrarse">Sign up</string>
@@ -24,7 +24,7 @@
     <string name="textoLabelUsuario">User:</string>
     <string name="textoLabelYaTienesCuenta">Already have an account?</string>
     <string name="title_activity_menu_principal">PrincipalMenu</string>
-    <string name="title_placeholder">Title</string>
+    <string name="cv_tema_title">Title</string>
     <string name="escriu_el_teu_nom_d_usuari">Write your email</string>
     <string name="escriu_la_teva_clau">Write your password</string>
     <string name="accepta_les_condicions_i_termes">Accept the Conditions and Terms</string>
@@ -57,4 +57,5 @@
     <string name="noCambiosMiPerfil">No changes detected</string>
     <string name="temaUsuarioAnonimo">Anónimo</string>
     <string name="search_filter">Search...</string>
+    <string name="cv_tema_user">User</string>
 </resources>

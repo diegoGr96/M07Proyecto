@@ -25,9 +25,9 @@
     <string name="menu_options_and_signout">Opciones i Tanca la sessió</string>
     <string name="menu_send">Enviar</string>
 
-    <string name="title_placeholder">Títol</string>
+    <string name="cv_tema_title">Títol</string>
     <string name="news_placeholder">Notícies</string>
-    <string name="sports_info_placeholder">Aquí hi ha algunes notícies</string>
+    <string name="cv_tema_info">Descripció del tema</string>
 
     <string name="hintCorreo">Correu</string>
     <string name="hintPassword">Clau</string>
@@ -86,4 +86,5 @@
     <string name="noCambiosMiPerfil">No s\'han detectat canvis</string>
     <string name="temaUsuarioAnonimo">Anònim</string>
     <string name="search_filter">Busca...</string>
+    <string name="cv_tema_user">Usuari</string>
 </resources>

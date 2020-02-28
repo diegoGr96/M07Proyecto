@@ -46,7 +46,7 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="24dp"
             android:padding="8dp"
-            android:text="@string/title_placeholder"
+            android:text="@string/cv_tema_title"
             android:textColor="#00FF0000"
             app:layout_constraintBottom_toBottomOf="@+id/gamesImageDetail"
             app:layout_constraintStart_toStartOf="parent" />
