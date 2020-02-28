@@ -6,7 +6,7 @@
     <string name="menu_profile">My profile</string>
     <string name="menu_home">Main menu</string>
     <string name="menu_send">Send</string>
-    <string name="menu_signout">Sign out</string>
+    <string name="menu_options_and_signout">Options and Sign out</string>
     <string name="menu_newtheme">Create a new theme</string>
     <string name="menu_search">Search</string>
     <string name="nav_header_desc">Navigation header</string>
@@ -56,4 +56,5 @@
     <string name="cambiosMiPerfil">Changes saved successfully</string>
     <string name="noCambiosMiPerfil">No changes detected</string>
     <string name="temaUsuarioAnonimo">Anónimo</string>
+    <string name="search_filter">Search...</string>
 </resources>

@@ -6,7 +6,7 @@
     <string name="menu_profile">Mi perfil</string>
     <string name="menu_home">Menú principal</string>
     <string name="menu_send">Enviar</string>
-    <string name="menu_signout">Cerrar sesión</string>
+    <string name="menu_options_and_signout">Opciones y Cerrar sesión</string>
     <string name="menu_search">Buscar</string>
     <string name="news_placeholder">Noticias</string>
     <string name="sports_info_placeholder">Nuevas noticias</string>
@@ -56,4 +56,5 @@
     <string name="cambiosMiPerfil">Cambios guardados correctamente</string>
     <string name="noCambiosMiPerfil">No se han detectado cambios</string>
     <string name="temaUsuarioAnonimo">Annonymous</string>
+    <string name="search_filter">Buscar...</string>
 </resources>

@@ -1,16 +1,16 @@
-package com.diego.m07proyecto.ui.share;
+package com.diego.m07proyecto.ui.search;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-public class ShareViewModel extends ViewModel {
+public class SearchViewModel extends ViewModel {
 
     private MutableLiveData<String> mText;
 
-    public ShareViewModel() {
+    public SearchViewModel() {
         mText = new MutableLiveData<>();
-        mText.setValue("This is share fragment");
+        mText.setValue("This is tools fragment");
     }
 
     public LiveData<String> getText() {

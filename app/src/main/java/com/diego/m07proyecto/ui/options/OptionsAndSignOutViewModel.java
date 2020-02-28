@@ -1,16 +1,16 @@
-package com.diego.m07proyecto.ui.profile;
+package com.diego.m07proyecto.ui.options;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-public class GalleryViewModel extends ViewModel {
+public class OptionsAndSignOutViewModel extends ViewModel {
 
     private MutableLiveData<String> mText;
 
-    public GalleryViewModel() {
+    public OptionsAndSignOutViewModel() {
         mText = new MutableLiveData<>();
-        mText.setValue("This is gallery fragment");
+        mText.setValue("This is share fragment");
     }
 
     public LiveData<String> getText() {

@@ -14,22 +14,26 @@ import androidx.lifecycle.ViewModelProviders;
 
 import com.diego.m07proyecto.R;
 
-public class ToolsFragment extends Fragment {
+public class SearchFragment extends Fragment {
 
-    private ToolsViewModel toolsViewModel;
+    private SearchViewModel searchViewModel;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        toolsViewModel =
-                ViewModelProviders.of(this).get(ToolsViewModel.class);
+        searchViewModel =
+                ViewModelProviders.of(this).get(SearchViewModel.class);
         View root = inflater.inflate(R.layout.fragment_search, container, false);
+        /*
+
         final TextView textView = root.findViewById(R.id.text_tools);
-        toolsViewModel.getText().observe(this, new Observer<String>() {
+        searchViewModel.getText().observe(this, new Observer<String>() {
             @Override
             public void onChanged(@Nullable String s) {
                 textView.setText(s);
             }
         });
+
+        */
         return root;
     }
 }

@@ -13,7 +13,7 @@
 
     <fragment
         android:id="@+id/nav_profile"
-        android:name="com.diego.m07proyecto.ui.profile.GalleryFragment"
+        android:name="com.diego.m07proyecto.ui.profile.ProfileFragment"
         android:label="@string/menu_profile"
         tools:layout="@layout/fragment_profile" />
 
@@ -25,14 +25,14 @@
 
     <fragment
         android:id="@+id/nav_search"
-        android:name="com.diego.m07proyecto.ui.search.ToolsFragment"
+        android:name="com.diego.m07proyecto.ui.search.SearchFragment"
         android:label="@string/menu_search"
         tools:layout="@layout/fragment_search" />
 
     <fragment
         android:id="@+id/nav_signout"
-        android:name="com.diego.m07proyecto.ui.share.ShareFragment"
-        android:label="@string/menu_signout"
+        android:name="com.diego.m07proyecto.ui.options.OptionsAndSignOutFragment"
+        android:label="@string/menu_options_and_signout"
         tools:layout="@layout/fragment_signout" />
 
     <fragment

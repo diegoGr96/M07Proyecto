@@ -27,7 +27,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class GalleryFragment extends Fragment {
+public class ProfileFragment extends Fragment {
 
     private FirebaseDatabase database;
     private FirebaseAuth mAuth;
