@@ -24,6 +24,7 @@ import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -36,6 +37,7 @@ public class HomeFragment extends Fragment {
     private RecyclerView mRecyclerView;
     private HistoriasAdapter mAdapter;
 
+    private List<HashMap<String,Object>> temasListh;
     private List<Tema> temasList;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -78,17 +80,21 @@ public class HomeFragment extends Fragment {
         myQuery.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                temasList = (List<Tema>) dataSnapshot.getValue();
-                System.out.println("Hola -- "+temasList);
-
-                if (temasList == null){
+                temasListh = (List<HashMap<String,Object>>) dataSnapshot.getValue();
+                if (temasListh == null){
 
                 }else {
+                    temasList = new ArrayList<>();
+                    for(int i =0; i < temasListh.size();i++){
+                        Tema tema = Tema.convertTema(temasListh.get(i));
+                        temasList.add(tema);
+                    }
+                    System.out.println("Hola -- "+temasList);
+                    Collections.reverse(temasList);
                     // Initialize the adapter and set it to the RecyclerView.
                     mAdapter = new HistoriasAdapter(getContext(), temasList);
                     mRecyclerView.setAdapter(mAdapter);
                 }
-
 
             }
 

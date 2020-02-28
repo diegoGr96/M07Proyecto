@@ -12,6 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
 import com.diego.m07proyecto.R;
+import com.diego.m07proyecto.Tema;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -111,6 +112,7 @@ public class SlideshowFragment extends Fragment {
                     titulo = tituloTema.getText().toString();
                     descripcion = descripcionTema.getText().toString();
                     DatabaseReference newTema = database.getReference("Temas/" + contador);
+                    /*
                     newTema.child("uidAutor").setValue(currentUser.getUid());
                     //System.out.println("ZZZAutor" + currentUser.getUid());
                     newTema.child("nickAutor").setValue(nick);
@@ -122,6 +124,11 @@ public class SlideshowFragment extends Fragment {
                     //
                     newTema.child("contRespuestas").setValue(0);
                     newTema.child("idTema").setValue(contador);
+                    */
+                    boolean isAnonimo = checkAnonim.isChecked();
+                    Tema nuevoTema = new Tema(isAnonimo, currentUser.getUid(),descripcion,contador,nick,titulo);
+                    newTema.setValue(nuevoTema);
+
                     DatabaseReference incNumTema = database.getReference("Usuarios/" + currentUser.getUid() + "/numTemas");
                     incNumTema.setValue(numTema);
                     contador++;
