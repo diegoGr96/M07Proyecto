@@ -79,7 +79,7 @@ public class AddRespuesta extends AppCompatActivity {
                         Snackbar.make(v, getResources().getText(R.string.respuesta_erronea), Snackbar.LENGTH_LONG)
                                 .setAction("Action", null).show();
                     } else {
-                        respuestaRef = database.getReference("Temas/Tema_" + idTema + "/respuestas/respuesta"+ numRespuestaTema);
+                        respuestaRef = database.getReference("Temas/Tema_" + idTema + "/respuestas/respuesta_"+ numRespuestaTema);
                         respuestaRef.setValue(new Respuesta(numRespuestaTema, textRespuesta, uidUser, nickUser, false, "test"));
                         numRespuestaTemaRef.setValue(++numRespuestaTema);
                         numRespuestaUserRef.setValue(++numRespuestaUser);

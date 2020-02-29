@@ -97,6 +97,13 @@ public class HomeFragment extends Fragment {
         // Initialize the RecyclerView.
         mRecyclerView = root.findViewById(R.id.recyclerView);
 
+        mRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+            }
+        });
+
         // Set the Layout Manager.
         Log.d("A", mRecyclerView + "   AAAAAAAAAAAAAAAAAa");
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));

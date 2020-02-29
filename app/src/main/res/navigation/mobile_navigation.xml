@@ -32,7 +32,7 @@
     <fragment
         android:id="@+id/nav_signout"
         android:name="com.diego.m07proyecto.ui.options.OptionsAndSignOutFragment"
-        android:label="@string/menu_options_and_signout"
+        android:label="@string/menu_signout"
         tools:layout="@layout/fragment_signout" />
 
     <fragment
