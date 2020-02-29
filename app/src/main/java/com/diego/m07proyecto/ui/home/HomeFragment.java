@@ -43,7 +43,7 @@ public class HomeFragment extends Fragment {
 
     SwipeRefreshLayout swipeRefreshTemas;
 
-    private List<HashMap<String, Object>> temasListh;
+    private Map<String,HashMap<String, Object>> temasListh;
     private List<Tema> temasList;
     private int contadorConsulta;
     private int contadorTemas = -1;
@@ -60,7 +60,7 @@ public class HomeFragment extends Fragment {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 contadorTemas = Integer.parseInt(String.valueOf(dataSnapshot.getValue()));
-                contadorConsulta = contadorTemas - 11;
+                contadorConsulta = contadorTemas-1;
                 System.out.println("Contador es: " + contadorTemas);
                 if (firstAttempt) {
                     initializeData();
@@ -90,7 +90,7 @@ public class HomeFragment extends Fragment {
             @Override
             public void onRefresh() {
                 contadorConsulta = contadorTemas - 10;
-                initializeData();
+                //initializeData();
                 swipeRefreshTemas.setRefreshing(false);
             }
         });
@@ -109,23 +109,30 @@ public class HomeFragment extends Fragment {
         while(contadorTemas == -1);
         contadorConsulta = contadorTemas;
         DatabaseReference dbRef = database.getReference("Temas");
-        Query myQuery = dbRef.orderByChild("idTema").startAt(contadorConsulta-10).endAt(contadorConsulta);
+        Query myQuery;
+        if (contadorTemas>10){
+            myQuery = dbRef.orderByChild("idTema").startAt(contadorConsulta-10).endAt(contadorConsulta);
+        }else{
+            myQuery = dbRef.orderByChild("idTema").startAt(0).endAt(contadorConsulta);
+        }
 
         myQuery.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
 
-                temasListh = (List<HashMap<String, Object>>) dataSnapshot.getValue();
+                temasListh = (Map<String,HashMap<String, Object>>) dataSnapshot.getValue();
                 if (temasListh == null) {
 
                 } else {
+
                     temasList = new ArrayList<>();
-                    for (int i =contadorConsulta-10; i < temasListh.size(); i++) {
-                        Tema tema = Tema.convertTema(temasListh.get(i));
+                    for (int i = 0; i < temasListh.size(); i++) {
+                        Tema tema = Tema.convertTema(temasListh.get("Tema_"+(--contadorTemas)));
                         temasList.add(tema);
                     }
+
                     System.out.println("Hola -- " + temasList);
-                    Collections.reverse(temasList);
+                    //Collections.reverse(temasList);
                     // Initialize the adapter and set it to the RecyclerView.
                     mAdapter = new HistoriasAdapter(getContext(), temasList);
                     mRecyclerView.setAdapter(mAdapter);
