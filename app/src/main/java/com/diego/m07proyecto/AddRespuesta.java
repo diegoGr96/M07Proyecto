@@ -4,17 +4,11 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
-import android.text.Editable;
-import android.text.TextWatcher;
-import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 
 import com.google.android.material.snackbar.Snackbar;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -28,7 +22,8 @@ public class AddRespuesta extends AppCompatActivity {
 
     private int respuestaLength = 0;
 
-    private int numRespuesta;
+    private int numRespuestaTema;
+    private int numRespuestaUser;
 
     private int idTema;
     private String uidUser;
@@ -36,7 +31,8 @@ public class AddRespuesta extends AppCompatActivity {
 
     FirebaseDatabase database = FirebaseDatabase.getInstance();
     DatabaseReference respuestaRef;
-    DatabaseReference numRespuestaRef;
+    DatabaseReference numRespuestaTemaRef;
+    DatabaseReference numRespuestaUserRef;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,11 +43,12 @@ public class AddRespuesta extends AppCompatActivity {
         idTema = getIntent().getIntExtra("ID_TEMA", -1);
         uidUser = getIntent().getStringExtra("UID_USER");
         nickUser = getIntent().getStringExtra("NICK_USER");
-        numRespuestaRef = database.getReference("Temas/"+ idTema + "/contRespuestas");
-        numRespuestaRef.addValueEventListener(new ValueEventListener() {
+        numRespuestaTemaRef = database.getReference("Temas/Tema_"+ idTema + "/contRespuestas");
+        numRespuestaUserRef = database.getReference("Usuarios/"+uidUser+"/numRespuestas");
+        numRespuestaTemaRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                numRespuesta = Integer.valueOf(String.valueOf(dataSnapshot.getValue()));
+                numRespuestaTema = Integer.valueOf(String.valueOf(dataSnapshot.getValue()));
             }
 
             @Override
@@ -59,18 +56,33 @@ public class AddRespuesta extends AppCompatActivity {
 
             }
         });
+
+        numRespuestaUserRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                numRespuestaUser = Integer.valueOf(String.valueOf(dataSnapshot.getValue()));
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
         sendRespuesta.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (idTema != -1) {
                     String textRespuesta = edtRespuesta.getText().toString();
                     respuestaLength = textRespuesta.length();
-                    if (respuestaLength > 20) {
+                    if (respuestaLength > 250 || respuestaLength < 1) {
                         Snackbar.make(v, getResources().getText(R.string.respuesta_erronea), Snackbar.LENGTH_LONG)
                                 .setAction("Action", null).show();
                     } else {
-                        respuestaRef = database.getReference("Temas/" + idTema + "/Respuestas/Respuesta"+numRespuesta);
-                        respuestaRef.setValue(new Respuesta(numRespuesta, textRespuesta, uidUser, nickUser, false, "test"));
+                        respuestaRef = database.getReference("Temas/Tema_" + idTema + "/respuestas/respuesta"+ numRespuestaTema);
+                        respuestaRef.setValue(new Respuesta(numRespuestaTema, textRespuesta, uidUser, nickUser, false, "test"));
+                        numRespuestaTemaRef.setValue(++numRespuestaTema);
+                        numRespuestaUserRef.setValue(++numRespuestaUser);
                         finish();
                     }
                 } else {

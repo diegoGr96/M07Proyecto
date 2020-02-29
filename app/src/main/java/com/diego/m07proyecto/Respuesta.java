@@ -23,7 +23,7 @@ public class Respuesta {
     }
 
     public Respuesta(String tituloAutor, String nickAutor,  String textRespuesta) {
-        //this.tituloAutor = tituloAutor;
+        this.tituloAutor = tituloAutor;
         this.nickAutor = nickAutor;
         this.textRespuesta = textRespuesta;
     }
