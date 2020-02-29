@@ -23,7 +23,7 @@ public class Respuesta {
     }
 
     public Respuesta(String tituloAutor, String nickAutor,  String textRespuesta) {
-        this.tituloAutor = tituloAutor;
+        //this.tituloAutor = tituloAutor;
         this.nickAutor = nickAutor;
         this.textRespuesta = textRespuesta;
     }
@@ -67,7 +67,6 @@ public class Respuesta {
     public void setAnonimo(boolean anonimo) {
         this.anonimo = anonimo;
     }
-
     public String getTituloAutor() {
         return tituloAutor;
     }
@@ -75,7 +74,6 @@ public class Respuesta {
     public void setTituloAutor(String tituloAutor) {
         this.tituloAutor = tituloAutor;
     }
-
     @Override
     public String toString() {
         return "Respuesta{" +
@@ -83,8 +81,9 @@ public class Respuesta {
                 ", textRespuesta='" + textRespuesta + '\'' +
                 ", uidAutor='" + uidAutor + '\'' +
                 ", nickAutor='" + nickAutor + '\'' +
-                ", anonimo=" + anonimo +
+                ", anonimo=" + anonimo /*+
                 ", tituloAutor='" + tituloAutor + '\'' +
-                '}';
+                '}'
+                */;
     }
 }

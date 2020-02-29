@@ -61,4 +61,7 @@
     <string name="resposta_tema">Type here your answer</string>
     <string name="enviar_resposta">Send answer</string>
     <string name="cv_historia_user">User</string>
+    <string name="characters_respuesta">Characters</string>
+    <string name="respuesta_erronea">Answer\'s length surpass the 250 characters limit.</string>
+    <string name="unknown_error">Unknown error.</string>
 </resources>

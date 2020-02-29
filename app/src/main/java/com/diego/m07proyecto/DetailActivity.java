@@ -14,6 +14,8 @@ import com.bumptech.glide.Glide;
 import com.diego.m07proyecto.ui.home.HomeViewModel;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -62,7 +64,7 @@ public class DetailActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail);
 
-          database= FirebaseDatabase.getInstance();
+        database= FirebaseDatabase.getInstance();
 
         fab = findViewById(R.id.addRespuesta);
 
@@ -72,19 +74,11 @@ public class DetailActivity extends AppCompatActivity {
         Log.d("A", mRecyclerView + "   AAAAAAAAAAAAAAAAAa");
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
 
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent iRespuesta = new Intent(getApplicationContext(), AddRespuesta.class);
-                startActivity(iRespuesta);
-            }
-        });
-
         idTema = getIntent().getIntExtra("ID_TEMA", -1);
         tituloTema = getIntent().getStringExtra("TITLE");
         nickAutor = getIntent().getStringExtra("USER");
         cuerpoAutor = getIntent().getStringExtra("BODY");
-        //uidAutor = getIntent().getStringExtra("UID");
+        uidAutor = getIntent().getStringExtra("UID");
 
         temaAutor = new Respuesta(tituloTema,nickAutor,cuerpoAutor);
         listaRespuestas = new ArrayList<>();
@@ -122,6 +116,17 @@ public class DetailActivity extends AppCompatActivity {
             public void onCancelled(DatabaseError error) {
                 // Failed to read value
                 Log.w("VVVV", "Failed to read value.", error.toException());
+            }
+        });
+
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent iRespuesta = new Intent(getApplicationContext(), AddRespuesta.class);
+                iRespuesta.putExtra("ID_TEMA", idTema);
+                iRespuesta.putExtra("UID_USER", uidAutor);
+                iRespuesta.putExtra("NICK_USER", nickAutor);
+                startActivity(iRespuesta);
             }
         });
 
