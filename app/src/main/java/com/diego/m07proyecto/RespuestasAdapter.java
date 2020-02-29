@@ -155,24 +155,18 @@ public class RespuestasAdapter extends RecyclerView.Adapter<RespuestasAdapter.Vi
 
             if (currentRespuesta.getTituloAutor() != null){
                 mTituloText.setText(currentRespuesta.getTituloAutor());
+                fondoCardView.setBackgroundColor(mContext.getResources().getColor(R.color.backgroundCardView));
+            }else{
+                mTituloText.setLayoutParams(new ConstraintLayout.LayoutParams(0, 0));
             }
-            mNickText.setText(currentRespuesta.getNickAutor());
+            mNickText.setText(currentRespuesta.isAnonimo()?mContext.getResources().getString(R.string.temaUsuarioAnonimo):currentRespuesta.getNickAutor());
             cuerpoRespuesta.setText(currentRespuesta.getTextRespuesta());
-            //fondoCardView.setBackgroundColor(mContext.getResources().getColor(R.color.colorHint));
+
         }
 
         @Override
         public void onClick(View view) {
-            /*
-            Respuesta currentTema = mRespuestaData.get(getAdapterPosition());
-            Log.d("A", "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAsddfnuirn");
-            Intent detailIntent = new Intent(mContext, DetailActivity.class);
-            detailIntent.putExtra("ID_TEMA", currentTema.getIdTema());
-            detailIntent.putExtra("TITLE", currentTema.getTitulo());
-            detailIntent.putExtra("USER", currentTema.getNickAutor());
-            detailIntent.putExtra("BODY", currentTema.getCuerpo());
-            mContext.startActivity(detailIntent);
-             */
         }
+
     }
 }

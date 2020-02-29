@@ -28,12 +28,14 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class DetailActivity extends AppCompatActivity {
     //Activity que se muestra cada ve que pulsamos en un juego (Elemento del Recycler View).
@@ -44,9 +46,10 @@ public class DetailActivity extends AppCompatActivity {
 
     private RecyclerView mRecyclerView;
     private RespuestasAdapter mAdapter;
+    private SwipeRefreshLayout swipeRefreshTemas;
 
     private FloatingActionButton fab;
-    private HashMap<String,HashMap<String,Object>> mapaRespuestas;
+    private Map<String, HashMap<String, Object>> mapaRespuestas;
     private List<Respuesta> listaRespuestas;
 
     private ImageView categoryImage;
@@ -64,11 +67,20 @@ public class DetailActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail);
 
-        database= FirebaseDatabase.getInstance();
+        database = FirebaseDatabase.getInstance();
 
         fab = findViewById(R.id.addRespuesta);
 
         mRecyclerView = findViewById(R.id.recyclerRespuestas);
+        swipeRefreshTemas = findViewById(R.id.swipeRefreshRespuestas);
+        swipeRefreshTemas.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                //contadorConsulta = contadorTemas - 1;
+                reiniciarLista();
+                swipeRefreshTemas.setRefreshing(false);
+            }
+        });
 
         // Set the Layout Manager.
         Log.d("A", mRecyclerView + "   AAAAAAAAAAAAAAAAAa");
@@ -80,32 +92,76 @@ public class DetailActivity extends AppCompatActivity {
         cuerpoAutor = getIntent().getStringExtra("BODY");
         uidAutor = getIntent().getStringExtra("UID");
 
-        temaAutor = new Respuesta(tituloTema,nickAutor,cuerpoAutor);
+        temaAutor = new Respuesta(tituloTema, nickAutor, cuerpoAutor);
         listaRespuestas = new ArrayList<>();
         listaRespuestas.add(temaAutor);
 
-        respuestasReference = database.getReference("Temas/"+idTema);
+        initializeData();
+
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent iRespuesta = new Intent(getApplicationContext(), AddRespuesta.class);
+                iRespuesta.putExtra("ID_TEMA", idTema);
+                iRespuesta.putExtra("UID_USER", uidAutor);
+                iRespuesta.putExtra("NICK_USER", nickAutor);
+                startActivityForResult(iRespuesta, 1);
+            }
+        });
+    }
+
+
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        // Check which request we're responding to
+        super.onActivityResult(requestCode, resultCode, data);
+        reiniciarLista();
+        /*
+        int sizeLista = listaRespuestas.size();
+        Query myQuery = respuestasReference.orderByChild("idRespuesta")
+                .equalTo(sizeLista-1);
+        myQuery.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                HashMap mapaNuevaRespuesta  = (HashMap<String, Object>) dataSnapshot.getValue();
+                if (mapaRespuestas!=null){
+                    String nickAutor = (String) mapaNuevaRespuesta.get("nickAutor");
+                    String textoRespuesta = (String) mapaNuevaRespuesta.get("textRespuesta");
+                    boolean isAnonimo = (boolean) mapaNuevaRespuesta.get("anonimo");
+                    Respuesta nuevaRespuesta = new Respuesta(nickAutor,textoRespuesta,isAnonimo);
+                    listaRespuestas.add(nuevaRespuesta);
+                    mAdapter.notifyDataSetChanged();
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+         */
+    }
+
+    private void initializeData() {
+        respuestasReference = database.getReference("Temas/Tema_" + idTema + "/Respuestas");
         Query myQuery = respuestasReference.orderByChild("idRespuesta").startAt(0).endAt(10);
         myQuery.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                mapaRespuestas = (HashMap<String,HashMap<String,Object>>) dataSnapshot.getValue();
-                if (mapaRespuestas == null){
+                mapaRespuestas = (HashMap<String, HashMap<String, Object>>) dataSnapshot.getValue();
+                if (mapaRespuestas == null) {
 
-                }else {
-                    /*
-                    temasList = new ArrayList<>();
-                    for(int i =0; i < temasListh.size();i++){
-                        Tema tema = Tema.convertTema(temasListh.get(i));
-                        temasList.add(tema);
+                } else {
+                    //listaRespuestas = new ArrayList<>();
+                    for (int i = 0; i < mapaRespuestas.size(); i++) {
+                        Respuesta respuesta = Respuesta.convertRespuesta(mapaRespuestas.get("respuesta_" + i));
+                        listaRespuestas.add(respuesta);
                     }
-                    System.out.println("Hola -- "+temasList);
-                    Collections.reverse(temasList);
-                    // Initialize the adapter and set it to the RecyclerView.
-                    mAdapter = new HistoriasAdapter(getContext(), temasList);
-                    mRecyclerView.setAdapter(mAdapter);
 
-                     */
+                    System.out.println("Hola -- " + listaRespuestas);
+                    //Collections.reverse(temasList);
+                    // Initialize the adapter and set it to the RecyclerView.
+                    // mAdapter = new RespuestasAdapter(getApplicationContext(), listaRespuestas);
+                    // mRecyclerView.setAdapter(mAdapter);
                 }
                 mAdapter = new RespuestasAdapter(getApplicationContext(), listaRespuestas);
                 mRecyclerView.setAdapter(mAdapter);
@@ -118,22 +174,11 @@ public class DetailActivity extends AppCompatActivity {
                 Log.w("VVVV", "Failed to read value.", error.toException());
             }
         });
+    }
 
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent iRespuesta = new Intent(getApplicationContext(), AddRespuesta.class);
-                iRespuesta.putExtra("ID_TEMA", idTema);
-                iRespuesta.putExtra("UID_USER", uidAutor);
-                iRespuesta.putExtra("NICK_USER", nickAutor);
-                startActivity(iRespuesta);
-            }
-        });
-
-        //categoryImage = findViewById(R.id.categoryImageDetail);
-
-
-        //Glide.with(this).load(getIntent().getIntExtra("image_resource", 0))
-        //        .into(categoryImage);
+    private void reiniciarLista(){
+        listaRespuestas.clear();
+        listaRespuestas.add(temaAutor);
+        initializeData();
     }
 }

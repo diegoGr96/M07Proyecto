@@ -13,19 +13,24 @@ public class Respuesta {
     public Respuesta() {
     }
 
-    public Respuesta(int idRespuesta, String textRespuesta, String uidAutor, String nickAutor, boolean anonimo, String tituloAutor) {
+    public Respuesta(int idRespuesta, String textRespuesta, String uidAutor, String nickAutor, boolean anonimo) {
         this.idRespuesta = idRespuesta;
         this.textRespuesta = textRespuesta;
         this.uidAutor = uidAutor;
         this.nickAutor = nickAutor;
         this.anonimo = anonimo;
-        this.tituloAutor = tituloAutor;
     }
 
-    public Respuesta(String tituloAutor, String nickAutor,  String textRespuesta) {
+    public Respuesta(String tituloAutor, String nickAutor, String textRespuesta) {
         this.tituloAutor = tituloAutor;
         this.nickAutor = nickAutor;
         this.textRespuesta = textRespuesta;
+    }
+
+    public Respuesta(String nickAutor, String textRespuesta, boolean anonimo) {
+        this.nickAutor = nickAutor;
+        this.textRespuesta = textRespuesta;
+        this.anonimo = anonimo;
     }
 
     public int getIdRespuesta() {
@@ -67,6 +72,7 @@ public class Respuesta {
     public void setAnonimo(boolean anonimo) {
         this.anonimo = anonimo;
     }
+
     public String getTituloAutor() {
         return tituloAutor;
     }
@@ -74,6 +80,15 @@ public class Respuesta {
     public void setTituloAutor(String tituloAutor) {
         this.tituloAutor = tituloAutor;
     }
+
+    public static Respuesta convertRespuesta(HashMap<String, Object> mapa) {
+        String nickAutor = (String) mapa.get("nickAutor");
+        String textoRespuesta = (String) mapa.get("textRespuesta");
+        boolean isAnonimo = (boolean) mapa.get("anonimo");
+
+        return new Respuesta(nickAutor, textoRespuesta, isAnonimo);
+    }
+
     @Override
     public String toString() {
         return "Respuesta{" +

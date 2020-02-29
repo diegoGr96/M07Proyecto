@@ -48,7 +48,7 @@ public class HomeFragment extends Fragment {
 
 
 
-    SwipeRefreshLayout swipeRefreshTemas;
+    private SwipeRefreshLayout swipeRefreshTemas;
 
     private Map<String,HashMap<String, Object>> temasListh;
     private List<Tema> temasList;
