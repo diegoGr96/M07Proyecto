@@ -109,7 +109,7 @@ public class SlideshowFragment extends Fragment {
                     System.out.println("Contador es(onClick): " + contador);
                     titulo = tituloTema.getText().toString();
                     descripcion = descripcionTema.getText().toString();
-                    DatabaseReference newTema = database.getReference("Temas/" + contador);
+                    DatabaseReference newTema = database.getReference("Temas/" + "Tema_"+contador);
 
                     boolean isAnonimo = checkAnonim.isChecked();
                     Tema nuevoTema = new Tema(isAnonimo, currentUser.getUid(),descripcion,contador,nick,titulo);
