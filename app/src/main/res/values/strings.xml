@@ -32,9 +32,6 @@
     <string name="hintCorreo">Correu</string>
     <string name="hintPassword">Clau</string>
 
-    <string name="fromSoftwareDetails" translatable="false">FromSoftware, Inc. es una compañía japonesa de videojuegos
-        fundada en noviembre de 1986 conocida principalmente por ser los creadores de las series Armored Core,
-        Demons Souls, Kings Field, Otogi, Tenchu, Dark Souls, Bloodborne y Sekiro: Shadows Die Twice.</string>
     <string name="hombre">Home</string>
     <string name="acepto_las_condiciones_y_t_rminos_de_servicio">Accepto les Condicions i Termes.</string>
     <string name="escriu_el_teu_nom_d_usuari">Escriu el teu correu</string>
@@ -45,25 +42,6 @@
     <string name="bot_per_a_iniciar_sessi">Botó per a iniciar sessió</string>
     <string name="clica_per_a_crear_un_compte">Clica per a crear un compte</string>
 
-    <string-array name="games_titles">
-        <item>Demons Souls</item>
-        <item>Dark Souls</item>
-        <item>Dark Souls 2</item>
-        <item>Dark Souls 3</item>
-        <item>Bloodborne</item>
-        <item>Sekiro: Shadows Die Twice</item>
-        <item>Elden Ring</item>
-    </string-array>
-
-    <string-array name="games_info">
-        <item>Demons Souls</item>
-        <item>DarkSouls</item>
-        <item>DarkSouls 2</item>
-        <item>DarkSouls 3</item>
-        <item>Bloodborne</item>
-        <item>Sekiro: Shadow Die Twice</item>
-        <item>Elden Ring</item>
-    </string-array>
     <string name="registroErroneo">Aquest usuari ja existeix.</string>
     <string name="login_error">Credencials incorrectes</string>
     <string name="hintNick" translatable="false">Nick</string>
@@ -89,4 +67,5 @@
     <string name="cv_tema_user">Usuari</string>
     <string name="resposta_tema">Escriu aqui la teva resposta</string>
     <string name="enviar_resposta">Enviar resposta</string>
+    <string name="cv_historia_user">Usuari</string>
 </resources>

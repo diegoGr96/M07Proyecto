@@ -18,6 +18,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import androidx.annotation.NonNull;
@@ -26,25 +27,50 @@ import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
+
 public class DetailActivity extends AppCompatActivity {
     //Activity que se muestra cada ve que pulsamos en un juego (Elemento del Recycler View).
 
-    FirebaseDatabase database = FirebaseDatabase.getInstance();
+    FirebaseDatabase database;
     DatabaseReference refClickedTema;
+    DatabaseReference respuestasReference;
 
-    private TextView temaTitle;
-    private TextView temaUser;
-    private TextView temaCuerpo;
+    private RecyclerView mRecyclerView;
+    private RespuestasAdapter mAdapter;
+
+    private FloatingActionButton fab;
+    private HashMap<String,HashMap<String,Object>> mapaRespuestas;
+    private List<Respuesta> listaRespuestas;
+
     private ImageView categoryImage;
     private int idTema = -1;
-    private FloatingActionButton fab;
+    private String tituloTema;
+    private String nickAutor;
+    private String cuerpoAutor;
+    private String uidAutor;
+
+    private Respuesta temaAutor;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail);
 
+          database= FirebaseDatabase.getInstance();
+
         fab = findViewById(R.id.addRespuesta);
+
+        mRecyclerView = findViewById(R.id.recyclerRespuestas);
+
+        // Set the Layout Manager.
+        Log.d("A", mRecyclerView + "   AAAAAAAAAAAAAAAAAa");
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
 
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -54,30 +80,55 @@ public class DetailActivity extends AppCompatActivity {
             }
         });
 
-        temaTitle = findViewById(R.id.txtTitle);
-        temaUser = findViewById(R.id.txtAutor);
-        temaCuerpo = findViewById(R.id.txtCuerpo);
-        categoryImage = findViewById(R.id.categoryImageDetail);
-
         idTema = getIntent().getIntExtra("ID_TEMA", -1);
+        tituloTema = getIntent().getStringExtra("TITLE");
+        nickAutor = getIntent().getStringExtra("USER");
+        cuerpoAutor = getIntent().getStringExtra("BODY");
+        //uidAutor = getIntent().getStringExtra("UID");
 
-        refClickedTema = database.getReference("Temas/"+idTema);
+        temaAutor = new Respuesta(tituloTema,nickAutor,cuerpoAutor);
+        listaRespuestas = new ArrayList<>();
+        listaRespuestas.add(temaAutor);
 
-        refClickedTema.addValueEventListener(new ValueEventListener() {
+        respuestasReference = database.getReference("Temas/"+idTema);
+        Query myQuery = respuestasReference.orderByChild("idRespuesta").startAt(0).endAt(10);
+        myQuery.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                temaTitle.setText(String.valueOf(dataSnapshot.child("titulo").getValue()));
-                temaUser.setText(String.valueOf(dataSnapshot.child("nickAutor").getValue()));
-                temaCuerpo.setText(String.valueOf(dataSnapshot.child("cuerpo").getValue()));
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                mapaRespuestas = (HashMap<String,HashMap<String,Object>>) dataSnapshot.getValue();
+                if (mapaRespuestas == null){
+
+                }else {
+                    /*
+                    temasList = new ArrayList<>();
+                    for(int i =0; i < temasListh.size();i++){
+                        Tema tema = Tema.convertTema(temasListh.get(i));
+                        temasList.add(tema);
+                    }
+                    System.out.println("Hola -- "+temasList);
+                    Collections.reverse(temasList);
+                    // Initialize the adapter and set it to the RecyclerView.
+                    mAdapter = new HistoriasAdapter(getContext(), temasList);
+                    mRecyclerView.setAdapter(mAdapter);
+
+                     */
+                }
+                mAdapter = new RespuestasAdapter(getApplicationContext(), listaRespuestas);
+                mRecyclerView.setAdapter(mAdapter);
+
             }
 
             @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
+            public void onCancelled(DatabaseError error) {
+                // Failed to read value
+                Log.w("VVVV", "Failed to read value.", error.toException());
             }
         });
 
-        Glide.with(this).load(getIntent().getIntExtra("image_resource", 0))
-                .into(categoryImage);
+        //categoryImage = findViewById(R.id.categoryImageDetail);
+
+
+        //Glide.with(this).load(getIntent().getIntExtra("image_resource", 0))
+        //        .into(categoryImage);
     }
 }

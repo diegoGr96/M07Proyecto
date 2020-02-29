@@ -55,9 +55,10 @@
     <string name="btnGuardasCambiosPerfil">Save</string>
     <string name="cambiosMiPerfil">Changes saved successfully</string>
     <string name="noCambiosMiPerfil">No changes detected</string>
-    <string name="temaUsuarioAnonimo">Anónimo</string>
+    <string name="temaUsuarioAnonimo">Annonymous</string>
     <string name="search_filter">Search...</string>
     <string name="cv_tema_user">User</string>
     <string name="resposta_tema">Type here your answer</string>
     <string name="enviar_resposta">Send answer</string>
+    <string name="cv_historia_user">User</string>
 </resources>

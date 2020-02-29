@@ -34,20 +34,20 @@ import androidx.recyclerview.widget.RecyclerView;
 /***
  * The adapter class for the RecyclerView, contains the games data.
  */
-public class HistoriasAdapter extends RecyclerView.Adapter<HistoriasAdapter.ViewHolder> {
+public class RespuestasAdapter extends RecyclerView.Adapter<RespuestasAdapter.ViewHolder> {
 
     // Member variables.
-    private List<Tema> mTemaData;
+    private List<Respuesta> mRespuestaData;
     private Context mContext;
 
     /**
      * Constructor that passes in the games data and the context.
      *
-     * @param temasData ArrayList containing the gamess data.
+     * @param respuestasData ArrayList containing the gamess data.
      * @param context   Context of the application.
      */
-    public HistoriasAdapter(Context context, List<Tema> temasData) {
-        this.mTemaData = temasData;
+    public RespuestasAdapter(Context context, List<Respuesta> respuestasData) {
+        this.mRespuestaData = respuestasData;
         this.mContext = context;
     }
 
@@ -66,10 +66,10 @@ public class HistoriasAdapter extends RecyclerView.Adapter<HistoriasAdapter.View
     Enlacamos los elementos graficos que queremos que salgan en cada HOLDER. En este proyecto se llama 'listItem'
      */
     @Override
-    public HistoriasAdapter.ViewHolder onCreateViewHolder(
+    public RespuestasAdapter.ViewHolder onCreateViewHolder(
             ViewGroup parent, int viewType) {
         return new ViewHolder(LayoutInflater.from(mContext).
-                inflate(R.layout.list_item, parent, false));
+                inflate(R.layout.respuesta_item, parent, false));
     }
 
     /**
@@ -86,13 +86,13 @@ public class HistoriasAdapter extends RecyclerView.Adapter<HistoriasAdapter.View
 
      */
     @Override
-    public void onBindViewHolder(HistoriasAdapter.ViewHolder holder,
+    public void onBindViewHolder(RespuestasAdapter.ViewHolder holder,
                                  int position) {
         // Get current games.
-        Tema currentTema = mTemaData.get(position);
+        Respuesta currentRespuesta = mRespuestaData.get(position);
 
         // Populate the textviews with data.
-        holder.bindTo(currentTema);
+        holder.bindTo(currentRespuesta);
     }
 
     /**
@@ -102,7 +102,7 @@ public class HistoriasAdapter extends RecyclerView.Adapter<HistoriasAdapter.View
      */
     @Override
     public int getItemCount() {
-        return mTemaData.size();
+        return mRespuestaData.size();
     }
 
 
@@ -114,7 +114,7 @@ public class HistoriasAdapter extends RecyclerView.Adapter<HistoriasAdapter.View
         // Member Variables for the TextViews
         private TextView mTituloText;
         private TextView mNickText;
-        private TextView cuerpoTema;
+        private TextView cuerpoRespuesta;
         private ConstraintLayout fondoCardView;
 
         /**
@@ -126,10 +126,10 @@ public class HistoriasAdapter extends RecyclerView.Adapter<HistoriasAdapter.View
             super(itemView);
 
             // Initialize the views.
-            mTituloText = itemView.findViewById(R.id.titleDetail);
-            mNickText = itemView.findViewById(R.id.userDetail);
-            cuerpoTema = itemView.findViewById(R.id.cuerpoTema);
-            fondoCardView = itemView.findViewById(R.id.fondoCardView);
+            mTituloText = itemView.findViewById(R.id.tituloAutor);
+            mNickText = itemView.findViewById(R.id.usuarioRespuesta);
+            cuerpoRespuesta = itemView.findViewById(R.id.cuerpoRespuesta);
+            fondoCardView = itemView.findViewById(R.id.fondoRespuesta);
             itemView.setOnClickListener(this);
         }
 
@@ -137,9 +137,10 @@ public class HistoriasAdapter extends RecyclerView.Adapter<HistoriasAdapter.View
         Mostramos los datos que hemos recibido a través del método 'onBindViewHolder' de la clase superior
         y nos encargamos de mostrarlos en pantalla.
          */
-        void bindTo(Tema currentTema) {
+        void bindTo(Respuesta currentRespuesta) {
             // Populate the textviews with data.
 
+            /*
             mTituloText.setText(currentTema.getTitulo());
             String cuerpo = currentTema.getCuerpo();
             if (cuerpo.length() > 70) cuerpo = cuerpo.substring(0, 71) + "...";
@@ -150,19 +151,28 @@ public class HistoriasAdapter extends RecyclerView.Adapter<HistoriasAdapter.View
                 mNickText.setText(currentTema.getNickAutor());
             }
             fondoCardView.setBackgroundColor(mContext.getResources().getColor(R.color.fondoCardView));
+             */
+
+            if (currentRespuesta.getTituloAutor() != null){
+                mTituloText.setText(currentRespuesta.getTituloAutor());
+            }
+            mNickText.setText(currentRespuesta.getNickAutor());
+            cuerpoRespuesta.setText(currentRespuesta.getTextRespuesta());
+            //fondoCardView.setBackgroundColor(mContext.getResources().getColor(R.color.colorHint));
         }
 
         @Override
         public void onClick(View view) {
-            Tema currentTema = mTemaData.get(getAdapterPosition());
+            /*
+            Respuesta currentTema = mRespuestaData.get(getAdapterPosition());
             Log.d("A", "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAsddfnuirn");
             Intent detailIntent = new Intent(mContext, DetailActivity.class);
             detailIntent.putExtra("ID_TEMA", currentTema.getIdTema());
             detailIntent.putExtra("TITLE", currentTema.getTitulo());
-            detailIntent.putExtra("USER", currentTema.isAnonimo()?mContext.getResources().getString(R.string.temaUsuarioAnonimo):currentTema.getNickAutor());
+            detailIntent.putExtra("USER", currentTema.getNickAutor());
             detailIntent.putExtra("BODY", currentTema.getCuerpo());
-            detailIntent.putExtra("UID",currentTema.getUidAutor());
             mContext.startActivity(detailIntent);
+             */
         }
     }
 }
