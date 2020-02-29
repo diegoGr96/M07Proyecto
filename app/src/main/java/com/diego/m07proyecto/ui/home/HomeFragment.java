@@ -11,6 +11,7 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.diego.m07proyecto.HistoriasAdapter;
 import com.diego.m07proyecto.R;
@@ -32,70 +33,104 @@ import java.util.Map;
 public class HomeFragment extends Fragment {
 
     FirebaseDatabase database;
+    DatabaseReference loadContador;
 
     private HomeViewModel homeViewModel;
     private RecyclerView mRecyclerView;
     private HistoriasAdapter mAdapter;
 
-    private List<HashMap<String,Object>> temasListh;
+
+
+    SwipeRefreshLayout swipeRefreshTemas;
+
+    private List<HashMap<String, Object>> temasListh;
     private List<Tema> temasList;
+    private int contadorConsulta;
+    private int contadorTemas = -1;
+
+    private boolean firstAttempt;
+
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-
+        firstAttempt = true;
         database = FirebaseDatabase.getInstance();
+        loadContador = database.getReference("contador");
+        loadContador.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                contadorTemas = Integer.parseInt(String.valueOf(dataSnapshot.getValue()));
+                contadorConsulta = contadorTemas - 11;
+                System.out.println("Contador es: " + contadorTemas);
+                if (firstAttempt) {
+                    initializeData();
+                    firstAttempt = false;
+                }
 
-        initializeData();
+            }
+
+            @Override
+            public void onCancelled(DatabaseError error) {
+                // Failed to read value
+            }
+        });
+
+
+
+
 
         System.out.println(temasList);
 
         homeViewModel =
                 ViewModelProviders.of(this).get(HomeViewModel.class);
         View root = inflater.inflate(R.layout.fragment_home, container, false);
+
+        swipeRefreshTemas = root.findViewById(R.id.swipeRefreshTemas);
+        swipeRefreshTemas.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                contadorConsulta = contadorTemas - 10;
+                initializeData();
+                swipeRefreshTemas.setRefreshing(false);
+            }
+        });
         // Initialize the RecyclerView.
         mRecyclerView = root.findViewById(R.id.recyclerView);
 
         // Set the Layout Manager.
         Log.d("A", mRecyclerView + "   AAAAAAAAAAAAAAAAAa");
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-
-        /*
-        final TextView textView = root.findViewById(R.id.text_home);
-        homeViewModel.getText().observe(this, new Observer<String>() {
-            @Override
-            public void onChanged(@Nullable String s) {
-                textView.setText(s);
-            }
-        });
-*/
         return root;
     }
 
 
     private void initializeData() {
-        // Get the resources from the XML file.
+        System.out.println("Contador tema "+ contadorTemas);
+        while(contadorTemas == -1);
+        contadorConsulta = contadorTemas;
         DatabaseReference dbRef = database.getReference("Temas");
-        Query myQuery = dbRef.orderByChild("idTema").startAt(0).endAt(10);
+        Query myQuery = dbRef.orderByChild("idTema").startAt(contadorConsulta-10).endAt(contadorConsulta);
 
         myQuery.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                temasListh = (List<HashMap<String,Object>>) dataSnapshot.getValue();
-                if (temasListh == null){
 
-                }else {
+                temasListh = (List<HashMap<String, Object>>) dataSnapshot.getValue();
+                if (temasListh == null) {
+
+                } else {
                     temasList = new ArrayList<>();
-                    for(int i =0; i < temasListh.size();i++){
+                    for (int i =contadorConsulta-10; i < temasListh.size(); i++) {
                         Tema tema = Tema.convertTema(temasListh.get(i));
                         temasList.add(tema);
                     }
-                    System.out.println("Hola -- "+temasList);
+                    System.out.println("Hola -- " + temasList);
                     Collections.reverse(temasList);
                     // Initialize the adapter and set it to the RecyclerView.
                     mAdapter = new HistoriasAdapter(getContext(), temasList);
                     mRecyclerView.setAdapter(mAdapter);
                 }
-
+                contadorConsulta+=10;
             }
 
             @Override
@@ -104,11 +139,5 @@ public class HomeFragment extends Fragment {
                 Log.w("VVVV", "Failed to read value.", error.toException());
             }
         });
-
-        // Create the ArrayList of Sports objects with titles and
-        // information about each sport.
-
-        // Notify the adapter of the change.
-       // mAdapter.notifyDataSetChanged();
     }
 }
