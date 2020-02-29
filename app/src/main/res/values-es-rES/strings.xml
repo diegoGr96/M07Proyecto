@@ -61,4 +61,7 @@
     <string name="enviar_resposta">Enviar respuesta</string>
     <string name="cv_historia_user">Usuario</string>
     <string name="temaUsuarioAnonimo">Anónimo</string>
+    <string name="characters_respuesta">Carácteres</string>
+    <string name="respuesta_erronea">La longitud de la respuesta excede el límite de 250 carácteres.</string>
+    <string name="unknown_error">Error desconocido.</string>
 </resources>

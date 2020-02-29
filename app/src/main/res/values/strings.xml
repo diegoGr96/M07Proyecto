@@ -68,4 +68,7 @@
     <string name="resposta_tema">Escriu aqui la teva resposta</string>
     <string name="enviar_resposta">Enviar resposta</string>
     <string name="cv_historia_user">Usuari</string>
+    <string name="characters_respuesta">Caràcters</string>
+    <string name="respuesta_erronea">La longitud de la resposta excedeix el limit de 250 caràcters.</string>
+    <string name="unknown_error">Error desconegut.</string>
 </resources>
