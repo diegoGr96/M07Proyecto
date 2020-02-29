@@ -64,4 +64,40 @@
     <string name="characters_respuesta">Carácteres</string>
     <string name="respuesta_erronea">La longitud de la respuesta excede el límite de 250 carácteres.</string>
     <string name="unknown_error">Error desconocido.</string>
+
+    <string-array
+        name="categories">
+        <item
+            >Familia</item>
+        <item
+            >Trabajo</item>
+        <item
+            >Amor</item>
+        <item
+            >Dinero</item>
+        <item
+            >Ocio</item>
+        <item
+            >Deportes</item>
+        <item
+            >Arte</item>
+        <item
+            >Estudios</item>
+    </string-array>
+
+    <string-array
+        name="search_filters">
+        <item
+            >Anónimo</item>
+        <item
+            >Número de respuestas</item>
+        <item
+            >Descripción</item>
+        <item
+            >ID del tema</item>
+        <item
+            >Nick</item>
+        <item
+            >Titulo</item>
+    </string-array>
 </resources>

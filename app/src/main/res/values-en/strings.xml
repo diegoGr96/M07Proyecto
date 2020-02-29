@@ -64,4 +64,40 @@
     <string name="characters_respuesta">Characters</string>
     <string name="respuesta_erronea">Answer\'s length surpass the 250 characters limit.</string>
     <string name="unknown_error">Unknown error.</string>
+
+    <string-array
+        name="categories">
+        <item
+            >Family</item>
+        <item
+            >Work</item>
+        <item
+            >Love</item>
+        <item
+            >Money</item>
+        <item
+            >Leisure</item>
+        <item
+            >Sports</item>
+        <item
+            >Art</item>
+        <item
+            >Study</item>
+    </string-array>
+
+    <string-array
+        name="search_filters">
+        <item
+            >Annonymous</item>
+        <item
+            >Number of answers</item>
+        <item
+            >Description</item>
+        <item
+            >Theme ID</item>
+        <item
+            >Nick</item>
+        <item
+            >Title</item>
+    </string-array>
 </resources>
