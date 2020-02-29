@@ -88,6 +88,8 @@
     <string-array
         name="search_filters">
         <item
+            >Categories</item>
+        <item
             >Annonymous</item>
         <item
             >Number of answers</item>
@@ -100,4 +102,6 @@
         <item
             >Title</item>
     </string-array>
+    <string name="btn_filter">Filter</string>
+    <string name="checkbox_filter_annonymous">Is annonymous</string>
 </resources>

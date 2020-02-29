@@ -72,39 +72,26 @@
     <string name="respuesta_erronea">La longitud de la resposta excedeix el limit de 250 caràcters.</string>
     <string name="unknown_error">Error desconegut.</string>
 
-    <string-array
-        name="categories">
-        <item
-            >Familia</item>
-        <item
-            >Treball</item>
-        <item
-            >Amor</item>
-        <item
-            >Diners</item>
-        <item
-            >Oci</item>
-        <item
-            >Esports</item>
-        <item
-            >Art</item>
-        <item
-            >Estudis</item>
+    <string-array name="categories">
+        <item>Familia</item>
+        <item>Treball</item>
+        <item>Amor</item>
+        <item>Diners</item>
+        <item>Oci</item>
+        <item>Esports</item>
+        <item>Art</item>
+        <item>Estudis</item>
     </string-array>
 
-    <string-array
-        name="search_filters">
-        <item
-            >Anònim</item>
-        <item
-            >Número de respostes</item>
-        <item
-            >Descripció</item>
-        <item
-            >ID del tema</item>
-        <item
-            >Nick</item>
-        <item
-            >Títol</item>
+    <string-array name="search_filters">
+        <item>Categories</item>
+        <item>Anònim</item>
+        <item>Número de respostes</item>
+        <item>Descripció</item>
+        <item>ID del tema</item>
+        <item>Nick</item>
+        <item>Títol</item>
     </string-array>
+    <string name="btn_filter">Filtra</string>
+    <string name="checkbox_filter_annonymous">És anònim</string>
 </resources>
