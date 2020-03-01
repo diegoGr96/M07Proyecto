@@ -105,8 +105,9 @@ public class HomeFragment extends Fragment {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                inicioConsulta-=10;
-                finalConsulta-=10;
+
+                finalConsulta-=9;
+                inicioConsulta = finalConsulta-9;
                 if (inicioConsulta < 0){
                     inicioConsulta = 0;
                 }
