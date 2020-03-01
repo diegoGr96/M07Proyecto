@@ -1,6 +1,8 @@
 package com.diego.m07proyecto.ui.home;
 
+import android.content.res.ColorStateList;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,6 +12,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -98,6 +101,7 @@ public class HomeFragment extends Fragment {
         final View root = inflater.inflate(R.layout.fragment_home, container, false);
 
         fab = root.findViewById(R.id.fabMenuPrincipal);
+        fab.setBackgroundTintList(ColorStateList.valueOf(ContextCompat.getColor(getContext(), R.color.fabDefault)));
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -109,17 +113,36 @@ public class HomeFragment extends Fragment {
                 if (finalConsulta>0){
                     Snackbar.make(view, "Cargando 10 temas mas", Snackbar.LENGTH_LONG)
                             .setAction("Action", null).show();
+                    fab.setBackgroundTintList(ColorStateList.valueOf(ContextCompat.getColor(getContext(), R.color.fabLoad)));
+                    fab.setRippleColor(ColorStateList.valueOf(ContextCompat.getColor(getContext(), R.color.fabLoadDark)));
+                    initializeData();
+                    Handler handler = new Handler();
+                    handler.postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            fab.setBackgroundTintList(ColorStateList.valueOf(ContextCompat.getColor(getContext(), R.color.fabDefault)));
+                            fab.setRippleColor(ColorStateList.valueOf(ContextCompat.getColor(getContext(), R.color.fabDefaultDark)));
+                        }
+                    }, 1500);
                     /*
                     Thread hiloCambioColores = new Thread(new CambioColorEditText(fab));
                     hiloCambioColores.start();
                     fab.setBackgroundResource(R.drawable.back_fav_cargar_temas_succes);
                      */
-                    initializeData();
                 }else{
                     Snackbar.make(view, "No hay mas temas que cargar.", Snackbar.LENGTH_LONG)
                             .setAction("Action", null).show();
+                    fab.setBackgroundTintList(ColorStateList.valueOf(ContextCompat.getColor(getContext(), R.color.fabNotLoad)));
+                    fab.setRippleColor(ColorStateList.valueOf(ContextCompat.getColor(getContext(), R.color.fabNotLoadDark)));
+                    Handler handler = new Handler();
+                    handler.postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            fab.setBackgroundTintList(ColorStateList.valueOf(ContextCompat.getColor(getContext(), R.color.fabDefault)));
+                            fab.setRippleColor(ColorStateList.valueOf(ContextCompat.getColor(getContext(), R.color.fabDefaultDark)));
+                        }
+                    }, 1500);
                 }
-
             }
         });
 

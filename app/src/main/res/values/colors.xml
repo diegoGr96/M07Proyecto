@@ -12,4 +12,10 @@
     <color name="colorCambiosGuardados">#6FD653</color>
     <color name="fondoCardView">#F8D237</color>
     <color name="fondoCardViewRespuestas">#FBFBFB</color>
+    <color name="fabDefault">#4A6CCC</color>
+    <color name="fabLoad">#4ACC60</color>
+    <color name="fabNotLoad">#CC4A4A</color>
+    <color name="fabDefaultDark">#3351A7</color>
+    <color name="fabLoadDark">#2B9E3E</color>
+    <color name="fabNotLoadDark">#9E2B2B</color>
 </resources>

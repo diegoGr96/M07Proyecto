@@ -62,7 +62,7 @@
             android:layout_height="wrap_content"
             android:hint="@string/cv_tema_info"
             android:padding="8dp"
-            android:textColor="#A09E9E"
+            android:textColor="#6D6D6D"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/userDetail" />
     </androidx.constraintlayout.widget.ConstraintLayout>
