@@ -13,11 +13,12 @@ public class Tema{
      String nickAutor;
      String titulo;
      List<Respuesta> respuestas;
+     int categoria;
 
     public Tema(){
     }
 
-    public Tema(boolean anomino, String uidAutor, String cuerpo, int idTema, String nickAutor, List<Respuesta> respuestas, String titulo) {
+    public Tema(boolean anomino, String uidAutor, String cuerpo, int idTema, String nickAutor, List<Respuesta> respuestas, String titulo, int categoria) {
         this.idTema = idTema;
         this.anonimo = anomino;
         this.uidAutor = uidAutor;
@@ -26,9 +27,10 @@ public class Tema{
         this.titulo = titulo;
         this.respuestas = respuestas;
         this.contRespuestas = 0;
+        this.categoria = categoria;
     }
 
-    public Tema(boolean anomino, String uidAutor, String cuerpo, int idTema, String nickAutor, String titulo) {
+    public Tema(boolean anomino, String uidAutor, String cuerpo, int idTema, String nickAutor, String titulo, int categoria) {
         this.idTema = idTema;
         this.anonimo = anomino;
         this.uidAutor = uidAutor;
@@ -36,6 +38,15 @@ public class Tema{
         this.nickAutor = nickAutor;
         this.titulo = titulo;
         this.contRespuestas = 0;
+        this.categoria = categoria;
+    }
+
+    public int getCategoria() {
+        return categoria;
+    }
+
+    public void setCategoria(int categoria) {
+        this.categoria = categoria;
     }
 
     public int getContRespuestas() {
@@ -132,6 +143,7 @@ public class Tema{
         //int contRespuestas = ((Long) mapa.get("contRespuestas")).intValue();
         String nickAutor = (String) mapa.get("nickAutor");
         String cuerpo = (String) mapa.get("cuerpo");
-        return new Tema(isAnonimo,uidAutor,cuerpo,idTema,nickAutor,null,titulo);
+        int categoria = ((Long)mapa.get("categoria")).intValue();
+        return new Tema(isAnonimo,uidAutor,cuerpo,idTema,nickAutor,null,titulo, categoria);
     }
 }

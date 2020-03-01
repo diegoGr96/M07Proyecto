@@ -149,7 +149,33 @@ public class HistoriasAdapter extends RecyclerView.Adapter<HistoriasAdapter.View
             } else {
                 mNickText.setText(currentTema.getNickAutor());
             }
-            fondoCardView.setBackgroundColor(mContext.getResources().getColor(R.color.fondoCardView));
+            //fondoCardView.setBackgroundColor(mContext.getResources().getColor(R.color.fondoCardView));
+            switch(currentTema.getCategoria()){
+                case 0:
+                    fondoCardView.setBackgroundResource(R.drawable.family_category);
+                    break;
+                case 1:
+                    fondoCardView.setBackgroundResource(R.drawable.work_category);
+                    break;
+                case 2:
+                    fondoCardView.setBackgroundResource(R.drawable.love_category);
+                    break;
+                case 3:
+                    fondoCardView.setBackgroundResource(R.drawable.money_category);
+                    break;
+                case 4:
+                    fondoCardView.setBackgroundResource(R.drawable.music_category);
+                    break;
+                case 5:
+                    fondoCardView.setBackgroundResource(R.drawable.sports_category);
+                    break;
+                case 6:
+                    fondoCardView.setBackgroundResource(R.drawable.art_category);
+                    break;
+                case 7:
+                    fondoCardView.setBackgroundResource(R.drawable.study_category);
+                    break;
+            }
         }
 
         @Override

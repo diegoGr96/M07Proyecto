@@ -99,7 +99,7 @@ public class FilteredThemes extends AppCompatActivity {
         switch (intent.getIntExtra("FILTER", -1)) {
             case 0:
                 //System.out.println("ESTOY EN EL CASO: " + intent.getIntExtra("FILTER", -1));
-                filter = ref.orderByChild("categoria").equalTo(getIntent().getStringExtra("CATEGORY")).limitToLast(10);
+                filter = ref.orderByChild("categoria").equalTo(getIntent().getIntExtra("CATEGORY", -1)).limitToLast(10);
                 break;
             case 1:
                 //System.out.println("ESTOY EN EL CASO: " + intent.getIntExtra("FILTER", -1));

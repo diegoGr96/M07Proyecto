@@ -7,9 +7,12 @@ import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.Spinner;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -36,6 +39,7 @@ public class SlideshowFragment extends Fragment {
     private EditText descripcionTema;
     private CheckBox checkAnonim;
     private Button btnCrear;
+    private Spinner spinnerCategory;
 
     private String nick;
 
@@ -46,6 +50,8 @@ public class SlideshowFragment extends Fragment {
 
     private int contador = -1;
 
+    private int selectedCategory;
+
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_newtheme, container, false);
@@ -54,6 +60,11 @@ public class SlideshowFragment extends Fragment {
         descripcionTema = root.findViewById(R.id.edtDescripcion);
         checkAnonim = root.findViewById(R.id.checkAnon);
         btnCrear = root.findViewById(R.id.btnCrear);
+        spinnerCategory = root.findViewById(R.id.spinnerCategory);
+
+        ArrayAdapter<CharSequence> adapterCategories = ArrayAdapter.createFromResource(getContext(), R.array.categories, android.R.layout.simple_spinner_item);
+        adapterCategories.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinnerCategory.setAdapter(adapterCategories);
 
         database = FirebaseDatabase.getInstance();
         mAuth = FirebaseAuth.getInstance();
@@ -101,6 +112,23 @@ public class SlideshowFragment extends Fragment {
             }
         });
 
+        spinnerCategory.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                //System.out.println("Test " + parent);
+                //System.out.println("Test " + view);
+                //System.out.println("Test " + position);
+                //System.out.println("Test " + id);
+                //System.out.println("Test " + parent.getItemAtPosition(position));
+                selectedCategory = (int) id;
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
         btnCrear.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -112,7 +140,7 @@ public class SlideshowFragment extends Fragment {
                     DatabaseReference newTema = database.getReference("Temas/" + "Tema_"+contador);
 
                     boolean isAnonimo = checkAnonim.isChecked();
-                    Tema nuevoTema = new Tema(isAnonimo, currentUser.getUid(),descripcion,contador,nick,titulo);
+                    Tema nuevoTema = new Tema(isAnonimo, currentUser.getUid(),descripcion,contador,nick,titulo, selectedCategory);
                     newTema.setValue(nuevoTema);
 
                     contador++;

@@ -124,8 +124,7 @@ public class SearchFragment extends Fragment {
                 //System.out.println(sFilter);
                 switch(selectedFilter){
                     case 0:
-                        String sCategory = (String) cbCategories.getItemAtPosition(selectedCategory);
-                        filterIntent.putExtra("CATEGORY", sCategory);
+                        filterIntent.putExtra("CATEGORY", selectedCategory);
                         //System.out.println(sCategory);
                         break;
                     case 1:
