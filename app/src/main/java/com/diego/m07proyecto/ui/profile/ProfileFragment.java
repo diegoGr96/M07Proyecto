@@ -1,11 +1,15 @@
 package com.diego.m07proyecto.ui.profile;
 
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -48,6 +52,7 @@ public class ProfileFragment extends Fragment {
 
     private String nacimientoOriginal;
     private String nombreOriginal;
+    private int contadorCaracteres;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -74,6 +79,7 @@ public class ProfileFragment extends Fragment {
         btnGuardar = root.findViewById(R.id.btnGuardar);
 
 
+
         DatabaseReference nickUsuario = database.getReference("Usuarios/" + currentUser.getUid() + "/");
         nickUsuario.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -81,13 +87,6 @@ public class ProfileFragment extends Fragment {
                 consulta = (HashMap<String, Object>) dataSnapshot.getValue();
                 consulta.remove("email");
                 int i = 0;
-                /*
-                for (Map.Entry<String, Object> elemento : consulta.entrySet()) {
-                    System.out.println("AAA   " + elemento.getKey() + " -- " + elemento.getValue());
-                    listaTextos.get(i).setText(elemento.getValue().toString());
-                    i++;
-                }
-                */
                 textNick.setText(consulta.get("nick").toString());
                 textNombre.setText(consulta.get("nombre").toString());
                 textNacimiento.setText(consulta.get("fechaNacimiento").toString());
@@ -124,6 +123,28 @@ public class ProfileFragment extends Fragment {
                     Snackbar.make(textNick, getResources().getText(R.string.noCambiosMiPerfil), Snackbar.LENGTH_LONG)
                             .setAction("Action", null).show();
                 }
+            }
+        });
+
+        textNacimiento.setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View v, int keyCode, KeyEvent event) {
+                int sizeFecha = textNacimiento.length();
+                String textoFecha = textNacimiento.getText().toString();
+                if (contadorCaracteres < sizeFecha) {
+                    if (sizeFecha == 2 || sizeFecha == 5) {
+                        textNacimiento.append("/");
+                    } else if (textNacimiento.length() > 10) {
+                        textNacimiento.setText(textNacimiento.getText().subSequence(0, sizeFecha - 1));
+                        textNacimiento.setSelection(sizeFecha - 1);
+                    }
+                    contadorCaracteres++;
+
+                } else {
+                    Toast.makeText(getContext(), "Borrando...", Toast.LENGTH_LONG).show();
+                    contadorCaracteres--;
+                }
+                return false;
             }
         });
         return root;
