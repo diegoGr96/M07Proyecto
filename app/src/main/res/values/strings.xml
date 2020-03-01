@@ -92,7 +92,7 @@
         <item>Nick</item>
         <item>Títol</item>
     </string-array>
-<!--
+    <!--
     <integer-array name="category_images">
         <item>@drawable/art_category</item>
         <item>@drawable/family_category</item>
@@ -104,7 +104,8 @@
         <item>@drawable/work_category</item>
     </integer-array>
     -->
-    
+
     <string name="btn_filter">Filtra</string>
     <string name="checkbox_filter_annonymous">És anònim</string>
+    <string name="respuesta_vacia">No pots enviar una resposta buida.</string>
 </resources>

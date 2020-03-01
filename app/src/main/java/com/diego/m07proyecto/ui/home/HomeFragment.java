@@ -111,8 +111,6 @@ public class HomeFragment extends Fragment {
                     inicioConsulta = 0;
                 }
                 if (finalConsulta>0){
-                    Snackbar.make(view, "Cargando 10 temas mas", Snackbar.LENGTH_LONG)
-                            .setAction("Action", null).show();
                     fab.setBackgroundTintList(ColorStateList.valueOf(ContextCompat.getColor(getContext(), R.color.fabLoad)));
                     fab.setRippleColor(ColorStateList.valueOf(ContextCompat.getColor(getContext(), R.color.fabLoadDark)));
                     initializeData();
@@ -124,14 +122,7 @@ public class HomeFragment extends Fragment {
                             fab.setRippleColor(ColorStateList.valueOf(ContextCompat.getColor(getContext(), R.color.fabDefaultDark)));
                         }
                     }, 1500);
-                    /*
-                    Thread hiloCambioColores = new Thread(new CambioColorEditText(fab));
-                    hiloCambioColores.start();
-                    fab.setBackgroundResource(R.drawable.back_fav_cargar_temas_succes);
-                     */
                 }else{
-                    Snackbar.make(view, "No hay mas temas que cargar.", Snackbar.LENGTH_LONG)
-                            .setAction("Action", null).show();
                     fab.setBackgroundTintList(ColorStateList.valueOf(ContextCompat.getColor(getContext(), R.color.fabNotLoad)));
                     fab.setRippleColor(ColorStateList.valueOf(ContextCompat.getColor(getContext(), R.color.fabNotLoadDark)));
                     Handler handler = new Handler();
@@ -159,7 +150,7 @@ public class HomeFragment extends Fragment {
         });
 
         // Initialize the RecyclerView.
-        mRecyclerView = root.findViewById(R.id.recyclerView);
+        mRecyclerView = root.findViewById(R.id.recyclerViewTemas);
 
         // Set the Layout Manager.
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
@@ -184,13 +175,26 @@ public class HomeFragment extends Fragment {
                 if (temasListh == null) {
 
                 } else {
+
                     for (int i = 0; i < temasListh.size(); i++) {
                         Tema tema = Tema.convertTema(temasListh.get("Tema_"+(finalConsulta-i)));
                         temasList.add(tema);
                     }
+                     /*
+                    ArrayList<Tema> auxList = new ArrayList<>();
+                    for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                        Tema tema = Tema.convertTema(temasListh.get(snapshot.getKey()));
+                        auxList.add(tema);
+                    }
+                    Collections.reverse(auxList);
+
+                    for(Tema tema : auxList){
+                        temasList.add(tema);
+                    }
+                    */
                     mAdapter.notifyDataSetChanged();
                     System.out.println("Hola -- " + temasList);
-                    //Collections.reverse(temasList);
+
                     // Initialize the adapter and set it to the RecyclerView.
                 }
                 //contadorConsulta+=10;

@@ -104,4 +104,5 @@
     </string-array>
     <string name="btn_filter">Filter</string>
     <string name="checkbox_filter_annonymous">Is annonymous</string>
+    <string name="respuesta_vacia">You cannot send and empty reply.</string>
 </resources>
