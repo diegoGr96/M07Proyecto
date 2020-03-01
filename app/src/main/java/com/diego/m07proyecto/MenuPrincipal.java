@@ -58,9 +58,9 @@ public class MenuPrincipal extends AppCompatActivity {
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        FloatingActionButton fab = findViewById(R.id.fab);
+        FloatingActionButton fab = findViewById(R.id.fabMenuPrincipal);
 
-        fab.setOnClickListener(new View.OnClickListener() {
+       /*fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
@@ -68,7 +68,7 @@ public class MenuPrincipal extends AppCompatActivity {
                         .setAction("Action", null).show();
 
             }
-        });
+        });*/
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);

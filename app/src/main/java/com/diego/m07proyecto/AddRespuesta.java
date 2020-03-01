@@ -100,7 +100,7 @@ public class AddRespuesta extends AppCompatActivity {
                 if (idTema != -1) {
                     String textRespuesta = edtRespuesta.getText().toString();
                     respuestaLength = textRespuesta.length();
-                    if (respuestaLength > 1) {
+                    if (respuestaLength > 0) {
                         if (respuestaLength < 250) {
                             respuestaRef = database.getReference("Temas/Tema_" + idTema + "/Respuestas/respuesta_" + numRespuestaTema);
                             respuestaRef.setValue(new Respuesta(numRespuestaTema, textRespuesta, currentUser, nickUser, checkAnonimo.isChecked()));

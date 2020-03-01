@@ -16,10 +16,13 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
+import com.diego.m07proyecto.CambioColorEditText;
 import com.diego.m07proyecto.HistoriasAdapter;
 import com.diego.m07proyecto.R;
 import com.diego.m07proyecto.Respuesta;
 import com.diego.m07proyecto.Tema;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -47,12 +50,13 @@ public class HomeFragment extends Fragment {
     private LinearLayoutManager manager;
 
 
-
+    private FloatingActionButton fab;
     private SwipeRefreshLayout swipeRefreshTemas;
 
     private Map<String,HashMap<String, Object>> temasListh;
     private List<Tema> temasList;
-    private int contadorConsulta;
+    private int inicioConsulta;
+    private int finalConsulta;
     private int contadorTemas = -1;
 
     private boolean firstAttempt;
@@ -62,6 +66,8 @@ public class HomeFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
 
+        temasList = new ArrayList<>();
+
         firstAttempt = true;
         database = FirebaseDatabase.getInstance();
         loadContador = database.getReference("contador");
@@ -69,7 +75,9 @@ public class HomeFragment extends Fragment {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 contadorTemas = Integer.parseInt(String.valueOf(dataSnapshot.getValue()));
-                contadorConsulta = contadorTemas-1;
+                finalConsulta=contadorTemas-1;
+                inicioConsulta = finalConsulta-9;
+                //contadorConsulta = contadorTemas-1;
                 System.out.println("Contador es: " + contadorTemas);
                 if (firstAttempt) {
                     initializeData();
@@ -89,14 +97,39 @@ public class HomeFragment extends Fragment {
                 ViewModelProviders.of(this).get(HomeViewModel.class);
         final View root = inflater.inflate(R.layout.fragment_home, container, false);
 
+        fab = root.findViewById(R.id.fabMenuPrincipal);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                inicioConsulta-=10;
+                finalConsulta-=10;
+                if (inicioConsulta < 0){
+                    inicioConsulta = 0;
+                }
+                if (finalConsulta>0){
+                    Snackbar.make(view, "Cargando 10 temas mas", Snackbar.LENGTH_LONG)
+                            .setAction("Action", null).show();
+                    /*
+                    Thread hiloCambioColores = new Thread(new CambioColorEditText(fab));
+                    hiloCambioColores.start();
+                    fab.setBackgroundResource(R.drawable.back_fav_cargar_temas_succes);
+                     */
+                    initializeData();
+                }else{
+                    Snackbar.make(view, "No hay mas temas que cargar.", Snackbar.LENGTH_LONG)
+                            .setAction("Action", null).show();
+                }
 
-
+            }
+        });
 
         swipeRefreshTemas = root.findViewById(R.id.swipeRefreshTemas);
         swipeRefreshTemas.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                contadorConsulta = contadorTemas - 1;
+                finalConsulta=contadorTemas-1;
+                inicioConsulta = finalConsulta-9;
+                temasList.clear();
                 initializeData();
                 swipeRefreshTemas.setRefreshing(false);
             }
@@ -105,43 +138,11 @@ public class HomeFragment extends Fragment {
         // Initialize the RecyclerView.
         mRecyclerView = root.findViewById(R.id.recyclerView);
 
-        mRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
-            @Override
-            public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
-                super.onScrolled(recyclerView, dx, dy);
-            }
-        });
-
         // Set the Layout Manager.
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         manager = new LinearLayoutManager(mRecyclerView.getContext());
-
-        mRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
-            @Override
-            public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
-                super.onScrollStateChanged(recyclerView, newState);
-                if (newState == AbsListView.OnScrollListener.SCROLL_STATE_TOUCH_SCROLL){
-                    isScrolling = true;
-                }
-            }
-
-            @Override
-            public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
-                super.onScrolled(recyclerView, dx, dy);
-                currentItems = manager.getChildCount();
-                totaltItems = manager.getItemCount();
-                scrollOutItems = manager.findFirstVisibleItemPosition();
-
-            //    Toast.makeText(root.getContext(),currentItems +" "+totaltItems+" "+scrollOutItems,Toast.LENGTH_LONG).show();
-                if (isScrolling && (currentItems + scrollOutItems == totaltItems)){
-                    isScrolling = false;
-                    Toast.makeText(root.getContext(),"Holaaaaaa",Toast.LENGTH_LONG).show();
-                }
-
-            }
-        });
-
-
+        mAdapter = new HistoriasAdapter(getContext(), temasList);
+        mRecyclerView.setAdapter(mAdapter);
         return root;
     }
 
@@ -151,13 +152,7 @@ public class HomeFragment extends Fragment {
         while(contadorTemas == -1);
         //contadorConsulta = contadorTemas;
         DatabaseReference dbRef = database.getReference("Temas");
-        Query myQuery;
-        if (contadorTemas>10){
-            myQuery = dbRef.orderByChild("idTema").startAt(contadorConsulta-10).endAt(contadorConsulta);
-        }else{
-            myQuery = dbRef.orderByChild("idTema").startAt(0).endAt(contadorConsulta);
-        }
-
+        Query myQuery = dbRef.orderByChild("idTema").startAt(inicioConsulta).endAt(finalConsulta);
         myQuery.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -166,18 +161,14 @@ public class HomeFragment extends Fragment {
                 if (temasListh == null) {
 
                 } else {
-
-                    temasList = new ArrayList<>();
                     for (int i = 0; i < temasListh.size(); i++) {
-                        Tema tema = Tema.convertTema(temasListh.get("Tema_"+(contadorConsulta--)));
+                        Tema tema = Tema.convertTema(temasListh.get("Tema_"+(finalConsulta-i)));
                         temasList.add(tema);
                     }
-
+                    mAdapter.notifyDataSetChanged();
                     System.out.println("Hola -- " + temasList);
                     //Collections.reverse(temasList);
                     // Initialize the adapter and set it to the RecyclerView.
-                    mAdapter = new HistoriasAdapter(getContext(), temasList);
-                    mRecyclerView.setAdapter(mAdapter);
                 }
                 //contadorConsulta+=10;
             }

@@ -6,7 +6,7 @@ import java.util.List;
 public class Tema{
      int contRespuestas;
      int idTema;
-     String uidTema;
+    // String uidTema;
      boolean anonimo;
      String uidAutor;
      String cuerpo;
@@ -64,14 +64,18 @@ public class Tema{
     public void setIdTema(int idTema) {
         this.idTema = idTema;
     }
-
+/*
     public String getUidTema() {
         return uidTema;
     }
 
+
+
     public void setUidTema(String uidTema) {
         this.uidTema = uidTema;
     }
+
+ */
 
     public boolean isAnonimo() {
         return anonimo;
@@ -125,7 +129,7 @@ public class Tema{
     public String toString() {
         return "Tema{" +
                 "idTema=" + idTema +
-                ", uidTema='" + uidTema + '\'' +
+              //  ", uidTema='" + uidTema + '\'' +
                 ", isAnonimo=" + anonimo +
                 ", uidAutor='" + uidAutor + '\'' +
                 ", cuerpo='" + cuerpo + '\'' +
