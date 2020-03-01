@@ -134,9 +134,14 @@ public class SearchFragment extends Fragment {
                         //System.out.println(sAnnonymous);
                         break;
                     default:
-                        String sText = txtFilter.getText().toString();
-                        filterIntent.putExtra("TEXT", sText);
-                        //System.out.println(sText);
+                        if(selectedFilter == 2 || selectedFilter == 4){
+                            int sText = Integer.parseInt(txtFilter.getText().toString());
+                            filterIntent.putExtra("TEXT", sText);
+                        }else {
+                            String sText = txtFilter.getText().toString();
+                            filterIntent.putExtra("TEXT", sText);
+                            //System.out.println(sText);
+                        }
                         break;
                 }
                 filterIntent.putExtra("FILTER", selectedFilter);
