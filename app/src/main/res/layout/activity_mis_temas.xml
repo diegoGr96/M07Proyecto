@@ -17,7 +17,7 @@
         app:backgroundTint="@color/backgroundLogoBienvenida"
         app:layout_constraintBottom_toBottomOf="@+id/swipeRefreshMisTemas"
         app:layout_constraintEnd_toEndOf="parent"
-        app:srcCompat="@drawable/newtheme" />
+        app:srcCompat="@drawable/fab_reload" />
 
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
         android:id="@+id/swipeRefreshMisTemas"
