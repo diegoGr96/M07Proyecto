@@ -112,7 +112,7 @@ public class AddRespuesta extends AppCompatActivity {
                                     .setAction("Action", null).show();
                         }
                     } else {
-                        Snackbar.make(v, "No puedes enviar una respuesta vacia.", Snackbar.LENGTH_LONG)
+                        Snackbar.make(v,  getResources().getText(R.string.respuesta_vacia), Snackbar.LENGTH_LONG)
                                 .setAction("Action", null).show();
                     }
                 } else {

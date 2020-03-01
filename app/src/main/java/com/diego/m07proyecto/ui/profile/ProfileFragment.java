@@ -1,5 +1,6 @@
 package com.diego.m07proyecto.ui.profile;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -14,7 +15,9 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
+import com.diego.m07proyecto.AddRespuesta;
 import com.diego.m07proyecto.CambioColorEditText;
+import com.diego.m07proyecto.MisTemas;
 import com.diego.m07proyecto.R;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.FirebaseAuth;
@@ -79,7 +82,6 @@ public class ProfileFragment extends Fragment {
         btnGuardar = root.findViewById(R.id.btnGuardar);
 
 
-
         DatabaseReference nickUsuario = database.getReference("Usuarios/" + currentUser.getUid() + "/");
         nickUsuario.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -117,7 +119,7 @@ public class ProfileFragment extends Fragment {
                     nacimientoOriginal = textNacimiento.getText().toString();
                     nombreOriginal = textNombre.getText().toString();
 
-                    Thread hiloCambioColores = new Thread(new CambioColorEditText(textNacimiento,textNombre));
+                    Thread hiloCambioColores = new Thread(new CambioColorEditText(textNacimiento, textNombre));
                     hiloCambioColores.start();
                 } else {
                     Snackbar.make(textNick, getResources().getText(R.string.noCambiosMiPerfil), Snackbar.LENGTH_LONG)
@@ -147,6 +149,15 @@ public class ProfileFragment extends Fragment {
                 return false;
             }
         });
+
+        btnMisTemas.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent iRespuesta = new Intent(getContext(), MisTemas.class);
+                startActivityForResult(iRespuesta, 1);
+            }
+        });
+
         return root;
     }
 }
