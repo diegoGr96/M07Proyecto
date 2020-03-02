@@ -35,6 +35,7 @@ import androidx.appcompat.widget.Toolbar;
 
 
 import android.view.Menu;
+import android.widget.Button;
 import android.widget.TextView;
 
 public class MenuPrincipal extends AppCompatActivity {
@@ -48,9 +49,6 @@ public class MenuPrincipal extends AppCompatActivity {
     private FirebaseDatabase database;
 
     private DatabaseReference myRef;
-
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

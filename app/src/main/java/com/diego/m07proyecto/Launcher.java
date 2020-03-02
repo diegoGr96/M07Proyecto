@@ -9,6 +9,7 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.os.Handler;
+import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -26,6 +27,9 @@ public class Launcher extends AppCompatActivity {
     FirebaseAuth mAuth;
     FirebaseUser usuario;
     private boolean postback = true;
+    int timer = 5000;
+    int timerAux;
+    private TextView txtReconnecting;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +37,7 @@ public class Launcher extends AppCompatActivity {
         setContentView(R.layout.activity_launcher);
         mAuth = FirebaseAuth.getInstance();
         usuario = mAuth.getCurrentUser();
+        txtReconnecting = findViewById(R.id.txtReconnecting);
         final Handler handler = new Handler();
         handler.postDelayed(new Runnable() {
             public void run() {
@@ -41,10 +46,23 @@ public class Launcher extends AppCompatActivity {
                 } else if (!connectionIsActive()) {
                     final Handler checkConnection = new Handler(getMainLooper());
                     checkConnection.postDelayed(new Runnable() {
-                        int timer = 5000;
-
                         @Override
                         public void run() {
+                            timerAux = timer;
+                            txtReconnecting.setText(getResources().getString(R.string.connection_wait) + " " + (timerAux / 1000));
+                            /*final Handler txtReconnectingVisualizer = new Handler();
+                            txtReconnectingVisualizer.postDelayed(new Runnable() {
+                                @Override
+                                public void run() {
+                                    System.out.println("Holaaa");
+                                    txtReconnecting.setText(getResources().getString(R.string.connection_wait) + " " + (timerAux / 1000));
+                                    timerAux -= 1000;
+                                    if (timerAux != 0) {
+                                        txtReconnectingVisualizer.postDelayed(this, 1000);
+                                    }
+                                }
+                            }, 1000);*/ // HACE UN BUCLE INFINITO
+
                             if (connectionIsActive()) {
                                 if (isUserLogged()) {
                                     checkFirstLog();
@@ -55,9 +73,12 @@ public class Launcher extends AppCompatActivity {
                                     finish();
                                 }
                             } else {
-                                timer = timer > 60000 ? timer + 5000 : timer;
+                                if (timer < 30000) timer += 5000;
+                                System.out.println(timer);
                             }
-                            if (postback)checkConnection.postDelayed(this, timer);
+                            if (postback) {
+                                checkConnection.postDelayed(this, timer);
+                            }
                         }
                     }, 10);
                 } else {
@@ -89,7 +110,7 @@ public class Launcher extends AppCompatActivity {
         myRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                 if (dataSnapshot.getValue().toString().equals("")) {
+                if (dataSnapshot.getValue().toString().equals("")) {
                     Intent intentSegundaActivity = new Intent(getApplicationContext(), Bienvenida.class);
                     startActivity(intentSegundaActivity);
                 } else {

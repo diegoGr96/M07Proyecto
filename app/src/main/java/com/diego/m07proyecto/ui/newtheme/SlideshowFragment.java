@@ -53,17 +53,9 @@ public class SlideshowFragment extends Fragment {
 
     private int selectedCategory;
 
-    private LayoutInflater auxInflater;
-
-    private ViewGroup auxContainer;
-
     public View onCreateView(@NonNull LayoutInflater inflater,
-                             ViewGroup container, Bundle savedInstanceState) {
+                             final ViewGroup container, Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_newtheme, container, false);
-
-        auxInflater = inflater;
-
-        auxContainer = container;
 
         tituloTema = root.findViewById(R.id.tituloTema);
         descripcionTema = root.findViewById(R.id.edtDescripcion);
