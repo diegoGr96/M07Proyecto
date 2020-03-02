@@ -148,8 +148,9 @@ public class SlideshowFragment extends Fragment {
                     numTema++;
                     //DatabaseReference incNumTema = database.getReference("Usuarios/" + currentUser.getUid() + "/numTemas");
                     TemaUsuario.setValue(numTema);
-
                     loadContador.setValue(contador);
+                    tituloTema.setText("");
+                    descripcionTema.setText("y que ");
                 } else {
                     Snackbar.make(view, getResources().getText(R.string.white_camps), Snackbar.LENGTH_LONG).setAction("Action", null).show();
                 }
