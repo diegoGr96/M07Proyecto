@@ -150,7 +150,7 @@ public class SlideshowFragment extends Fragment {
                     TemaUsuario.setValue(numTema);
                     loadContador.setValue(contador);
                     tituloTema.setText("");
-                    descripcionTema.setText("y que ");
+                    descripcionTema.setText("");
                 } else {
                     Snackbar.make(view, getResources().getText(R.string.white_camps), Snackbar.LENGTH_LONG).setAction("Action", null).show();
                 }
