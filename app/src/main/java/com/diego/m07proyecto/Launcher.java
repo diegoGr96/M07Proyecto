@@ -30,6 +30,8 @@ public class Launcher extends AppCompatActivity {
     int timer = 5000;
     int timerAux;
     private TextView txtReconnecting;
+    Handler checkConnection = new Handler(getMainLooper());
+    Handler txtReconnectingVisualizer = new Handler();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,13 +46,11 @@ public class Launcher extends AppCompatActivity {
                 if (isUserLogged() && connectionIsActive()) {
                     checkFirstLog();
                 } else if (!connectionIsActive()) {
-                    final Handler checkConnection = new Handler(getMainLooper());
                     checkConnection.postDelayed(new Runnable() {
                         @Override
                         public void run() {
                             timerAux = timer;
                             txtReconnecting.setText(getResources().getString(R.string.connection_wait) + " " + (timerAux / 1000));
-                            /*final Handler txtReconnectingVisualizer = new Handler();
                             txtReconnectingVisualizer.postDelayed(new Runnable() {
                                 @Override
                                 public void run() {
@@ -61,7 +61,7 @@ public class Launcher extends AppCompatActivity {
                                         txtReconnectingVisualizer.postDelayed(this, 1000);
                                     }
                                 }
-                            }, 1000);*/ // HACE UN BUCLE INFINITO
+                            }, 1000);
 
                             if (connectionIsActive()) {
                                 if (isUserLogged()) {
