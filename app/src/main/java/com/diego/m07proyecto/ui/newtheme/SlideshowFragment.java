@@ -19,6 +19,7 @@ import androidx.fragment.app.Fragment;
 
 import com.diego.m07proyecto.R;
 import com.diego.m07proyecto.Tema;
+import com.diego.m07proyecto.ui.home.HomeFragment;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -52,9 +53,17 @@ public class SlideshowFragment extends Fragment {
 
     private int selectedCategory;
 
+    private LayoutInflater auxInflater;
+
+    private ViewGroup auxContainer;
+
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_newtheme, container, false);
+
+        auxInflater = inflater;
+
+        auxContainer = container;
 
         tituloTema = root.findViewById(R.id.tituloTema);
         descripcionTema = root.findViewById(R.id.edtDescripcion);
