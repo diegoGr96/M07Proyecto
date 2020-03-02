@@ -71,7 +71,7 @@ public class Bienvenida3 extends AppCompatActivity {
                     contadorCaracteres++;
 
                 } else {
-                    Toast.makeText(getApplicationContext(), "Borrando...", Toast.LENGTH_LONG).show();
+                    //Toast.makeText(getApplicationContext(), "Borrando...", Toast.LENGTH_LONG).show();
                     contadorCaracteres--;
                 }
                 return false;
