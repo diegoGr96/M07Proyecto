@@ -10,7 +10,9 @@ import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.os.Handler;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -30,7 +32,7 @@ public class Launcher extends AppCompatActivity {
     int timer = 5000;
     int timerAux;
     private TextView txtReconnecting;
-    Handler checkConnection = new Handler(getMainLooper());
+    //Handler checkConnection = new Handler(getMainLooper());
     Handler txtReconnectingVisualizer = new Handler();
 
     @Override
@@ -41,6 +43,10 @@ public class Launcher extends AppCompatActivity {
         usuario = mAuth.getCurrentUser();
         txtReconnecting = findViewById(R.id.txtReconnecting);
         final Handler handler = new Handler();
+
+
+
+        /*
         handler.postDelayed(new Runnable() {
             public void run() {
                 if (isUserLogged() && connectionIsActive()) {
@@ -63,23 +69,24 @@ public class Launcher extends AppCompatActivity {
                                 }
                             }, 1000);
 
-                            if (connectionIsActive()) {
-                                if (isUserLogged()) {
-                                    checkFirstLog();
-                                } else {
-                                    Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-                                    startActivity(intent);
-                                    postback = false;
-                                    finish();
-                                }
-                            } else {
-                                if (timer < 30000) timer += 5000;
-                                System.out.println(timer);
-                            }
-                            if (postback) {
-                                checkConnection.postDelayed(this, timer);
-                            }
-                        }
+        if (connectionIsActive()) {
+            if (isUserLogged()) {
+                checkFirstLog();
+            } else {
+                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                startActivity(intent);
+                postback = false;
+                finish();
+            }
+        } else {
+            if (timer < 30000) timer += 5000;
+            System.out.println(timer);
+        }
+        if (postback) {
+            checkConnection.postDelayed(this, timer);
+        }
+
+    }
                     }, 10);
                 } else {
                     Intent intentSegundaActivity = new Intent(getApplicationContext(), MainActivity.class);
@@ -88,6 +95,38 @@ public class Launcher extends AppCompatActivity {
                 }
             }
         }, 500);
+        *//*
+        if (connectionIsActive()) {
+            if (isUserLogged()) {
+                checkFirstLog();
+            } else {
+                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                startActivity(intent);
+                postback = false;
+                finish();
+            }
+        } else {
+            try {
+                Toast.makeText(Launcher.this, "Reconectadndo", Toast.LENGTH_LONG).show();
+                Thread.sleep(3000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            if (timer < 30000) timer += 5000;
+            System.out.println("aaaaa" + timer);
+        }
+        if (postback) {
+            //checkConnection.postDelayed(this, timer);
+        }
+*/
+
+    }
+
+    public void onResume() {
+        super.onResume();
+        Reconector reconector = new Reconector();
+        Thread hilo = new Thread(reconector);
+        hilo.start();
     }
 
     public boolean isUserLogged() {
@@ -127,4 +166,65 @@ public class Launcher extends AppCompatActivity {
             }
         });
     }
+
+    private void checkInicioSesion() {
+        if (connectionIsActive()) {
+            if (isUserLogged()) {
+                checkFirstLog();
+            } else {
+                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                startActivity(intent);
+                postback = false;
+                finish();
+            }
+        } else {
+            try {
+                Toast.makeText(Launcher.this, "Reconectadndo", Toast.LENGTH_LONG).show();
+                Thread.sleep(3000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            if (timer < 30000) timer += 5000;
+            System.out.println("aaaaa" + timer);
+        }
+        if (postback) {
+            //checkConnection.postDelayed(this, timer);
+        }
+    }
+
+    private class Reconector extends Thread {
+        private int temporizador = 0;
+
+        @Override
+        public void run() {
+
+            while (postback) {
+                if (connectionIsActive()) {
+                    postback = false;
+                } else {
+                    temporizador += 3000;
+                    runOnUiThread(new Runnable() {
+                        public void run() {
+                            txtReconnecting.setText("Sin conexión, Reconectando en " + (temporizador / 1000) + " segundos. ");
+                            //Snackbar.make(txtReconnecting,"Reconectando en " + (temporizador/1000) +" segundos. ", Snackbar.LENGTH_LONG)
+                            // .setAction("Action", null).show();
+                            //Toast.makeText(Launcher.this, "Reconectando en " + (temporizador/1000) +" segundos. ", Toast.LENGTH_LONG).show();
+                        }
+                    });
+                    espera(temporizador);
+                }
+            }
+            checkInicioSesion();
+        }
+    }
+
+    private void espera(int mili) {
+        try {
+            Thread.sleep(mili);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
 }
+
+

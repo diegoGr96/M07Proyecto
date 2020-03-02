@@ -8,13 +8,12 @@
 
     <TextView
         android:id="@+id/presentacion"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="55dp"
         android:layout_marginTop="55dp"
-        android:layout_marginEnd="55dp"
         android:text="@string/bienvenida1_welcome_text"
-        android:textSize="55sp"
+        android:textAlignment="center"
+        android:textSize="50sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
