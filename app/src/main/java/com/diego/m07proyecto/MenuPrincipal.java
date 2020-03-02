@@ -1,5 +1,6 @@
 package com.diego.m07proyecto;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 
@@ -9,6 +10,10 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
@@ -69,6 +74,139 @@ public class MenuPrincipal extends AppCompatActivity {
 
             }
         });*/
+
+
+
+
+
+
+
+       /*
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        //fragmentManager.getFragment().getLayoutInflater().inflate();
+        fragmentManager.registerFragmentLifecycleCallbacks(new FragmentManager.FragmentLifecycleCallbacks() {
+            @Override
+            public void onFragmentPreAttached(@NonNull FragmentManager fm, @NonNull Fragment f, @NonNull Context context) {
+                super.onFragmentPreAttached(fm, f, context);
+                System.out.println("1");
+                System.out.println("fm: " + fm);
+                System.out.println("f: " + f);
+                System.out.println("context: " + context);
+            }
+
+            @Override
+            public void onFragmentAttached(@NonNull FragmentManager fm, @NonNull Fragment f, @NonNull Context context) {
+                super.onFragmentAttached(fm, f, context);
+                System.out.println("2");
+                System.out.println("fm: " + fm);
+                System.out.println("f: " + f);
+                System.out.println("context: " + context);
+            }
+
+            @Override
+            public void onFragmentPreCreated(@NonNull FragmentManager fm, @NonNull Fragment f, @Nullable Bundle savedInstanceState) {
+                super.onFragmentPreCreated(fm, f, savedInstanceState);
+                System.out.println("3");
+                System.out.println("fm: " + fm);
+                System.out.println("f: " + f);
+                System.out.println("savedInstanceState: " + savedInstanceState);
+            }
+
+            @Override
+            public void onFragmentCreated(@NonNull FragmentManager fm, @NonNull Fragment f, @Nullable Bundle savedInstanceState) {
+                super.onFragmentCreated(fm, f, savedInstanceState);
+                System.out.println("4");
+                System.out.println("fm: " + fm);
+                System.out.println("f: " + f);
+                System.out.println("savedInstanceState: " + savedInstanceState);
+            }
+
+            @Override
+            public void onFragmentActivityCreated(@NonNull FragmentManager fm, @NonNull Fragment f, @Nullable Bundle savedInstanceState) {
+                super.onFragmentActivityCreated(fm, f, savedInstanceState);
+                System.out.println("5");
+                System.out.println("fm: " + fm);
+                System.out.println("f: " + f);
+                System.out.println("savedInstanceState: " + savedInstanceState);
+            }
+
+            @Override
+            public void onFragmentViewCreated(@NonNull FragmentManager fm, @NonNull Fragment f, @NonNull View v, @Nullable Bundle savedInstanceState) {
+                super.onFragmentViewCreated(fm, f, v, savedInstanceState);
+                System.out.println("6");
+                System.out.println("fm: " + fm);
+                System.out.println("f: " + f);
+                System.out.println("v: " + v);
+                System.out.println("savedInstanceState: " + savedInstanceState);
+            }
+
+            @Override
+            public void onFragmentStarted(@NonNull FragmentManager fm, @NonNull Fragment f) {
+                super.onFragmentStarted(fm, f);
+                System.out.println("7");
+                System.out.println("fm: " + fm);
+                System.out.println("f: " + f);
+            }
+
+            @Override
+            public void onFragmentResumed(@NonNull FragmentManager fm, @NonNull Fragment f) {
+                super.onFragmentResumed(fm, f);
+                System.out.println("8");
+                System.out.println("fm: " + fm);
+                System.out.println("f: " + f);
+            }
+
+            @Override
+            public void onFragmentPaused(@NonNull FragmentManager fm, @NonNull Fragment f) {
+                super.onFragmentPaused(fm, f);
+                System.out.println("9");
+                System.out.println("fm: " + fm);
+                System.out.println("f: " + f);
+            }
+
+            @Override
+            public void onFragmentStopped(@NonNull FragmentManager fm, @NonNull Fragment f) {
+                super.onFragmentStopped(fm, f);
+                System.out.println("10");
+                System.out.println("fm: " + fm);
+                System.out.println("f: " + f);
+            }
+
+            @Override
+            public void onFragmentSaveInstanceState(@NonNull FragmentManager fm, @NonNull Fragment f, @NonNull Bundle outState) {
+                super.onFragmentSaveInstanceState(fm, f, outState);
+                System.out.println("11");
+                System.out.println("fm: " + fm);
+                System.out.println("f: " + f);
+                System.out.println("outState" + outState);
+            }
+
+            @Override
+            public void onFragmentViewDestroyed(@NonNull FragmentManager fm, @NonNull Fragment f) {
+                super.onFragmentViewDestroyed(fm, f);
+                System.out.println("12");
+                System.out.println("fm: " + fm);
+                System.out.println("f: " + f);
+            }
+
+            @Override
+            public void onFragmentDestroyed(@NonNull FragmentManager fm, @NonNull Fragment f) {
+                super.onFragmentDestroyed(fm, f);
+                System.out.println("13");
+                System.out.println("fm: " + fm);
+                System.out.println("f: " + f);
+            }
+
+            @Override
+            public void onFragmentDetached(@NonNull FragmentManager fm, @NonNull Fragment f) {
+                super.onFragmentDetached(fm, f);
+                System.out.println("14");
+                System.out.println("fm: " + fm);
+                System.out.println("f: " + f);
+            }
+        }, true);
+
+        */
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);

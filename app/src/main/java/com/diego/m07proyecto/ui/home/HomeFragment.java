@@ -107,30 +107,32 @@ public class HomeFragment extends Fragment {
                 if (finalConsulta >= 0) {
                     finalConsulta = inicioConsulta - 1;
                     inicioConsulta = finalConsulta - 9;
-                    if (finalConsulta >= 0) {
-                        fab.setBackgroundTintList(ColorStateList.valueOf(ContextCompat.getColor(getContext(), R.color.fabLoad)));
-                        fab.setRippleColor(ColorStateList.valueOf(ContextCompat.getColor(getContext(), R.color.fabLoadDark)));
-                        initializeData();
-                        Handler handler = new Handler();
-                        handler.postDelayed(new Runnable() {
-                            @Override
-                            public void run() {
-                                fab.setBackgroundTintList(ColorStateList.valueOf(ContextCompat.getColor(getContext(), R.color.fabDefault)));
-                                fab.setRippleColor(ColorStateList.valueOf(ContextCompat.getColor(getContext(), R.color.fabDefaultDark)));
-                            }
-                        }, 1500);
-                    } else {
-                        fab.setBackgroundTintList(ColorStateList.valueOf(ContextCompat.getColor(getContext(), R.color.fabNotLoad)));
-                        fab.setRippleColor(ColorStateList.valueOf(ContextCompat.getColor(getContext(), R.color.fabNotLoadDark)));
-                        Handler handler = new Handler();
-                        handler.postDelayed(new Runnable() {
-                            @Override
-                            public void run() {
-                                fab.setBackgroundTintList(ColorStateList.valueOf(ContextCompat.getColor(getContext(), R.color.fabDefault)));
-                                fab.setRippleColor(ColorStateList.valueOf(ContextCompat.getColor(getContext(), R.color.fabDefaultDark)));
-                            }
-                        }, 1500);
-                    }
+                    fab.setBackgroundTintList(ColorStateList.valueOf(ContextCompat.getColor(getContext(), R.color.fabLoad)));
+                    fab.setRippleColor(ColorStateList.valueOf(ContextCompat.getColor(getContext(), R.color.fabLoadDark)));
+                    fab.setEnabled(false);
+                    initializeData();
+                    Handler handler = new Handler();
+                    handler.postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            fab.setBackgroundTintList(ColorStateList.valueOf(ContextCompat.getColor(getContext(), R.color.fabDefault)));
+                            fab.setRippleColor(ColorStateList.valueOf(ContextCompat.getColor(getContext(), R.color.fabDefaultDark)));
+                            fab.setEnabled(true);
+                        }
+                    }, 1500);
+                } else {
+                    fab.setBackgroundTintList(ColorStateList.valueOf(ContextCompat.getColor(getContext(), R.color.fabNotLoad)));
+                    fab.setRippleColor(ColorStateList.valueOf(ContextCompat.getColor(getContext(), R.color.fabNotLoadDark)));
+                    fab.setEnabled(false);
+                    Handler handler = new Handler();
+                    handler.postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            fab.setBackgroundTintList(ColorStateList.valueOf(ContextCompat.getColor(getContext(), R.color.fabDefault)));
+                            fab.setRippleColor(ColorStateList.valueOf(ContextCompat.getColor(getContext(), R.color.fabDefaultDark)));
+                            fab.setEnabled(true);
+                        }
+                    }, 1500);
                 }
             }
         });
