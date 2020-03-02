@@ -42,29 +42,12 @@ public class MainActivity extends AppCompatActivity {
     private TextView textoUsuario;
     private TextView textoClave;
     private TextView textoRegistro;
+    private TextView textoRecuperarPassword;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-/*
-        int tiempoEspera = 3000;
-        while(!isNetworkAvailable()){
-            if (tiempoEspera<60000){
-                tiempoEspera+=3000;
-            }
-            try {
-                Thread.sleep(tiempoEspera);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-        }
-
-*/
-/*
-        Reconectar hiloReconectar = new Reconectar();
-        hiloReconectar.start();
-*/
         mAuth = FirebaseAuth.getInstance();
         FirebaseUser currentUser = mAuth.getCurrentUser();
         if (currentUser != null) {
@@ -75,6 +58,7 @@ public class MainActivity extends AppCompatActivity {
         textoUsuario = findViewById(R.id.textoUsuario);
         textoClave = findViewById(R.id.textoClave);
         textoRegistro = findViewById(R.id.textoRegistrar);
+        textoRecuperarPassword = findViewById(R.id.textoRecuperarContrasenya);
 
         textoRegistro.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -82,6 +66,30 @@ public class MainActivity extends AppCompatActivity {
 
                 Intent intentSegundaActivity = new Intent(getApplicationContext(), RegistrarUsuarioActivity.class);
                 startActivityForResult(intentSegundaActivity, NUEVO_USUARIO_ACTIVITY_REQUEST_CODE);
+
+            }
+        });
+        textoRecuperarPassword.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String email = textoUsuario.getText().toString();
+                if (!email.isEmpty()) {
+                    mAuth.sendPasswordResetEmail(email).addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+                            if (task.isSuccessful()) {
+                                Snackbar.make(textoUsuario, getResources().getText(R.string.recuperar_password_success), Snackbar.LENGTH_LONG)
+                                        .setAction("Action", null).show();
+                            } else {
+                                Snackbar.make(textoUsuario, getResources().getText(R.string.error_recuperar_contrasenya), Snackbar.LENGTH_LONG)
+                                        .setAction("Action", null).show();
+                            }
+                        }
+                    });
+                }else{
+                    Snackbar.make(textoUsuario, getResources().getText(R.string.recuperar_password_vacio), Snackbar.LENGTH_LONG)
+                            .setAction("Action", null).show();
+                }
 
             }
         });

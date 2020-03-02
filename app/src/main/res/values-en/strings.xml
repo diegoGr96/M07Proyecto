@@ -110,4 +110,8 @@
     <string name="bienvenida1_welcome_text">Welcome to</string>
     <string name="hintApellidos">Surname</string>
     <string name="bienvenida3_envia_button">Send</string>
+    <string name="recuperar_contrasenya">Restore password</string>
+    <string name="recuperar_password_success">Recovery password email sent successfully.</string>
+    <string name="error_recuperar_contrasenya">Email not found.</string>
+    <string name="recuperar_password_vacio">Insert an email.</string>
 </resources>
