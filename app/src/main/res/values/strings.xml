@@ -108,4 +108,9 @@
     <string name="btn_filter">Filtra</string>
     <string name="checkbox_filter_annonymous">És anònim</string>
     <string name="respuesta_vacia">No pots enviar una resposta buida.</string>
+    <string name="register_null_fields">Has d\'omplir tots els camps</string>
+    <string name="register_mark_checkbox">Has d\'acceptar les Condicions i Termes.</string>
+    <string name="bienvenida1_welcome_text">Benvingut/da a</string>
+    <string name="hintApellidos">Cognoms</string>
+    <string name="bienvenida3_envia_button">Envia</string>
 </resources>

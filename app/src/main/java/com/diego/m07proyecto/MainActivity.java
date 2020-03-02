@@ -138,9 +138,6 @@ public class MainActivity extends AppCompatActivity {
         if (requestCode == NUEVO_USUARIO_ACTIVITY_REQUEST_CODE && resultCode == RESULT_OK) {
             Snackbar.make(this.textoRegistro, getResources().getText(R.string.registroCorrecto), Snackbar.LENGTH_LONG)
                     .setAction("Action", null).show();
-        } else if (requestCode == NUEVO_USUARIO_ACTIVITY_REQUEST_CODE && resultCode == RESULT_CANCELED) {
-            Toast.makeText(
-                    this, "El usuario no ha sido registrado porque estaba vacio.", Toast.LENGTH_LONG).show();
         }
     }
 

@@ -105,4 +105,9 @@
     <string name="btn_filter">Filtrar</string>
     <string name="checkbox_filter_annonymous">És anónimo</string>
     <string name="respuesta_vacia">No puedes enviar una respuesta vacía</string>
+    <string name="register_null_fields">Debes rellenar todos los campos</string>
+    <string name="register_mark_checkbox">Tienes que aceptar las Condiciones y Términos</string>
+    <string name="bienvenida1_welcome_text">Bienvenido/a a</string>
+    <string name="hintApellidos">Apellidos</string>
+    <string name="bienvenida3_envia_button">Enviar</string>
 </resources>

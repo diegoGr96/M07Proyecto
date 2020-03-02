@@ -42,7 +42,7 @@
     <string name="no_hay_conexion">Connection timed out.</string>
     <string name="sign_out">Sign out</string>
     <string name="AdvertenciaNickVacio">Error: Empty Nick.</string>
-    <string name="ask_anonimat">Keep me anonymous</string>
+    <string name="ask_anonimat">Keep me annonymous</string>
     <string name="description_tema">Express yourself here</string>
     <string name="tema_crear">CREATE THEME</string>
     <string name="tema_title">Write your theme title here</string>
@@ -105,4 +105,9 @@
     <string name="btn_filter">Filter</string>
     <string name="checkbox_filter_annonymous">Is annonymous</string>
     <string name="respuesta_vacia">You cannot send and empty reply.</string>
+    <string name="register_null_fields">You must fill all the fields</string>
+    <string name="register_mark_checkbox">You must accept the Conditions and Terms</string>
+    <string name="bienvenida1_welcome_text">Welcome to</string>
+    <string name="hintApellidos">Surname</string>
+    <string name="bienvenida3_envia_button">Send</string>
 </resources>

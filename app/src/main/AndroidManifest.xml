@@ -11,9 +11,13 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
-        <activity android:name=".MisTemas"></activity>
-        <activity android:name=".FilteredThemes" />
-        <activity android:name=".AddRespuesta" />
+        <activity android:name=".MisTemas"
+            android:parentActivityName=".MenuPrincipal">
+        </activity>
+        <activity android:name=".FilteredThemes"
+            android:parentActivityName=".MenuPrincipal"/>
+        <activity android:name=".AddRespuesta"
+            android:parentActivityName=".DetailActivity"/>
         <activity android:name=".Launcher">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -29,8 +33,10 @@
             android:label="@string/title_activity_menu_principal"
             android:theme="@style/NoActionBar" />
         <activity android:name=".PaginaPrincipalActivity" />
-        <activity android:name=".RegistrarUsuarioActivity" />
-        <activity android:name=".DetailActivity" />
+        <activity android:name=".RegistrarUsuarioActivity"
+            android:parentActivityName=".MainActivity"/>
+        <activity android:name=".DetailActivity"
+            android:parentActivityName=".MenuPrincipal"/>
         <activity android:name=".MainActivity">
 
             <!--

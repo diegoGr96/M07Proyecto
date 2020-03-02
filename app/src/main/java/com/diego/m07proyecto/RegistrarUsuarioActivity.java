@@ -57,42 +57,41 @@ public class RegistrarUsuarioActivity extends AppCompatActivity {
         botonRegistrarse = findViewById(R.id.botonRegistrarse);
         textoUsuario = findViewById(R.id.textoUsuario);
         textoClave = findViewById(R.id.textoClave);
-
-        botonRegistrarse.setEnabled(false);
-
-    }
-
-    public void botonCondiciones(View view){
-        botonRegistrarse.setEnabled(checkCondiciones.isChecked());
     }
 
     public void registrarse(View view) {
-       final View viewButton = view;
-        if(checkCondiciones.isChecked()) {
+        final View viewButton = view;
+        if (checkCondiciones.isChecked()) {
             String email = textoUsuario.getText().toString().trim();
             String password = textoClave.getText().toString().trim();
-            mAuth.createUserWithEmailAndPassword(email, password)
-                    .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-                        @Override
-                        public void onComplete(@NonNull Task<AuthResult> task) {
-                            if (task.isSuccessful()) {
-                                // Sign in success, update UI with the signed-in user's information
-                                Intent returnIntent = new Intent(getApplicationContext(), RegistrarUsuarioActivity.class);
-                                setResult(Activity.RESULT_OK,returnIntent);
-                                FirebaseUser aux = task.getResult().getUser();
-                                DatabaseReference myRef = database.getReference("Usuarios/"+aux.getUid());
-                                myRef.child("email").setValue(aux.getEmail());
-                                myRef.child("nick").setValue("");
-                                finish();
-                            } else {
-                                Log.w("a", "createUserWithEmail:failure", task.getException());
-                                Snackbar.make(viewButton, getResources().getText(R.string.registroErroneo), Snackbar.LENGTH_LONG)
-                                        .setAction("Action", null).show();
+            if (!email.isEmpty() && !password.isEmpty()) {
+                mAuth.createUserWithEmailAndPassword(email, password)
+                        .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                            @Override
+                            public void onComplete(@NonNull Task<AuthResult> task) {
+                                if (task.isSuccessful()) {
+                                    // Sign in success, update UI with the signed-in user's information
+                                    Intent returnIntent = new Intent(getApplicationContext(), RegistrarUsuarioActivity.class);
+                                    setResult(Activity.RESULT_OK, returnIntent);
+                                    FirebaseUser aux = task.getResult().getUser();
+                                    DatabaseReference myRef = database.getReference("Usuarios/" + aux.getUid());
+                                    myRef.child("email").setValue(aux.getEmail());
+                                    myRef.child("nick").setValue("");
+                                    finish();
+                                } else {
+                                    Log.w("a", "createUserWithEmail:failure", task.getException());
+                                    Snackbar.make(viewButton, getResources().getText(R.string.registroErroneo), Snackbar.LENGTH_LONG)
+                                            .setAction("Action", null).show();
+                                }
                             }
-                        }
-                    });
-        } else{
-            Toast.makeText(this, "Tienes que aceptar las Condiciones y los Términos de servicio.", Toast.LENGTH_LONG).show();
+                        });
+            } else {
+                Snackbar.make(viewButton, getResources().getText(R.string.register_null_fields), Snackbar.LENGTH_LONG)
+                        .setAction("Action", null).show();
+            }
+        } else {
+            Snackbar.make(viewButton, getResources().getText(R.string.register_mark_checkbox), Snackbar.LENGTH_LONG)
+                    .setAction("Action", null).show();
         }
     }
 }
