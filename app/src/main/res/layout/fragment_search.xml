@@ -7,6 +7,7 @@
 
     <Spinner
         android:id="@+id/cbFilter"
+        style="@style/editText"
         android:layout_width="0dp"
         android:layout_height="50dp"
         android:layout_marginStart="25dp"
@@ -31,21 +32,23 @@
         android:id="@+id/checkboxFilter"
         android:layout_width="wrap_content"
         android:layout_height="50dp"
-        android:layout_marginStart="25dp"
+        android:layout_marginStart="30dp"
         android:layout_marginTop="50dp"
-        android:text="@string/checkbox_filter_annonymous"
+        android:scaleX="2"
+        android:scaleY="2"
         android:visibility="invisible"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/cbFilter" />
 
     <Spinner
         android:id="@+id/cbCategories"
-        android:spinnerMode="dialog"
+        style="@style/editText"
         android:layout_width="0dp"
         android:layout_height="50dp"
         android:layout_marginStart="25dp"
         android:layout_marginTop="150dp"
-        android:layout_marginEnd="150dp"
+        android:layout_marginEnd="140dp"
+        android:spinnerMode="dialog"
         android:visibility="invisible"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -54,6 +57,7 @@
 
     <EditText
         android:id="@+id/txtFilter"
+        style="@style/editText"
         android:layout_width="0dp"
         android:layout_height="50dp"
         android:layout_marginStart="25dp"
@@ -66,5 +70,17 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textoIsAnonim"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="55dp"
+        android:text="@string/checkbox_filter_annonymous"
+        android:textSize="24sp"
+        android:visibility="invisible"
+        app:layout_constraintStart_toEndOf="@+id/checkboxFilter"
+        app:layout_constraintTop_toBottomOf="@+id/cbFilter" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

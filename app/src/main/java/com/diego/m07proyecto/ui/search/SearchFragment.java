@@ -11,6 +11,7 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -27,6 +28,7 @@ public class SearchFragment extends Fragment {
     private Spinner cbCategories;
     private EditText txtFilter;
     private CheckBox checkboxFilter;
+    private TextView textoIsAnonimo;
     private Button btnFilter;
 
     private int selectedFilter;
@@ -43,6 +45,7 @@ public class SearchFragment extends Fragment {
         ArrayAdapter<CharSequence> adapterFilter = ArrayAdapter.createFromResource(getContext(), R.array.search_filters, android.R.layout.simple_spinner_item);
         adapterFilter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         cbFilter.setAdapter(adapterFilter);
+        textoIsAnonimo = root.findViewById(R.id.textoIsAnonim);
 
         cbCategories = root.findViewById(R.id.cbCategories);
         ArrayAdapter<CharSequence> adapterCategories = ArrayAdapter.createFromResource(getContext(), R.array.categories, android.R.layout.simple_spinner_item);
@@ -63,16 +66,19 @@ public class SearchFragment extends Fragment {
                     case 0:
                         cbCategories.setVisibility(View.VISIBLE);
                         checkboxFilter.setVisibility(View.INVISIBLE);
+                        textoIsAnonimo.setVisibility(View.INVISIBLE);
                         txtFilter.setVisibility(View.INVISIBLE);
                         break;
                     case 1:
                         cbCategories.setVisibility(View.INVISIBLE);
                         checkboxFilter.setVisibility(View.VISIBLE);
+                        textoIsAnonimo.setVisibility(View.VISIBLE);
                         txtFilter.setVisibility(View.INVISIBLE);
                         break;
                     default:
                         cbCategories.setVisibility(View.INVISIBLE);
                         checkboxFilter.setVisibility(View.INVISIBLE);
+                        textoIsAnonimo.setVisibility(View.INVISIBLE);
                         txtFilter.setVisibility(View.VISIBLE);
                         break;
                 }
