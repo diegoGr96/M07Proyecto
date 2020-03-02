@@ -7,18 +7,6 @@
     android:layout_height="match_parent">
 
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/fabMisTemas"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom|end"
-        android:layout_margin="@dimen/fab_margin"
-        android:tint="#FFFFFF"
-        app:backgroundTint="@color/backgroundLogoBienvenida"
-        app:layout_constraintBottom_toBottomOf="@+id/swipeRefreshMisTemas"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:srcCompat="@drawable/fab_reload" />
-
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
         android:id="@+id/swipeRefreshMisTemas"
         android:layout_width="match_parent"

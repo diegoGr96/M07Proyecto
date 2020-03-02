@@ -48,22 +48,21 @@ public class HomeFragment extends Fragment {
     private RecyclerView mRecyclerView;
     private HistoriasAdapter mAdapter;
 
-    private boolean isScrolling=false;
-    private int currentItems,totaltItems,scrollOutItems;
+    private boolean isScrolling = false;
+    private int currentItems, totaltItems, scrollOutItems;
     private LinearLayoutManager manager;
 
 
     private FloatingActionButton fab;
     private SwipeRefreshLayout swipeRefreshTemas;
 
-    private Map<String,HashMap<String, Object>> temasListh;
+    private Map<String, HashMap<String, Object>> temasListh;
     private List<Tema> temasList;
     private int inicioConsulta;
     private int finalConsulta;
     private int contadorTemas = -1;
 
     private boolean firstAttempt;
-
 
 
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -78,8 +77,8 @@ public class HomeFragment extends Fragment {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 contadorTemas = Integer.parseInt(String.valueOf(dataSnapshot.getValue()));
-                finalConsulta=contadorTemas-1;
-                inicioConsulta = finalConsulta-9;
+                finalConsulta = contadorTemas - 1;
+                inicioConsulta = finalConsulta - 9;
                 //contadorConsulta = contadorTemas-1;
                 System.out.println("Contador es: " + contadorTemas);
                 if (firstAttempt) {
@@ -105,35 +104,33 @@ public class HomeFragment extends Fragment {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-                finalConsulta-=9;
-                inicioConsulta = finalConsulta-9;
-                if (inicioConsulta < 0){
-                    inicioConsulta = 0;
-                }
-                if (finalConsulta>0){
-                    fab.setBackgroundTintList(ColorStateList.valueOf(ContextCompat.getColor(getContext(), R.color.fabLoad)));
-                    fab.setRippleColor(ColorStateList.valueOf(ContextCompat.getColor(getContext(), R.color.fabLoadDark)));
-                    initializeData();
-                    Handler handler = new Handler();
-                    handler.postDelayed(new Runnable() {
-                        @Override
-                        public void run() {
-                            fab.setBackgroundTintList(ColorStateList.valueOf(ContextCompat.getColor(getContext(), R.color.fabDefault)));
-                            fab.setRippleColor(ColorStateList.valueOf(ContextCompat.getColor(getContext(), R.color.fabDefaultDark)));
-                        }
-                    }, 1500);
-                }else{
-                    fab.setBackgroundTintList(ColorStateList.valueOf(ContextCompat.getColor(getContext(), R.color.fabNotLoad)));
-                    fab.setRippleColor(ColorStateList.valueOf(ContextCompat.getColor(getContext(), R.color.fabNotLoadDark)));
-                    Handler handler = new Handler();
-                    handler.postDelayed(new Runnable() {
-                        @Override
-                        public void run() {
-                            fab.setBackgroundTintList(ColorStateList.valueOf(ContextCompat.getColor(getContext(), R.color.fabDefault)));
-                            fab.setRippleColor(ColorStateList.valueOf(ContextCompat.getColor(getContext(), R.color.fabDefaultDark)));
-                        }
-                    }, 1500);
+                if (finalConsulta >= 0) {
+                    finalConsulta = inicioConsulta - 1;
+                    inicioConsulta = finalConsulta - 9;
+                    if (finalConsulta >= 0) {
+                        fab.setBackgroundTintList(ColorStateList.valueOf(ContextCompat.getColor(getContext(), R.color.fabLoad)));
+                        fab.setRippleColor(ColorStateList.valueOf(ContextCompat.getColor(getContext(), R.color.fabLoadDark)));
+                        initializeData();
+                        Handler handler = new Handler();
+                        handler.postDelayed(new Runnable() {
+                            @Override
+                            public void run() {
+                                fab.setBackgroundTintList(ColorStateList.valueOf(ContextCompat.getColor(getContext(), R.color.fabDefault)));
+                                fab.setRippleColor(ColorStateList.valueOf(ContextCompat.getColor(getContext(), R.color.fabDefaultDark)));
+                            }
+                        }, 1500);
+                    } else {
+                        fab.setBackgroundTintList(ColorStateList.valueOf(ContextCompat.getColor(getContext(), R.color.fabNotLoad)));
+                        fab.setRippleColor(ColorStateList.valueOf(ContextCompat.getColor(getContext(), R.color.fabNotLoadDark)));
+                        Handler handler = new Handler();
+                        handler.postDelayed(new Runnable() {
+                            @Override
+                            public void run() {
+                                fab.setBackgroundTintList(ColorStateList.valueOf(ContextCompat.getColor(getContext(), R.color.fabDefault)));
+                                fab.setRippleColor(ColorStateList.valueOf(ContextCompat.getColor(getContext(), R.color.fabDefaultDark)));
+                            }
+                        }, 1500);
+                    }
                 }
             }
         });
@@ -142,8 +139,8 @@ public class HomeFragment extends Fragment {
         swipeRefreshTemas.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                finalConsulta=contadorTemas-1;
-                inicioConsulta = finalConsulta-9;
+                finalConsulta = contadorTemas - 1;
+                inicioConsulta = finalConsulta - 9;
                 temasList.clear();
                 initializeData();
                 swipeRefreshTemas.setRefreshing(false);
@@ -163,8 +160,8 @@ public class HomeFragment extends Fragment {
 
 
     private void initializeData() {
-        System.out.println("Contador tema "+ contadorTemas);
-        while(contadorTemas == -1);
+        System.out.println("Contador tema " + contadorTemas);
+        while (contadorTemas == -1) ;
         //contadorConsulta = contadorTemas;
         DatabaseReference dbRef = database.getReference("Temas");
         Query myQuery = dbRef.orderByChild("idTema").startAt(inicioConsulta).endAt(finalConsulta);
@@ -172,27 +169,15 @@ public class HomeFragment extends Fragment {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
 
-                temasListh = (Map<String,HashMap<String, Object>>) dataSnapshot.getValue();
+                temasListh = (Map<String, HashMap<String, Object>>) dataSnapshot.getValue();
                 if (temasListh == null) {
 
                 } else {
-
                     for (int i = 0; i < temasListh.size(); i++) {
-                        Tema tema = Tema.convertTema(temasListh.get("Tema_"+(finalConsulta-i)));
+                        Tema tema = Tema.convertTema(temasListh.get("Tema_" + (finalConsulta - i)));
                         temasList.add(tema);
                     }
-                     /*
-                    ArrayList<Tema> auxList = new ArrayList<>();
-                    for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-                        Tema tema = Tema.convertTema(temasListh.get(snapshot.getKey()));
-                        auxList.add(tema);
-                    }
-                    Collections.reverse(auxList);
 
-                    for(Tema tema : auxList){
-                        temasList.add(tema);
-                    }
-                    */
                     mAdapter.notifyDataSetChanged();
                     System.out.println("Hola -- " + temasList);
 

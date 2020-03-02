@@ -36,7 +36,7 @@ public class MisTemas extends AppCompatActivity {
     private RecyclerView mRecyclerView;
     private HistoriasAdapter mAdapter;
 
-    private FloatingActionButton fab;
+    //private FloatingActionButton fab;
     private SwipeRefreshLayout swipeRefreshMisTemas;
 
     private Map<String, HashMap<String, Object>> temasListh;
@@ -83,6 +83,7 @@ public class MisTemas extends AppCompatActivity {
 
         System.out.println(temasList);
 
+        /*
         fab = findViewById(R.id.fabMisTemas);
         fab.setBackgroundTintList(ColorStateList.valueOf(ContextCompat.getColor(getApplicationContext(), R.color.fabDefault)));
         fab.setOnClickListener(new View.OnClickListener() {
@@ -119,7 +120,7 @@ public class MisTemas extends AppCompatActivity {
                 }
             }
         });
-
+*/
         swipeRefreshMisTemas = findViewById(R.id.swipeRefreshMisTemas);
         swipeRefreshMisTemas.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
