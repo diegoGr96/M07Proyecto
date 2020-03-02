@@ -3,15 +3,18 @@ package com.diego.m07proyecto;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.core.content.ContextCompat;
 
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.ColorStateList;
 import android.net.ConnectivityManager;
 import android.net.Network;
 import android.net.NetworkInfo;
 import android.os.Bundle;
+import android.os.Handler;
 import android.renderscript.Sampler;
 import android.util.Log;
 import android.view.View;
@@ -52,7 +55,7 @@ public class MainActivity extends AppCompatActivity {
         FirebaseUser currentUser = mAuth.getCurrentUser();
         if (currentUser != null) {
             checkLogin(currentUser);
-            System.out.println("NO SOY NULL");
+            //System.out.println("NO SOY NULL");
         }
 
         textoUsuario = findViewById(R.id.textoUsuario);
@@ -74,12 +77,24 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 String email = textoUsuario.getText().toString();
                 if (!email.isEmpty()) {
+                    Snackbar.make(textoUsuario,  getResources().getText(R.string.string_cargando), Snackbar.LENGTH_LONG)
+                            .setAction("Action", null).show();
                     mAuth.sendPasswordResetEmail(email).addOnCompleteListener(new OnCompleteListener<Void>() {
                         @Override
                         public void onComplete(@NonNull Task<Void> task) {
                             if (task.isSuccessful()) {
-                                Snackbar.make(textoUsuario, getResources().getText(R.string.recuperar_password_success), Snackbar.LENGTH_LONG)
-                                        .setAction("Action", null).show();
+                                textoRecuperarPassword.setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.fabLoad));
+                                Handler handler = new Handler();
+                                handler.postDelayed(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        textoRecuperarPassword.setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.colorRecuperarPassword));
+                                        Snackbar.make(textoUsuario, getResources().getText(R.string.recuperar_password_success), Snackbar.LENGTH_LONG)
+                                                .setAction("Action", null).show();
+                                    }
+                                }, 2000);
+
+
                             } else {
                                 Snackbar.make(textoUsuario, getResources().getText(R.string.error_recuperar_contrasenya), Snackbar.LENGTH_LONG)
                                         .setAction("Action", null).show();
@@ -114,7 +129,7 @@ public class MainActivity extends AppCompatActivity {
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if (task.isSuccessful()) {
                                 // Sign in success, update UI with the signed-in user's information
-                                Log.d("", "signInWithEmail:success");
+                                //Log.d("", "signInWithEmail:success");
                                 //FirebaseUser user = mAuth.getCurrentUser();
                                 FirebaseUser currentUser = task.getResult().getUser();
                                 checkLogin(currentUser);

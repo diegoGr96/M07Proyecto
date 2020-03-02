@@ -76,7 +76,7 @@ public class SlideshowFragment extends Fragment {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 contador = Integer.parseInt(String.valueOf(dataSnapshot.getValue()));
-                System.out.println("Contador es: " + contador);
+                //System.out.println("Contador es: " + contador);
             }
 
             @Override
@@ -135,7 +135,7 @@ public class SlideshowFragment extends Fragment {
             public void onClick(View view) {
                 while(contador == -1);
                 if (!tituloTema.getText().toString().equals("") && !descripcionTema.getText().toString().equals("")) {
-                    System.out.println("Contador es(onClick): " + contador);
+                    //System.out.println("Contador es(onClick): " + contador);
                     titulo = tituloTema.getText().toString();
                     descripcion = descripcionTema.getText().toString();
                     DatabaseReference newTema = database.getReference("Temas/" + "Tema_"+contador);

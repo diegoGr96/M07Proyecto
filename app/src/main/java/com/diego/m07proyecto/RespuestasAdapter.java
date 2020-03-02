@@ -138,20 +138,6 @@ public class RespuestasAdapter extends RecyclerView.Adapter<RespuestasAdapter.Vi
         y nos encargamos de mostrarlos en pantalla.
          */
         void bindTo(Respuesta currentRespuesta) {
-            // Populate the textviews with data.
-
-            /*
-            mTituloText.setText(currentTema.getTitulo());
-            String cuerpo = currentTema.getCuerpo();
-            if (cuerpo.length() > 70) cuerpo = cuerpo.substring(0, 71) + "...";
-            cuerpoTema.setText(cuerpo);
-            if (currentTema.isAnonimo()) {
-                mNickText.setText(R.string.temaUsuarioAnonimo);
-            } else {
-                mNickText.setText(currentTema.getNickAutor());
-            }
-            fondoCardView.setBackgroundColor(mContext.getResources().getColor(R.color.fondoCardView));
-             */
 
             if (currentRespuesta.getTituloAutor() != null){
                 mTituloText.setText(currentRespuesta.getTituloAutor());

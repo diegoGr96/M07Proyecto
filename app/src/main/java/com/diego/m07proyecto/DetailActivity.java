@@ -83,7 +83,7 @@ public class DetailActivity extends AppCompatActivity {
         });
 
         // Set the Layout Manager.
-        Log.d("A", mRecyclerView + "   AAAAAAAAAAAAAAAAAa");
+        //Log.d("A", mRecyclerView + "   AAAAAAAAAAAAAAAAAa");
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
 
         idTema = getIntent().getIntExtra("ID_TEMA", -1);
@@ -115,30 +115,6 @@ public class DetailActivity extends AppCompatActivity {
         // Check which request we're responding to
         super.onActivityResult(requestCode, resultCode, data);
         reiniciarLista();
-        /*
-        int sizeLista = listaRespuestas.size();
-        Query myQuery = respuestasReference.orderByChild("idRespuesta")
-                .equalTo(sizeLista-1);
-        myQuery.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                HashMap mapaNuevaRespuesta  = (HashMap<String, Object>) dataSnapshot.getValue();
-                if (mapaRespuestas!=null){
-                    String nickAutor = (String) mapaNuevaRespuesta.get("nickAutor");
-                    String textoRespuesta = (String) mapaNuevaRespuesta.get("textRespuesta");
-                    boolean isAnonimo = (boolean) mapaNuevaRespuesta.get("anonimo");
-                    Respuesta nuevaRespuesta = new Respuesta(nickAutor,textoRespuesta,isAnonimo);
-                    listaRespuestas.add(nuevaRespuesta);
-                    mAdapter.notifyDataSetChanged();
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });
-         */
     }
 
     private void initializeData() {
@@ -157,7 +133,7 @@ public class DetailActivity extends AppCompatActivity {
                         listaRespuestas.add(respuesta);
                     }
 
-                    System.out.println("Hola -- " + listaRespuestas);
+                    //System.out.println("Hola -- " + listaRespuestas);
                     //Collections.reverse(temasList);
                     // Initialize the adapter and set it to the RecyclerView.
                     // mAdapter = new RespuestasAdapter(getApplicationContext(), listaRespuestas);
@@ -171,7 +147,7 @@ public class DetailActivity extends AppCompatActivity {
             @Override
             public void onCancelled(DatabaseError error) {
                 // Failed to read value
-                Log.w("VVVV", "Failed to read value.", error.toException());
+                //Log.w("VVVV", "Failed to read value.", error.toException());
             }
         });
     }

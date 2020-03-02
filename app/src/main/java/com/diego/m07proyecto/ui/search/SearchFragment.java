@@ -38,17 +38,6 @@ public class SearchFragment extends Fragment {
         searchViewModel =
                 ViewModelProviders.of(this).get(SearchViewModel.class);
         View root = inflater.inflate(R.layout.fragment_search, container, false);
-        /*
-
-        final TextView textView = root.findViewById(R.id.text_tools);
-        searchViewModel.getText().observe(this, new Observer<String>() {
-            @Override
-            public void onChanged(@Nullable String s) {
-                textView.setText(s);
-            }
-        });
-
-        */
 
         cbFilter = root.findViewById(R.id.cbFilter);
         ArrayAdapter<CharSequence> adapterFilter = ArrayAdapter.createFromResource(getContext(), R.array.search_filters, android.R.layout.simple_spinner_item);
@@ -69,11 +58,6 @@ public class SearchFragment extends Fragment {
         cbFilter.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                //System.out.println("Test " + parent);
-                //System.out.println("Test " + view);
-                //System.out.println("Test " + position);
-                //System.out.println("Test " + id);
-                //System.out.println("Test " + parent.getItemAtPosition(position));
                 selectedFilter = (int) id;
                 switch((int)id){
                     case 0:
@@ -103,11 +87,6 @@ public class SearchFragment extends Fragment {
         cbCategories.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                //System.out.println("Test " + parent);
-                //System.out.println("Test " + view);
-                //System.out.println("Test " + position);
-                //System.out.println("Test " + id);
-                //System.out.println("Test " + parent.getItemAtPosition(position));
                 selectedCategory = (int) id;
             }
 

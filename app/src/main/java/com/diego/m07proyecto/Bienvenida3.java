@@ -54,7 +54,7 @@ public class Bienvenida3 extends AppCompatActivity {
         }
         mAuth = FirebaseAuth.getInstance();
         currentUser = mAuth.getCurrentUser();
-        System.out.println("El UID es: " + currentUser.getUid());
+        //System.out.println("El UID es: " + currentUser.getUid());
 
         fechaNacimiento.setOnKeyListener(new View.OnKeyListener() {
             @Override

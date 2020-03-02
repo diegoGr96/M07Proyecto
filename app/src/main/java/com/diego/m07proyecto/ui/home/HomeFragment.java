@@ -48,10 +48,6 @@ public class HomeFragment extends Fragment {
     private RecyclerView mRecyclerView;
     private HistoriasAdapter mAdapter;
 
-    private boolean isScrolling = false;
-    private int currentItems, totaltItems, scrollOutItems;
-    private LinearLayoutManager manager;
-
 
     private FloatingActionButton fab;
     private SwipeRefreshLayout swipeRefreshTemas;
@@ -79,8 +75,7 @@ public class HomeFragment extends Fragment {
                 contadorTemas = Integer.parseInt(String.valueOf(dataSnapshot.getValue()));
                 finalConsulta = contadorTemas - 1;
                 inicioConsulta = finalConsulta - 9;
-                //contadorConsulta = contadorTemas-1;
-                System.out.println("Contador es: " + contadorTemas);
+                /*System.out.println("Contador es: " + contadorTemas);*/
                 if (firstAttempt) {
                     initializeData();
                     firstAttempt = false;
@@ -154,7 +149,6 @@ public class HomeFragment extends Fragment {
 
         // Set the Layout Manager.
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        manager = new LinearLayoutManager(mRecyclerView.getContext());
         mAdapter = new HistoriasAdapter(getContext(), temasList);
         mRecyclerView.setAdapter(mAdapter);
         return root;
@@ -162,7 +156,7 @@ public class HomeFragment extends Fragment {
 
 
     private void initializeData() {
-        System.out.println("Contador tema " + contadorTemas);
+        //System.out.println("Contador tema " + contadorTemas);
         while (contadorTemas == -1) ;
         //contadorConsulta = contadorTemas;
         DatabaseReference dbRef = database.getReference("Temas");
@@ -181,17 +175,16 @@ public class HomeFragment extends Fragment {
                     }
 
                     mAdapter.notifyDataSetChanged();
-                    System.out.println("Hola -- " + temasList);
+                    //System.out.println("Hola -- " + temasList);
 
                     // Initialize the adapter and set it to the RecyclerView.
                 }
-                //contadorConsulta+=10;
             }
 
             @Override
             public void onCancelled(DatabaseError error) {
                 // Failed to read value
-                Log.w("VVVV", "Failed to read value.", error.toException());
+                //Log.w("VVVV", "Failed to read value.", error.toException());
             }
         });
     }

@@ -68,7 +68,7 @@ public class MisTemas extends AppCompatActivity {
                 /*finalConsulta=contadorTemas-1;
                 inicioConsulta = finalConsulta-9;*/
                 //contadorConsulta = contadorTemas-1;
-                System.out.println("Contador es: " + contadorTemas);
+                //System.out.println("Contador es: " + contadorTemas);
                 if (firstAttempt) {
                     initializeData();
                     firstAttempt = false;
@@ -81,46 +81,8 @@ public class MisTemas extends AppCompatActivity {
             }
         });
 
-        System.out.println(temasList);
+        //System.out.println(temasList);
 
-        /*
-        fab = findViewById(R.id.fabMisTemas);
-        fab.setBackgroundTintList(ColorStateList.valueOf(ContextCompat.getColor(getApplicationContext(), R.color.fabDefault)));
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                inicioConsulta -= 10;
-                finalConsulta -= 10;
-                if (inicioConsulta < 0) {
-                    inicioConsulta = 0;
-                }
-                if (finalConsulta > 0) {
-                    fab.setBackgroundTintList(ColorStateList.valueOf(ContextCompat.getColor(getApplicationContext(), R.color.fabLoad)));
-                    fab.setRippleColor(ColorStateList.valueOf(ContextCompat.getColor(getApplicationContext(), R.color.fabLoadDark)));
-                    initializeData();
-                    Handler handler = new Handler();
-                    handler.postDelayed(new Runnable() {
-                        @Override
-                        public void run() {
-                            fab.setBackgroundTintList(ColorStateList.valueOf(ContextCompat.getColor(getApplicationContext(), R.color.fabDefault)));
-                            fab.setRippleColor(ColorStateList.valueOf(ContextCompat.getColor(getApplicationContext(), R.color.fabDefaultDark)));
-                        }
-                    }, 1500);
-                } else {
-                    fab.setBackgroundTintList(ColorStateList.valueOf(ContextCompat.getColor(getApplicationContext(), R.color.fabNotLoad)));
-                    fab.setRippleColor(ColorStateList.valueOf(ContextCompat.getColor(getApplicationContext(), R.color.fabNotLoadDark)));
-                    Handler handler = new Handler();
-                    handler.postDelayed(new Runnable() {
-                        @Override
-                        public void run() {
-                            fab.setBackgroundTintList(ColorStateList.valueOf(ContextCompat.getColor(getApplicationContext(), R.color.fabDefault)));
-                            fab.setRippleColor(ColorStateList.valueOf(ContextCompat.getColor(getApplicationContext(), R.color.fabDefaultDark)));
-                        }
-                    }, 1500);
-                }
-            }
-        });
-*/
         swipeRefreshMisTemas = findViewById(R.id.swipeRefreshMisTemas);
         swipeRefreshMisTemas.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
@@ -143,7 +105,7 @@ public class MisTemas extends AppCompatActivity {
     }
 
     private void initializeData() {
-        System.out.println("Contador tema " + contadorTemas);
+        //System.out.println("Contador tema " + contadorTemas);
         while (contadorTemas == -1) ;
         DatabaseReference dbRef = database.getReference("Temas");
         Query myQuery = dbRef.orderByChild("uidAutor").equalTo(uidAutor);
@@ -155,29 +117,19 @@ public class MisTemas extends AppCompatActivity {
                 if (temasListh == null) {
 
                 } else {
-                    //  for (int i = 0; i < temasListh.size(); i++) {
-                    //for(String key : temasListh.keySet()){
-                    /*for (Map.Entry<String, HashMap<String, Object>> entry : temasListh.entrySet()) {
-                        String key = entry.getKey();
-                        HashMap value = entry.getValue();
-                        //Tema tema = Tema.convertTema(temasListh.get("Tema_" + (finalConsulta - i)));
-                        //HashMap value = entry.getValue();
-                        Tema tema = Tema.convertTema(value);
-                        temasList.add(tema);
-                    }*/
                     for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                         Tema tema = Tema.convertTema(temasListh.get(snapshot.getKey()));
                         temasList.add(tema);
                     }
                     mAdapter.notifyDataSetChanged();
-                    System.out.println("Hola -- " + temasList);
+                    //System.out.println("Hola -- " + temasList);
                 }
             }
 
             @Override
             public void onCancelled(DatabaseError error) {
                 // Failed to read value
-                Log.w("VVVV", "Failed to read value.", error.toException());
+                //Log.w("VVVV", "Failed to read value.", error.toException());
             }
         });
     }

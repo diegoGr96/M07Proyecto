@@ -115,4 +115,5 @@
     <string name="error_recuperar_contrasenya">Email not found.</string>
     <string name="recuperar_password_vacio">Insert an email.</string>
     <string name="connection_wait">Connection timed out. Reconnecting in...</string>
+    <string name="string_cargando">Loading...</string>
 </resources>

@@ -143,7 +143,6 @@ public class ProfileFragment extends Fragment {
                     contadorCaracteres++;
 
                 } else {
-                    Toast.makeText(getContext(), "Borrando...", Toast.LENGTH_LONG).show();
                     contadorCaracteres--;
                 }
                 return false;

@@ -115,4 +115,5 @@
     <string name="error_recuperar_contrasenya">No se ha encontrado el correo introducido.</string>
     <string name="recuperar_password_vacio">Introduce un correo.</string>
     <string name="connection_wait">La conexión ha fallado. Reconectando en...</string>
+    <string name="string_cargando">Cargando...</string>
 </resources>
