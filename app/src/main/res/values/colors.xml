@@ -19,4 +19,5 @@
     <color name="fabLoadDark">#2B9E3E</color>
     <color name="fabNotLoadDark">#9E2B2B</color>
     <color name="colorRecuperarPassword">#FF0000</color>
+    <color name="transparent">#E0E0E0</color>
 </resources>

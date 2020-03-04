@@ -49,6 +49,20 @@
         <item name="android:fontFamily">@font/allerta</item>
     </style>
 
+    <style name="tituloCardView">
+        <item name="android:textColor">@color/textColor</item>
+        <item name="android:textSize">35sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:fontFamily">@font/allerta</item>
+    </style>
+
+    <style name="usuarioCardView">
+        <item name="android:textColor">@color/textColor</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:fontFamily">@font/allerta</item>
+    </style>
+
     <style name="textoCardView">
         <item name="android:textColor">@color/textColor</item>
         <item name="android:textSize">20sp</item>
@@ -58,7 +72,8 @@
     <style name="cardViews">
         <item name="android:textColor">@color/letraBlanca</item>
         <item name="android:fontFamily">@font/allerta</item>
-        <item name="android:background">@color/backgroundCardView</item>
+        <!--<item name="android:background">@color/backgroundCardView</item>-->
+        <item name="android:background">@color/transparent</item>
         <item name="android:textSize">4sp</item>
     </style>
 

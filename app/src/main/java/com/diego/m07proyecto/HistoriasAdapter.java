@@ -18,17 +18,14 @@ package com.diego.m07proyecto;
 
 import android.content.Context;
 import android.content.Intent;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
-import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
 /***
@@ -115,7 +112,7 @@ public class HistoriasAdapter extends RecyclerView.Adapter<HistoriasAdapter.View
         private TextView mTituloText;
         private TextView mNickText;
         private TextView cuerpoTema;
-        private ConstraintLayout fondoCardView;
+        private ImageView ctgBackground;
 
         /**
          * Constructor for the ViewHolder, used in onCreateViewHolder().
@@ -129,7 +126,7 @@ public class HistoriasAdapter extends RecyclerView.Adapter<HistoriasAdapter.View
             mTituloText = itemView.findViewById(R.id.titleDetail);
             mNickText = itemView.findViewById(R.id.userDetail);
             cuerpoTema = itemView.findViewById(R.id.cuerpoTema);
-            fondoCardView = itemView.findViewById(R.id.fondoCardView);
+            ctgBackground = itemView.findViewById(R.id.ctgBackground);
             itemView.setOnClickListener(this);
         }
 
@@ -152,28 +149,28 @@ public class HistoriasAdapter extends RecyclerView.Adapter<HistoriasAdapter.View
             //fondoCardView.setBackgroundColor(mContext.getResources().getColor(R.color.fondoCardView));
             switch(currentTema.getCategoria()){
                 case 0:
-                    fondoCardView.setBackgroundResource(R.drawable.family_category);
+                    ctgBackground.setImageResource(R.drawable.family_category);
                     break;
                 case 1:
-                    fondoCardView.setBackgroundResource(R.drawable.work_category);
+                    ctgBackground.setImageResource(R.drawable.work_category);
                     break;
                 case 2:
-                    fondoCardView.setBackgroundResource(R.drawable.love_category);
+                    ctgBackground.setImageResource(R.drawable.love_category);
                     break;
                 case 3:
-                    fondoCardView.setBackgroundResource(R.drawable.money_category);
+                    ctgBackground.setImageResource(R.drawable.money_category);
                     break;
                 case 4:
-                    fondoCardView.setBackgroundResource(R.drawable.music_category);
+                    ctgBackground.setImageResource(R.drawable.music_category);
                     break;
                 case 5:
-                    fondoCardView.setBackgroundResource(R.drawable.sports_category);
+                    ctgBackground.setImageResource(R.drawable.sports_category);
                     break;
                 case 6:
-                    fondoCardView.setBackgroundResource(R.drawable.art_category);
+                    ctgBackground.setImageResource(R.drawable.art_category);
                     break;
                 case 7:
-                    fondoCardView.setBackgroundResource(R.drawable.study_category);
+                    ctgBackground.setImageResource(R.drawable.study_category);
                     break;
             }
         }
