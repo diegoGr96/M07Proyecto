@@ -7,8 +7,11 @@ import android.os.Bundle;
 import android.text.Layout;
 import android.view.KeyEvent;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
+import android.widget.SpinnerAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -35,7 +38,9 @@ public class Bienvenida3 extends AppCompatActivity {
     private EditText textoUsuario;
     private EditText textoNombre;
     private EditText textoApellidos;
-    private EditText fechaNacimiento;
+    private Spinner spnDia;
+    private Spinner spnMes;
+    private Spinner spnAny;
 
     private int contadorCaracteres;
 
@@ -47,7 +52,24 @@ public class Bienvenida3 extends AppCompatActivity {
         textoUsuario = findViewById(R.id.textoUsuario);
         textoNombre = findViewById(R.id.textoNombre);
         textoApellidos = findViewById(R.id.textoApellidos);
-        fechaNacimiento = findViewById(R.id.fechaNacimiento);
+        spnDia = findViewById(R.id.spnDia);
+        spnMes = findViewById(R.id.spnMes);
+        spnAny = findViewById(R.id.spnAny);
+
+        ArrayAdapter<CharSequence> adapterDies = ArrayAdapter.createFromResource(getApplicationContext(), R.array.dies, android.R.layout.simple_spinner_item);
+        adapterDies.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spnDia.setAdapter(adapterDies);
+
+        ArrayAdapter<CharSequence> adapterMesos = ArrayAdapter.createFromResource(getApplicationContext(), R.array.mesos, android.R.layout.simple_spinner_item);
+        adapterMesos.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spnMes.setAdapter(adapterMesos);
+
+        ArrayAdapter<CharSequence> adapterAnys = ArrayAdapter.createFromResource(getApplicationContext(), R.array.anys, android.R.layout.simple_spinner_item);
+        adapterAnys.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spnAny.setAdapter(adapterAnys);
+
+
+        //fechaNacimiento = findViewById(R.id.fechaNacimiento);
         text = findViewById(R.id.text);
         if (android.os.Build.VERSION.SDK_INT >= 26) {
             text.setJustificationMode(Layout.JUSTIFICATION_MODE_INTER_WORD);
@@ -56,6 +78,8 @@ public class Bienvenida3 extends AppCompatActivity {
         currentUser = mAuth.getCurrentUser();
         //System.out.println("El UID es: " + currentUser.getUid());
 
+
+        /*
         fechaNacimiento.setOnKeyListener(new View.OnKeyListener() {
             @Override
             public boolean onKey(View v, int keyCode, KeyEvent event) {
@@ -77,6 +101,8 @@ public class Bienvenida3 extends AppCompatActivity {
                 return false;
             }
         });
+
+         */
     }
 
     public void goToPage2(View view) {
@@ -84,7 +110,7 @@ public class Bienvenida3 extends AppCompatActivity {
         startActivity(intent);
     }
 
-    public void envia(View view) throws ParseException {
+    public void envia(View view) {
         String usuario = "";
         String nombre = "";
         String apellidos = "";
@@ -94,8 +120,7 @@ public class Bienvenida3 extends AppCompatActivity {
         if (!textoNombre.getText().toString().equals("")) nombre = textoNombre.getText().toString();
         if (!textoApellidos.getText().toString().equals(""))
             apellidos = textoApellidos.getText().toString();
-        if (!fechaNacimiento.getText().toString().equals(""))
-            nacimiento = fechaNacimiento.getText().toString();
+        System.out.println(spnDia.getSelectedItem().toString());
 
         if (usuario.length() > 0) {
             DatabaseReference myRef = database.getReference("Usuarios/" + currentUser.getUid());

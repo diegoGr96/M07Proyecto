@@ -24,7 +24,7 @@
         android:id="@+id/textoNombre"
         style="@style/editText"
         android:layout_width="0dp"
-        android:layout_height="40dp"
+        android:layout_height="48dp"
         android:layout_marginStart="30dp"
         android:layout_marginTop="30dp"
         android:layout_marginEnd="150dp"
@@ -40,7 +40,7 @@
         android:id="@+id/textoUsuario"
         style="@style/editText"
         android:layout_width="0dp"
-        android:layout_height="40dp"
+        android:layout_height="48dp"
         android:layout_marginStart="30dp"
         android:layout_marginTop="30dp"
         android:layout_marginEnd="150dp"
@@ -55,7 +55,7 @@
         android:id="@+id/textoApellidos"
         style="@style/editText"
         android:layout_width="0dp"
-        android:layout_height="40dp"
+        android:layout_height="48dp"
         android:layout_marginStart="30dp"
         android:layout_marginTop="30dp"
         android:layout_marginEnd="150dp"
@@ -67,20 +67,34 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textoNombre" />
 
-    <EditText
-        android:id="@+id/fechaNacimiento"
-        style="@style/editText"
+    <Spinner
+        android:id="@+id/spnDia"
         android:layout_width="0dp"
-        android:layout_height="40dp"
+        android:layout_height="48dp"
         android:layout_marginStart="30dp"
         android:layout_marginTop="30dp"
-        android:layout_marginEnd="150dp"
-        android:ems="10"
-        android:hint="@string/hintFechaNacimiento"
-        android:inputType="date"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textoApellidos" />
+
+    <Spinner
+        android:id="@+id/spnMes"
+        android:layout_width="175dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="30dp"
+        app:layout_constraintStart_toEndOf="@+id/spnDia"
+        app:layout_constraintTop_toBottomOf="@+id/textoApellidos" />
+
+    <Spinner
+        android:id="@+id/spnAny"
+        android:layout_width="wrap_content"
+        android:layout_height="48dp"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginEnd="30dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.1"
+        app:layout_constraintStart_toEndOf="@+id/spnMes"
         app:layout_constraintTop_toBottomOf="@+id/textoApellidos" />
 
     <ImageButton
@@ -88,13 +102,14 @@
         android:layout_width="65dp"
         android:layout_height="65dp"
         android:layout_marginStart="35dp"
-        android:layout_marginTop="100dp"
+        android:layout_marginTop="110dp"
         android:layout_marginBottom="35dp"
         android:background="@drawable/back_btns"
         android:onClick="goToPage2"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/fechaNacimiento"
+        app:layout_constraintTop_toBottomOf="@+id/spnMes"
+        app:layout_constraintVertical_bias="1.0"
         app:srcCompat="@drawable/arrow_left" />
 
     <Button
@@ -104,11 +119,12 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="110dp"
         android:layout_marginEnd="35dp"
-        android:layout_marginBottom="44dp"
+        android:layout_marginBottom="35dp"
         android:onClick="envia"
         android:text="@string/bienvenida3_envia_button"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/fechaNacimiento" />
+        app:layout_constraintTop_toBottomOf="@+id/spnMes"
+        app:layout_constraintVertical_bias="1.0" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
