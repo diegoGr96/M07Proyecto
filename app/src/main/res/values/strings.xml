@@ -271,4 +271,6 @@
     <string name="recuperar_password_vacio">Introdueix un correu.</string>
     <string name="connection_wait">La connexió ha fallat. Reconectant en...</string>
     <string name="string_cargando">Carregant...</string>
+    <string name="menu_chat">Xat</string>
+    <string name="buscar_chat">Buscar</string>
 </resources>

@@ -268,4 +268,6 @@
     <string name="recuperar_password_vacio">Insert an email.</string>
     <string name="connection_wait">Connection timed out. Reconnecting in...</string>
     <string name="string_cargando">Loading...</string>
+    <string name="menu_chat">Chat</string>
+    <string name="buscar_chat">Search</string>
 </resources>
