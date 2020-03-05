@@ -58,6 +58,7 @@ public class SendFragment extends Fragment {
 
     private Map<String, HashMap<String, Object>> chatListh;
     private List<Chat> chatList;
+    private int contGeneralMensajesSinLeer;
 
     private MediaPlayer audioMario = new MediaPlayer();
     private boolean firstAttempt;
@@ -76,7 +77,6 @@ public class SendFragment extends Fragment {
         database = FirebaseDatabase.getInstance();
         mAuth = FirebaseAuth.getInstance();
         currentUser = mAuth.getCurrentUser();
-        String userrr = mAuth.getCurrentUser().getUid();
         //Testeo
         referenciaChat = database.getReference("RelacionChatUsuario/uidDiego");
         //referenciaChat = database.getReference("RelacionChatUsuario/"+currentUser.getUid());
@@ -87,16 +87,21 @@ public class SendFragment extends Fragment {
                 if (chatListh == null) {
 
                 } else {
-                    if (firstAttempt){
-                        firstAttempt=false;
-                    }else{
-                        managerOfSound();
-                    }
                     chatList.clear();
+                    int contMensajesSinLeer = 0;
                     for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                         Chat chat = Chat.convertChat(chatListh.get(snapshot.getKey()));
                         chatList.add(chat);
+                        contMensajesSinLeer+= chat.getMensajesSinLeer();
                     }
+                    if (!firstAttempt && contGeneralMensajesSinLeer < contMensajesSinLeer){
+                        managerOfSound();
+                    }
+                    if (firstAttempt){
+                        firstAttempt=false;
+                        contGeneralMensajesSinLeer = 0;
+                    }
+                    contGeneralMensajesSinLeer = contMensajesSinLeer;
                     mAdapterChat = new ChatAdapter(getContext(), chatList);
                     mRecyclerView.setAdapter(mAdapterChat);
                 }
