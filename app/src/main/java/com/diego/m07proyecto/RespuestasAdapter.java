@@ -172,6 +172,7 @@ public class RespuestasAdapter extends RecyclerView.Adapter<RespuestasAdapter.Vi
 
         @Override
         public void onClick(View view) {
+
         }
 
     }
