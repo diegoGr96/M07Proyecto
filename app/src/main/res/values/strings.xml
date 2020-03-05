@@ -273,4 +273,5 @@
     <string name="string_cargando">Carregant...</string>
     <string name="menu_chat">Xat</string>
     <string name="buscar_chat">Buscar</string>
+    <string name="searchChatNotFound">No s\'ha trobat cap coincidencia.</string>
 </resources>

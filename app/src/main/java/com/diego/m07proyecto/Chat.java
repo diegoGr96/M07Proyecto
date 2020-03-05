@@ -1,9 +1,126 @@
 package com.diego.m07proyecto;
 
+import java.util.HashMap;
 import java.util.List;
 
 public class Chat {
     private int idChat;
+    private String correoDestino;
+    private String fechaUltimoMensaje;
+    private int mensajesSinLeer;
+    private String nombreChat;
+    private String uidDestino;
+    private String ultimoMensaje;
     private List<Mensaje> listaMensajes;
 
+    public Chat() {
+    }
+
+    public Chat(int idChat, String correoDestino, String fechaUltimoMensaje, int mensajesSinLeer, String nombreChat, String uidDestino, String ultimoMensaje, List<Mensaje> listaMensajes) {
+        this.idChat = idChat;
+        this.correoDestino = correoDestino;
+        this.fechaUltimoMensaje = fechaUltimoMensaje;
+        this.mensajesSinLeer = mensajesSinLeer;
+        this.nombreChat = nombreChat;
+        this.uidDestino = uidDestino;
+        this.ultimoMensaje = ultimoMensaje;
+        this.listaMensajes = listaMensajes;
+    }
+
+    public Chat(String correoDestino, String fechaUltimoMensaje, int mensajesSinLeer, String nombreChat, String uidDestino, String ultimoMensaje) {
+        this.correoDestino = correoDestino;
+        this.fechaUltimoMensaje = fechaUltimoMensaje;
+        this.mensajesSinLeer = mensajesSinLeer;
+        this.nombreChat = nombreChat;
+        this.uidDestino = uidDestino;
+        this.ultimoMensaje = ultimoMensaje;
+    }
+
+    public int getIdChat() {
+        return idChat;
+    }
+
+    public void setIdChat(int idChat) {
+        this.idChat = idChat;
+    }
+
+    public String getCorreoDestino() {
+        return correoDestino;
+    }
+
+    public void setCorreoDestino(String correoDestino) {
+        this.correoDestino = correoDestino;
+    }
+
+    public String getFechaUltimoMensaje() {
+        return fechaUltimoMensaje;
+    }
+
+    public void setFechaUltimoMensaje(String fechaUltimoMensaje) {
+        this.fechaUltimoMensaje = fechaUltimoMensaje;
+    }
+
+    public int getMensajesSinLeer() {
+        return mensajesSinLeer;
+    }
+
+    public void setMensajesSinLeer(int mensajesSinLeer) {
+        this.mensajesSinLeer = mensajesSinLeer;
+    }
+
+    public String getNombreChat() {
+        return nombreChat;
+    }
+
+    public void setNombreChat(String nombreChat) {
+        this.nombreChat = nombreChat;
+    }
+
+    public String getUidDestino() {
+        return uidDestino;
+    }
+
+    public void setUidDestino(String uidDestino) {
+        this.uidDestino = uidDestino;
+    }
+
+    public String getUltimoMensaje() {
+        return ultimoMensaje;
+    }
+
+    public void setUltimoMensaje(String ultimoMensaje) {
+        this.ultimoMensaje = ultimoMensaje;
+    }
+
+    public List<Mensaje> getListaMensajes() {
+        return listaMensajes;
+    }
+
+    public void setListaMensajes(List<Mensaje> listaMensajes) {
+        this.listaMensajes = listaMensajes;
+    }
+
+    @Override
+    public String toString() {
+        return "Chat{" +
+                "idChat=" + idChat +
+                ", correoDestino='" + correoDestino + '\'' +
+                ", fechaUltimoMensaje='" + fechaUltimoMensaje + '\'' +
+                ", mensajesSinLeer=" + mensajesSinLeer +
+                ", nombreChat='" + nombreChat + '\'' +
+                ", uidDestino='" + uidDestino + '\'' +
+                ", ultimoMensaje='" + ultimoMensaje + '\'' +
+                ", listaMensajes=" + listaMensajes +
+                '}';
+    }
+
+    public static Chat convertChat(HashMap<String, Object> mapa){
+        String correoDestino = (String) mapa.get("correoDestino");
+        String fechaUltimoMensaje = (String) mapa.get("fechaUltimoMensaje");
+        int mensajesSinLeer = ((Long) mapa.get("mensajesSinLeer")).intValue();
+        String nombreChat = (String) mapa.get("nombreChat");
+        String uidDestino = (String) mapa.get("uidDestino");
+        String ultimoMensaje = (String) mapa.get("ultimoMensaje");
+        return new Chat(correoDestino,fechaUltimoMensaje,mensajesSinLeer,nombreChat,uidDestino,ultimoMensaje);
+    }
 }

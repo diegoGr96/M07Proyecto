@@ -270,4 +270,5 @@
     <string name="string_cargando">Cargando...</string>
     <string name="menu_chat">Chat</string>
     <string name="buscar_chat">Buscar</string>
+    <string name="searchChatNotFound">No se ha encontrado ninguna coincidencia.</string>
 </resources>
