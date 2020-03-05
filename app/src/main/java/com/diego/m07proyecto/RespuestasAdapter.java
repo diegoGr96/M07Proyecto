@@ -22,6 +22,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -39,16 +40,19 @@ public class RespuestasAdapter extends RecyclerView.Adapter<RespuestasAdapter.Vi
     // Member variables.
     private List<Respuesta> mRespuestaData;
     private Context mContext;
+    private int numViewType;
+    private Tema currentTema;
 
     /**
      * Constructor that passes in the games data and the context.
      *
      * @param respuestasData ArrayList containing the gamess data.
-     * @param context   Context of the application.
+     * @param context        Context of the application.
      */
-    public RespuestasAdapter(Context context, List<Respuesta> respuestasData) {
+    public RespuestasAdapter(Context context, List<Respuesta> respuestasData, Tema currentTema) {
         this.mRespuestaData = respuestasData;
         this.mContext = context;
+        this.currentTema = currentTema;
     }
 
 
@@ -68,18 +72,17 @@ public class RespuestasAdapter extends RecyclerView.Adapter<RespuestasAdapter.Vi
     @Override
     public RespuestasAdapter.ViewHolder onCreateViewHolder(
             ViewGroup parent, int viewType) {
-        switch(viewType){
+        numViewType = viewType;
+        System.out.println("NUM: " + viewType);
+        switch (viewType) {
             case 0:
                 return new ViewHolder(LayoutInflater.from(mContext).
-                        inflate(R.layout.respuesta_item, parent, false));
-            case 1:
-                return new ViewHolder(LayoutInflater.from(mContext).
-                        inflate(R.layout.respuesta_item2, parent, false));
+                        inflate(R.layout.list_item, parent, false));
             default:
-                return null;
+                return new ViewHolder(LayoutInflater.from(mContext).
+                        inflate(R.layout.respuesta_item, parent, false));
+
         }
-        /*return new ViewHolder(LayoutInflater.from(mContext).
-                inflate(R.layout.respuesta_item, parent, false));*/
     }
 
     /**
@@ -99,10 +102,17 @@ public class RespuestasAdapter extends RecyclerView.Adapter<RespuestasAdapter.Vi
     public void onBindViewHolder(RespuestasAdapter.ViewHolder holder,
                                  int position) {
         // Get current games.
-        Respuesta currentRespuesta = mRespuestaData.get(position);
+        System.out.println("NUMPOS: " + position);
+        if (position == 0) {
+            System.out.println("NUMCALL 0:");
+            holder.bindTo(currentTema);
+        } else {
+            System.out.println("NUMCALL 1:");
+            Respuesta currentRespuesta = mRespuestaData.get(position);
+            holder.bindTo(currentRespuesta);
+        }
 
         // Populate the textviews with data.
-        holder.bindTo(currentRespuesta);
     }
 
     /**
@@ -112,10 +122,10 @@ public class RespuestasAdapter extends RecyclerView.Adapter<RespuestasAdapter.Vi
      */
 
     @Override
-    public int getItemViewType(int position){
-        if(position == 0){
+    public int getItemViewType(int position) {
+        if (position == 0) {
             return 0;
-        } else{
+        } else {
             return 1;
         }
     }
@@ -129,13 +139,15 @@ public class RespuestasAdapter extends RecyclerView.Adapter<RespuestasAdapter.Vi
     /**
      * ViewHolder class that represents each row of data in the RecyclerView.
      */
-    class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+    class ViewHolder extends RecyclerView.ViewHolder {
 
         // Member Variables for the TextViews
-        private TextView mTituloText;
-        private TextView mNickText;
-        private TextView cuerpoRespuesta;
-        private ConstraintLayout fondoCardView;
+        private TextView titleTemaText;
+        private TextView userTemaText;
+        private TextView cuerpoTemaText;
+        private TextView userRespuestaText;
+        private TextView cuerpoRespuestaText;
+        private ImageView ctgBackground;
 
         /**
          * Constructor for the ViewHolder, used in onCreateViewHolder().
@@ -144,35 +156,74 @@ public class RespuestasAdapter extends RecyclerView.Adapter<RespuestasAdapter.Vi
          */
         ViewHolder(View itemView) {
             super(itemView);
-
             // Initialize the views.
-            mTituloText = itemView.findViewById(R.id.tituloAutor);
-            mNickText = itemView.findViewById(R.id.usuarioRespuesta);
-            cuerpoRespuesta = itemView.findViewById(R.id.cuerpoRespuesta);
-            fondoCardView = itemView.findViewById(R.id.fondoRespuesta);
-            itemView.setOnClickListener(this);
+            titleTemaText = itemView.findViewById(R.id.titleDetail);
+            userTemaText = itemView.findViewById(R.id.userDetail);
+            cuerpoTemaText = itemView.findViewById(R.id.cuerpoTema);
+            userRespuestaText = itemView.findViewById(R.id.usuarioRespuesta);
+            cuerpoRespuestaText = itemView.findViewById(R.id.cuerpoRespuesta);
+            ctgBackground = itemView.findViewById(R.id.ctgBackground);
         }
-
         /*
         Mostramos los datos que hemos recibido a través del método 'onBindViewHolder' de la clase superior
         y nos encargamos de mostrarlos en pantalla.
          */
-        void bindTo(Respuesta currentRespuesta) {
 
+        void bindTo(Tema currentTema) {
+            titleTemaText.setText(currentTema.getTitulo());
+            String cuerpo = currentTema.getCuerpo();
+            if (cuerpo.length() > 70) cuerpo = cuerpo.substring(0, 71) + "...";
+            cuerpoTemaText.setText(cuerpo);
+            if (currentTema.isAnonimo()) {
+                userTemaText.setText(R.string.temaUsuarioAnonimo);
+            } else {
+                userTemaText.setText(currentTema.getNickAutor());
+            }
+            //fondoCardView.setBackgroundColor(mContext.getResources().getColor(R.color.fondoCardView));
+            System.out.println("CATEGORIA ACTUAL: " + currentTema.getCategoria());
+            switch (currentTema.getCategoria()) {
+                case 0:
+                    ctgBackground.setImageResource(R.drawable.family_category);
+                    break;
+                case 1:
+                    ctgBackground.setImageResource(R.drawable.work_category);
+                    break;
+                case 2:
+                    ctgBackground.setImageResource(R.drawable.love_category);
+                    break;
+                case 3:
+                    ctgBackground.setImageResource(R.drawable.money_category);
+                    break;
+                case 4:
+                    ctgBackground.setImageResource(R.drawable.music_category);
+                    break;
+                case 5:
+                    ctgBackground.setImageResource(R.drawable.sports_category);
+                    break;
+                case 6:
+                    ctgBackground.setImageResource(R.drawable.art_category);
+                    break;
+                case 7:
+                    ctgBackground.setImageResource(R.drawable.study_category);
+                    break;
+            }
+        }
+
+        void bindTo(Respuesta currentRespuesta) {
+/*
             if (currentRespuesta.getTituloAutor() != null){
                 mTituloText.setText(currentRespuesta.getTituloAutor());
                 fondoCardView.setBackgroundColor(mContext.getResources().getColor(R.color.backgroundCardView));
             }else{
                 mTituloText.setLayoutParams(new ConstraintLayout.LayoutParams(0, 0));
             }
-            mNickText.setText(currentRespuesta.isAnonimo()?mContext.getResources().getString(R.string.temaUsuarioAnonimo):currentRespuesta.getNickAutor());
-            cuerpoRespuesta.setText(currentRespuesta.getTextRespuesta());
 
-        }
+ */
+            userRespuestaText.setText(currentRespuesta.isAnonimo() ? mContext.getResources().getString(R.string.temaUsuarioAnonimo) : currentRespuesta.getNickAutor());
+            cuerpoRespuestaText.setText(currentRespuesta.getTextRespuesta());
 
-        @Override
-        public void onClick(View view) {
-
+            System.out.println("NUMTEXT: " +userRespuestaText.getText());
+            System.out.println("NUMTEXT: " + cuerpoRespuestaText.getText());
         }
 
     }

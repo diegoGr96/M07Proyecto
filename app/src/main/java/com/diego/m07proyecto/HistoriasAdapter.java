@@ -185,6 +185,7 @@ public class HistoriasAdapter extends RecyclerView.Adapter<HistoriasAdapter.View
             detailIntent.putExtra("USER", currentTema.isAnonimo()?mContext.getResources().getString(R.string.temaUsuarioAnonimo):currentTema.getNickAutor());
             detailIntent.putExtra("BODY", currentTema.getCuerpo());
             detailIntent.putExtra("UID",currentTema.getUidAutor());
+            detailIntent.putExtra("CATEGORY", currentTema.getCategoria());
             detailIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             mContext.startActivity(detailIntent);
         }

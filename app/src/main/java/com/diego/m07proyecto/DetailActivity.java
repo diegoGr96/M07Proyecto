@@ -58,6 +58,9 @@ public class DetailActivity extends AppCompatActivity {
     private String nickAutor;
     private String cuerpoAutor;
     private String uidAutor;
+    private int categoria;
+
+    private Tema currentTema;
 
     private Respuesta temaAutor;
 
@@ -91,6 +94,9 @@ public class DetailActivity extends AppCompatActivity {
         nickAutor = getIntent().getStringExtra("USER");
         cuerpoAutor = getIntent().getStringExtra("BODY");
         uidAutor = getIntent().getStringExtra("UID");
+        categoria = getIntent().getIntExtra("CATEGORY", 0);
+
+        currentTema = new Tema(idTema, tituloTema, nickAutor, cuerpoAutor, uidAutor, categoria);
 
         temaAutor = new Respuesta(tituloTema, nickAutor, cuerpoAutor);
         listaRespuestas = new ArrayList<>();
@@ -139,9 +145,8 @@ public class DetailActivity extends AppCompatActivity {
                     // mAdapter = new RespuestasAdapter(getApplicationContext(), listaRespuestas);
                     // mRecyclerView.setAdapter(mAdapter);
                 }
-                mAdapter = new RespuestasAdapter(getApplicationContext(), listaRespuestas);
+                mAdapter = new RespuestasAdapter(getApplicationContext(), listaRespuestas, currentTema);
                 mRecyclerView.setAdapter(mAdapter);
-
             }
 
             @Override
