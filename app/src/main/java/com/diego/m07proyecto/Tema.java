@@ -40,6 +40,17 @@ public class Tema{
         this.categoria = categoria;
     }
 
+
+
+    public Tema(int idTema, String titulo, String nickAutor, String cuerpo, String uidAutor, int categoria){
+        this.idTema = idTema;
+        this.titulo = titulo;
+        this.nickAutor = nickAutor;
+        this.cuerpo = cuerpo;
+        this.uidAutor = uidAutor;
+        this.categoria = categoria;
+    }
+
     public int getCategoria() {
         return categoria;
     }
