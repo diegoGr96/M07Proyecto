@@ -68,8 +68,18 @@ public class RespuestasAdapter extends RecyclerView.Adapter<RespuestasAdapter.Vi
     @Override
     public RespuestasAdapter.ViewHolder onCreateViewHolder(
             ViewGroup parent, int viewType) {
-        return new ViewHolder(LayoutInflater.from(mContext).
-                inflate(R.layout.respuesta_item, parent, false));
+        switch(viewType){
+            case 0:
+                return new ViewHolder(LayoutInflater.from(mContext).
+                        inflate(R.layout.respuesta_item, parent, false));
+            case 1:
+                return new ViewHolder(LayoutInflater.from(mContext).
+                        inflate(R.layout.respuesta_item2, parent, false));
+            default:
+                return null;
+        }
+        /*return new ViewHolder(LayoutInflater.from(mContext).
+                inflate(R.layout.respuesta_item, parent, false));*/
     }
 
     /**
@@ -100,6 +110,16 @@ public class RespuestasAdapter extends RecyclerView.Adapter<RespuestasAdapter.Vi
      *
      * @return Size of the data set.
      */
+
+    @Override
+    public int getItemViewType(int position){
+        if(position == 0){
+            return 0;
+        } else{
+            return 1;
+        }
+    }
+
     @Override
     public int getItemCount() {
         return mRespuestaData.size();
