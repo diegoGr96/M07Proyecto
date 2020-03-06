@@ -172,7 +172,6 @@ public class RespuestasAdapter extends RecyclerView.Adapter<RespuestasAdapter.Vi
         void bindTo(Tema currentTema) {
             titleTemaText.setText(currentTema.getTitulo());
             String cuerpo = currentTema.getCuerpo();
-            if (cuerpo.length() > 70) cuerpo = cuerpo.substring(0, 71) + "...";
             cuerpoTemaText.setText(cuerpo);
             if (currentTema.isAnonimo()) {
                 userTemaText.setText(R.string.temaUsuarioAnonimo);
