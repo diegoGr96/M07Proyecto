@@ -11,12 +11,11 @@ public class Chat {
     private String nombreChat;
     private String uidDestino;
     private String ultimoMensaje;
-    private List<Mensaje> listaMensajes;
 
     public Chat() {
     }
 
-    public Chat(int idChat, String correoDestino, String fechaUltimoMensaje, int mensajesSinLeer, String nombreChat, String uidDestino, String ultimoMensaje, List<Mensaje> listaMensajes) {
+    public Chat(int idChat, String correoDestino, String fechaUltimoMensaje, int mensajesSinLeer, String nombreChat, String uidDestino, String ultimoMensaje) {
         this.idChat = idChat;
         this.correoDestino = correoDestino;
         this.fechaUltimoMensaje = fechaUltimoMensaje;
@@ -24,7 +23,6 @@ public class Chat {
         this.nombreChat = nombreChat;
         this.uidDestino = uidDestino;
         this.ultimoMensaje = ultimoMensaje;
-        this.listaMensajes = listaMensajes;
     }
 
     public Chat(String correoDestino, String fechaUltimoMensaje, int mensajesSinLeer, String nombreChat, String uidDestino, String ultimoMensaje) {
@@ -92,14 +90,6 @@ public class Chat {
         this.ultimoMensaje = ultimoMensaje;
     }
 
-    public List<Mensaje> getListaMensajes() {
-        return listaMensajes;
-    }
-
-    public void setListaMensajes(List<Mensaje> listaMensajes) {
-        this.listaMensajes = listaMensajes;
-    }
-
     @Override
     public String toString() {
         return "Chat{" +
@@ -110,7 +100,6 @@ public class Chat {
                 ", nombreChat='" + nombreChat + '\'' +
                 ", uidDestino='" + uidDestino + '\'' +
                 ", ultimoMensaje='" + ultimoMensaje + '\'' +
-                ", listaMensajes=" + listaMensajes +
                 '}';
     }
 
