@@ -73,7 +73,7 @@
         <item name="android:textColor">@color/letraBlanca</item>
         <item name="android:fontFamily">@font/allerta</item>
         <!--<item name="android:background">@color/backgroundCardView</item>-->
-        <item name="android:background">@color/transparent</item>
+        <item name="android:background">@android:color/transparent</item>
         <item name="android:textSize">4sp</item>
     </style>
 
