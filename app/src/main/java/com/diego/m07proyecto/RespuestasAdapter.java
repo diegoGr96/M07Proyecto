@@ -77,7 +77,7 @@ public class RespuestasAdapter extends RecyclerView.Adapter<RespuestasAdapter.Vi
         switch (viewType) {
             case 0:
                 return new ViewHolder(LayoutInflater.from(mContext).
-                        inflate(R.layout.list_item, parent, false));
+                        inflate(R.layout.tema_item, parent, false));
             default:
                 return new ViewHolder(LayoutInflater.from(mContext).
                         inflate(R.layout.respuesta_item, parent, false));
@@ -124,8 +124,10 @@ public class RespuestasAdapter extends RecyclerView.Adapter<RespuestasAdapter.Vi
     @Override
     public int getItemViewType(int position) {
         if (position == 0) {
+            System.out.println("NUMPOSITIOOOOOON: " + position);
             return 0;
         } else {
+            System.out.println("NUMPOSITIOOOOOON: " + position);
             return 1;
         }
     }
@@ -172,7 +174,6 @@ public class RespuestasAdapter extends RecyclerView.Adapter<RespuestasAdapter.Vi
         void bindTo(Tema currentTema) {
             titleTemaText.setText(currentTema.getTitulo());
             String cuerpo = currentTema.getCuerpo();
-            if (cuerpo.length() > 70) cuerpo = cuerpo.substring(0, 71) + "...";
             cuerpoTemaText.setText(cuerpo);
             if (currentTema.isAnonimo()) {
                 userTemaText.setText(R.string.temaUsuarioAnonimo);
