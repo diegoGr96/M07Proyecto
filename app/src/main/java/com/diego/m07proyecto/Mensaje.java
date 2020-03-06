@@ -1,50 +1,46 @@
 package com.diego.m07proyecto;
 
-public class Mensaje {
+import java.util.HashMap;
 
-    private int idMensaje;
-    private String remitente;
-    private String texto;
+public class Mensaje {
+    private String correoDestino;
+    private String mensaje;
 
     public Mensaje() {
     }
 
-    public Mensaje(int idMensaje, String remitente, String texto) {
-        this.idMensaje = idMensaje;
-        this.remitente = remitente;
-        this.texto = texto;
+    public Mensaje(String correoDestino, String mensaje) {
+        this.correoDestino = correoDestino;
+        this.mensaje = mensaje;
     }
 
-    public int getIdMensaje() {
-        return idMensaje;
+    public String getCorreoDestino() {
+        return correoDestino;
     }
 
-    public void setIdMensaje(int idMensaje) {
-        this.idMensaje = idMensaje;
+    public void setCorreoDestino(String correoDestino) {
+        this.correoDestino = correoDestino;
     }
 
-    public String getRemitente() {
-        return remitente;
+    public String getMensaje() {
+        return mensaje;
     }
 
-    public void setRemitente(String remitente) {
-        this.remitente = remitente;
-    }
-
-    public String getTexto() {
-        return texto;
-    }
-
-    public void setTexto(String texto) {
-        this.texto = texto;
+    public void setMensaje(String mensaje) {
+        this.mensaje = mensaje;
     }
 
     @Override
     public String toString() {
         return "Mensaje{" +
-                "idMensaje=" + idMensaje +
-                ", remitente='" + remitente + '\'' +
-                ", texto='" + texto + '\'' +
+                "correoDestino='" + correoDestino + '\'' +
+                ", mensaje='" + mensaje + '\'' +
                 '}';
+    }
+
+    public static Mensaje convertConversacion(HashMap<String, Object> mapa){
+        String correoDestino = (String)mapa.get("Remitente");
+        String mensaje = (String)mapa.get("Texto");
+        return new Mensaje(correoDestino,mensaje);
     }
 }

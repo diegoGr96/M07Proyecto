@@ -149,6 +149,9 @@ public class ChatAdapter  extends RecyclerView.Adapter<ChatAdapter.ViewHolder>{
             mContext.startActivity(detailIntent);
 
              */
+
+            Intent intent = new Intent(mContext,ActivityConversacion.class);
+            mContext.startActivity(intent);
         }
     }
 }

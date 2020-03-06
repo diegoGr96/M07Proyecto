@@ -1,30 +1,36 @@
 package com.diego.m07proyecto;
 
+
 import android.content.Context;
 import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.google.firebase.auth.FirebaseUser;
 
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
 
-public class SearchUserAdapter extends RecyclerView.Adapter<SearchUserAdapter.ViewHolder> {
+public class ConversacionAdapter extends RecyclerView.Adapter<ConversacionAdapter.ViewHolder> {
     // Member variables.
-    private List<SearchUsers> mSearchUserData;
+    private List<Mensaje> mMensajeData;
     private Context mContext;
-
+    private FirebaseUser currentUser;
+    private boolean isMe;
     /**
      * Constructor that passes in the games data and the context.
      *
-     * @param searchUsersData ArrayList containing the gamess data.
+     * @param mensajeData ArrayList containing the gamess data.
      * @param context   Context of the application.
      */
-    public SearchUserAdapter(Context context, List<SearchUsers> searchUsersData) {
-        this.mSearchUserData = searchUsersData;
+    public ConversacionAdapter(Context context, List<Mensaje> mensajeData, FirebaseUser currentUser) {
+        this.mMensajeData = mensajeData;
         this.mContext = context;
+        this.currentUser = currentUser;
     }
 
 
@@ -42,10 +48,15 @@ public class SearchUserAdapter extends RecyclerView.Adapter<SearchUserAdapter.Vi
     Enlacamos los elementos graficos que queremos que salgan en cada HOLDER. En este proyecto se llama 'listItem'
      */
     @Override
-    public SearchUserAdapter.ViewHolder onCreateViewHolder(
+    public ConversacionAdapter.ViewHolder onCreateViewHolder(
             ViewGroup parent, int viewType) {
-        return new SearchUserAdapter.ViewHolder(LayoutInflater.from(mContext).
-                inflate(R.layout.search_users_item, parent, false));
+        if (viewType == 1){
+            return new ConversacionAdapter.ViewHolder(LayoutInflater.from(mContext).
+                    inflate(R.layout.conversacion_item_origen, parent, false));
+        }else{
+            return new ConversacionAdapter.ViewHolder(LayoutInflater.from(mContext).
+                    inflate(R.layout.conversacion_item_destino, parent, false));
+        }
     }
 
     /**
@@ -62,13 +73,24 @@ public class SearchUserAdapter extends RecyclerView.Adapter<SearchUserAdapter.Vi
 
      */
     @Override
-    public void onBindViewHolder(SearchUserAdapter.ViewHolder holder,
+    public void onBindViewHolder(ConversacionAdapter.ViewHolder holder,
                                  int position) {
         // Get current games.
-        SearchUsers currentSearch = mSearchUserData.get(position);
+        Mensaje currentMensaje = mMensajeData.get(position);
 
         // Populate the textviews with data.
-        holder.bindTo(currentSearch);
+        holder.bindTo(currentMensaje);
+    }
+
+    @Override
+    public int getItemViewType(int position) {
+        if (mMensajeData.get(position).getCorreoDestino().equals(currentUser.getEmail())){
+            isMe = true;
+            return 1;
+        }else{
+            isMe = false;
+            return 0;
+        }
     }
 
     /**
@@ -78,20 +100,17 @@ public class SearchUserAdapter extends RecyclerView.Adapter<SearchUserAdapter.Vi
      */
     @Override
     public int getItemCount() {
-        return mSearchUserData.size();
+        return mMensajeData.size();
     }
 
 
     /**
      * ViewHolder class that represents each row of data in the RecyclerView.
      */
-    class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+    class ViewHolder extends RecyclerView.ViewHolder {
 
         // Member Variables for the TextViews
-        private TextView textoSearchNick;
-        private TextView textoSearchEmail;
-
-
+        private TextView mensaje;
 
         /**
          * Constructor for the ViewHolder, used in onCreateViewHolder().
@@ -102,40 +121,21 @@ public class SearchUserAdapter extends RecyclerView.Adapter<SearchUserAdapter.Vi
             super(itemView);
 
             // Initialize the views.
-            textoSearchNick = itemView.findViewById(R.id.textoSearchNick);
-            textoSearchEmail = itemView.findViewById(R.id.textoSearchEmail);
-            itemView.setOnClickListener(this);
+            if (isMe){
+                mensaje = itemView.findViewById(R.id.textoConversacionOrigen);
+            }else{
+                mensaje = itemView.findViewById(R.id.textoConversacionDestino);
+            }
         }
 
         /*
         Mostramos los datos que hemos recibido a través del método 'onBindViewHolder' de la clase superior
         y nos encargamos de mostrarlos en pantalla.
          */
-        void bindTo(SearchUsers currentSearch) {
+        void bindTo(Mensaje currentMensaje) {
             // Populate the textviews with data.
-
-            textoSearchNick.setText(currentSearch.getNickDestino());
-            textoSearchEmail.setText(currentSearch.getCorreoDestino());
-
-        }
-
-        @Override
-        public void onClick(View view) {
-            /*
-            Chat currentChat = mChatData.get(getAdapterPosition());
-            //Log.d("A", "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAsddfnuirn");
-            Intent detailIntent = new Intent(mContext, DetailActivity.class);
-            detailIntent.putExtra("ID_TEMA", currentChat.getIdTema());
-            detailIntent.putExtra("TITLE", currentChat.getTitulo());
-            detailIntent.putExtra("USER", currentChat.isAnonimo() ? mContext.getResources().getString(R.string.temaUsuarioAnonimo) : currentChat.getNickAutor());
-            detailIntent.putExtra("BODY", currentChat.getCuerpo());
-            detailIntent.putExtra("UID", currentChat.getUidAutor());
-            detailIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            mContext.startActivity(detailIntent);
-
-             */
-            Intent intent = new Intent(mContext,ActivityConversacion.class);
-            mContext.startActivity(intent);
+            mensaje.setText(currentMensaje.getMensaje());
         }
     }
 }
+

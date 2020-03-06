@@ -101,6 +101,7 @@ public class SendFragment extends Fragment {
                         firstAttempt=false;
                         contGeneralMensajesSinLeer = 0;
                     }
+
                     contGeneralMensajesSinLeer = contMensajesSinLeer;
                     mAdapterChat = new ChatAdapter(getContext(), chatList);
                     mRecyclerView.setAdapter(mAdapterChat);
