@@ -7,8 +7,8 @@
     android:layout_height="wrap_content"
     android:layout_margin="8dp"
     android:orientation="vertical"
-    app:cardElevation="5dp"
     app:cardCornerRadius="5dp">
+    <!--app:cardElevation="5dp"-->
 
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -17,28 +17,43 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+        <ImageView
+            android:id="@+id/userImage"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/profile"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
 
         <TextView
             android:id="@+id/usuarioRespuesta"
             style="@style/textoCardView"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="48dp"
+            android:layout_marginTop="10dp"
             android:fontFamily="@font/allerta"
             android:hint="@string/cv_historia_user"
             android:padding="8dp"
             android:textColor="@color/textColor"
-            app:layout_constraintStart_toStartOf="parent"
+            android:textStyle="bold"
+            app:layout_constraintStart_toEndOf="@+id/userImage"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/cuerpoRespuesta"
             style="@style/textoCardView"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="48dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
             android:hint="@string/cv_tema_info"
             android:padding="8dp"
             android:textColor="#A09E9E"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/usuarioRespuesta"
             app:layout_constraintTop_toBottomOf="@+id/usuarioRespuesta" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
