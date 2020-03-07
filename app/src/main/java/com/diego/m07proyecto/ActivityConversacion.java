@@ -21,18 +21,22 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 
 public class ActivityConversacion extends AppCompatActivity {
     private FirebaseDatabase database;
     private FirebaseAuth mAuth;
     private FirebaseUser currentUser;
-    DatabaseReference referenciaChat;
-    DatabaseReference referenciaNuevoMensaje;
-    ValueEventListener eventoChat;
+    private DatabaseReference referenciaChat;
+    private DatabaseReference referenciaNuevoMensaje;
+    private DatabaseReference refSumarMensSinLeer;
+    private ValueEventListener eventoNuevoMensaje;
 
     private RecyclerView mRecyclerView;
     private ConversacionAdapter mAdapterConversacion;
@@ -48,8 +52,10 @@ public class ActivityConversacion extends AppCompatActivity {
 
     private boolean firstAttempt = true;
     private long contadorMensajes = -1;
-    // private String nombreChat;
-    //private String CORREO_CHAT;
+    //private long mensajesSinLeer = 0;
+    private String uidDestino;
+    private String NOMBRE_CHAT;
+    private String CORREO_CHAT_DESTINO;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,15 +78,15 @@ public class ActivityConversacion extends AppCompatActivity {
         mRecyclerView.setAdapter(mAdapterConversacion);
 
         //En este punto obtendremos el valor que recibimos del Intent para saber en que Chat nos encontramos.
-        final String NOMBRE_CHAT = getIntent().getStringExtra("NOMBRE_CHAT");
-        final String CORREO_CHAT = getIntent().getStringExtra("CORREO_CHAT");
-        textoCorreoDestino.setText(CORREO_CHAT.length() > 27 ? CORREO_CHAT.split("@")[0] : CORREO_CHAT);
+        NOMBRE_CHAT = getIntent().getStringExtra("NOMBRE_CHAT");
+        CORREO_CHAT_DESTINO = getIntent().getStringExtra("CORREO_CHAT");
+        textoCorreoDestino.setText(CORREO_CHAT_DESTINO.length() > 27 ? CORREO_CHAT_DESTINO.split("@")[0] : CORREO_CHAT_DESTINO);
 
         //Esta referencia se usa una sola vez al principio para cargar la conversación.
         //Las siguientes veces solo se cargará el último mensaje enviado y/o recibido.
         //Referencia Testeo
         //referenciaChat = database.getReference("Chats/Chat_0/Mensajes");
-        referenciaChat = database.getReference("Chats/"+NOMBRE_CHAT+"/Mensajes");
+        referenciaChat = database.getReference("Chats/" + NOMBRE_CHAT + "/Mensajes");
         Query queryCargarConversacion = referenciaChat.orderByChild("idMensaje");
         queryCargarConversacion.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -94,11 +100,13 @@ public class ActivityConversacion extends AppCompatActivity {
                         if (!(snapshot.getValue() instanceof Long)) {
                             Mensaje mensaje = Mensaje.convertMensaje(conversacionListh.get(snapshot.getKey()));
                             conversacionList.add(mensaje);
-                        }else{
+                        } else {
                             //long mapaHijo = (Long)snapshot.getValue();
-                            contadorMensajes = (Long)snapshot.getValue();
+                            contadorMensajes = (Long) snapshot.getValue();
                         }
                     }
+                    DatabaseReference refReiniciarContMensSinLeer = database.getReference("RelacionChatUsuario/" + currentUser.getUid() + "/" + NOMBRE_CHAT + "/mensajesSinLeer");
+                    refReiniciarContMensSinLeer.setValue(0);
                     mAdapterConversacion.notifyDataSetChanged();
                     //mRecyclerView.getLayoutManager().scrollToPosition(conversacionList.size() - 1);
                 }
@@ -110,11 +118,7 @@ public class ActivityConversacion extends AppCompatActivity {
             }
         });
 
-        //Testeo
-        //referenciaNuevoMensaje = database.getReference("Chats/Chat_0/Mensajes/contadorMensajes");
-        //Definitiva
-        referenciaNuevoMensaje = database.getReference("Chats/"+NOMBRE_CHAT+"/Mensajes/contadorMensajes");
-        referenciaNuevoMensaje.addValueEventListener(new ValueEventListener() {
+        eventoNuevoMensaje = new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if (firstAttempt) {
@@ -124,21 +128,68 @@ public class ActivityConversacion extends AppCompatActivity {
                     //Referencia Testeo
                     //DatabaseReference refGetNuevoMensaje = database.getReference("Chats/Chat_0/Mensajes/Mens_" + (contadorMensajes - 1));
                     //Definitiva
-                    DatabaseReference refGetNuevoMensaje = database.getReference("Chats/"+NOMBRE_CHAT+"/Mensajes/Mens_" + (contadorMensajes - 1));
+                    DatabaseReference refGetNuevoMensaje = database.getReference("Chats/" + NOMBRE_CHAT + "/Mensajes/Mens_" + (contadorMensajes - 1));
                     refGetNuevoMensaje.addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                            Toast.makeText(getApplicationContext(), "Nuevo Mensaje!!!", Toast.LENGTH_LONG).show();
+                            //Toast.makeText(getApplicationContext(), "Nuevo Mensaje!!!", Toast.LENGTH_LONG).show();
                             conversacionListh.clear();
                             HashMap<String, Object> mapaNuevoMensaje = (HashMap<String, Object>) dataSnapshot.getValue();
-                            //String remitente = (String) mapaNuevoMensaje.get("Remitente");
-                            //String textoMensaje = (String) mapaNuevoMensaje.get("Texto");
-                            Mensaje mensaje = Mensaje.convertMensaje(mapaNuevoMensaje);
+                            final Mensaje mensaje = Mensaje.convertMensaje(mapaNuevoMensaje);
 
                             conversacionList.add(mensaje);
                             mAdapterConversacion.notifyDataSetChanged();
                             mRecyclerView.getLayoutManager().scrollToPosition(conversacionList.size() - 1);
+                            if (!mensaje.getRemitente().equals(CORREO_CHAT_DESTINO)) {
+                                DatabaseReference refGetUidDestino = database.getReference("RelacionChatUsuario/" + currentUser.getUid() + "/" + NOMBRE_CHAT + "/uidDestino");
 
+                                refGetUidDestino.addListenerForSingleValueEvent(new ValueEventListener() {
+                                    long mensajesSinLeer = -1;
+
+                                    @Override
+                                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                        uidDestino = dataSnapshot.getValue(String.class);
+                                        refSumarMensSinLeer = database.getReference("RelacionChatUsuario/" + uidDestino + "/" + NOMBRE_CHAT + "/mensajesSinLeer");
+                                        refSumarMensSinLeer.addListenerForSingleValueEvent(new ValueEventListener() {
+                                            @Override
+                                            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                                mensajesSinLeer = dataSnapshot.getValue(Long.class);
+                                                while (mensajesSinLeer == -1) ;
+                                                refSumarMensSinLeer.setValue(mensajesSinLeer + 1);
+                                                mensajesSinLeer = -1;
+                                                String textoUltimoMensaje = mensaje.getTexto().length() > 200 ? mensaje.getTexto().substring(0, 201)+"..." : mensaje.getTexto();
+                                                SimpleDateFormat fecha = new SimpleDateFormat("HH:mm   dd-MM-yyyy ", Locale.getDefault());
+                                                //Chat Propio
+                                                //Actualizamos el ultimoMensaje
+                                                DatabaseReference refUltimoMensajeYFecha = database.getReference("RelacionChatUsuario/" + currentUser.getUid() + "/" + NOMBRE_CHAT + "/ultimoMensaje");
+                                                refUltimoMensajeYFecha.setValue(textoUltimoMensaje);
+                                                //Actualizamos Fecha ultimoMensaje
+                                                refUltimoMensajeYFecha = database.getReference("RelacionChatUsuario/" + currentUser.getUid() + "/" + NOMBRE_CHAT + "/fechaUltimoMensaje");
+                                                //Obtenemos la fecha y hora
+                                                String currentDateandTime = fecha.format(new Date());
+                                                refUltimoMensajeYFecha.setValue(currentDateandTime);
+                                                //Chat Destino
+                                                //Actualizamos el ultimoMensaje
+                                                refUltimoMensajeYFecha = database.getReference("RelacionChatUsuario/" + uidDestino + "/" + NOMBRE_CHAT + "/ultimoMensaje");
+                                                refUltimoMensajeYFecha.setValue(textoUltimoMensaje);
+                                                //Actualizamos Fecha ultimoMensaje
+                                                refUltimoMensajeYFecha = database.getReference("RelacionChatUsuario/" + uidDestino + "/" + NOMBRE_CHAT + "/fechaUltimoMensaje");
+                                                refUltimoMensajeYFecha.setValue(currentDateandTime);
+                                            }
+
+                                            @Override
+                                            public void onCancelled(@NonNull DatabaseError databaseError) {
+                                            }
+                                        });
+                                    }
+
+                                    @Override
+                                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                                    }
+                                });
+
+                            }
                         }
 
                         @Override
@@ -153,7 +204,13 @@ public class ActivityConversacion extends AppCompatActivity {
             public void onCancelled(@NonNull DatabaseError databaseError) {
 
             }
-        });
+        };
+
+        //Testeo
+        //referenciaNuevoMensaje = database.getReference("Chats/Chat_0/Mensajes/contadorMensajes");
+        //Definitiva
+        referenciaNuevoMensaje = database.getReference("Chats/" + NOMBRE_CHAT + "/Mensajes/contadorMensajes");
+        referenciaNuevoMensaje.addValueEventListener(eventoNuevoMensaje);
 
         btnEnviarMensaje.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -164,7 +221,7 @@ public class ActivityConversacion extends AppCompatActivity {
                     //Referencia TESTEO
                     //DatabaseReference ref = database.getReference("Chats/Chat_0/Mensajes/Mens_" + contadorMensajes);
                     //Referencia DEFINITIVA
-                    DatabaseReference ref = database.getReference("Chats/"+NOMBRE_CHAT+"/Mensajes/Mens_"+contadorMensajes);
+                    DatabaseReference ref = database.getReference("Chats/" + NOMBRE_CHAT + "/Mensajes/Mens_" + contadorMensajes);
                     Mensaje nuevoMensaje = new Mensaje(currentUser.getEmail(), sNuevoMensaje, contadorMensajes);
                     ref.setValue(nuevoMensaje);
                     //Referencia TESTEO
@@ -185,25 +242,15 @@ public class ActivityConversacion extends AppCompatActivity {
                 finish();
             }
         });
-/*
-        RecyclerView.SmoothScroller smoothScroller = new
-                LinearSmoothScroller(getApplicationContext()) {
-                    @Override
-                    protected int getVerticalSnapPreference() {
-                        return LinearSmoothScroller.SNAP_TO_END;
-                    }
-                };
-
- */
-
-    }
-/*
-    private String generarMensajeIniciacion(String nickOrigen, String nickDestino) {
-        String mensaje1 = getApplicationContext().getApplicationContext().getString(R.string.mensajeIniciacion1);
-        String mensaje2 = getApplicationContext().getApplicationContext().getString(R.string.mensajeIniciacion2);
-        String mensaje3 = getApplicationContext().getApplicationContext().getString(R.string.mensajeIniciacion3);
-        return mensaje1 + nickOrigen + mensaje2 + nickDestino + mensaje3 + " 🎉🎉";
     }
 
- */
+    public void onPause() {
+        super.onPause();
+        referenciaNuevoMensaje.removeEventListener(eventoNuevoMensaje);
+        DatabaseReference refReiniciarContMensSinLeer = database.getReference("RelacionChatUsuario/" + currentUser.getUid() + "/" + NOMBRE_CHAT + "/mensajesSinLeer");
+        refReiniciarContMensSinLeer.setValue(0);
+        finish();
+        //Falta hacer que se actualize la vista previa de los mensajes.
+    }
+
 }

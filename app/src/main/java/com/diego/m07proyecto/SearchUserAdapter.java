@@ -235,6 +235,7 @@ public class SearchUserAdapter extends RecyclerView.Adapter<SearchUserAdapter.Vi
                 intentConversacion.putExtra("CORREO_CHAT", currentSearch.getCorreoDestino());
                 intentConversacion.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 mContext.startActivity(intentConversacion);
+
             }
 
             @Override
@@ -254,12 +255,8 @@ public class SearchUserAdapter extends RecyclerView.Adapter<SearchUserAdapter.Vi
         newRelacionChatReference.setValue(uidDestino);
         newRelacionChatReference = database.getReference("RelacionChatUsuario/" + uidOrigen + "/" + nuevoChat + "/nickDestino");
         newRelacionChatReference.setValue(currentSearch.getNickDestino());
-        /*
-        newRelacionChatReference = database.getReference("RelacionChatUsuario/" + uidOrigen + "/" + nuevoChat + "/ultimoMensaje");
-        //String ultimoMensaje = generarMensajeIniciacion(nickOrigen, currentSearch.getNickDestino());
-        newRelacionChatReference.setValue(primerMensaje);
-
-         */
+        newRelacionChatReference = database.getReference("RelacionChatUsuario/" + uidOrigen + "/" + nuevoChat + "/mensajesSinLeer");
+        newRelacionChatReference.setValue(0);
     }
 
     private void iniciarRelacionDestino(final FirebaseDatabase database, String uidDestino) {
@@ -271,12 +268,8 @@ public class SearchUserAdapter extends RecyclerView.Adapter<SearchUserAdapter.Vi
         newRelacionChatReference.setValue(currentUser.getUid());
         newRelacionChatReference = database.getReference("RelacionChatUsuario/" + uidDestino + "/" + nuevoChat + "/nickDestino");
         newRelacionChatReference.setValue(nickOrigen);
-        /*
-        newRelacionChatReference = database.getReference("RelacionChatUsuario/" + uidDestino + "/" + nuevoChat + "/ultimoMensaje");
-        //primerMensaje = generarMensajeIniciacion(currentSearch.getNickDestino(), nickOrigen);
-        newRelacionChatReference.setValue(primerMensaje);
-
-         */
+        newRelacionChatReference = database.getReference("RelacionChatUsuario/" + uidDestino + "/" + nuevoChat + "/mensajesSinLeer");
+        newRelacionChatReference.setValue(0);
     }
 /*
     private String generarMensajeIniciacion(String nickOrigen, String nickDestino) {

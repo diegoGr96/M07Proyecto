@@ -115,7 +115,7 @@ public class SendFragment extends Fragment {
             }
         };
 
-        referenciaChat.addValueEventListener(eventoChat);
+        //referenciaChat.addValueEventListener(eventoChat);
 
         textoBuscar = root.findViewById(R.id.textoBuscarChat);
         btnBuscar = root.findViewById(R.id.btnBuscarChat);
@@ -231,8 +231,12 @@ public class SendFragment extends Fragment {
         super.onPause();
         textoBuscar.setVisibility(View.INVISIBLE);
         btnCerrarBuscar.setVisibility(View.INVISIBLE);
-
         mRecyclerView.setAdapter(mAdapterChat);
         referenciaChat.removeEventListener(eventoChat);
+    }
+
+    public void onResume() {
+        super.onResume();
+        referenciaChat.addValueEventListener(eventoChat);
     }
 }
