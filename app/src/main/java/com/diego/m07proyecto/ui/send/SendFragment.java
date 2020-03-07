@@ -32,6 +32,8 @@ import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -45,6 +47,7 @@ public class SendFragment extends Fragment {
     private FirebaseUser currentUser;
     private DatabaseReference referenciaChat;
     private ValueEventListener eventoChat;
+    private Query queryChat;
 
     private RecyclerView mRecyclerView;
     private ChatAdapter mAdapterChat;
@@ -81,6 +84,7 @@ public class SendFragment extends Fragment {
         //referenciaChat = database.getReference("RelacionChatUsuario/uidDiego");
         //Referencia Final
         referenciaChat = database.getReference("RelacionChatUsuario/" + currentUser.getUid());
+        queryChat = referenciaChat.orderByChild("mensajesSinLeer");
         eventoChat = new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -102,8 +106,9 @@ public class SendFragment extends Fragment {
                         firstAttempt = false;
                         contGeneralMensajesSinLeer = 0;
                     }
-
+                    Collections.reverse(chatList);
                     contGeneralMensajesSinLeer = contMensajesSinLeer;
+
                     mAdapterChat = new ChatAdapter(getContext(), chatList);
                     mRecyclerView.setAdapter(mAdapterChat);
                 }
@@ -232,11 +237,11 @@ public class SendFragment extends Fragment {
         textoBuscar.setVisibility(View.INVISIBLE);
         btnCerrarBuscar.setVisibility(View.INVISIBLE);
         mRecyclerView.setAdapter(mAdapterChat);
-        referenciaChat.removeEventListener(eventoChat);
+        queryChat.removeEventListener(eventoChat);
     }
 
     public void onResume() {
         super.onResume();
-        referenciaChat.addValueEventListener(eventoChat);
+        queryChat.addValueEventListener(eventoChat);
     }
 }

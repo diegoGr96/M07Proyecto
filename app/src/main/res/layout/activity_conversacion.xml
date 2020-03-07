@@ -30,7 +30,7 @@
         android:background="@drawable/back_boton_volver"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="?attr/homeAsUpIndicator" />
+        app:srcCompat="?attr/actionModeCloseDrawable" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerConversacion"
