@@ -5,12 +5,12 @@ import java.util.HashMap;
 public class Mensaje {
     private String remitente;
     private String texto;
-    private int idMensaje;
+    private long idMensaje;
 
     public Mensaje() {
     }
 
-    public Mensaje(String remitente, String texto, int idMensaje) {
+    public Mensaje(String remitente, String texto, long idMensaje) {
         this.remitente = remitente;
         this.texto = texto;
         this.idMensaje = idMensaje;
@@ -32,11 +32,11 @@ public class Mensaje {
         this.texto = texto;
     }
 
-    public int getIdMensaje() {
+    public long getIdMensaje() {
         return idMensaje;
     }
 
-    public void setIdMensaje(int idMensaje) {
+    public void setIdMensaje(long idMensaje) {
         this.idMensaje = idMensaje;
     }
 
@@ -50,9 +50,9 @@ public class Mensaje {
     }
 
     public static Mensaje convertMensaje(HashMap<String, Object> mapa){
-        String remitente = (String)mapa.get("Remitente");
-        String texto  = (String)mapa.get("Texto");
-        int idMensaje = ((Long)mapa.get("idMensaje")).intValue();
+        String remitente = (String)mapa.get("remitente");
+        String texto  = (String)mapa.get("texto");
+        long idMensaje = (Long)mapa.get("idMensaje");
         return new Mensaje(remitente,texto,idMensaje);
     }
 }

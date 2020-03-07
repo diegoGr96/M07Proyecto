@@ -214,7 +214,7 @@ public class SearchUserAdapter extends RecyclerView.Adapter<SearchUserAdapter.Vi
                 nuevoChat = "Chat_" + contadorChats;
                 //newChatReference = database.getReference("Chats/" + nuevoChat + "/Mens_0/Texto");
                 //newChatReference.setValue(generarMensajeIniciacion(nickOrigen, currentSearch.getNickDestino()));
-                DatabaseReference newChatReference = database.getReference("Chats/" + nuevoChat + "/contadorMensajes");
+                DatabaseReference newChatReference = database.getReference("Chats/" + nuevoChat + "/Mensajes/contadorMensajes");
                 newChatReference.setValue(0);
                 //Actualizamos el valor del contador de Chats en Firebase porque ya se ha creado el nuevo Chat.
                 contadorChatsReference.setValue(contadorChats + 1);
