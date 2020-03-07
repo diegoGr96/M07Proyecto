@@ -271,4 +271,5 @@
     <string name="menu_chat">Chat</string>
     <string name="buscar_chat">Search</string>
     <string name="searchChatNotFound">No match found.</string>
+    <string name="mensajeIniciacion1">Wow It seems to be the beginning of a new conversation!. Feel free to express your emotions and remember ... ExpressaT! 🎉🎉</string>
 </resources>

@@ -123,7 +123,10 @@ public class ChatAdapter  extends RecyclerView.Adapter<ChatAdapter.ViewHolder>{
             // Populate the textviews with data.
 
             textoDestino.setText(currentChat.getCorreoDestino());
-            textoUltimoMensaje.setText(currentChat.getUltimoMensaje());
+            if (currentChat.getUltimoMensaje() != null){
+                textoUltimoMensaje.setText(currentChat.getUltimoMensaje());
+            }
+
             textoFecha.setText(currentChat.getFechaUltimoMensaje());
             int mensajesSinLeer = currentChat.getMensajesSinLeer();
             if (mensajesSinLeer>0) {
@@ -136,19 +139,6 @@ public class ChatAdapter  extends RecyclerView.Adapter<ChatAdapter.ViewHolder>{
 
         @Override
         public void onClick(View view) {
-            /*
-            Chat currentChat = mChatData.get(getAdapterPosition());
-            //Log.d("A", "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAsddfnuirn");
-            Intent detailIntent = new Intent(mContext, DetailActivity.class);
-            detailIntent.putExtra("ID_TEMA", currentChat.getIdTema());
-            detailIntent.putExtra("TITLE", currentChat.getTitulo());
-            detailIntent.putExtra("USER", currentChat.isAnonimo() ? mContext.getResources().getString(R.string.temaUsuarioAnonimo) : currentChat.getNickAutor());
-            detailIntent.putExtra("BODY", currentChat.getCuerpo());
-            detailIntent.putExtra("UID", currentChat.getUidAutor());
-            detailIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            mContext.startActivity(detailIntent);
-
-             */
 
             Intent intent = new Intent(mContext,ActivityConversacion.class);
             mContext.startActivity(intent);

@@ -3,6 +3,7 @@ package com.diego.m07proyecto;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.LinearSmoothScroller;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
@@ -33,6 +34,7 @@ public class ActivityConversacion extends AppCompatActivity {
 
     private RecyclerView mRecyclerView;
     private ConversacionAdapter mAdapterConversacion;
+    RecyclerView.LayoutManager layoutManager;
 
     private Map<String, HashMap<String, Object>> conversacionListh;
     private List<Mensaje> conversacionList;
@@ -60,7 +62,6 @@ public class ActivityConversacion extends AppCompatActivity {
                 if (conversacionListh == null) {
 
                 } else {
-                    //conversacionList.clear();
                     for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                         if (!(snapshot.getValue() instanceof Long)) {
                             Mensaje mensaje = Mensaje.convertConversacion(conversacionListh.get(snapshot.getKey()));
@@ -68,8 +69,6 @@ public class ActivityConversacion extends AppCompatActivity {
                         }
                     }
                     mAdapterConversacion.notifyDataSetChanged();
-                    //mAdapterConversacion = new ConversacionAdapter(getApplicationContext(), conversacionList,currentUser);
-                    //mRecyclerView.setAdapter(mAdapterConversacion);
                 }
             }
 
@@ -102,6 +101,7 @@ public class ActivityConversacion extends AppCompatActivity {
                             //Mensaje mensaje = Mensaje.convertConversacion(mapaNuevoMensaje.get(snapshot.getKey()));
                             conversacionList.add(mensaje);
                             mAdapterConversacion.notifyDataSetChanged();
+                            mRecyclerView.getLayoutManager().scrollToPosition(conversacionList.size()-1);
                         }
 
                         @Override
@@ -117,5 +117,25 @@ public class ActivityConversacion extends AppCompatActivity {
 
             }
         });
+/*
+        RecyclerView.SmoothScroller smoothScroller = new
+                LinearSmoothScroller(getApplicationContext()) {
+                    @Override
+                    protected int getVerticalSnapPreference() {
+                        return LinearSmoothScroller.SNAP_TO_END;
+                    }
+                };
+
+ */
+
     }
+/*
+    private String generarMensajeIniciacion(String nickOrigen, String nickDestino) {
+        String mensaje1 = getApplicationContext().getApplicationContext().getString(R.string.mensajeIniciacion1);
+        String mensaje2 = getApplicationContext().getApplicationContext().getString(R.string.mensajeIniciacion2);
+        String mensaje3 = getApplicationContext().getApplicationContext().getString(R.string.mensajeIniciacion3);
+        return mensaje1 + nickOrigen + mensaje2 + nickDestino + mensaje3 + " 🎉🎉";
+    }
+
+ */
 }

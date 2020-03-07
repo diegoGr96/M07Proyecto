@@ -77,6 +77,7 @@ public class RegistrarUsuarioActivity extends AppCompatActivity {
                                     DatabaseReference myRef = database.getReference("Usuarios/" + aux.getUid());
                                     myRef.child("email").setValue(aux.getEmail());
                                     myRef.child("nick").setValue("");
+                                    myRef.child("uid").setValue(aux.getUid());
                                     finish();
                                 } else {
                                     Log.w("a", "createUserWithEmail:failure", task.getException());

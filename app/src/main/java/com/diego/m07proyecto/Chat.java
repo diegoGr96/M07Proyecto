@@ -106,7 +106,10 @@ public class Chat {
     public static Chat convertChat(HashMap<String, Object> mapa){
         String correoDestino = (String) mapa.get("correoDestino");
         String fechaUltimoMensaje = (String) mapa.get("fechaUltimoMensaje");
-        int mensajesSinLeer = ((Long) mapa.get("mensajesSinLeer")).intValue();
+        int mensajesSinLeer = 0;
+        if (mapa.get("mensajesSinLeer") != null) {
+            mensajesSinLeer = ((Long) mapa.get("mensajesSinLeer")).intValue();
+        }
         String nombreChat = (String) mapa.get("nombreChat");
         String uidDestino = (String) mapa.get("uidDestino");
         String ultimoMensaje = (String) mapa.get("ultimoMensaje");

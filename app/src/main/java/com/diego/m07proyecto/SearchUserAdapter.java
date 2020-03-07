@@ -7,20 +7,39 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class SearchUserAdapter extends RecyclerView.Adapter<SearchUserAdapter.ViewHolder> {
     // Member variables.
     private List<SearchUsers> mSearchUserData;
     private Context mContext;
+    private long contadorChats = -1;
+    private String nickOrigen;
+    private SearchUsers currentSearch;
+    private String nuevoChat;
+    private String primerMensaje;
+    private FirebaseUser currentUser;
+    //private String nombreNuevoChat;
 
     /**
      * Constructor that passes in the games data and the context.
      *
      * @param searchUsersData ArrayList containing the gamess data.
-     * @param context   Context of the application.
+     * @param context         Context of the application.
      */
     public SearchUserAdapter(Context context, List<SearchUsers> searchUsersData) {
         this.mSearchUserData = searchUsersData;
@@ -92,7 +111,6 @@ public class SearchUserAdapter extends RecyclerView.Adapter<SearchUserAdapter.Vi
         private TextView textoSearchEmail;
 
 
-
         /**
          * Constructor for the ViewHolder, used in onCreateViewHolder().
          *
@@ -121,21 +139,142 @@ public class SearchUserAdapter extends RecyclerView.Adapter<SearchUserAdapter.Vi
 
         @Override
         public void onClick(View view) {
-            /*
-            Chat currentChat = mChatData.get(getAdapterPosition());
-            //Log.d("A", "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAsddfnuirn");
-            Intent detailIntent = new Intent(mContext, DetailActivity.class);
-            detailIntent.putExtra("ID_TEMA", currentChat.getIdTema());
-            detailIntent.putExtra("TITLE", currentChat.getTitulo());
-            detailIntent.putExtra("USER", currentChat.isAnonimo() ? mContext.getResources().getString(R.string.temaUsuarioAnonimo) : currentChat.getNickAutor());
-            detailIntent.putExtra("BODY", currentChat.getCuerpo());
-            detailIntent.putExtra("UID", currentChat.getUidAutor());
-            detailIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            mContext.startActivity(detailIntent);
+            currentSearch = mSearchUserData.get(getAdapterPosition());
 
-             */
-            Intent intent = new Intent(mContext,ActivityConversacion.class);
-            mContext.startActivity(intent);
+            final String correoDestino = currentSearch.getCorreoDestino();
+            final String uidDestino = currentSearch.getUidDestino();
+            final FirebaseDatabase database = FirebaseDatabase.getInstance();
+            final FirebaseAuth mAuth = FirebaseAuth.getInstance();
+            currentUser = mAuth.getCurrentUser();
+
+            DatabaseReference referenciaNickOrigen = database.getReference("Usuarios/" + currentUser.getUid() + "/nick");
+            referenciaNickOrigen.addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    nickOrigen = dataSnapshot.getValue(String.class);
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                }
+            });
+
+            //Procedemos a mirar si el usuario que hemos seleccionado en el buscador ya tiene una conversación con nosotros.
+            //Lo miramos en la Tabla 'RelacionChatUsuario'
+            DatabaseReference referenciaSearchUser = database.getReference("RelacionChatUsuario/" + currentUser.getUid());
+            Query query = referenciaSearchUser.orderByChild("correoDestino").equalTo(correoDestino);
+            query.addListenerForSingleValueEvent(new ValueEventListener() {
+                Map<String, Object> mapaResultado;
+
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+                    mapaResultado = (HashMap<String, Object>) dataSnapshot.getValue();
+                    //Si no hemos encontrado ningún resultado quiere decir que nunca hemos hablado con esa persona.
+                    //Por lo tando tenemos que inicializar dicha conversación y ingresar un nuevo campo en la tabla 'RelacionChatUsuario'
+                    //para la nueva conversación.
+                    if (mapaResultado == null) {
+                        inicializarNuevoChat(database, currentUser, correoDestino, uidDestino);
+                    } else {
+                        nuevoChat = (String) mapaResultado.get("nombreChat");
+                    }
+
+                    Intent intentConversacion = new Intent(mContext, ActivityConversacion.class);
+                    intentConversacion.putExtra("nombreChat", nuevoChat);
+                    intentConversacion.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    mContext.startActivity(intentConversacion);
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+                    String a = "🎉🎉";
+                }
+            });
+
+
         }
     }
+
+    private void inicializarNuevoChat(final FirebaseDatabase database, final FirebaseUser currentUser, final String correoDestino, final String uidDestino) {
+        //Primero crearemos la nueva Tabla en 'Chats', para eso primero necesitamos obtener el contador de chats
+        //Una vez lo obtengamos ya podremos crear el nuevo chat.
+        final DatabaseReference contadorChatsReference = database.getReference("Chats/contadorChats");
+        contadorChatsReference.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                //En este punto ya tenemos el contador de chats y estamos en posición de crear el nuevo tema.
+                //Crearemos el nuevo tema inicializando su propio contador de mensajes a 0.
+                contadorChats = (long) dataSnapshot.getValue();
+
+                while (contadorChats == -1 && nickOrigen == null) ;
+                nuevoChat = "Chat_" + contadorChats;
+                //newChatReference = database.getReference("Chats/" + nuevoChat + "/Mens_0/Texto");
+                //newChatReference.setValue(generarMensajeIniciacion(nickOrigen, currentSearch.getNickDestino()));
+                DatabaseReference newChatReference = database.getReference("Chats/" + nuevoChat + "/contadorMensajes");
+                newChatReference.setValue(0);
+                //Actualizamos el valor del contador de Chats en Firebase porque ya se ha creado el nuevo Chat.
+                contadorChatsReference.setValue(contadorChats + 1);
+                //En este punto ya hemos creado el nuevo chat y procederemos a crear el nuevo campo en la tabla 'RelacionChatUsuario'
+                //la ininializaremos con el nombre del chat, el correo destino y el UID destino.
+                //- El nombre del chat lo obtenemos a partir del contador de chats
+                //- El correo destino lo tenemos del Objeto 'currentSearch'
+                //- El UID destino lo tenemos a del Objeto 'currentSearch'
+                iniciarRelacionOrigen(database, currentUser.getUid(), correoDestino, uidDestino);
+                //En este punto hemos creado el nuevo chat en la tabla 'RelacionChatUsuario' y la hemos inicializado con el campo 'nombreChat'
+                //y el campo 'correoDestino'.
+                //Por último tenemos que crear la tabla 'RelacionChatUsuario' para el usuario destino.
+                iniciarRelacionDestino(database, uidDestino);
+                //Después de todas estas operaciones solo nos queda asignar el valor a la variable de clase 'nuevoChat' y inicializar la nueva activity.
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+        //En este caso quiere decir que ya tenemos una conversación iniciada con este usuario.
+    }
+
+    private void iniciarRelacionOrigen(final FirebaseDatabase database, String uidOrigen, String correoDestino, String uidDestino) {
+        DatabaseReference newRelacionChatReference = database.getReference("RelacionChatUsuario/" + uidOrigen + "/" + nuevoChat + "/nombreChat");
+        newRelacionChatReference.setValue("Chat_" + contadorChats);
+        newRelacionChatReference = database.getReference("RelacionChatUsuario/" + uidOrigen + "/" + nuevoChat + "/correoDestino");
+        newRelacionChatReference.setValue(correoDestino);
+        newRelacionChatReference = database.getReference("RelacionChatUsuario/" + uidOrigen + "/" + nuevoChat + "/uidDestino");
+        newRelacionChatReference.setValue(uidDestino);
+        newRelacionChatReference = database.getReference("RelacionChatUsuario/" + uidOrigen + "/" + nuevoChat + "/nickDestino");
+        newRelacionChatReference.setValue(currentSearch.getNickDestino());
+        /*
+        newRelacionChatReference = database.getReference("RelacionChatUsuario/" + uidOrigen + "/" + nuevoChat + "/ultimoMensaje");
+        //String ultimoMensaje = generarMensajeIniciacion(nickOrigen, currentSearch.getNickDestino());
+        newRelacionChatReference.setValue(primerMensaje);
+
+         */
+    }
+
+    private void iniciarRelacionDestino(final FirebaseDatabase database, String uidDestino) {
+        DatabaseReference newRelacionChatReference = database.getReference("RelacionChatUsuario/" + uidDestino + "/" + nuevoChat + "/nombreChat");
+        newRelacionChatReference.setValue("Chat_" + contadorChats);
+        newRelacionChatReference = database.getReference("RelacionChatUsuario/" + uidDestino + "/" + nuevoChat + "/correoDestino");
+        newRelacionChatReference.setValue(currentUser.getEmail());
+        newRelacionChatReference = database.getReference("RelacionChatUsuario/" + uidDestino + "/" + nuevoChat + "/uidDestino");
+        newRelacionChatReference.setValue(currentUser.getUid());
+        newRelacionChatReference = database.getReference("RelacionChatUsuario/" + uidDestino + "/" + nuevoChat + "/nickDestino");
+        newRelacionChatReference.setValue(nickOrigen);
+        /*
+        newRelacionChatReference = database.getReference("RelacionChatUsuario/" + uidDestino + "/" + nuevoChat + "/ultimoMensaje");
+        //primerMensaje = generarMensajeIniciacion(currentSearch.getNickDestino(), nickOrigen);
+        newRelacionChatReference.setValue(primerMensaje);
+
+         */
+    }
+/*
+    private String generarMensajeIniciacion(String nickOrigen, String nickDestino) {
+        String mensaje1 = mContext.getApplicationContext().getString(R.string.mensajeIniciacion1);
+        String mensaje2 = mContext.getApplicationContext().getString(R.string.mensajeIniciacion2);
+        String mensaje3 = mContext.getApplicationContext().getString(R.string.mensajeIniciacion3);
+        return mensaje1 + nickOrigen + mensaje2 + nickDestino + mensaje3 + " 🎉🎉";
+    }
+*/
 }

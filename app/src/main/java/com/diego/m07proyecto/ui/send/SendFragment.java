@@ -43,8 +43,8 @@ public class SendFragment extends Fragment {
     private FirebaseDatabase database;
     private FirebaseAuth mAuth;
     private FirebaseUser currentUser;
-    DatabaseReference referenciaChat;
-    ValueEventListener eventoChat;
+    private DatabaseReference referenciaChat;
+    private ValueEventListener eventoChat;
 
     private RecyclerView mRecyclerView;
     private ChatAdapter mAdapterChat;
@@ -77,9 +77,10 @@ public class SendFragment extends Fragment {
         database = FirebaseDatabase.getInstance();
         mAuth = FirebaseAuth.getInstance();
         currentUser = mAuth.getCurrentUser();
-        //Testeo
-        referenciaChat = database.getReference("RelacionChatUsuario/uidDiego");
-        //referenciaChat = database.getReference("RelacionChatUsuario/"+currentUser.getUid());
+        //Referencia Testeo
+        //referenciaChat = database.getReference("RelacionChatUsuario/uidDiego");
+        //Referencia Final
+        referenciaChat = database.getReference("RelacionChatUsuario/"+currentUser.getUid());
         eventoChat = new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -132,7 +133,7 @@ public class SendFragment extends Fragment {
                 }else{
                     hideKeyboard(getActivity());
                     //contadorConsulta = contadorTemas;
-                    String valorBusqueda = textoBuscar.getText().toString();
+                    String valorBusqueda = textoBuscar.getText().toString().trim().toLowerCase();
                     DatabaseReference dbRef = database.getReference("Usuarios/");
                     Query myQuery;
                     if (valorBusqueda.contains("@")){
@@ -160,7 +161,8 @@ public class SendFragment extends Fragment {
 
                                     String nickResult = String.valueOf(value.get("nick"));
                                     String emailResult = String.valueOf(value.get("email"));
-                                    userResult = new SearchUsers(nickResult,emailResult);
+                                    String uidResult = String.valueOf(value.get("uid"));
+                                    userResult = new SearchUsers(nickResult,emailResult,uidResult);
                                 }
 
                                 searchResult.add(userResult);
