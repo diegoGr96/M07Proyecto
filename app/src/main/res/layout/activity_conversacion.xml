@@ -7,11 +7,14 @@
     tools:context=".ActivityConversacion">
 
     <TextView
-        android:id="@+id/textoEmailConversacion"
+        android:id="@+id/textoNickConversacion"
         style="@style/botones"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:padding="10dp"
+        android:layout_height="46dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="5dp"
+        android:padding="8dp"
         android:text="prueba@prueba.com"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -20,12 +23,14 @@
 
     <ImageButton
         android:id="@+id/btnVolverConversacion"
-        style="@style/botones"
-        android:layout_width="51dp"
-        android:layout_height="50dp"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="5dp"
+        android:background="@drawable/back_boton_volver"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/arrow_left" />
+        app:srcCompat="?attr/homeAsUpIndicator" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerConversacion"
@@ -33,35 +38,41 @@
         android:layout_height="0dp"
         android:layout_marginTop="15dp"
         android:layout_marginBottom="5dp"
-        app:layout_constraintBottom_toTopOf="@+id/editText2"
+        app:layout_constraintBottom_toTopOf="@+id/textoNuevoMensaje"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textoEmailConversacion"
+        app:layout_constraintTop_toBottomOf="@+id/textoNickConversacion"
         app:layout_constraintVertical_bias="0.0" />
 
     <ImageButton
-        android:id="@+id/imageButton2"
-        style="@style/botones"
-        android:layout_width="0dp"
-        android:layout_height="45dp"
+        android:id="@+id/btnEnviarMensaje"
+        android:layout_width="46dp"
+        android:layout_height="46dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="5dp"
+        android:background="@drawable/back_boton_volver"
         android:padding="15dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:srcCompat="@drawable/ic_menu_send" />
+        app:srcCompat="@android:drawable/ic_menu_send" />
 
     <EditText
-        android:id="@+id/editText2"
+        android:id="@+id/textoNuevoMensaje"
         style="@style/editText"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginStart="5dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="5dp"
         android:ems="10"
         android:gravity="start|top"
+        android:hint="@string/escribe_mensaje_chat"
         android:inputType="textMultiLine"
+        android:maxHeight="200dp"
         android:padding="10dp"
-        android:text="Escribe aquí..."
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/imageButton2"
+        app:layout_constraintEnd_toStartOf="@+id/btnEnviarMensaje"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

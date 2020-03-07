@@ -139,8 +139,10 @@ public class ChatAdapter  extends RecyclerView.Adapter<ChatAdapter.ViewHolder>{
 
         @Override
         public void onClick(View view) {
-
+            Chat currentChat = mChatData.get(getAdapterPosition());
             Intent intent = new Intent(mContext,ActivityConversacion.class);
+            intent.putExtra("NOMBRE_CHAT",currentChat.getNombreChat());
+            intent.putExtra("CORREO_CHAT", currentChat.getCorreoDestino());
             mContext.startActivity(intent);
         }
     }

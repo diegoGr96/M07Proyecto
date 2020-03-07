@@ -3,20 +3,21 @@ package com.diego.m07proyecto;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.LinearSmoothScroller;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
+import android.view.View;
+import android.widget.EditText;
+import android.widget.ImageButton;
+import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
@@ -39,12 +40,26 @@ public class ActivityConversacion extends AppCompatActivity {
     private Map<String, HashMap<String, Object>> conversacionListh;
     private List<Mensaje> conversacionList;
 
+    private TextView textoCorreoDestino;
+    private ImageButton btnVolver;
+    private EditText textoNuevoMensaje;
+    private ImageButton btnEnviarMensaje;
+
     private boolean firstAttempt = true;
+    private long contadorMensajes = -1;
+    // private String nombreChat;
+    //private String CORREO_CHAT;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_conversacion);
+
+        textoCorreoDestino = findViewById(R.id.textoNickConversacion);
+        btnVolver = findViewById(R.id.btnVolverConversacion);
+        textoNuevoMensaje = findViewById(R.id.textoNuevoMensaje);
+        btnEnviarMensaje = findViewById(R.id.btnEnviarMensaje);
+
 
         database = FirebaseDatabase.getInstance();
         mAuth = FirebaseAuth.getInstance();
@@ -54,6 +69,15 @@ public class ActivityConversacion extends AppCompatActivity {
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
         mAdapterConversacion = new ConversacionAdapter(getApplicationContext(), conversacionList, currentUser);
         mRecyclerView.setAdapter(mAdapterConversacion);
+
+        //En este punto obtendremos el valor que recibimos del Intent para saber en que Chat nos encontramos.
+        final String NOMBRE_CHAT = getIntent().getStringExtra("NOMBRE_CHAT");
+        final String CORREO_CHAT = getIntent().getStringExtra("CORREO_CHAT");
+
+
+        textoCorreoDestino.setText(CORREO_CHAT.length() > 27 ? CORREO_CHAT.split("@")[0] : CORREO_CHAT);
+
+        //Referencia Testeo
         referenciaChat = database.getReference("Chats/Chat_0/Mensajes");
         referenciaChat.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -64,7 +88,7 @@ public class ActivityConversacion extends AppCompatActivity {
                 } else {
                     for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                         if (!(snapshot.getValue() instanceof Long)) {
-                            Mensaje mensaje = Mensaje.convertConversacion(conversacionListh.get(snapshot.getKey()));
+                            Mensaje mensaje = Mensaje.convertMensaje(conversacionListh.get(snapshot.getKey()));
                             conversacionList.add(mensaje);
                         }
                     }
@@ -87,21 +111,22 @@ public class ActivityConversacion extends AppCompatActivity {
                 if (firstAttempt) {
                     firstAttempt = false;
                 } else {
-                    long idNuevoMensaje = dataSnapshot.getValue(Long.class);
-                    DatabaseReference refGetNuevoMensaje = database.getReference("Chats/Chat_0/Mensajes/Mens_" + (idNuevoMensaje - 1));
+                    contadorMensajes = dataSnapshot.getValue(Long.class);
+                    //Referencia Testeo
+                    DatabaseReference refGetNuevoMensaje = database.getReference("Chats/Chat_0/Mensajes/Mens_" + (contadorMensajes - 1));
                     refGetNuevoMensaje.addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                             Toast.makeText(getApplicationContext(), "Nuevo Mensaje!!!", Toast.LENGTH_LONG).show();
                             conversacionListh.clear();
-                            Map<String, Object> mapaNuevoMensaje = (HashMap<String, Object>) dataSnapshot.getValue();
-                            String remitente = (String) mapaNuevoMensaje.get("Remitente");
-                            String textoMensaje = (String) mapaNuevoMensaje.get("Texto");
-                            Mensaje mensaje = new Mensaje(remitente, textoMensaje);
-                            //Mensaje mensaje = Mensaje.convertConversacion(mapaNuevoMensaje.get(snapshot.getKey()));
+                            HashMap<String, Object> mapaNuevoMensaje = (HashMap<String, Object>) dataSnapshot.getValue();
+                            //String remitente = (String) mapaNuevoMensaje.get("Remitente");
+                            //String textoMensaje = (String) mapaNuevoMensaje.get("Texto");
+                            Mensaje mensaje = Mensaje.convertMensaje(mapaNuevoMensaje);
+
                             conversacionList.add(mensaje);
                             mAdapterConversacion.notifyDataSetChanged();
-                            mRecyclerView.getLayoutManager().scrollToPosition(conversacionList.size()-1);
+                            mRecyclerView.getLayoutManager().scrollToPosition(conversacionList.size() - 1);
                         }
 
                         @Override
@@ -115,6 +140,26 @@ public class ActivityConversacion extends AppCompatActivity {
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
 
+            }
+        });
+
+        btnEnviarMensaje.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String sNuevoMensaje = textoNuevoMensaje.getText().toString();
+                if (sNuevoMensaje.length() > 0) {
+                    while (contadorMensajes == -1) ;
+                    DatabaseReference ref = database.getReference("Chats/"+NOMBRE_CHAT+"Mensajes/");
+                } else {
+
+                }
+            }
+        });
+
+        btnVolver.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
             }
         });
 /*

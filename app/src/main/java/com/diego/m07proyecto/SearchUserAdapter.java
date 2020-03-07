@@ -31,9 +31,7 @@ public class SearchUserAdapter extends RecyclerView.Adapter<SearchUserAdapter.Vi
     private String nickOrigen;
     private SearchUsers currentSearch;
     private String nuevoChat;
-    private String primerMensaje;
     private FirebaseUser currentUser;
-    //private String nombreNuevoChat;
 
     /**
      * Constructor that passes in the games data and the context.
@@ -165,34 +163,39 @@ public class SearchUserAdapter extends RecyclerView.Adapter<SearchUserAdapter.Vi
             DatabaseReference referenciaSearchUser = database.getReference("RelacionChatUsuario/" + currentUser.getUid());
             Query query = referenciaSearchUser.orderByChild("correoDestino").equalTo(correoDestino);
             query.addListenerForSingleValueEvent(new ValueEventListener() {
-                Map<String, Object> mapaResultado;
+                Map<String, HashMap<String, Object>> mapaResultado;
 
                 @Override
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
-                    mapaResultado = (HashMap<String, Object>) dataSnapshot.getValue();
+                    mapaResultado = (Map<String, HashMap<String, Object>>) dataSnapshot.getValue();
                     //Si no hemos encontrado ningún resultado quiere decir que nunca hemos hablado con esa persona.
                     //Por lo tando tenemos que inicializar dicha conversación y ingresar un nuevo campo en la tabla 'RelacionChatUsuario'
                     //para la nueva conversación.
                     if (mapaResultado == null) {
                         inicializarNuevoChat(database, currentUser, correoDestino, uidDestino);
-                    } else {
-                        nuevoChat = (String) mapaResultado.get("nombreChat");
-                    }
 
-                    Intent intentConversacion = new Intent(mContext, ActivityConversacion.class);
-                    intentConversacion.putExtra("nombreChat", nuevoChat);
-                    intentConversacion.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                    mContext.startActivity(intentConversacion);
+                    } else {
+                        HashMap<String, Object> mapaHijo;
+                        for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                            mapaHijo = mapaResultado.get(snapshot.getKey());
+                            nuevoChat = (String) mapaHijo.get("nombreChat");
+                            break;
+                        }
+                        //operacionesTerminadas = true;
+                        Intent intentConversacion = new Intent(mContext, ActivityConversacion.class);
+                        intentConversacion.putExtra("NOMBRE_CHAT", nuevoChat);
+                        intentConversacion.putExtra("CORREO_CHAT", currentSearch.getCorreoDestino());
+                        intentConversacion.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                        mContext.startActivity(intentConversacion);
+                    }
                 }
 
                 @Override
                 public void onCancelled(@NonNull DatabaseError databaseError) {
-                    String a = "🎉🎉";
+
                 }
             });
-
-
         }
     }
 
@@ -226,6 +229,12 @@ public class SearchUserAdapter extends RecyclerView.Adapter<SearchUserAdapter.Vi
                 //Por último tenemos que crear la tabla 'RelacionChatUsuario' para el usuario destino.
                 iniciarRelacionDestino(database, uidDestino);
                 //Después de todas estas operaciones solo nos queda asignar el valor a la variable de clase 'nuevoChat' y inicializar la nueva activity.
+                //operacionesTerminadas = true;
+                Intent intentConversacion = new Intent(mContext, ActivityConversacion.class);
+                intentConversacion.putExtra("NOMBRE_CHAT", nuevoChat);
+                intentConversacion.putExtra("CORREO_CHAT", currentSearch.getCorreoDestino());
+                intentConversacion.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                mContext.startActivity(intentConversacion);
             }
 
             @Override

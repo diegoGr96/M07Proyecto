@@ -84,7 +84,7 @@ public class ConversacionAdapter extends RecyclerView.Adapter<ConversacionAdapte
 
     @Override
     public int getItemViewType(int position) {
-        if (mMensajeData.get(position).getCorreoDestino().equals(currentUser.getEmail())){
+        if (mMensajeData.get(position).getRemitente().equals(currentUser.getEmail())){
             isMe = true;
             return 1;
         }else{
@@ -134,7 +134,7 @@ public class ConversacionAdapter extends RecyclerView.Adapter<ConversacionAdapte
          */
         void bindTo(Mensaje currentMensaje) {
             // Populate the textviews with data.
-            mensaje.setText(currentMensaje.getMensaje());
+            mensaje.setText(currentMensaje.getTexto());
         }
     }
 }

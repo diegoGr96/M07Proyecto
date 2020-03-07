@@ -272,4 +272,5 @@
     <string name="buscar_chat">Buscar</string>
     <string name="searchChatNotFound">No se ha encontrado ninguna coincidencia.</string>
     <string name="mensajeIniciacion1">"¡Vaya! parece que es el inicio de una nueva conversación. Sentíos libres de expresar vuestras emociones y recordad... ¡ExpressaT! 🎉🎉"</string>
+    <string name="escribe_mensaje_chat">Escribe un mensaje</string>
 </resources>

@@ -10,6 +10,7 @@ public class Chat {
     private int mensajesSinLeer;
     private String nombreChat;
     private String uidDestino;
+    private String nickDestino;
     private String ultimoMensaje;
 
     public Chat() {
@@ -25,12 +26,13 @@ public class Chat {
         this.ultimoMensaje = ultimoMensaje;
     }
 
-    public Chat(String correoDestino, String fechaUltimoMensaje, int mensajesSinLeer, String nombreChat, String uidDestino, String ultimoMensaje) {
+    public Chat(String correoDestino, String fechaUltimoMensaje, int mensajesSinLeer, String nombreChat, String uidDestino, String nickDestino, String ultimoMensaje) {
         this.correoDestino = correoDestino;
         this.fechaUltimoMensaje = fechaUltimoMensaje;
         this.mensajesSinLeer = mensajesSinLeer;
         this.nombreChat = nombreChat;
         this.uidDestino = uidDestino;
+        this.nickDestino = nickDestino;
         this.ultimoMensaje = ultimoMensaje;
     }
 
@@ -82,6 +84,14 @@ public class Chat {
         this.uidDestino = uidDestino;
     }
 
+    public String getNickDestino() {
+        return nickDestino;
+    }
+
+    public void setNickDestino(String nickDestino) {
+        this.nickDestino = nickDestino;
+    }
+
     public String getUltimoMensaje() {
         return ultimoMensaje;
     }
@@ -103,7 +113,7 @@ public class Chat {
                 '}';
     }
 
-    public static Chat convertChat(HashMap<String, Object> mapa){
+    public static Chat convertChat(HashMap<String, Object> mapa) {
         String correoDestino = (String) mapa.get("correoDestino");
         String fechaUltimoMensaje = (String) mapa.get("fechaUltimoMensaje");
         int mensajesSinLeer = 0;
@@ -111,8 +121,9 @@ public class Chat {
             mensajesSinLeer = ((Long) mapa.get("mensajesSinLeer")).intValue();
         }
         String nombreChat = (String) mapa.get("nombreChat");
+        String nickDestino = (String) mapa.get("nickDestino");
         String uidDestino = (String) mapa.get("uidDestino");
         String ultimoMensaje = (String) mapa.get("ultimoMensaje");
-        return new Chat(correoDestino,fechaUltimoMensaje,mensajesSinLeer,nombreChat,uidDestino,ultimoMensaje);
+        return new Chat(correoDestino, fechaUltimoMensaje, mensajesSinLeer, nombreChat, uidDestino, nickDestino, ultimoMensaje);
     }
 }
