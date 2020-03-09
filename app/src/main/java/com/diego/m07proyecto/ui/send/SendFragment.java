@@ -32,6 +32,8 @@ import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -43,8 +45,9 @@ public class SendFragment extends Fragment {
     private FirebaseDatabase database;
     private FirebaseAuth mAuth;
     private FirebaseUser currentUser;
-    DatabaseReference referenciaChat;
-    ValueEventListener eventoChat;
+    private DatabaseReference referenciaChat;
+    private ValueEventListener eventoChat;
+    private Query queryChat;
 
     private RecyclerView mRecyclerView;
     private ChatAdapter mAdapterChat;
@@ -77,9 +80,11 @@ public class SendFragment extends Fragment {
         database = FirebaseDatabase.getInstance();
         mAuth = FirebaseAuth.getInstance();
         currentUser = mAuth.getCurrentUser();
-        //Testeo
-        referenciaChat = database.getReference("RelacionChatUsuario/uidDiego");
-        //referenciaChat = database.getReference("RelacionChatUsuario/"+currentUser.getUid());
+        //Referencia Testeo
+        //referenciaChat = database.getReference("RelacionChatUsuario/uidDiego");
+        //Referencia Final
+        referenciaChat = database.getReference("RelacionChatUsuario/" + currentUser.getUid());
+        queryChat = referenciaChat.orderByChild("mensajesSinLeer");
         eventoChat = new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -92,17 +97,18 @@ public class SendFragment extends Fragment {
                     for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                         Chat chat = Chat.convertChat(chatListh.get(snapshot.getKey()));
                         chatList.add(chat);
-                        contMensajesSinLeer+= chat.getMensajesSinLeer();
+                        contMensajesSinLeer += chat.getMensajesSinLeer();
                     }
-                    if (!firstAttempt && contGeneralMensajesSinLeer < contMensajesSinLeer){
+                    if (!firstAttempt && contGeneralMensajesSinLeer < contMensajesSinLeer) {
                         managerOfSound();
                     }
-                    if (firstAttempt){
-                        firstAttempt=false;
+                    if (firstAttempt) {
+                        firstAttempt = false;
                         contGeneralMensajesSinLeer = 0;
                     }
-
+                    Collections.reverse(chatList);
                     contGeneralMensajesSinLeer = contMensajesSinLeer;
+
                     mAdapterChat = new ChatAdapter(getContext(), chatList);
                     mRecyclerView.setAdapter(mAdapterChat);
                 }
@@ -114,10 +120,10 @@ public class SendFragment extends Fragment {
             }
         };
 
-        referenciaChat.addValueEventListener(eventoChat);
+        //referenciaChat.addValueEventListener(eventoChat);
 
         textoBuscar = root.findViewById(R.id.textoBuscarChat);
-        btnBuscar =  root.findViewById(R.id.btnBuscarChat);
+        btnBuscar = root.findViewById(R.id.btnBuscarChat);
         btnCerrarBuscar = root.findViewById(R.id.btnCerrarBuscar);
 
         textoBuscar.setVisibility(View.INVISIBLE);
@@ -125,19 +131,19 @@ public class SendFragment extends Fragment {
         btnBuscar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (textoBuscar.getVisibility() == View.INVISIBLE){
+                if (textoBuscar.getVisibility() == View.INVISIBLE) {
                     textoBuscar.setVisibility(View.VISIBLE);
                     btnCerrarBuscar.setVisibility(View.VISIBLE);
                     textoBuscar.requestFocus();
-                }else{
+                } else {
                     hideKeyboard(getActivity());
                     //contadorConsulta = contadorTemas;
-                    String valorBusqueda = textoBuscar.getText().toString();
+                    String valorBusqueda = textoBuscar.getText().toString().trim().toLowerCase();
                     DatabaseReference dbRef = database.getReference("Usuarios/");
                     Query myQuery;
-                    if (valorBusqueda.contains("@")){
+                    if (valorBusqueda.contains("@")) {
                         myQuery = dbRef.orderByChild("email").equalTo(valorBusqueda);
-                    }else{
+                    } else {
                         myQuery = dbRef.orderByChild("nick").equalTo(valorBusqueda);
                     }
                     myQuery.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -154,13 +160,14 @@ public class SendFragment extends Fragment {
                                 textoBuscar.setText("");
 
                                 SearchUsers userResult = null;
-                                for(Map.Entry<String,HashMap<String,Object>> entry : searchListh.entrySet()){
+                                for (Map.Entry<String, HashMap<String, Object>> entry : searchListh.entrySet()) {
                                     String key = entry.getKey();
                                     HashMap value = entry.getValue();
 
                                     String nickResult = String.valueOf(value.get("nick"));
                                     String emailResult = String.valueOf(value.get("email"));
-                                    userResult = new SearchUsers(nickResult,emailResult);
+                                    String uidResult = String.valueOf(value.get("uid"));
+                                    userResult = new SearchUsers(nickResult, emailResult, uidResult);
                                 }
 
                                 searchResult.add(userResult);
@@ -227,6 +234,14 @@ public class SendFragment extends Fragment {
 
     public void onPause() {
         super.onPause();
-        referenciaChat.removeEventListener(eventoChat);
+        textoBuscar.setVisibility(View.INVISIBLE);
+        btnCerrarBuscar.setVisibility(View.INVISIBLE);
+        mRecyclerView.setAdapter(mAdapterChat);
+        queryChat.removeEventListener(eventoChat);
+    }
+
+    public void onResume() {
+        super.onResume();
+        queryChat.addValueEventListener(eventoChat);
     }
 }
