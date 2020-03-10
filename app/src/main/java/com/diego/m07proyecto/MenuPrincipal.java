@@ -137,4 +137,8 @@ public class MenuPrincipal extends AppCompatActivity {
         mAuth.signOut();
         finish();
     }
+
+    public void goToEditProfile(View view) {
+        startActivity(new Intent(this, EditProfile.class));
+    }
 }
