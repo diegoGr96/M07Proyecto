@@ -1,5 +1,6 @@
 package com.diego.m07proyecto;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
@@ -12,8 +13,11 @@ import android.widget.EditText;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.List;
 import java.util.Map;
@@ -23,6 +27,7 @@ public class EditProfile extends AppCompatActivity {
     private FirebaseDatabase database;
     private FirebaseAuth mAuth;
     private FirebaseUser currentUser;
+    private DatabaseReference userData;
 
     private Map<String, Object> consulta;
 
@@ -38,7 +43,6 @@ public class EditProfile extends AppCompatActivity {
     private Button btnGuardar;
     private String nacimientoOriginal;
     private String nombreOriginal;
-    private int contadorCaracteres;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,6 +52,7 @@ public class EditProfile extends AppCompatActivity {
         database = FirebaseDatabase.getInstance();
         mAuth = FirebaseAuth.getInstance();
         currentUser = mAuth.getCurrentUser();
+        userData = database.getReference("Usuarios/"+currentUser.getUid());
 
         btnGuardar = findViewById(R.id.btnGuardar);
         textNick = findViewById(R.id.textNick);
@@ -55,6 +60,24 @@ public class EditProfile extends AppCompatActivity {
         textNacimiento = findViewById(R.id.textNacimiento);
         textTemasCreados = findViewById(R.id.textTemasCreados);
         textRespuestas = findViewById(R.id.textRespuestas);
+
+        userData.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                textNick.setText(dataSnapshot.child("nick").getValue().toString());
+                textNombre.setText(dataSnapshot.child("nombre").getValue().toString());
+                textNacimiento.setText(dataSnapshot.child("fechaNacimiento").getValue().toString());
+                textTemasCreados.setText(dataSnapshot.child("numTemas").getValue().toString());
+                textRespuestas.setText(dataSnapshot.child("numRespuestas").getValue().toString());
+                nombreOriginal = textNombre.getText().toString();
+                nacimientoOriginal = textNacimiento.getText().toString();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
 
         btnGuardar.setOnClickListener(new View.OnClickListener() {
             @Override

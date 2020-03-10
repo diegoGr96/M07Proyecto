@@ -69,6 +69,8 @@ public class ProfileFragment extends Fragment {
     private RecyclerView mRecyclerView;
     private HistoriasAdapter mAdapter;
 
+    private DatabaseReference datosUsuario;
+
     /*
     private Map<String, Object> consulta;
 
@@ -170,47 +172,9 @@ public class ProfileFragment extends Fragment {
         btnGuardar = root.findViewById(R.id.btnGuardar);
         */
 
-        DatabaseReference datosUsuario = database.getReference("Usuarios/" + currentUser.getUid() + "/");
-        datosUsuario.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+        datosUsuario = database.getReference("Usuarios/" + currentUser.getUid() + "/");
 
-                txtNick.setText(dataSnapshot.child("nick").getValue().toString());
-                txtBorn.setText(getResources().getString(R.string.born_in) + dataSnapshot.child("fechaNacimiento").getValue().toString() + ".");
-                if(dataSnapshot.child("descripcion").exists()){
-                    String auxDescription = dataSnapshot.child("descripcion").getValue().toString();
-                    if(auxDescription == ""){
-                        txtDescription.setText(getResources().getString(R.string.no_description));
-                    } else{
-                        txtDescription.setText(auxDescription);
-                    }
-                } else{
-                    txtDescription.setText(getResources().getString(R.string.no_description));
-                }
-
-                /*
-                Usuario usuario = new Usuario((Usuario) dataSnapshot.getValue());
-                System.out.println("El usuario es: " + usuario);
-
-                consulta = (HashMap<String, Object>) dataSnapshot.getValue();
-                consulta.remove("email");
-                int i = 0;
-                textNick.setText(consulta.get("nick").toString());
-                textNombre.setText(consulta.get("nombre").toString());
-                textNacimiento.setText(consulta.get("fechaNacimiento").toString());
-                textTemasCreados.setText(consulta.get("numTemas").toString());
-                textRespuestas.setText(consulta.get("numRespuestas").toString());
-                nacimientoOriginal = textNacimiento.getText().toString();
-                nombreOriginal = textNombre.getText().toString();
-                */
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });
-
+        cargarDatos();
 
         /*
         btnGuardar.setOnClickListener(new View.OnClickListener() {
@@ -271,7 +235,56 @@ public class ProfileFragment extends Fragment {
 
         return root;
     }
-/*
+
+    private void cargarDatos() {
+        datosUsuario.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+                txtNick.setText(dataSnapshot.child("nick").getValue().toString());
+                txtBorn.setText(getResources().getString(R.string.born_in) + dataSnapshot.child("fechaNacimiento").getValue().toString() + ".");
+                if (dataSnapshot.child("descripcion").exists()) {
+                    String auxDescription = dataSnapshot.child("descripcion").getValue().toString();
+                    if (auxDescription == "") {
+                        txtDescription.setText(getResources().getString(R.string.no_description));
+                    } else {
+                        txtDescription.setText(auxDescription);
+                    }
+                } else {
+                    txtDescription.setText(getResources().getString(R.string.no_description));
+                }
+
+                /*
+                Usuario usuario = new Usuario((Usuario) dataSnapshot.getValue());
+                System.out.println("El usuario es: " + usuario);
+
+                consulta = (HashMap<String, Object>) dataSnapshot.getValue();
+                consulta.remove("email");
+                int i = 0;
+                textNick.setText(consulta.get("nick").toString());
+                textNombre.setText(consulta.get("nombre").toString());
+                textNacimiento.setText(consulta.get("fechaNacimiento").toString());
+                textTemasCreados.setText(consulta.get("numTemas").toString());
+                textRespuestas.setText(consulta.get("numRespuestas").toString());
+                nacimientoOriginal = textNacimiento.getText().toString();
+                nombreOriginal = textNombre.getText().toString();
+                */
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        cargarDatos();
+    }
+
+    /*
     private void initializeData() {
         //System.out.println("Contador tema " + contadorTemas);
         while (contadorTemas == -1) ;
