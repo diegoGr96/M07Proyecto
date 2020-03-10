@@ -10,15 +10,24 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.diego.m07proyecto.AddRespuesta;
 import com.diego.m07proyecto.CambioColorEditText;
+import com.diego.m07proyecto.EditProfile;
+import com.diego.m07proyecto.HistoriasAdapter;
 import com.diego.m07proyecto.MisTemas;
 import com.diego.m07proyecto.R;
+import com.diego.m07proyecto.Tema;
+import com.diego.m07proyecto.Usuario;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -26,6 +35,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 
@@ -39,7 +49,29 @@ public class ProfileFragment extends Fragment {
     private FirebaseDatabase database;
     private FirebaseAuth mAuth;
     private FirebaseUser currentUser;
+    private DatabaseReference loadContador;
 
+    private String uidAutor;
+
+    private int contadorTemas = -1;
+
+    private Map<String, HashMap<String, Object>> temasListh;
+    private List<Tema> temasList;
+
+    private boolean firstAttempt;
+
+    private TextView txtNick;
+    private TextView txtBorn;
+    private TextView txtDescription;
+    private Button btnVerTemas;
+    private ImageButton btnEditProfile;
+
+    private RecyclerView mRecyclerView;
+    private HistoriasAdapter mAdapter;
+
+    private DatabaseReference datosUsuario;
+
+    /*
     private Map<String, Object> consulta;
 
     private EditText textNick;
@@ -50,12 +82,12 @@ public class ProfileFragment extends Fragment {
 
     private List<EditText> listaTextos;
 
-    private Button btnMisTemas;
+    //private Button btnMisTemas;
     private Button btnGuardar;
-
     private String nacimientoOriginal;
     private String nombreOriginal;
     private int contadorCaracteres;
+    */
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -64,13 +96,71 @@ public class ProfileFragment extends Fragment {
         database = FirebaseDatabase.getInstance();
         mAuth = FirebaseAuth.getInstance();
         currentUser = mAuth.getCurrentUser();
+        uidAutor = mAuth.getCurrentUser().getUid();
 
+        btnVerTemas = root.findViewById(R.id.btnVerTemas);
+        btnEditProfile = root.findViewById(R.id.btnEditProfile);
+        txtNick = root.findViewById(R.id.txtNickProfile);
+        txtBorn = root.findViewById(R.id.txtBornDateProfile);
+        txtDescription = root.findViewById(R.id.txtDescripcionProfile);
+
+        btnEditProfile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getActivity().getApplicationContext(), EditProfile.class));
+            }
+        });
+
+        temasList = new ArrayList<>();
+
+        firstAttempt = true;
+
+        btnVerTemas.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getActivity().getApplicationContext(), MisTemas.class));
+            }
+        });
+
+        loadContador = database.getReference("contador");
+        loadContador.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                contadorTemas = Integer.parseInt(String.valueOf(dataSnapshot.getValue()));
+                /*finalConsulta=contadorTemas-1;
+                inicioConsulta = finalConsulta-9;*/
+                //contadorConsulta = contadorTemas-1;
+                //System.out.println("Contador es: " + contadorTemas);
+                /*
+                if (firstAttempt) {
+                    initializeData();
+                    firstAttempt = false;
+                }
+                 */
+            }
+
+            @Override
+            public void onCancelled(DatabaseError error) {
+                // Failed to read value
+            }
+        });
+
+        /*
         textNick = root.findViewById(R.id.textNick);
         textNombre = root.findViewById(R.id.textNombre);
         textNacimiento = root.findViewById(R.id.textNacimiento);
         textTemasCreados = root.findViewById(R.id.textTemasCreados);
         textRespuestas = root.findViewById(R.id.textRespuestas);
+        */
 
+/*
+        mRecyclerView = root.findViewById(R.id.rvMisTemas);
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity().getApplicationContext()));
+        mAdapter = new HistoriasAdapter(getActivity().getApplicationContext(), temasList);
+        mRecyclerView.setAdapter(mAdapter);
+ */
+
+        /*
         listaTextos = new ArrayList<>();
         listaTextos.add(textRespuestas);
         listaTextos.add(textNick);
@@ -78,33 +168,15 @@ public class ProfileFragment extends Fragment {
         listaTextos.add(textNacimiento);
         listaTextos.add(textNombre);
 
-        btnMisTemas = root.findViewById(R.id.btnMisTemas);
+        //btnMisTemas = root.findViewById(R.id.btnMisTemas);
         btnGuardar = root.findViewById(R.id.btnGuardar);
+        */
 
+        datosUsuario = database.getReference("Usuarios/" + currentUser.getUid() + "/");
 
-        DatabaseReference nickUsuario = database.getReference("Usuarios/" + currentUser.getUid() + "/");
-        nickUsuario.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                consulta = (HashMap<String, Object>) dataSnapshot.getValue();
-                consulta.remove("email");
-                int i = 0;
-                textNick.setText(consulta.get("nick").toString());
-                textNombre.setText(consulta.get("nombre").toString());
-                textNacimiento.setText(consulta.get("fechaNacimiento").toString());
-                textTemasCreados.setText(consulta.get("numTemas").toString());
-                textRespuestas.setText(consulta.get("numRespuestas").toString());
-                nacimientoOriginal = textNacimiento.getText().toString();
-                nombreOriginal = textNombre.getText().toString();
+        cargarDatos();
 
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });
-
+        /*
         btnGuardar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -127,7 +199,9 @@ public class ProfileFragment extends Fragment {
                 }
             }
         });
+        */
 
+        /*
         textNacimiento.setOnKeyListener(new View.OnKeyListener() {
             @Override
             public boolean onKey(View v, int keyCode, KeyEvent event) {
@@ -148,15 +222,98 @@ public class ProfileFragment extends Fragment {
                 return false;
             }
         });
+        */
 
+        /*
         btnMisTemas.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent iRespuesta = new Intent(getContext(), MisTemas.class);
                 startActivityForResult(iRespuesta, 1);
             }
-        });
+        });*/
 
         return root;
     }
+
+    private void cargarDatos() {
+        datosUsuario.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+                txtNick.setText(dataSnapshot.child("nick").getValue().toString());
+                txtBorn.setText(getResources().getString(R.string.born_in) + dataSnapshot.child("fechaNacimiento").getValue().toString() + ".");
+                if (dataSnapshot.child("descripcion").exists()) {
+                    String auxDescription = dataSnapshot.child("descripcion").getValue().toString();
+                    if (auxDescription == "") {
+                        txtDescription.setText(getResources().getString(R.string.no_description));
+                    } else {
+                        txtDescription.setText(auxDescription);
+                    }
+                } else {
+                    txtDescription.setText(getResources().getString(R.string.no_description));
+                }
+
+                /*
+                Usuario usuario = new Usuario((Usuario) dataSnapshot.getValue());
+                System.out.println("El usuario es: " + usuario);
+
+                consulta = (HashMap<String, Object>) dataSnapshot.getValue();
+                consulta.remove("email");
+                int i = 0;
+                textNick.setText(consulta.get("nick").toString());
+                textNombre.setText(consulta.get("nombre").toString());
+                textNacimiento.setText(consulta.get("fechaNacimiento").toString());
+                textTemasCreados.setText(consulta.get("numTemas").toString());
+                textRespuestas.setText(consulta.get("numRespuestas").toString());
+                nacimientoOriginal = textNacimiento.getText().toString();
+                nombreOriginal = textNombre.getText().toString();
+                */
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        cargarDatos();
+    }
+
+    /*
+    private void initializeData() {
+        //System.out.println("Contador tema " + contadorTemas);
+        while (contadorTemas == -1) ;
+        DatabaseReference dbRef = database.getReference("Temas");
+        Query myQuery = dbRef.orderByChild("uidAutor").equalTo(uidAutor);
+        myQuery.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+
+                temasListh = (Map<String, HashMap<String, Object>>) dataSnapshot.getValue();
+                if (temasListh == null) {
+
+                } else {
+                    for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                        Tema tema = Tema.convertTema(temasListh.get(snapshot.getKey()));
+                        temasList.add(tema);
+                    }
+                    mAdapter.notifyDataSetChanged();
+                    //System.out.println("Hola -- " + temasList);
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError error) {
+                // Failed to read value
+                //Log.w("VVVV", "Failed to read value.", error.toException());
+            }
+        });
+    }
+
+ */
 }

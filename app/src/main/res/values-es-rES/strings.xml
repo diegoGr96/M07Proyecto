@@ -273,4 +273,10 @@
     <string name="searchChatNotFound">No se ha encontrado ninguna coincidencia.</string>
     <string name="mensajeIniciacion1">"¡Vaya! parece que es el inicio de una nueva conversación. Sentíos libres de expresar vuestras emociones y recordad... ¡ExpressaT! 🎉🎉"</string>
     <string name="escribe_mensaje_chat">Escribe un mensaje</string>
+    <string name="text_edit_profile">Editar perfil</string>
+    <string name="text_mis_temas">Mis temas</string>
+    <string name="profile_born_date_hint">"Fecha de nacimiento: "</string>
+    <string name="profile_description_hint">Descripción</string>
+    <string name="no_description">No hay descripción.</string>
+    <string name="born_in">"Nació el: "</string>
 </resources>
