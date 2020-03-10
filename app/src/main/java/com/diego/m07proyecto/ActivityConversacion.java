@@ -157,7 +157,7 @@ public class ActivityConversacion extends AppCompatActivity {
                                                 while (mensajesSinLeer == -1) ;
                                                 refSumarMensSinLeer.setValue(mensajesSinLeer + 1);
                                                 mensajesSinLeer = -1;
-                                                String textoUltimoMensaje = mensaje.getTexto().length() > 200 ? mensaje.getTexto().substring(0, 201)+"..." : mensaje.getTexto();
+                                                String textoUltimoMensaje = mensaje.getTexto().length() > 28 ? mensaje.getTexto().substring(0, 29)+"..." : mensaje.getTexto();
                                                 SimpleDateFormat fecha = new SimpleDateFormat("HH:mm   dd-MM-yyyy ", Locale.getDefault());
                                                 //Chat Propio
                                                 //Actualizamos el ultimoMensaje
