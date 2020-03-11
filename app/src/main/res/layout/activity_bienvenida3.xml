@@ -31,6 +31,7 @@
         android:ems="10"
         android:hint="@string/hintNombre"
         android:inputType="textPersonName"
+        android:maxLength="33"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -47,6 +48,7 @@
         android:ems="10"
         android:hint="@string/hintNick"
         android:inputType="textPersonName"
+        android:maxLength="24"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/text" />
@@ -62,6 +64,7 @@
         android:ems="10"
         android:hint="@string/hintApellidos"
         android:inputType="textPersonName"
+        android:maxLength="66"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -73,8 +76,10 @@
         android:layout_height="48dp"
         android:layout_marginStart="30dp"
         android:layout_marginTop="30dp"
+        app:layout_constraintBottom_toTopOf="@+id/btnBack"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textoApellidos" />
+        app:layout_constraintTop_toBottomOf="@+id/textoApellidos"
+        app:layout_constraintVertical_bias="0.0" />
 
     <Spinner
         android:id="@+id/spnMes"
@@ -82,8 +87,10 @@
         android:layout_height="48dp"
         android:layout_marginStart="15dp"
         android:layout_marginTop="30dp"
+        app:layout_constraintBottom_toTopOf="@+id/btnBack"
         app:layout_constraintStart_toEndOf="@+id/spnDia"
-        app:layout_constraintTop_toBottomOf="@+id/textoApellidos" />
+        app:layout_constraintTop_toBottomOf="@+id/textoApellidos"
+        app:layout_constraintVertical_bias="0.0" />
 
     <Spinner
         android:id="@+id/spnAny"
@@ -92,24 +99,23 @@
         android:layout_marginStart="15dp"
         android:layout_marginTop="30dp"
         android:layout_marginEnd="30dp"
+        app:layout_constraintBottom_toTopOf="@+id/btnBack"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.1"
         app:layout_constraintStart_toEndOf="@+id/spnMes"
-        app:layout_constraintTop_toBottomOf="@+id/textoApellidos" />
+        app:layout_constraintTop_toBottomOf="@+id/textoApellidos"
+        app:layout_constraintVertical_bias="0.0" />
 
     <ImageButton
         android:id="@+id/btnBack"
         android:layout_width="65dp"
         android:layout_height="65dp"
         android:layout_marginStart="35dp"
-        android:layout_marginTop="110dp"
         android:layout_marginBottom="35dp"
         android:background="@drawable/back_btns"
         android:onClick="goToPage2"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/spnMes"
-        app:layout_constraintVertical_bias="1.0"
         app:srcCompat="@drawable/arrow_left" />
 
     <Button

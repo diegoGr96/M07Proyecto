@@ -273,11 +273,11 @@
     <string name="searchChatNotFound">No se ha encontrado ninguna coincidencia.</string>
     <string name="mensajeIniciacion1">"¡Vaya! parece que es el inicio de una nueva conversación. Sentíos libres de expresar vuestras emociones y recordad... ¡ExpressaT! 🎉🎉"</string>
     <string name="escribe_mensaje_chat">Escribe un mensaje</string>
-    <string name="text_edit_profile">Editar perfil</string>
     <string name="text_mis_temas">Mis temas</string>
     <string name="profile_born_date_hint">"Fecha de nacimiento: "</string>
     <string name="profile_description_hint">Descripción</string>
     <string name="no_description">No hay descripción.</string>
     <string name="born_in">"Nació el: "</string>
-    <string name="caracteres_password">Mínimo 6 caracteres, máximo 24</string>
+    <string name="caracteres_password">La contraseña debe de tener entre 6 y 24 carácteres.</string>
+    <string name="hintDescripcion">Descripción</string>
 </resources>

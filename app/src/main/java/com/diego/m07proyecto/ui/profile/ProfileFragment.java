@@ -245,7 +245,7 @@ public class ProfileFragment extends Fragment {
                 txtBorn.setText(getResources().getString(R.string.born_in) + dataSnapshot.child("fechaNacimiento").getValue().toString() + ".");
                 if (dataSnapshot.child("descripcion").exists()) {
                     String auxDescription = dataSnapshot.child("descripcion").getValue().toString();
-                    if (auxDescription == "") {
+                    if (auxDescription.isEmpty()) {
                         txtDescription.setText(getResources().getString(R.string.no_description));
                     } else {
                         txtDescription.setText(auxDescription);

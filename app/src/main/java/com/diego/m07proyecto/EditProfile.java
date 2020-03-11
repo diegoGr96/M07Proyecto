@@ -34,8 +34,11 @@ public class EditProfile extends AppCompatActivity {
     private EditText textNick;
     private EditText textNombre;
     private EditText textNacimiento;
+    private EditText textDescripcion;
+    /*
     private EditText textTemasCreados;
     private EditText textRespuestas;
+    */
 
     private List<EditText> listaTextos;
 
@@ -43,6 +46,7 @@ public class EditProfile extends AppCompatActivity {
     private Button btnGuardar;
     private String nacimientoOriginal;
     private String nombreOriginal;
+    private String descripcionOriginal;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,8 +62,11 @@ public class EditProfile extends AppCompatActivity {
         textNick = findViewById(R.id.textNick);
         textNombre = findViewById(R.id.textNombre);
         textNacimiento = findViewById(R.id.textNacimiento);
+        textDescripcion = findViewById(R.id.textDescripcion);
+        /*
         textTemasCreados = findViewById(R.id.textTemasCreados);
         textRespuestas = findViewById(R.id.textRespuestas);
+        */
 
         userData.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -67,10 +74,14 @@ public class EditProfile extends AppCompatActivity {
                 textNick.setText(dataSnapshot.child("nick").getValue().toString());
                 textNombre.setText(dataSnapshot.child("nombre").getValue().toString());
                 textNacimiento.setText(dataSnapshot.child("fechaNacimiento").getValue().toString());
+                textDescripcion.setText(dataSnapshot.child("descripcion").getValue().toString());
+                /*
                 textTemasCreados.setText(dataSnapshot.child("numTemas").getValue().toString());
                 textRespuestas.setText(dataSnapshot.child("numRespuestas").getValue().toString());
+                */
                 nombreOriginal = textNombre.getText().toString();
                 nacimientoOriginal = textNacimiento.getText().toString();
+                descripcionOriginal = textDescripcion.getText().toString();
             }
 
             @Override
@@ -82,10 +93,11 @@ public class EditProfile extends AppCompatActivity {
         btnGuardar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (!nombreOriginal.equals(textNombre.getText().toString()) || !nacimientoOriginal.equals(textNacimiento.getText().toString())) {
+                if (!nombreOriginal.equals(textNombre.getText().toString()) || !nacimientoOriginal.equals(textNacimiento.getText().toString()) || !descripcionOriginal.equals((textDescripcion.getText().toString()))) {
                     DatabaseReference newTema = database.getReference("Usuarios/" + currentUser.getUid());
                     newTema.child("nombre").setValue(textNombre.getText().toString());
                     newTema.child("fechaNacimiento").setValue(textNacimiento.getText().toString());
+                    newTema.child("descripcion").setValue(textDescripcion.getText().toString());
                     finish();
 
                     /*

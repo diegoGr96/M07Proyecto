@@ -23,6 +23,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -150,6 +151,7 @@ public class RespuestasAdapter extends RecyclerView.Adapter<RespuestasAdapter.Vi
         private TextView userRespuestaText;
         private TextView cuerpoRespuestaText;
         private ImageView ctgBackground;
+        private ConstraintLayout fondoRespuesta;
 
         /**
          * Constructor for the ViewHolder, used in onCreateViewHolder().
@@ -165,6 +167,7 @@ public class RespuestasAdapter extends RecyclerView.Adapter<RespuestasAdapter.Vi
             userRespuestaText = itemView.findViewById(R.id.usuarioRespuesta);
             cuerpoRespuestaText = itemView.findViewById(R.id.cuerpoRespuesta);
             ctgBackground = itemView.findViewById(R.id.ctgBackground);
+            fondoRespuesta = itemView.findViewById(R.id.fondoRespuesta);
         }
         /*
         Mostramos los datos que hemos recibido a través del método 'onBindViewHolder' de la clase superior
@@ -225,6 +228,13 @@ public class RespuestasAdapter extends RecyclerView.Adapter<RespuestasAdapter.Vi
 
             System.out.println("NUMTEXT: " +userRespuestaText.getText());
             System.out.println("NUMTEXT: " + cuerpoRespuestaText.getText());
+            fondoRespuesta.setOnLongClickListener(new View.OnLongClickListener() {
+                @Override
+                public boolean onLongClick(View v) {
+                    // TO DO
+                    return false;
+                }
+            });
         }
 
     }

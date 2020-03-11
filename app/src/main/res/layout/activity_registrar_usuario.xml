@@ -62,7 +62,6 @@
         android:layout_width="0dp"
         android:layout_height="48dp"
         android:layout_marginStart="50dp"
-        android:layout_marginTop="30dp"
         android:layout_marginEnd="50dp"
         android:width="315dp"
         android:contentDescription="@string/escriu_la_teva_clau"
@@ -76,14 +75,14 @@
         android:textColorHint="@color/colorHint"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textoUsuario" />
+        app:layout_constraintTop_toBottomOf="@+id/textView4" />
 
     <CheckBox
         android:id="@+id/checkCondiciones"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="50dp"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="50dp"
         android:checked="false"
         android:contentDescription="@string/accepta_les_condicions_i_termes"
         android:fontFamily="@font/allerta"
@@ -93,14 +92,13 @@
         android:scrollbarSize="4dp"
         android:textSize="16sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView4" />
+        app:layout_constraintTop_toBottomOf="@+id/textoClave" />
 
     <TextView
         android:id="@+id/labelCondiciones"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
-        android:layout_marginTop="30dp"
         android:layout_marginEnd="90dp"
         android:background="#006D6D6D"
         android:fontFamily="@font/allerta"
@@ -108,21 +106,23 @@
         android:text="@string/acepto_las_condiciones_y_t_rminos_de_servicio"
         android:textColor="#000000"
         android:textSize="14sp"
+        app:layout_constraintBottom_toBottomOf="@+id/checkCondiciones"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toEndOf="@+id/checkCondiciones"
-        app:layout_constraintTop_toBottomOf="@+id/textView4" />
+        app:layout_constraintTop_toTopOf="@+id/checkCondiciones" />
 
     <TextView
         android:id="@+id/textView4"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="55dp"
-        android:layout_marginTop="5dp"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="50dp"
         android:text="@string/caracteres_password"
         android:textColor="@color/colorRecuperarPassword"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textoClave" />
+        app:layout_constraintTop_toBottomOf="@+id/textoUsuario" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

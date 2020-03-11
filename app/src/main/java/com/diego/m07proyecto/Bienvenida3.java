@@ -131,6 +131,7 @@ public class Bienvenida3 extends AppCompatActivity {
             myRef.child("nombre").setValue(nombre + " " + apellidos);
             myRef.child("numRespuestas").setValue(0);
             myRef.child("numTemas").setValue(0);
+            myRef.child("descripcion").setValue("");
 
             Intent intent = new Intent(this, MenuPrincipal.class);
             startActivity(intent);
