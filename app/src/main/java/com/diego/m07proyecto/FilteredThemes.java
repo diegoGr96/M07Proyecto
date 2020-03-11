@@ -8,8 +8,11 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.AbsListView;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.material.snackbar.Snackbar;
@@ -33,6 +36,9 @@ public class FilteredThemes extends AppCompatActivity {
     private Query filter;
     private Intent intent;
 
+    private ImageView imgNotFound;
+    private TextView txtNotFound;
+
     private RecyclerView mRecyclerView;
     private HistoriasAdapter mAdapter;
 
@@ -52,6 +58,9 @@ public class FilteredThemes extends AppCompatActivity {
         intent = getIntent();
         database = FirebaseDatabase.getInstance();
         ref = database.getReference("Temas");
+
+        txtNotFound = findViewById(R.id.txtNotFound);
+        imgNotFound = findViewById(R.id.imgNotFound);
 
         swipeRefreshTemas = findViewById(R.id.swipeRefreshFiltroTemas);
         swipeRefreshTemas.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
@@ -146,6 +155,10 @@ public class FilteredThemes extends AppCompatActivity {
                     mAdapter = new HistoriasAdapter(getApplicationContext(), temasList);
                     mRecyclerView.setAdapter(mAdapter);
                     mAdapter.notifyDataSetChanged();
+                } else{
+                    mRecyclerView.setVisibility(View.INVISIBLE);
+                    imgNotFound.setVisibility(View.VISIBLE);
+                    txtNotFound.setVisibility(View.VISIBLE);
                 }
             }
 

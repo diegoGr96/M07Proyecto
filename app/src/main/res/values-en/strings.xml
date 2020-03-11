@@ -280,4 +280,5 @@
     <string name="born_in">"Was born in: "</string>
     <string name="caracteres_password">Password must have between 6 and 24 characters</string>
     <string name="hintDescripcion">Description</string>
+    <string name="temas_not_found">No themes were found.</string>
 </resources>

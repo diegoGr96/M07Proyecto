@@ -285,4 +285,5 @@
     <string name="born_in">Va néixer el:</string>
     <string name="caracteres_password">La contrasenya ha de tenir entre 6 i 24 caràcters.</string>
     <string name="hintDescripcion">Descripció</string>
+    <string name="temas_not_found">No s\'ha trobat cap tema.</string>
 </resources>

@@ -8,6 +8,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AbsListView;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -48,6 +50,8 @@ public class HomeFragment extends Fragment {
     private RecyclerView mRecyclerView;
     private HistoriasAdapter mAdapter;
 
+    private ImageView imgNotFound;
+    private TextView txtNotFound;
 
     private FloatingActionButton fab;
     private SwipeRefreshLayout swipeRefreshTemas;
@@ -93,6 +97,9 @@ public class HomeFragment extends Fragment {
         homeViewModel =
                 ViewModelProviders.of(this).get(HomeViewModel.class);
         final View root = inflater.inflate(R.layout.fragment_home, container, false);
+
+        imgNotFound = root.findViewById(R.id.imgNotFound);
+        txtNotFound = root.findViewById(R.id.txtNotFound);
 
         fab = root.findViewById(R.id.fabMenuPrincipal);
         fab.setBackgroundTintList(ColorStateList.valueOf(ContextCompat.getColor(getContext(), R.color.fabDefault)));
@@ -167,7 +174,9 @@ public class HomeFragment extends Fragment {
 
                 temasListh = (Map<String, HashMap<String, Object>>) dataSnapshot.getValue();
                 if (temasListh == null) {
-
+                    mRecyclerView.setVisibility(View.INVISIBLE);
+                    imgNotFound.setVisibility(View.VISIBLE);
+                    txtNotFound.setVisibility(View.VISIBLE);
                 } else {
                     for (int i = 0; i < temasListh.size(); i++) {
                         Tema tema = Tema.convertTema(temasListh.get("Tema_" + (finalConsulta - i)));

@@ -12,6 +12,8 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
 import android.view.View;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
@@ -37,6 +39,9 @@ public class MisTemas extends AppCompatActivity {
     private RecyclerView mRecyclerView;
     private HistoriasAdapter mAdapter;
 
+    private ImageView imgNotFound;
+    private TextView txtNotFound;
+
     //private FloatingActionButton fab;
     private SwipeRefreshLayout swipeRefreshMisTemas;
 
@@ -54,6 +59,8 @@ public class MisTemas extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mis_temas);
 
+        txtNotFound = findViewById(R.id.txtNotFound);
+        imgNotFound = findViewById(R.id.imgNotFound);
 
         temasList = new ArrayList<>();
 
@@ -117,7 +124,9 @@ public class MisTemas extends AppCompatActivity {
 
                 temasListh = (Map<String, HashMap<String, Object>>) dataSnapshot.getValue();
                 if (temasListh == null) {
-
+                    mRecyclerView.setVisibility(View.INVISIBLE);
+                    imgNotFound.setVisibility(View.VISIBLE);
+                    txtNotFound.setVisibility(View.VISIBLE);
                 } else {
                     for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                         Tema tema = Tema.convertTema(temasListh.get(snapshot.getKey()));
