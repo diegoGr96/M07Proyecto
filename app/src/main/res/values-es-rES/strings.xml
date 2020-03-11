@@ -279,4 +279,5 @@
     <string name="profile_description_hint">Descripción</string>
     <string name="no_description">No hay descripción.</string>
     <string name="born_in">"Nació el: "</string>
+    <string name="caracteres_password">Mínimo 6 caracteres, máximo 24</string>
 </resources>

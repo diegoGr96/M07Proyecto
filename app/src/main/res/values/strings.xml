@@ -283,4 +283,5 @@
     <string name="profile_description_hint">Descripció</string>
     <string name="no_description">No hi ha descripció.</string>
     <string name="born_in">Va néixer el:</string>
+    <string name="caracteres_password">Mínim 6 caràcters, máxim 24.</string>
 </resources>

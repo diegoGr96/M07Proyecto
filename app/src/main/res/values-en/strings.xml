@@ -279,4 +279,5 @@
     <string name="profile_description_hint">Description</string>
     <string name="no_description">No description found.</string>
     <string name="born_in">"Was born in: "</string>
+    <string name="caracteres_password">Minimum 6 characters, maximum 24.</string>
 </resources>
