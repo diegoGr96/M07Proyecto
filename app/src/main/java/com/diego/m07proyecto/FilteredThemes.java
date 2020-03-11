@@ -146,15 +146,21 @@ public class FilteredThemes extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if (dataSnapshot.exists()) {
                     temasListh = (Map<String,HashMap<String, Object>>) dataSnapshot.getValue();
-                    temasList = new ArrayList<>();
-                    for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-                        Tema tema = Tema.convertTema(temasListh.get(snapshot.getKey()));
-                        temasList.add(tema);
+                    if(temasListh != null) {
+                        temasList = new ArrayList<>();
+                        for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                            Tema tema = Tema.convertTema(temasListh.get(snapshot.getKey()));
+                            temasList.add(tema);
+                        }
+                        Collections.reverse(temasList);
+                        mAdapter = new HistoriasAdapter(getApplicationContext(), temasList);
+                        mRecyclerView.setAdapter(mAdapter);
+                        mAdapter.notifyDataSetChanged();
+                    } else{
+                        mRecyclerView.setVisibility(View.INVISIBLE);
+                        imgNotFound.setVisibility(View.VISIBLE);
+                        txtNotFound.setVisibility(View.VISIBLE);
                     }
-                    Collections.reverse(temasList);
-                    mAdapter = new HistoriasAdapter(getApplicationContext(), temasList);
-                    mRecyclerView.setAdapter(mAdapter);
-                    mAdapter.notifyDataSetChanged();
                 } else{
                     mRecyclerView.setVisibility(View.INVISIBLE);
                     imgNotFound.setVisibility(View.VISIBLE);
