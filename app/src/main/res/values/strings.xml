@@ -274,7 +274,7 @@
     <string name="menu_chat">Xat</string>
     <string name="buscar_chat">Buscar</string>
     <string name="searchChatNotFound">No s\'ha trobat cap coincidencia.</string>
-    <string name="mensajeIniciacion1">Vaja! sembla que és l\'inici d\'una nova conversa! . Sentiu-vos lliures de expressar-vos les vostres emocions i recordeu ... ExpressaT!  🎉🎉</string>
+    <string name="mensajeIniciacion1">Vaja! sembla que és l\'inici d\'una nova conversa! Sentiu-vos lliures de expressar-vos les vostres emocions i recordeu ... ExpressaT!  🎉🎉</string>
     <string name="escribe_mensaje_chat">Escriu un missatge</string>
     <string name="text_edit_profile" translatable="false">Editar perfil</string>
     <string name="text_mis_temas">Els meus temes</string>
