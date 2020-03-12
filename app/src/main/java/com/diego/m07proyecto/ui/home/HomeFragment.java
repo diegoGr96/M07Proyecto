@@ -171,12 +171,9 @@ public class HomeFragment extends Fragment {
         myQuery.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-
                 temasListh = (Map<String, HashMap<String, Object>>) dataSnapshot.getValue();
                 if (temasListh == null) {
-                    mRecyclerView.setVisibility(View.INVISIBLE);
-                    imgNotFound.setVisibility(View.VISIBLE);
-                    txtNotFound.setVisibility(View.VISIBLE);
+
                 } else {
                     for (int i = 0; i < temasListh.size(); i++) {
                         Tema tema = Tema.convertTema(temasListh.get("Tema_" + (finalConsulta - i)));
@@ -187,6 +184,11 @@ public class HomeFragment extends Fragment {
                     //System.out.println("Hola -- " + temasList);
 
                     // Initialize the adapter and set it to the RecyclerView.
+                }
+                if (temasList == null) {
+                    mRecyclerView.setVisibility(View.INVISIBLE);
+                    imgNotFound.setVisibility(View.VISIBLE);
+                    txtNotFound.setVisibility(View.VISIBLE);
                 }
             }
 
