@@ -124,9 +124,6 @@ public class MisTemas extends AppCompatActivity {
 
                 temasListh = (Map<String, HashMap<String, Object>>) dataSnapshot.getValue();
                 if (temasListh == null) {
-                    mRecyclerView.setVisibility(View.INVISIBLE);
-                    imgNotFound.setVisibility(View.VISIBLE);
-                    txtNotFound.setVisibility(View.VISIBLE);
                 } else {
                     for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                         Tema tema = Tema.convertTema(temasListh.get(snapshot.getKey()));
@@ -135,6 +132,12 @@ public class MisTemas extends AppCompatActivity {
                     mAdapter.notifyDataSetChanged();
                     //System.out.println("Hola -- " + temasList);
                 }
+                if (temasList == null) {
+                    mRecyclerView.setVisibility(View.INVISIBLE);
+                    imgNotFound.setVisibility(View.VISIBLE);
+                    txtNotFound.setVisibility(View.VISIBLE);
+                }
+
             }
 
             @Override

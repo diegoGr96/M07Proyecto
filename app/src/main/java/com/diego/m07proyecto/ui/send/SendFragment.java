@@ -138,11 +138,11 @@ public class SendFragment extends Fragment {
                 } else {
                     hideKeyboard(getActivity());
                     //contadorConsulta = contadorTemas;
-                    String valorBusqueda = textoBuscar.getText().toString().trim().toLowerCase();
+                    String valorBusqueda = textoBuscar.getText().toString().trim();
                     DatabaseReference dbRef = database.getReference("Usuarios/");
                     Query myQuery;
                     if (valorBusqueda.contains("@")) {
-                        myQuery = dbRef.orderByChild("email").equalTo(valorBusqueda);
+                        myQuery = dbRef.orderByChild("email").equalTo(valorBusqueda.toLowerCase());
                     } else {
                         myQuery = dbRef.orderByChild("nick").equalTo(valorBusqueda);
                     }
