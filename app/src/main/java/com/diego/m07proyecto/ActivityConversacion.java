@@ -108,6 +108,7 @@ public class ActivityConversacion extends AppCompatActivity {
                     DatabaseReference refReiniciarContMensSinLeer = database.getReference("RelacionChatUsuario/" + currentUser.getUid() + "/" + NOMBRE_CHAT + "/mensajesSinLeer");
                     refReiniciarContMensSinLeer.setValue(0);
                     mAdapterConversacion.notifyDataSetChanged();
+                    mRecyclerView.getLayoutManager().scrollToPosition(conversacionList.size() - 1);
                     //mRecyclerView.getLayoutManager().scrollToPosition(conversacionList.size() - 1);
                 }
             }
